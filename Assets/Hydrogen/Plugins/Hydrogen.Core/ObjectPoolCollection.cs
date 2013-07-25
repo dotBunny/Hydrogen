@@ -181,7 +181,7 @@ namespace Hydrogen.Core
 				}
 				else
 				{
-					spawnedObject.active = true;
+					spawnedObject.SetActive(true);
 				}
 				
 				if ( trackSpawnedObjects ) Hydrogen.Array.Add<GameObject>(ref _spawnedObjects, spawnedObject, false);
@@ -239,9 +239,13 @@ namespace Hydrogen.Core
 			else
 			{
 				// This stops things from keeping their velocity from previous
-				if ( hasRigidbody ) gameObject.rigidbody.velocity = Vector3.zero;
+				if ( hasRigidbody ) 
+				{
+					gameObject.rigidbody.velocity = Vector3.zero;
+					gameObject.rigidbody.angularVelocity = Vector3.zero;
+				}
 				
-				gameObject.active = false;
+				gameObject.SetActive(false);
 				
 			}
 				
