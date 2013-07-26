@@ -16,9 +16,12 @@ Installation
 If you are cloning this repository you will more then likely need to copy it into the working 
 folder of your Unity project, unless you've included it in as a submodule on your own GIT repo.
 
-If you've downloaded the Asset Store version, its already installed for you :)
+A good tutorial for submodules can be found here:
 
-The actual repo for the Asset Store .unitypackage can be found here:
+http://joncairns.com/2011/10/how-to-use-git-submodules/
+
+If you've downloaded the Asset Store version, its already installed for you :) The actual repo 
+for the Asset Store .unitypackage can be found here:
 
 https://github.com/dotBunny/Hydrogen-Package
 
