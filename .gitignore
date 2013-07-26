@@ -6,6 +6,7 @@ Temp
 *.unityproj
 *.sln
 *.userprefs
+*.meta
 
 Assets/AssetStoreTools.meta
 
