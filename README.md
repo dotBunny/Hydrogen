@@ -22,16 +22,16 @@ If you've downloaded the Asset Store version, its already installed for you :)
 Folders
 ------------------------------------------------------------------------------------------------
 
-### /Hydrogen/Components/ ###
+### Components ###
 Here is where you find some premade drag and drop components to drop on to your GameObjects, or
 you can add them by the quick add button. We've prefixed all of our component based scripts with
 'h' so that they can be easily found and identified.
 
-### /Hydrogen/Plugins/ ###
+### Plugins ###
 This is where bulk of the code is kept. It is issolated in its own namespace as to not interfere
 with anything else.
 
-### /Hydrogen/Shaders ###
+### Shaders ###
 Pretty self explanitory don't you think?
 
 
