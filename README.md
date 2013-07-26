@@ -13,11 +13,14 @@ Requirements
 Installation
 ------------------------------------------------------------------------------------------------
 
-If you are cloning this repository you will more then likely need to copy it 
-into the working folder of your Unity project.
+If you are cloning this repository you will more then likely need to copy it into the working 
+folder of your Unity project, unless you've included it in as a submodule on your own GIT repo.
 
 If you've downloaded the Asset Store version, its already installed for you :)
 
+The actual repo for the Asset Store .unitypackage can be found here:
+
+https://github.com/dotBunny/Hydrogen-Package
 
 Folders
 ------------------------------------------------------------------------------------------------
