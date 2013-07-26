@@ -54,14 +54,12 @@ namespace Hydrogen.Core
 		public bool defaultCullExtras = true;
 			
 		public Hydrogen.Core.ObjectPoolCollection[] objectPools;
-		private Dictionary<GameObject, int> _poolGameObjectLookupTable;
 		private Dictionary<string, int> _poolStringLookupTable;
 		
 		
 		public void Awake()
 		{
 			if (objectPools == null) objectPools = new Hydrogen.Core.ObjectPoolCollection[0];
-			if ( _poolGameObjectLookupTable == null )  _poolGameObjectLookupTable = new Dictionary<GameObject, int>();
 			if ( _poolStringLookupTable == null ) _poolStringLookupTable = new Dictionary<string, int>();
 		
 			
@@ -76,7 +74,6 @@ namespace Hydrogen.Core
 				if ( !objectPools[x].Initialized )
 				{
 					objectPools[x].Initialize(objectPools[x].prefab, this.transform, x);
-					_poolGameObjectLookupTable.Add(objectPools[x].prefab,x);
 					_poolStringLookupTable.Add(objectPools[x].prefab.name,x);
 				}
 			}
@@ -84,16 +81,7 @@ namespace Hydrogen.Core
 		
 		public int GetPoolID(GameObject gameObject)
 		{
-			if ( gameObject == null ) {
-				throw new MissingReferenceException(
-					"You are passing a null gameObject reference to hObjectPool.Instance.GetPoolID()");
-			}	
-			
-			if ( _poolGameObjectLookupTable.ContainsKey(gameObject) )
-			{
-				return _poolGameObjectLookupTable[gameObject];
-			}
-			return -1;
+			return GetPoolID(gameObject.name);
 		}
 		public int GetPoolID(string prefabName)
 		{
@@ -106,6 +94,7 @@ namespace Hydrogen.Core
 			{
 				return _poolStringLookupTable[prefabName];
 			}
+			
 			return -1;
 		}
 		
@@ -144,7 +133,7 @@ namespace Hydrogen.Core
 				throw new MissingReferenceException("You are passing a null gameObject reference to hObjectPool.Instance.Add()");
 			}
 			
-			int tempLookup = GetPoolID(gameObject);
+			int tempLookup = GetPoolID(gameObject.name);
 			if ( tempLookup == -1 )
 			{
 				// Create our new pool
@@ -157,10 +146,8 @@ namespace Hydrogen.Core
 				Hydrogen.Array.Add<Hydrogen.Core.ObjectPoolCollection>(ref objectPools, newPool, false);
 				
 				// Add reference for lookup table
-				if ( _poolGameObjectLookupTable == null ) _poolGameObjectLookupTable = new Dictionary<GameObject, int>();
 				if ( _poolStringLookupTable == null ) _poolStringLookupTable = new Dictionary<string, int>();
 				
-				_poolGameObjectLookupTable.Add (newPool.prefab, objectPools.Length - 1);
 				_poolStringLookupTable.Add (newPool.prefab.name, objectPools.Length - 1);
 				
 				return objectPools.Length - 1;
@@ -171,9 +158,13 @@ namespace Hydrogen.Core
 		
 		public bool Remove(GameObject gameObject, bool destroyImmediate)
 		{
-			int tempLookup = GetPoolID(gameObject);
+			int tempLookup = GetPoolID(gameObject.name);
 			if ( tempLookup != -1 )
 			{
+				// Remove object from lookup table
+				_poolStringLookupTable.Remove(gameObject.name);
+				
+				// Remove from pooling system
 				return objectPools[tempLookup].RemoveFromPool(gameObject, destroyImmediate);
 			}
 			return false;
@@ -187,19 +178,19 @@ namespace Hydrogen.Core
 	    /// </remarks>
 		public GameObject Spawn(Transform transform)
 		{
-			return objectPools[GetPoolID(transform.gameObject)].Spawn(Vector3.zero, Quaternion.identity);
+			return objectPools[GetPoolID(transform.gameObject.name)].Spawn(Vector3.zero, Quaternion.identity);
 		}
 		public GameObject Spawn(GameObject gameObject)
 		{
-			return objectPools[GetPoolID(gameObject)].Spawn(Vector3.zero, Quaternion.identity);
+			return objectPools[GetPoolID(gameObject.name)].Spawn(Vector3.zero, Quaternion.identity);
 		}
 		public GameObject Spawn(Transform transform, Vector3 position, Quaternion rotation)
 		{
-			return objectPools[GetPoolID(transform.gameObject)].Spawn(position, rotation);
+			return objectPools[GetPoolID(transform.gameObject.name)].Spawn(position, rotation);
 		}
 		public GameObject Spawn(GameObject gameObject, Vector3 position, Quaternion rotation)
 		{
-			return objectPools[GetPoolID(gameObject)].Spawn(position, rotation);
+			return objectPools[GetPoolID(gameObject.name)].Spawn(position, rotation);
 		}
 		public GameObject Spawn(int poolID)
 		{
@@ -219,11 +210,11 @@ namespace Hydrogen.Core
 		/// </param>
 		public void Despawn(Transform transform)
 		{
-			Despawn(transform.gameObject, GetPoolID(gameObject));
+			Despawn(transform.gameObject, GetPoolID(gameObject.name));
 		}
 		public void Despawn(GameObject gameObject)
 		{
-			Despawn(gameObject, GetPoolID(gameObject));
+			Despawn(gameObject, GetPoolID(gameObject.name));
 		}
 		public void Despawn(Transform transform, int poolID)
 		{
