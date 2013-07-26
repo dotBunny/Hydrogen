@@ -60,7 +60,7 @@ namespace Hydrogen.Core
 		private Transform _parentTransform;
 		private int _poolID;
 		
-		private GameObject[] _spawnedObjects = new GameObject[0];
+		private GameObject[] _spawnedObjects;
 		
 		public GameObject[] SpawnedObjects { get { return _spawnedObjects; }}
 		
@@ -86,7 +86,6 @@ namespace Hydrogen.Core
 			_parentTransform = parent;
 			_poolID = poolID;
 			_pooledObjects = new GameObject[0];
-			//_spawnedObjects = new GameObject[0];
 			
 			if ( prefab.GetComponent<ObjectPoolItemBase>() ) hasObjectPoolItem = true;
 			
@@ -125,8 +124,13 @@ namespace Hydrogen.Core
 			GameObject newObject = GameObject.Instantiate(prefab) as GameObject;
 			
 			newObject.name = prefab.name;
-			newObject.GetComponent<ObjectPoolItemBase>().parentPool = this;
-			newObject.GetComponent<ObjectPoolItemBase>().poolID = _poolID;
+			
+			// Check if there is our helper item on the gameObject
+			if ( newObject.GetComponent<ObjectPoolItemBase>() )
+			{
+				newObject.GetComponent<ObjectPoolItemBase>().parentPool = this;
+				newObject.GetComponent<ObjectPoolItemBase>().poolID = _poolID;
+			}
 			
 			Hydrogen.Array.Add<GameObject>(ref _pooledObjects, newObject, false);
 			
@@ -136,8 +140,16 @@ namespace Hydrogen.Core
 		
 		public bool RemoveFromPool(GameObject gameObject, bool destroyObject)
 		{
-			return Hydrogen.Array.Remove<GameObject>(ref _pooledObjects, gameObject);
-			if ( destroyObject ) GameObject.DestroyImmediate(gameObject);
+			if ( destroyObject ) 
+			{
+				GameObject.DestroyImmediate(gameObject);
+				return Hydrogen.Array.Remove<GameObject>(ref _pooledObjects, gameObject);
+			}
+			else
+			{
+				return Hydrogen.Array.Remove<GameObject>(ref _pooledObjects, gameObject);
+			}
+			
 		}
 		
 		
@@ -184,7 +196,13 @@ namespace Hydrogen.Core
 					spawnedObject.SetActive(true);
 				}
 				
-				if ( trackSpawnedObjects ) Hydrogen.Array.Add<GameObject>(ref _spawnedObjects, spawnedObject, false);
+				if ( trackSpawnedObjects )
+				{
+					// No already spawned objects
+					if (_spawnedObjects == null ) _spawnedObjects = new GameObject[0];
+					
+					Hydrogen.Array.Add<GameObject>(ref _spawnedObjects, spawnedObject, false);
+				}
 				
 				return spawnedObject;
 			}

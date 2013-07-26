@@ -50,12 +50,12 @@ public  class hObjectPoolItem : Hydrogen.Core.ObjectPoolItemBase {
 	{
 		if ( parentPool.hasRigidbody ) gameObject.rigidbody.velocity = Vector3.zero;
 		
-		gameObject.active = false;
+		gameObject.SetActive(false);
 	}
 	public override void OnSpawned()
 	{
 		
-		gameObject.active = true;
+		gameObject.SetActive(true);
 		StartCoroutine(DespawnTimer());
 	}	
 	
@@ -82,7 +82,7 @@ public  class hObjectPoolItem : Hydrogen.Core.ObjectPoolItemBase {
 			yield return new WaitForSeconds(particleSystem.startDelay + 0.25f);
 			while(particleSystem.IsAlive(true))
 			{
-				if (!particleSystem.gameObject.active)
+				if (!particleSystem.gameObject.activeSelf)
        			{
 					particleSystem.Clear(true);
 					yield break;
@@ -90,7 +90,7 @@ public  class hObjectPoolItem : Hydrogen.Core.ObjectPoolItemBase {
 				yield return null;
 			}
 		}
-		gameObject.active = false;
+		gameObject.SetActive(false);
 		
 		hObjectPool.Instance.objectPools[poolID].DespawnImmediate(gameObject);
 	}
