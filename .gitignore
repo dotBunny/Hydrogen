@@ -7,6 +7,7 @@ Temp
 *.sln
 *.userprefs
 *.meta
+<<<<<<< HEAD
 
 Assets/AssetStoreTools.meta
 
@@ -27,3 +28,5 @@ Assets/AssetStoreTools/Editor/icon.png.meta
 Assets/AssetStoreTools/Labels.asset
 
 Assets/AssetStoreTools/Labels.asset.meta
+=======
+>>>>>>> cbb7a2229b214fd6b6bc07d351ff753dfbb80c6b
