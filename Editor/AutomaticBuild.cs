@@ -2,8 +2,8 @@
 // 
 // AutomaticBuild.cs
 //  
-// Author:
-//	 Josh Montoute
+// Author(s):
+//   Josh Montoute
 //   Matthew Davey <matthew.davey@dotbunny.com>
 //
 // Copyright (C) 2011 by Thinksquirrel Software, LLC
