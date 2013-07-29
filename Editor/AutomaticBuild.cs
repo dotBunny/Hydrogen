@@ -43,14 +43,12 @@ public static class AutomaticBuild {
  
 	static string[] GetScenePaths()
 	{
-		string[] scenes = new string[EditorBuildSettings.scenes.Length];
- 
-		for(int i = 0; i < scenes.Length; i++)
-		{
-			scenes[i] = EditorBuildSettings.scenes[i].path;
+		List<string> EditorScenes = new List<string>();
+		foreach(EditorBuildSettingsScene scene in EditorBuildSettings.scenes) {
+			if (!scene.enabled) continue;
+			EditorScenes.Add(scene.path);
 		}
- 
-		return scenes;
+		return EditorScenes.ToArray();
 	}
  
 	[MenuItem("File/Automatic Build/Windows (32 bit)")]
