@@ -35,26 +35,22 @@ namespace Hydrogen
         
 		public static float ClampAngle (float angle, float minimumAngle, float maximumAngle)
 		{
-			// Neutralize really fucked up angles
-			angle = angle % 360;
-			
-			//if (angle < -360F) angle += 360F;
-			//if (angle > 360F) angle -= 360F;
-			
-			
-			if ((angle >= -360F) && (angle <= 360F))
-			{
-            	if (angle < -360F) 
-				{
-	                angle += 360F;
-            	}
-            	if (angle > 360F) 
-				{
-                	angle -= 360F;
-            	}           
-        	}
 			// Clamp that angle up
-			return UnityEngine.Mathf.Clamp (angle, minimumAngle, maximumAngle);
+			return UnityEngine.Mathf.Clamp (NeutralizeAngle(angle), minimumAngle, maximumAngle);
+		}
+		public static float NeutralizeAngle(float angle)
+		{
+			// Neutralize really fucked up angles
+			return angle % 360;
+		}
+		
+		public static float UnsignAngle(float angle)
+		{
+			if ( angle < 0 )
+			{
+				return 360 + angle;
+			}
+			return angle;
 		}
     }
 }
