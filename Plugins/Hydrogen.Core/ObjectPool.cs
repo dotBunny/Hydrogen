@@ -73,7 +73,7 @@ namespace Hydrogen.Core
 				
 				if ( !objectPools[x].Initialized )
 				{
-					objectPools[x].Initialize(objectPools[x].prefab.gameObject, this.transform, x);
+					objectPools[x].Initialize(objectPools[x].prefab, this.transform, x);
 					_poolStringLookupTable.Add(objectPools[x].prefab.name,x);
 				}
 			}
