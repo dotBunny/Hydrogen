@@ -32,7 +32,7 @@ namespace Hydrogen.Core
 	[System.Serializable]
 	public class ObjectPoolCollection
 	{		
-		public GameObject prefab;
+		public Transform prefab;
 		public int preloadAmount;
 		public bool spawnMoreIfNeeded;
 		public bool sendMessage = false;
@@ -81,7 +81,7 @@ namespace Hydrogen.Core
 		
 		public void Initialize(GameObject gameObject, Transform parent, int poolID)
 		{
-			prefab = gameObject;
+			prefab = gameObject.transform;
 			
 			_parentTransform = parent;
 			_poolID = poolID;
@@ -121,7 +121,10 @@ namespace Hydrogen.Core
 		
 		public void AddToPool()
 		{
-			GameObject newObject = GameObject.Instantiate(prefab) as GameObject;
+		//	GameObject newObject = GameObject.Instantiate(prefab) as GameObject;
+			Transform newTransform = GameObject.Instantiate(prefab) as Transform;
+			
+			GameObject newObject = newTransform.gameObject;
 			
 			newObject.name = prefab.name;
 			
