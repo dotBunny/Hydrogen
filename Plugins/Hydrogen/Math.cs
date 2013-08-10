@@ -41,14 +41,36 @@ namespace Hydrogen
 		public static float NeutralizeAngle(float angle)
 		{
 			// Neutralize really fucked up angles
-			return angle % 360;
+			return angle % 360f;
 		}
 		
-		public static float UnsignAngle(float angle)
+		public static float UnsignedAngle(float angle)
 		{
-			if ( angle < 0 )
+			if ( angle < 0f )
 			{
-				return 360 + angle;
+				if ( angle < -360f )
+				{
+					return (angle - (angle % 360f) * -1f) + (360f + (angle % 360f));
+				}
+				else
+				{
+					return 360f + angle;
+				}
+			}
+			return angle;
+		}
+		
+		public static float SignedAngle(float angle)
+		{
+			angle = NeutralizeAngle(angle);
+			
+			if ( angle > 180f ) 
+			{
+				return ((angle % 180f) * -1f);
+			}
+			else if ( angle < -180 )
+			{
+				return ((angle % 180) * -1f);
 			}
 			return angle;
 		}
