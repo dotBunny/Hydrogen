@@ -49,8 +49,8 @@ namespace Hydrogen
 			if ( angle < 0f )
 			{
 				if ( angle < -360f )
-				{
-					return (angle - (angle % 360f) * -1f) + (360f + (angle % 360f));
+				{	
+					return ((360 + (angle % 360f)) + ((angle - ( angle % 360f))) * -1);
 				}
 				else
 				{
@@ -62,11 +62,12 @@ namespace Hydrogen
 		
 		public static float SignedAngle(float angle)
 		{
-			angle = NeutralizeAngle(angle);
+			
+			angle = angle % 360f;
 			
 			if ( angle > 180f ) 
 			{
-				return ((angle % 180f) * -1f);
+				return (180 - ((angle % 180f))) * -1f;
 			}
 			else if ( angle < -180 )
 			{
