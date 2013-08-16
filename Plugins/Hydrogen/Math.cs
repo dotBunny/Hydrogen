@@ -32,7 +32,8 @@ namespace Hydrogen
     /// </summary>
     public static class Math
     {
-        
+
+		
 		public static float ClampAngle (float angle, float minimumAngle, float maximumAngle)
 		{
 			// Clamp that angle up
@@ -41,7 +42,8 @@ namespace Hydrogen
 		public static float NeutralizeAngle(float angle)
 		{
 			// Neutralize really fucked up angles
-			return angle % 360f;
+			if ( angle < 0 ) return (angle % 360f) * -1;
+			else return angle % 360f;
 		}
 		
 		public static float UnsignedAngle(float angle)
