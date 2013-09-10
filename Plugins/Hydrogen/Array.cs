@@ -35,6 +35,17 @@ namespace Hydrogen
     /// </summary>
     public static class Array
     {
+		public static bool Contains<T>(ref T[] array, T targetObject)
+		{
+			if (array.Any(t => t.Equals(targetObject)))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
         /// <summary>
         /// Add a unique item to an array.
         /// </summary>
