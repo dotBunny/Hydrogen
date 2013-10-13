@@ -45,6 +45,7 @@ Support
 ------------------------------------------------------------------------------------------------
 
 Any issues can be reported @ http://github.com/dotBunny/Hydrogen/issues
+
 Automated documentation can be found @ http://hydrogen.dotbunny.com/documentation/
 
 Due to time commitments to our normal projects, support may be very limited.
