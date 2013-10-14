@@ -3,9 +3,9 @@
 // Layers.cs
 //  
 // Author:
-//   Matthew Davey <matthew.davey@dotbunny.com>
+//   Bob Berkebile
 //
-// Copyright (C) 2013 dotBunny Inc. (http://www.dotbunny.com)
+// Copyright (C) 2012 PixelPlacement (http://pixelplacement.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
 // this software and associated documentation files (the "Software"), to deal in
@@ -29,7 +29,7 @@ using UnityEngine;
 namespace Hydrogen
 {
 	/// <summary>
-	/// Additional static functions, constants and classes used to extend existing Math support inside of Unity.
+	/// Additional static functions, constants and classes used to extend existing Layers support inside of Unity.
 	/// </summary>
 	public static class Layers
 	{
