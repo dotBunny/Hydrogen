@@ -2,10 +2,12 @@
 // 
 // Layers.cs
 //  
-// Author:
+// Authors:
 //   Bob Berkebile
+//   Matthew Davey <matthew.davey@dotbunny.com>
 //
 // Copyright (C) 2012 PixelPlacement (http://pixelplacement.com/)
+// Copyright (C) 2013 dotBunny Inc. (http://dotbunny.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
 // this software and associated documentation files (the "Software"), to deal in
@@ -33,25 +35,36 @@ namespace Hydrogen
 	/// </summary>
 	public static class Layers
 	{
+		/// <summary>
+		/// Create a layer mask only including these layers.
+		/// </summary>
+		/// <returns>A layer mask including only the passed layers.</returns>
+		/// <param name="layers">Array of Layer IDs</param>
 		public static int OnlyIncluding( params int[] layers ){
-			return MakeMask( layers );
-		}
-		
-		public static int EverythingBut( params int[] layers ){
-			return ~MakeMask( layers );
-		}
-		
-		public static bool ContainsLayer( LayerMask layerMask, int layer ){
-			return ( layerMask.value & 1 << layer ) != 0 ;	
-		}
-		
-		static int MakeMask( params int[] layers ){
 			int mask = 0;
 			foreach ( int item in layers ) {
 				mask |= 1 << item;
 			}
-			return mask;	
+			return mask;
 		}
 
+		/// <summary>
+		/// Create a layer mask of everything but these layers.
+		/// </summary>
+		/// <returns>A layer mask of everything but the passed layers.</returns>
+		/// <param name="layers">Array of Layer IDs.</param>
+		public static int EverythingBut( params int[] layers ){
+			return ~OnlyIncluding( layers );
+		}
+
+		/// <summary>
+		/// Determine if the specified layer is contained within the layerMask.
+		/// </summary>
+		/// <returns><c>true</c>, if the layer is contained, <c>false</c> otherwise.</returns>
+		/// <param name="layerMask">The LayerMask to poll</param>
+		/// <param name="targetLayer">The layer to check.</param>
+		public static bool ContainsLayer( LayerMask layerMask, int targetLayer ){
+			return ( layerMask.value & 1 << targetLayer ) != 0 ;	
+		}
 	}
 }

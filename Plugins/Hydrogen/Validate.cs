@@ -33,6 +33,7 @@ namespace Hydrogen
     /// <summary>
     /// Additional static functions, constants and classes used to extend existing Validation support inside of Unity.
     /// </summary>
+	//TODO: Need proper documentation
     public static class Validate
     {
 		

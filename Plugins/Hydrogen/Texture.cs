@@ -29,6 +29,10 @@ using UnityEngine;
 
 namespace Hydrogen
 {
+	/// <summary>
+	/// Additional static functions, constants and classes used to extend existing Texture support inside of Unity.
+	/// </summary>
+	//TODO: Need proper documentation
     public static class Texture
     {
         // simple bilinear filtering

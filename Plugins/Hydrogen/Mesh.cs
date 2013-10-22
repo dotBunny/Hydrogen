@@ -35,9 +35,7 @@ namespace Hydrogen
         /// <summary>
         /// The maximum vertices allowed in a Mesh.
         /// </summary>
-        /// <remarks>
-        /// This is a Unity imposed limitation, presumably this may grow over time.
-        /// </remarks>
+        /// <remarks>This is a Unity imposed limitation, presumably this may grow over time.</remarks>
         public const int MeshVerticesLimit = 65536;
     }
 }

@@ -37,8 +37,8 @@ namespace Hydrogen
         /// <summary>
         /// To convert a Byte Array of Unicode values (UTF-8 encoded) to a complete String.
         /// </summary>
-        /// <param name="characters">Unicode Byte Array to be converted to String</param>
-        /// <returns>String converted from Unicode Byte Array</returns>
+		/// <returns>String converted from Unicode Byte Array</returns>
+		/// <param name="characters">Unicode Byte Array to be converted to String</param>
         public static String UTF8ByteArrayToString(Byte[] characters)
         {
             var encoding = new System.Text.UTF8Encoding();
@@ -47,10 +47,10 @@ namespace Hydrogen
         }
 
         /// <summary>
-        /// Converts the String to UTF8 Byte array and is used in De serialization
+        /// Converts the String to UTF8 Byte array and is used in Deserialization
         /// </summary>
-        /// <param name="pXmlString"></param>
-        /// <returns></returns>
+		/// <returns>A byte array</returns>
+		/// <param name="pXmlString">The source string</param>
         public static Byte[] StringToUTF8ByteArray(String pXmlString)
         {
             var encoding = new System.Text.UTF8Encoding();

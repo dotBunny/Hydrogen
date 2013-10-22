@@ -35,11 +35,11 @@ namespace Hydrogen
     public static class Resources
     {
 		/// <summary>
-        /// Load the object of the specified type
+        /// Load the object of the specified type.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="path"></param>
-        /// <returns>Object</returns>
+		/// <returns>A reference to the loaded object.</returns>
+		/// <typeparam name="T">Object Type.</typeparam>
+        /// <param name="path">The full path to the desired object.</param>
         public static T Load<T>(string path) where T : UnityEngine.Object
         {
             return (T)UnityEngine.Resources.Load(path, typeof(T));

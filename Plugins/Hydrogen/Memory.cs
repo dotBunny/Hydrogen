@@ -40,9 +40,9 @@ namespace Hydrogen
         /// <summary>
         /// Perform a deep Copy of the object.
         /// </summary>
-        /// <typeparam name="T">The type of object being copied.</typeparam>
+		/// <returns>The copied object.</returns>
+		/// <typeparam name="T">Object Type</typeparam>
         /// <param name="source">The object instance to copy.</param>
-        /// <returns>The copied object.</returns>
         public static T Clone<T>(this T source)
         {
             if (!typeof(T).IsSerializable)

@@ -30,37 +30,73 @@ using System;
 namespace Hydrogen
 {
 
-    /// <summary>
-    /// Additional static functions, constants and classes used to extend existing Validation support inside of Unity.
-    /// </summary>
+	/// <summary>
+	/// Additional static functions, constants and classes used to extend existing Component support inside of Unity.
+	/// </summary>
     public static class Components
     {
-		public static T GetComponentIfNull< T >( UnityEngine.Component that, T cachedT ) where T : UnityEngine.Component
+		/// <summary>
+		/// Get a component reference, checking if its already referenced.
+		/// </summary>
+		/// <returns>The desired component.</returns>
+		/// <param name="targetObject">The object to look on for the component.</param>
+		/// <param name="cachedReference">Possible pre-existing reference to component.</param>
+		/// <typeparam name="T">Object Type.</typeparam>
+		/// <example>
+		/// private AudioSource _localAudioSource = null;
+		/// public AudioSource LocalAudioSource
+		/// {
+		///		get
+		///		{
+		///			_localAudioSource = Hydrogen.Components.GetComponentIfNull( this, _localAudioSource );
+		///			return _localAudioSource;
+		///		}
+		///	}
+		/// </example>
+		public static T GetComponentIfNull< T >( UnityEngine.Component targetObject, T cachedReference ) where T : UnityEngine.Component
 		{
-		    if( cachedT == null )
+			if( cachedReference == null )
 		    {
-		        cachedT = (T)that.GetComponent( typeof( T ) );
-		        if( cachedT == null )
+				cachedReference = (T)targetObject.GetComponent( typeof( T ) );
+				if( cachedReference == null )
 		        {
-		            UnityEngine.Debug.LogWarning( "GetComponent of type " + typeof( T ) + " failed on " + that.name, that );
+		            UnityEngine.Debug.LogWarning( "GetComponent of type " + typeof( T ) + " failed on " + targetObject.name, targetObject );
 		        }
 		    }
 		
-		    return cachedT;
+			return cachedReference;
 		}
-		
-		public static T GetComponentIfNull< T >( UnityEngine.GameObject that, T cachedT ) where T : UnityEngine.Component
+
+		/// <summary>
+		/// Get a component reference, checking if its already referenced.
+		/// </summary>
+		/// <returns>The desired component.</returns>
+		/// <param name="targetObject">The object to look on for the component.</param>
+		/// <param name="cachedReference">Possible pre-existing reference to component.</param>
+		/// <typeparam name="T">Object Type.</typeparam>
+		/// <example>
+		/// private AudioSource _localAudioSource = null;
+		/// public AudioSource LocalAudioSource
+		/// {
+		///		get
+		///		{
+		///			_localAudioSource = Hydrogen.Components.GetComponentIfNull( this, _localAudioSource );
+		///			return _localAudioSource;
+		///		}
+		///	}
+		/// </example>
+		public static T GetComponentIfNull< T >( UnityEngine.GameObject targetObject, T cachedReference ) where T : UnityEngine.Component
 		{
-		    if( cachedT == null )
+			if( cachedReference == null )
 		    {
-		        cachedT = (T)that.GetComponent( typeof( T ) );
-		        if( cachedT == null )
+				cachedReference = (T)targetObject.GetComponent( typeof( T ) );
+				if( cachedReference == null )
 		        {
-		            UnityEngine.Debug.LogWarning( "GetComponent of type " + typeof( T ) + " failed on " + that.name, that );
+					UnityEngine.Debug.LogWarning( "GetComponent of type " + typeof( T ) + " failed on " + targetObject.name, targetObject );
 		        }
 		    }
 		
-		    return cachedT;
+			return cachedReference;
 		}	
 	}	
 }

@@ -36,6 +36,7 @@ namespace Hydrogen
     /// <summary>
     /// Additional static functions, constants and classes used to extend existing Regex support inside of Unity.
     /// </summary>
+	//TODO: Need to add proper documentation
     public static class Regex
     {
         internal static System.Text.RegularExpressions.Regex r = new
@@ -87,15 +88,6 @@ namespace Hydrogen
             }
         }
 
-        public static void printf(string Format, params object[] Parameters)
-        {
-            Console.Write(sprintf(Format, Parameters));
-        }
-
-        public static void fprintf(TextWriter Destination, string Format, params object[] Parameters)
-        {
-            Destination.Write(sprintf(Format, Parameters));
-        }
 
         public static string sprintf(string Format, params object[] Parameters)
         {
@@ -409,8 +401,6 @@ namespace Hydrogen
 
             return f.ToString();
         }
-
-
 
         public static string PregReplace(string input, string[] pattern, string[] replacements)
         {

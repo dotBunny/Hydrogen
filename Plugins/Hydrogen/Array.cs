@@ -35,38 +35,15 @@ namespace Hydrogen
     /// </summary>
     public static class Array
     {
-		public static bool Contains<T>(ref T[] array, T targetObject)
-		{
-			if (array.Any(t => t.Equals(targetObject)))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-        /// <summary>
-        /// Add a unique item to an array.
-        /// </summary>
-        /// <returns>
-        /// Was anything added?
-        /// </returns>
-        /// <param name='array'>
-        /// The source array.
-        /// </param>
-        /// <param name='position'>
-        /// The position (index) where to insert the object.
-        /// </param>
-        /// <param name='newObject'>
-        /// Object to be added.
-        /// </param>
-        /// <param name='forceUnique'>
-        /// Should it check to see if there is an existing reference in the array?
-        /// </param>
-        /// <typeparam name='T'>
-        /// Object Type.
-        /// </typeparam>
+	    /// <summary>
+		/// Add a unique item to an array.
+		/// </summary>
+		/// <returns><c>true</c>, if something was added, <c>false</c> otherwise.</returns>
+		/// <param name="array">The source array.</param>
+        /// <param name="position">The position (index) where to insert the object.</param>
+        /// <param name="newObject">Object to be added.</param>
+        /// <param name="forceUnique">Should it check to see if there is an existing reference in the array?</param>
+        /// <typeparam name="T">Object Type.</typeparam>
         public static bool AddAt<T>(ref T[] array, int position, T newObject, bool forceUnique)
         {
 
@@ -115,21 +92,11 @@ namespace Hydrogen
         /// <summary>
         /// Add a unique item to an array.
         /// </summary>
-        /// <returns>
-        /// Was anything added?
-        /// </returns>
-        /// <param name='array'>
-        /// The source array
-        /// </param>
-        /// <param name='newObject'>
-        /// Object to be added.
-        /// </param>
-        /// <param name='forceUnique'>
-        /// Should it check to see if there is an existing reference in the array?
-        /// </param>
-        /// <typeparam name='T'>
-        /// Object Type.
-        /// </typeparam>
+		/// <returns><c>true</c>, if something was added, <c>false</c> otherwise.</returns>
+		/// <param name="array">The source array</param>
+        /// <param name="newObject">Object to be added.</param>
+        /// <param name="forceUnique">Should it check to see if there is an existing reference in the array?</param>
+        /// <typeparam name="T">Object Type.</typeparam>
         public static bool Add<T>(ref T[] array, T newObject, bool forceUnique)
         {
             return AddAt(ref array, array.Length, newObject, forceUnique);
@@ -138,40 +105,41 @@ namespace Hydrogen
 		/// <summary>
         /// Add an item to an array.
         /// </summary>
-        /// <returns>
-        /// Was anything added?
-        /// </returns>
-        /// <param name='array'>
-        /// The source array
-        /// </param>
-        /// <param name='newObject'>
-        /// Object to be added.
-        /// </param>
-        /// <typeparam name='T'>
-        /// Object Type.
-        /// </typeparam>
+        /// <returns>Was anything added?</returns>
+        /// <param name="array">The source array</param>
+        /// <param name="newObject">Object to be added.</param>
+        /// <typeparam name="T">Object Type.</typeparam>
         public static bool Add<T>(ref T[] array, T newObject)
         {
             return AddAt(ref array, array.Length, newObject, false);
         }
 
-		
+		/// <summary>
+		/// Determine if the specified array contains the targetObject.
+		/// </summary>
+		/// <returns><c>true</c>, if something was found, <c>false</c> otherwise.</returns>
+		/// <param name="array">The source array.</param>
+		/// <param name="targetObject">Object to test for.</param>
+		/// <typeparam name="T">Object Type</typeparam>
+		public static bool Contains<T>(ref T[] array, T targetObject)
+		{
+			if (array.Any(t => t.Equals(targetObject)))
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 		
         /// <summary>
         /// Removes all references for an object from array.
         /// </summary>
-        /// <returns>
-        /// Was something removed?
-        /// </returns>
-        /// <param name='array'>
-        /// The source array
-        /// </param>
-        /// <param name='oldObject'>
-        /// Object to be removed.
-        /// </param>
-        /// <typeparam name='T'>
-        /// Object Type.
-        /// </typeparam>
+		/// <returns><c>true</c>, if something was removed, <c>false</c> otherwise.</returns>
+		/// <param name="array">The source array.</param>
+        /// <param name="oldObject">Object to be removed.</param>
+        /// <typeparam name="T">Object Type.</typeparam>
         public static bool Remove<T>(ref T[] array, T oldObject)
         {
 
@@ -209,18 +177,10 @@ namespace Hydrogen
 		/// <summary>
 		/// Removes an object in an array at the provided index.
 		/// </summary>
-		/// <returns>
-		/// The <see cref="System.Boolean"/>.
-		/// </returns>
-		/// <param name='array'>
-		/// The source array.
-		/// </param>
-		/// <param name='index'>
-		/// The index of the item to be removed.
-		/// </param>
-		/// <typeparam name='T'>
-		/// Object Type.
-		/// </typeparam>
+		/// <returns><c>true</c>, if something was removed, <c>false</c> otherwise.</returns>
+		/// <param name="array">The source array.</param>
+		/// <param name="index">The index of the item to be removed.</param>
+		/// <typeparam name="T">Object Type.</typeparam>
 		public static bool RemoveAt<T>(ref T[] array, int index)
 		{
 			// Failsafe
