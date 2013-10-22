@@ -40,31 +40,31 @@ namespace Hydrogen
 		/// <param name="value">The value.</param>
 		public static object ToUnsigned(object value)
 		{
-			switch (Type.GetTypeCode(value.GetType()))
+			switch (System.Type.GetTypeCode(value.GetType()))
 			{
-			case TypeCode.SByte:
+			case System.TypeCode.SByte:
 				return (byte)((sbyte)value);
-			case TypeCode.Int16:
+			case System.TypeCode.Int16:
 				return (ushort)((short)value);
-			case TypeCode.Int32:
+			case System.TypeCode.Int32:
 				return (uint)((int)value);
-			case TypeCode.Int64:
+			case System.TypeCode.Int64:
 				return (ulong)((long)value);
 				
-			case TypeCode.Byte:
+			case System.TypeCode.Byte:
 				return value;
-			case TypeCode.UInt16:
+			case System.TypeCode.UInt16:
 				return value;
-			case TypeCode.UInt32:
+			case System.TypeCode.UInt32:
 				return value;
-			case TypeCode.UInt64:
+			case System.TypeCode.UInt64:
 				return value;
 				
-			case TypeCode.Single:
-				return (UInt32)((float)value);
-			case TypeCode.Double:
+			case System.TypeCode.Single:
+				return (System.UInt32)((float)value);
+			case System.TypeCode.Double:
 				return (ulong)((double)value);
-			case TypeCode.Decimal:
+			case System.TypeCode.Decimal:
 				return (ulong)((decimal)value);
 				
 			default:
@@ -80,31 +80,31 @@ namespace Hydrogen
 		/// <param name="round">Should decimals be rounded?</param>
 		public static long UnboxToLong(object value, bool round)
 		{
-			switch (Type.GetTypeCode(value.GetType()))
+			switch (System.Type.GetTypeCode(value.GetType()))
 			{
-			case TypeCode.SByte:
+			case System.TypeCode.SByte:
 				return (long)((sbyte)value);
-			case TypeCode.Int16:
+			case System.TypeCode.Int16:
 				return (long)((short)value);
-			case TypeCode.Int32:
+			case System.TypeCode.Int32:
 				return (long)((int)value);
-			case TypeCode.Int64:
+			case System.TypeCode.Int64:
 				return (long)value;
 				
-			case TypeCode.Byte:
+			case System.TypeCode.Byte:
 				return (long)((byte)value);
-			case TypeCode.UInt16:
+			case System.TypeCode.UInt16:
 				return (long)((ushort)value);
-			case TypeCode.UInt32:
+			case System.TypeCode.UInt32:
 				return (long)((uint)value);
-			case TypeCode.UInt64:
+			case System.TypeCode.UInt64:
 				return (long)((ulong)value);
 				
-			case TypeCode.Single:
+			case System.TypeCode.Single:
 				return (round ? (long)System.Math.Round((float)value) : (long)((float)value));
-			case TypeCode.Double:
+			case System.TypeCode.Double:
 				return (round ? (long)System.Math.Round((double)value) : (long)((double)value));
-			case TypeCode.Decimal:
+			case System.TypeCode.Decimal:
 				return (round ? (long)System.Math.Round((decimal)value) : (long)((decimal)value));
 				
 			default:

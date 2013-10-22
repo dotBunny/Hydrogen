@@ -289,7 +289,7 @@ namespace Hydrogen
                         w = FormatNumber((flagGroupThousands ? "n" : "d"), flagAlternate,
                                         fieldLength, int.MinValue, flagLeft2Right,
                                         false, false,
-                                        paddingCharacter, Hydrogen.Convert.ToUnsigned(o));
+                                        paddingCharacter, Hydrogen.Math.ToUnsigned(o));
                         defaultParamIx++;
                         break;
                     #endregion
@@ -432,7 +432,7 @@ namespace Hydrogen
 
             if (Validate.IsNumericType(Value))
             {
-                w = System.Convert.ToString(Hydrogen.Convert.UnboxToLong(Value, true), 8);
+                w = System.Convert.ToString(Hydrogen.Math.UnboxToLong(Value, true), 8);
 
                 if (Left2Right || Padding == ' ')
                 {

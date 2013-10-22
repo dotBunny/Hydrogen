@@ -42,7 +42,7 @@ namespace Hydrogen
 		public static bool AgentAtDestination(NavMeshAgent agent)
 		{
 			float dist = agent.remainingDistance; 
-			if (dist!=Mathf.Infinity && agent.pathStatus==NavMeshPathStatus.PathComplete && agent.remainingDistance==0)
+			if (dist!=Mathf.Infinity && agent.pathStatus==UnityEngine.NavMeshPathStatus.PathComplete && agent.remainingDistance==0)
 			{
 				return true;
 			}
@@ -58,12 +58,13 @@ namespace Hydrogen
 		/// <param name="allowedMask">Any limitations on what NavMeshLayer the position can be on.</param>
 		public static Vector3 RandomPosition(Vector3 basePosition, float distance, int allowedMask = 1)
 		{
-			NavMeshHit _hit;
+			UnityEngine.NavMeshHit _hit;
 
-			if(NavMesh.SamplePosition((Random.insideUnitSphere * distance) + basePosition,out _hit, distance,allowedMask))
+			if(UnityEngine.NavMesh.SamplePosition((Random.insideUnitSphere * distance) + basePosition,out _hit, distance,allowedMask))
 			{
 				return _hit.position;
 			}
+			else return basePosition;
 		}
 	}
 }
