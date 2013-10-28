@@ -1,5 +1,5 @@
 // 
-// SimpleColor.shader
+// SimpleTexture.shader
 //  
 // Author:
 //   Matthew Davey <matthew.davey@dotbunny.com>
@@ -23,13 +23,13 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-Shader "Hydrogen/Simple/Color" {
-   Properties { 
-      _Color ("Color", Color) = (1, 1, 1, 1)
-   } 
-   SubShader { 
-      Pass { 
-         Color [_Color]
-      } 
-   }
+Shader "Hydrogen/Unlit/Texture" {
+	Properties {
+		_MainTex ("Base (RGB)", 2D) = "white"
+	}
+	SubShader {
+		Pass {
+			SetTexture [_MainTex]
+		}
+	}
 }

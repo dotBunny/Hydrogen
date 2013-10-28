@@ -1,5 +1,5 @@
 // 
-// SimpleTransparentTexture.shader
+// UnlitColor.shader
 //  
 // Author:
 //   Matthew Davey <matthew.davey@dotbunny.com>
@@ -23,26 +23,13 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-Shader "Hydrogen/Simple/Transparent Texture" {
-	Properties {
-		_Color ("Main Color", Color) = (1,1,1,1)
-		_MainTex ("Base (RGB) Trans (A)", 2D) = "white" {}
-	}
-	Category {
-		ZWrite Off
-		Alphatest Greater 0
-		Tags {Queue=Transparent}
-		Blend SrcAlpha OneMinusSrcAlpha
-		
-		SubShader {
-			Pass {
-				Lighting Off
-				SetTexture [_MainTex]
-				{
-					constantColor [_Color]
-					Combine texture * constant, texture * constant
-				}
-			}
-		}
-	}
+Shader "Hydrogen/Unlit/Color" {
+   Properties { 
+      _Color ("Color", Color) = (1, 1, 1, 1)
+   } 
+   SubShader { 
+      Pass { 
+         Color [_Color]
+      } 
+   }
 }
