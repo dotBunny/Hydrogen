@@ -182,19 +182,13 @@ public class HydrogenTestFlightMenu  {
 			EditorUtility.DisplayProgressBar("Installing", "Copying Android Extras ...", 0.4f);
 			
 			// Grab a copy of Unity's AndroidManifest and shove it in the Android plugins folder (only if we don't already have one there)
-			// TODO WTF IT ISNT WORKING
-			Debug.Log (Application.dataPath + DS + "Plugins" + DS + "Android" + DS +  "AndroidManifest.xml");
 			if ( !File.Exists(Application.dataPath + DS + "Plugins" + DS + "Android" + DS + "AndroidManifest.xml"))
 			{
-				Debug.Log ("not exist");
 				File.Copy (EditorApplication.applicationContentsPath + DS + "PlaybackEngines" + DS + "AndroidPlayer" + DS + "AndroidManifest.xml",
 					Application.dataPath + DS + "Plugins" + DS + "Android" + DS + "AndroidManifest.xml", true);
-				
-				// Do a little parsing for the user ahead of time
 			}
 			
 			// Add the required permissions for TestFlight
-
 			string[] _manifestLines = System.IO.File.ReadAllLines(Application.dataPath + DS + "Plugins" + DS + "Android" + DS + "AndroidManifest.xml");
 			int _insertionLocation = 0;
 			bool _foundInternet = false;

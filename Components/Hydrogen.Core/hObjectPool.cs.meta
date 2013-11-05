@@ -1,5 +1,8 @@
 fileFormatVersion: 2
 guid: 3e5347e8cd5a04971aa0beec56b10b9f
+labels:
+- hydrogen
+- component
 MonoImporter:
   serializedVersion: 2
   defaultReferences: []

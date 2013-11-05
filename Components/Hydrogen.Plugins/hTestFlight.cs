@@ -84,6 +84,8 @@ public class hTestFlight : MonoBehaviour
 		// Should this gameObject be kept around :) I think so.
 		if ( presistant ) DontDestroyOnLoad( this.gameObject );
 		
+		Flying = false;
+		
 #if (UNITY_IPHONE || UNITY_IOS) && !UNITY_EDITOR
 		TakeOff(tokenIOS);
 #elif UNITY_ANDROID && !UNITY_EDITOR
@@ -97,7 +99,7 @@ public class hTestFlight : MonoBehaviour
 		
 		if ( token != "" && token != null )
 		{
-			Hydrogen.Plugins.TestFlight.TakeOff(tokenAndroid);
+			Hydrogen.Plugins.TestFlight.TakeOff(token);
 			Flying = true;
 		}
 	}
