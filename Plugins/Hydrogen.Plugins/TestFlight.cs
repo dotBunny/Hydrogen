@@ -116,7 +116,6 @@ namespace Hydrogen.Plugins
 		
 #else
 		public static void TakeOff(string token) {}
-		public static void OpenFeedbackView() {}
 		public static void PassCheckpoint(string checkpointName) {}
 		public static void AddCustomEnvironmentInformation(string information, string forKey) {}
 		public static void SubmitFeedback(string feedbackString) {}
