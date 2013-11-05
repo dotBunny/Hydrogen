@@ -25,12 +25,7 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-/// <summary>
-/// Object pool.
-/// </summary>
-/// <exception cref='MissingReferenceException'>
-/// Is thrown when the missing reference exception.
-/// </exception>
+
 
 using UnityEngine;
 using System.Collections;

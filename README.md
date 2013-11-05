@@ -12,6 +12,11 @@ Requirements
 ------------------------------------------------------------------------------------------------
 - Unity 4.x
 
+Included Libraries
+------------------------------------------------------------------------------------------------
+- TestFlight for Android 1.2
+- TestFlight for iOS 2.0.2
+
 Installation
 ------------------------------------------------------------------------------------------------
 
@@ -35,12 +40,23 @@ Here is where you find some premade drag and drop components to drop on to your 
 you can add them by the quick add button. We've prefixed all of our component based scripts with
 'h' so that they can be easily found and identified.
 
+### Editors ###
+Some fun swag for the Unity Editor, nothing major though.
+
+### Extras ###
+This is kind of a storage folder for things that our scripts will utilize automatically for you.
+We would advise not playing with this folder, hell any folders really, that much.
+
 ### Plugins ###
 This is where bulk of the code is kept. It is issolated in its own namespace as to not interfere
 with anything else.
 
 ### Shaders ###
 Pretty self explanitory don't you think?
+
+### Vendors ###
+If we've included something to make your life easier that we didn't particularily make or contribute
+to; this will be its home.
 
 
 Support
