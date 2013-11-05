@@ -25,6 +25,7 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using UnityEngine;
 using System.Collections;
 #if (UNITY_IPHONE || UNITY_IOS) && !UNITY_EDITOR
 using System.Runtime.InteropServices;
