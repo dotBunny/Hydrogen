@@ -98,8 +98,6 @@ namespace Hydrogen.Plugins
 			_testFlight.CallStatic("takeOff", _application, token);
 		}
 		
-		public static void OpenFeedbackView() {}
-		
 		public static void PassCheckpoint(string checkpointName)
 		{
 			_testFlight.CallStatic("passCheckpoint", checkpointName);
