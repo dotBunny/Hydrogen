@@ -207,7 +207,7 @@ public class HydrogenTestFlightMenu  {
 				}
 				if ( _manifestLines[x].Contains ("</application>")) 
 				{
-					_insertionLocation = x;
+					_insertionLocation = x + 1;
 				}
 			}
 			
