@@ -130,6 +130,7 @@ namespace Hydrogen.Plugins
 		public static void TakeOff(string token)
 		{
 			_testFlight.CallStatic("takeOff", _application, token);
+			Flying = true;
 		}
 		
 		public static void PassCheckpoint(string checkpointName)

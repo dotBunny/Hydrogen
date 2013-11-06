@@ -100,7 +100,7 @@ public class hTestFlight : MonoBehaviour
 		
 		if ( !Hydrogen.Plugins.TestFlight.Session ) Hydrogen.Plugins.TestFlight.StartSession();
 		
-		if ( token != "" && token != null ) Hydrogen.Plugins.TestFlight.TakeOff(token);
+		if ( !string.IsNullOrEmpty(token) ) Hydrogen.Plugins.TestFlight.TakeOff(token);
 	}
 	
 	public void SubmitFeedback(string message)
