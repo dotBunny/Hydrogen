@@ -57,7 +57,7 @@ namespace Hydrogen.Plugins
 		private static extern void TestFlight_StartSession ();
 		public static void StartSession()
 		{
-			Session = false;
+			Session = true;
 		}
 		
 		[DllImport ("__Internal")]
