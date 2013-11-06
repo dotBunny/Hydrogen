@@ -83,24 +83,18 @@ public class hTestFlight : MonoBehaviour
 		// Should this gameObject be kept around :) I think so.
 		if ( presistant ) DontDestroyOnLoad( this.gameObject );
 		
+				
+		
 		// Depending on the platform there are some things that need to be handled before we can 
 		// take off and start submitting data
 		Hydrogen.Plugins.TestFlight.Initialize();
-
+		
 #if (UNITY_IPHONE || UNITY_IOS) && !UNITY_EDITOR
-		TakeOff(tokenIOS);
+		Hydrogen.Plugins.TestFlight.TakeOff(tokenIOS);
 #elif UNITY_ANDROID && !UNITY_EDITOR
-		TakeOff(tokenAndroid);
+		Hydrogen.Plugins.TestFlight.TakeOff(tokenAndroid);
 #endif
-	}
-	
-	public void TakeOff(string token)
-	{
-		if ( Hydrogen.Plugins.TestFlight.Flying ) return;
-		
-		if ( !Hydrogen.Plugins.TestFlight.Session ) Hydrogen.Plugins.TestFlight.StartSession();
-		
-		if ( !string.IsNullOrEmpty(token) ) Hydrogen.Plugins.TestFlight.TakeOff(token);
+		Hydrogen.Plugins.TestFlight.StartSession();
 	}
 	
 	public void SubmitFeedback(string message)
