@@ -40,12 +40,39 @@ namespace Hydrogen.Plugins
 	/// </summary>
 	public class TestFlight 
 	{
+		public static bool Session { get; private set; }
+		public static bool Flying { get; private set; }
+		
 #if HYDROGEN_TESTFLIGHT && (UNITY_IPHONE || UNITY_IOS) && (!UNITY_EDITOR)
+		[DllImport ("__Internal")]
+		private static extern void TestFlight_Initialize ();
+		public static void Initialize()
+		{
+			Session = false;
+			Flying = false;
+			TestFlight_Initialize();
+		}
+			
+		[DllImport ("__Internal")]
+		private static extern void TestFlight_StartSession ();
+		public static void StartSession()
+		{
+			Session = false;
+		}
+		
+		[DllImport ("__Internal")]
+		private static extern void TestFlight_EndSession ();
+		public static void EndSession()
+		{
+			Session = false;
+		}
+		
 		[DllImport ("__Internal")]
 		private static extern void TestFlight_TakeOff (string token);
 		public static void TakeOff(string token)
 		{
 			TestFlight_TakeOff(token);
+			Flying = true;
 		}
 	
 		[DllImport ("__Internal")]
@@ -82,19 +109,26 @@ namespace Hydrogen.Plugins
 		{
 			TestFlight_LogAsync(message);
 		}
+		
 #elif HYDROGEN_TESTFLIGHT && UNITY_ANDROID && !UNITY_EDITOR
 		private static AndroidJavaClass _testFlight = null;
 		private static AndroidJavaClass _unityPlayer = null;
 		private static AndroidJavaObject _activity = null;
 		private static AndroidJavaObject _application = null;
 		
-		public static void TakeOff(string token)
+		public static void Initialize()
 		{
+			Session = false;
+			Flying = false;
+			
 			_unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer"); 
 			_activity = _unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
 			_application = _activity.Call<AndroidJavaObject>("getApplication");
-			
 			_testFlight = new AndroidJavaClass("com.testflightapp.lib.TestFlight"); 
+		}
+		
+		public static void TakeOff(string token)
+		{
 			_testFlight.CallStatic("takeOff", _application, token);
 		}
 		
@@ -114,8 +148,36 @@ namespace Hydrogen.Plugins
 		
 		public static void LogAsync(string message) {}
 		
+		public static void EndSession()
+		{
+			_testFlight.CallStatic("endSession");
+			Session = false;
+		}
+		
+		public static void StartSession()
+		{
+			_testFlight.CallStatic("startSession");
+			Session = true;
+		}
+		
 #else
-		public static void TakeOff(string token) {}
+		public static void Initialize() 
+		{
+			Session = false;
+			Flying = false;
+		}
+		public static void StartSession() 
+		{
+			Session = true;
+		}
+		public static void EndSession() 
+		{
+			Session = false;
+		}
+		public static void TakeOff(string token) 
+		{
+			Flying = true;	
+		}
 		public static void PassCheckpoint(string checkpointName) {}
 		public static void AddCustomEnvironmentInformation(string information, string forKey) {}
 		public static void SubmitFeedback(string feedbackString) {}

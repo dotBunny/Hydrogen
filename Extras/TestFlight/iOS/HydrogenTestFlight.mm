@@ -1,10 +1,27 @@
 #include "TestFlight.h"
 #include "TestFlight+AsyncLogging.h"
+#include "TestFlight+ManualSessions.h"
 
+
+extern "C" void TestFlight_Initialize()
+{
+    // Manual Session Control
+    [TestFlight setOptions:@{ TFOptionManualSessions : @YES }];
+}
 extern "C" void TestFlight_TakeOff(char* token)
 {
     NSString *stringFromChar = [NSString stringWithCString:token encoding:NSASCIIStringEncoding];
     [TestFlight takeOff:stringFromChar];
+}
+
+extern "C" void TestFlight_StartSession()
+{
+    [TestFlight manuallyStartSession];
+}
+
+extern "C" void TestFlight_EndSession()
+{
+    [TestFlight manuallyEndSession];
 }
 
 extern "C" void TestFlight_PassCheckpoint(char* checkpointName)

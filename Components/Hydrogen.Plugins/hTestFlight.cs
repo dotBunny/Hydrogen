@@ -32,11 +32,10 @@ using UnityEngine;
 /// </summary>
 public class hTestFlight : MonoBehaviour
 {
-	public bool Flying { get; private set; }
-	
 	public bool presistant = true;
 	public string tokenAndroid = "";
 	public string tokenIOS = "";
+	private bool _paused = false;
 	
 	/// <summary>
 	/// Internal fail safe to maintain instance across threads
@@ -84,8 +83,10 @@ public class hTestFlight : MonoBehaviour
 		// Should this gameObject be kept around :) I think so.
 		if ( presistant ) DontDestroyOnLoad( this.gameObject );
 		
-		Flying = false;
-		
+		// Depending on the platform there are some things that need to be handled before we can 
+		// take off and start submitting data
+		Hydrogen.Plugins.TestFlight.Initialize();
+
 #if (UNITY_IPHONE || UNITY_IOS) && !UNITY_EDITOR
 		TakeOff(tokenIOS);
 #elif UNITY_ANDROID && !UNITY_EDITOR
@@ -95,18 +96,16 @@ public class hTestFlight : MonoBehaviour
 	
 	public void TakeOff(string token)
 	{
-		if ( Flying ) return;
+		if ( Hydrogen.Plugins.TestFlight.Flying ) return;
 		
-		if ( token != "" && token != null )
-		{
-			Hydrogen.Plugins.TestFlight.TakeOff(token);
-			Flying = true;
-		}
+		if ( !Hydrogen.Plugins.TestFlight.Session ) Hydrogen.Plugins.TestFlight.StartSession();
+		
+		if ( token != "" && token != null ) Hydrogen.Plugins.TestFlight.TakeOff(token);
 	}
 	
 	public void SubmitFeedback(string message)
 	{
-		if ( !Flying )
+		if ( !Hydrogen.Plugins.TestFlight.Flying || !Hydrogen.Plugins.TestFlight.Session)
 		{
 			Debug.Log ("Unable to submit feedback, TestFlight is not in flight.");
 			return;
@@ -117,7 +116,7 @@ public class hTestFlight : MonoBehaviour
 	
 	public void PassCheckpoint(string checkpointName)
 	{
-		if ( !Flying )
+		if ( !Hydrogen.Plugins.TestFlight.Flying || !Hydrogen.Plugins.TestFlight.Session )
 		{
 			Debug.Log ("Unable to send checkpoint data, TestFlight is not in flight.");
 			return;
@@ -128,7 +127,7 @@ public class hTestFlight : MonoBehaviour
 	
 	public void AddCustomEnvironmentInformation(string data, string key)
 	{
-		if ( !Flying ) 
+		if ( !Hydrogen.Plugins.TestFlight.Flying || !Hydrogen.Plugins.TestFlight.Session) 
 		{
 			Debug.Log ("Unable to send information, TestFlight is not in flight.");
 			return;
@@ -139,7 +138,7 @@ public class hTestFlight : MonoBehaviour
 	
 	public void Log(string message)
 	{
-		if ( !Flying ) 
+		if ( !Hydrogen.Plugins.TestFlight.Flying || !Hydrogen.Plugins.TestFlight.Session ) 
 		{
 			Debug.Log ("Unable to send log data, TestFlight is not in flight.");
 			return;
@@ -150,13 +149,37 @@ public class hTestFlight : MonoBehaviour
 	
 	public void LogAsync(string message)
 	{
-		if ( !Flying ) 
+		if ( !Hydrogen.Plugins.TestFlight.Flying || !Hydrogen.Plugins.TestFlight.Session ) 
 		{
 			Debug.Log ("Unable to send log data, TestFlight is not in flight.");
 			return;
 		}
-			
-			
 		Hydrogen.Plugins.TestFlight.LogAsync(message);
+	}
+	
+	/// <summary>
+	/// Raised when your application is paused, as a more accurate depiction of Session times.
+	/// </summary>
+	/// <remarks>
+	/// This was meant originally as a fix for Android, but we've carried it over to iOS and 
+	/// switched everything to manual for better integration with Unity
+	/// </remarks>
+	public void OnApplicationPause()
+	{
+		if ( _paused ) 
+		{
+			_paused = false;
+			Hydrogen.Plugins.TestFlight.StartSession();
+		}
+		else
+		{
+			_paused = true;
+			Hydrogen.Plugins.TestFlight.EndSession();
+		}	
+	}
+	
+	public void OnApplicationQuit()
+	{
+		Hydrogen.Plugins.TestFlight.EndSession();
 	}
 }
