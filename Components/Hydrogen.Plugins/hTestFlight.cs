@@ -160,16 +160,8 @@ public class hTestFlight : MonoBehaviour
 	/// </remarks>
 	public void OnApplicationPause()
 	{
-		if ( _paused ) 
-		{
-			_paused = false;
-			Hydrogen.Plugins.TestFlight.StartSession();
-		}
-		else
-		{
-			_paused = true;
-			Hydrogen.Plugins.TestFlight.EndSession();
-		}	
+		if ( !Hydrogen.Plugins.TestFlight.Session ) Hydrogen.Plugins.TestFlight.StartSession();
+		else Hydrogen.Plugins.TestFlight.EndSession();
 	}
 	
 	public void OnApplicationQuit()
