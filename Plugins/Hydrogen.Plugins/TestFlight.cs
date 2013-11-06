@@ -57,6 +57,7 @@ namespace Hydrogen.Plugins
 		private static extern void TestFlight_StartSession ();
 		public static void StartSession()
 		{
+			TestFlight_StartSession();
 			Session = true;
 		}
 		
@@ -64,6 +65,7 @@ namespace Hydrogen.Plugins
 		private static extern void TestFlight_EndSession ();
 		public static void EndSession()
 		{
+			TestFlight_EndSession();
 			Session = false;
 		}
 		
