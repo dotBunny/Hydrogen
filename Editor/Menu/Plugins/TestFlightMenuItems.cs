@@ -1,6 +1,6 @@
 ﻿#region Copyright Notice & License Information
 // 
-// HydrogenTestFlightMenu.cs
+// TestFlightMenuItems.cs
 //  
 // Author(s):
 //   Matthew Davey <matthew.davey@dotbunny.com>
@@ -31,7 +31,7 @@ using System.Collections;
 using System.IO;
 
 
-public class HydrogenTestFlightMenu  {
+public class TestFlightMenuItems  {
 	
 	public static char DS = System.IO.Path.DirectorySeparatorChar;
 	

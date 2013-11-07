@@ -50,6 +50,7 @@ namespace Hydrogen.Plugins
 		{
 			Session = false;
 			Flying = false;
+			
 			TestFlight_Initialize();
 		}
 			

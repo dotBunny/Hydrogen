@@ -35,7 +35,6 @@ public class hTestFlight : MonoBehaviour
 	public bool presistant = true;
 	public string tokenAndroid = "";
 	public string tokenIOS = "";
-	private bool _paused = false;
 	
 	/// <summary>
 	/// Internal fail safe to maintain instance across threads
@@ -101,7 +100,9 @@ public class hTestFlight : MonoBehaviour
 	{
 		if ( !Hydrogen.Plugins.TestFlight.Flying || !Hydrogen.Plugins.TestFlight.Session)
 		{
+#if (UNITY_IPHONE || UNITY_IOS || UNITY_ANDROID) && !UNITY_EDITOR
 			Debug.Log ("Unable to submit feedback, TestFlight is not in flight.");
+#endif
 			return;
 		}
 		
@@ -112,7 +113,9 @@ public class hTestFlight : MonoBehaviour
 	{
 		if ( !Hydrogen.Plugins.TestFlight.Flying || !Hydrogen.Plugins.TestFlight.Session )
 		{
+#if (UNITY_IPHONE || UNITY_IOS || UNITY_ANDROID) && !UNITY_EDITOR
 			Debug.Log ("Unable to send checkpoint data, TestFlight is not in flight.");
+#endif
 			return;
 		}
 		
@@ -123,7 +126,9 @@ public class hTestFlight : MonoBehaviour
 	{
 		if ( !Hydrogen.Plugins.TestFlight.Flying || !Hydrogen.Plugins.TestFlight.Session) 
 		{
+#if (UNITY_IPHONE || UNITY_IOS || UNITY_ANDROID) && !UNITY_EDITOR
 			Debug.Log ("Unable to send information, TestFlight is not in flight.");
+#endif
 			return;
 		}
 		
@@ -134,7 +139,9 @@ public class hTestFlight : MonoBehaviour
 	{
 		if ( !Hydrogen.Plugins.TestFlight.Flying || !Hydrogen.Plugins.TestFlight.Session ) 
 		{
+#if (UNITY_IPHONE || UNITY_IOS || UNITY_ANDROID) && !UNITY_EDITOR
 			Debug.Log ("Unable to send log data, TestFlight is not in flight.");
+#endif
 			return;
 		}
 		
@@ -145,7 +152,9 @@ public class hTestFlight : MonoBehaviour
 	{
 		if ( !Hydrogen.Plugins.TestFlight.Flying || !Hydrogen.Plugins.TestFlight.Session ) 
 		{
+#if (UNITY_IPHONE || UNITY_IOS || UNITY_ANDROID) && !UNITY_EDITOR
 			Debug.Log ("Unable to send log data, TestFlight is not in flight.");
+#endif
 			return;
 		}
 		Hydrogen.Plugins.TestFlight.LogAsync(message);
