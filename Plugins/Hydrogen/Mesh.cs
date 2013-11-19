@@ -4,6 +4,7 @@
 //  
 // Author:
 //   Matthew Davey <matthew.davey@dotbunny.com>
+//	 Robin Southern <betajaen@ihoed.com>
 //
 // Copyright (C) 2013 dotBunny Inc. (http://www.dotbunny.com)
 //
