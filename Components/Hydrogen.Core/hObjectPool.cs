@@ -31,6 +31,7 @@ using UnityEngine;
 /// <summary>
 /// Hydrogen.Core.ObjectPool Instance
 /// </summary>
+[AddComponentMenu("Hydrogen/Object Pool Manager")]
 public class hObjectPool : Hydrogen.Core.ObjectPool
 {
 	/// <summary>

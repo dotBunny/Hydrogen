@@ -31,6 +31,7 @@ using System.Collections;
 /// <summary>
 /// Hydrogen.Plugins.TestFlight Instance
 /// </summary>
+[AddComponentMenu("Hydrogen/TestFlight Manager")]
 public class hTestFlight : MonoBehaviour
 {
 	public bool presistant = true;

@@ -39,6 +39,7 @@ namespace Hydrogen.Core
 	/// Each GameObject / Prefab has its own pool, this is done for many reasons, 
 	/// but ultimately seems to be the best performance scenario.
 	/// </summary>
+	[AddComponentMenu("")]
 	public class ObjectPool : MonoBehaviour
 	{
 		public int defaultPreloadAmount = 5;
