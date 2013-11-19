@@ -4,6 +4,7 @@
 //  
 // Author:
 //   Matthew Davey <matthew.davey@dotbunny.com>
+//	 Robin Southern
 //
 // Copyright (C) 2013 dotBunny Inc. (http://www.dotbunny.com)
 //
@@ -53,7 +54,7 @@ namespace Hydrogen
 		///		}
 		///	}
 		/// </example>
-		public static T GetComponentIfNull< T >( UnityEngine.Component targetObject, T cachedReference ) where T : UnityEngine.Component
+		public static T GetComponentIfNull< T >( this UnityEngine.Component targetObject, T cachedReference ) where T : UnityEngine.Component
 		{
 			if( cachedReference == null )
 		    {
@@ -85,7 +86,7 @@ namespace Hydrogen
 		///		}
 		///	}
 		/// </example>
-		public static T GetComponentIfNull< T >( UnityEngine.GameObject targetObject, T cachedReference ) where T : UnityEngine.Component
+		public static T GetComponentIfNull< T >( this UnityEngine.GameObject targetObject, T cachedReference ) where T : UnityEngine.Component
 		{
 			if( cachedReference == null )
 		    {
@@ -97,6 +98,55 @@ namespace Hydrogen
 		    }
 		
 			return cachedReference;
-		}	
+		}
+
+		/// <summary>
+		/// Get a component reference from a gameObjects parents.
+		/// </summary>
+		/// <returns>The desired component.</returns>
+		/// <param name="targetObject">The root object to look on for the component (backwards).</param>
+		/// <param name="cachedReference">Possible pre-existing reference to component.</param>
+		/// <typeparam name="T">Object Type.</typeparam>
+		/// <example>
+		/// private AudioSource _localAudioSource = null;
+		/// public AudioSource LocalAudioSource
+		/// {
+		///		get
+		///		{
+		///			_localAudioSource = Hydrogen.Components.GetComponentInParents( this, _localAudioSource );
+		///			return _localAudioSource;
+		///		}
+		///	}
+		/// </example>
+		public static T GetComponentInParents< T >( this UnityEngine.GameObject targetObject, T cachedReference) where T : UnityEngine.Component
+		{
+			if( cachedReference == null )
+			{
+				UnityEngine.Transform p = targetObject.transform.parent;
+
+				while (p != null)
+				{
+
+					T t = (T)targetObject.GetComponent( typeof ( T ) );
+					
+					// Return as soon as we find the component
+					if (t != null) 
+					{
+						cachedReference = t;
+						return cachedReference;
+					}
+					
+					// Next parent to search
+					p = p.parent;
+				}
+
+				if( cachedReference == null )
+				{
+					UnityEngine.Debug.LogWarning( "GetComponentInParents of type " + typeof( T ) + " failed on " + targetObject.name, targetObject );
+				}
+			}
+			
+			return cachedReference;
+		}
 	}	
 }

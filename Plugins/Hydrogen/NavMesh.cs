@@ -39,7 +39,7 @@ namespace Hydrogen
 		/// </summary>
 		/// <returns><c>true</c>, if at destination was agented, <c>false</c> otherwise.</returns>
 		/// <param name="agent">The target NavMeshAgent.</param>
-		public static bool AgentAtDestination(NavMeshAgent agent)
+		public static bool AgentAtDestination(this NavMeshAgent agent)
 		{
 			float dist = agent.remainingDistance; 
 			if (dist!=Mathf.Infinity && agent.pathStatus==UnityEngine.NavMeshPathStatus.PathComplete && agent.remainingDistance==0)

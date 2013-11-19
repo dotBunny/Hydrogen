@@ -37,5 +37,40 @@ namespace Hydrogen
         /// </summary>
         /// <remarks>This is a Unity imposed limitation, presumably this may grow over time.</remarks>
         public const int MeshVerticesLimit = 65536;
+		 
+		/// <summary>
+		/// Return the index of the closest vertex to the targetPosition on the Mesh
+		/// </summary>
+		/// <returns>The vertex index on the mesh.</returns>
+		/// <param name="mesh">The mesh to compare against.</param>
+		/// <param name="targetPosition">The position to check against.</param>
+		public static int NearestVertexIndex(this UnityEngine.Mesh mesh, UnityEngine.Vector3 targetPosition)
+		{
+			// Create local reference
+			UnityEngine.Vector3[] vertices = mesh.vertices;
+
+			// Our best distance so far
+			float nearestDistance = UnityEngine.Mathf.Infinity;
+
+			// The index (-1) if we don't find one
+			int best = vertices.Length - 1;
+
+			for (var i = 0; i < (best + 1); i++)
+			{
+				UnityEngine.Vector3 vertex = vertices[i];
+				UnityEngine.Vector3 difference = targetPosition - vertex;
+
+				float differenceDist = difference.sqrMagnitude;
+				
+				if (differenceDist < nearestDistance)
+				{
+					nearestDistance = differenceDist;
+					best = i;
+				}
+			}
+
+			// Send it back!
+			return best;
+		}
     }
 }
