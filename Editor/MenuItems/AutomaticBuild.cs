@@ -50,7 +50,7 @@ public static class AutomaticBuild {
 		}
 		return EditorScenes.ToArray();
 	}
- 
+
 	[MenuItem("File/Automatic Build/Windows (32 bit)")]
 	static void PerformWin32Build ()
 	{

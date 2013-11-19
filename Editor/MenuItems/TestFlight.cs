@@ -1,6 +1,6 @@
 ﻿#region Copyright Notice & License Information
 // 
-// TestFlightMenuItems.cs
+// TestFlight.cs
 //  
 // Author(s):
 //   Matthew Davey <matthew.davey@dotbunny.com>
@@ -31,75 +31,73 @@ using System.Collections;
 using System.IO;
 
 
-public class TestFlightMenuItems  {
-	
-	public static char DS = System.IO.Path.DirectorySeparatorChar;
-	
-	[MenuItem("Hydrogen/Plugins/Install TestFlight for iOS")]
+public class TestFlight  {
+
+	[MenuItem("Assets/TestFlight/Install for iOS", true)]
+	public static bool InstallTestFlightForIOSCheck()
+	{
+		// Restrict our search area for performance reasons
+		string hydrogenPath = HydrogenUtility.GetHydrogenPath();
+
+		if ( System.IO.Directory.GetFiles(hydrogenPath , "libTestFlight.a", System.IO.SearchOption.AllDirectories).Length == 0 ) 
+			return false;
+		if ( System.IO.Directory.GetFiles(hydrogenPath, "TestFlight+AsyncLogging.h", System.IO.SearchOption.AllDirectories).Length == 0 ) 
+			return false;
+		if ( System.IO.Directory.GetFiles(hydrogenPath, "libTestFlight.a", System.IO.SearchOption.AllDirectories).Length == 0 ) 
+			return false;
+		if ( System.IO.Directory.GetFiles(hydrogenPath, "libTestFlight.a", System.IO.SearchOption.AllDirectories).Length == 0 ) 
+			return false;
+
+		return true;
+	}
+
+	[MenuItem("Assets/TestFlight/Install for iOS")]
 	public static void InstallTestFlightForIOS()
 	{
 		EditorUtility.DisplayProgressBar("Installing", "Getting Path Information  ...", 0.00f);
-		
-		// Find the base location for the iOS TestFlight files
-		string[] _locations = System.IO.Directory.GetFiles(Application.dataPath, "libTestFlight.a", System.IO.SearchOption.AllDirectories);
-		string _baseLocation = "";
-		foreach(string location in _locations)
-		{
-			if ( location.Contains("Hydrogen") && location.Contains("Vendors") && location.Contains("TestFlight") )
-			{
-				_baseLocation = location.Replace("libTestFlight.a", "");;
-				break;
-			}
-		}		
-		
-		// Find the location of our extras that we want to add into the mix
-		string[] _extras = System.IO.Directory.GetFiles(Application.dataPath, "HydrogenTestFlight.mm", System.IO.SearchOption.AllDirectories);
-		string _extraLocation = "";
-		foreach(string extra in _extras)
-		{
-			if ( extra.Contains("Hydrogen") && extra.Contains("Extras") && extra.Contains("TestFlight") )
-			{
-				_extraLocation = extra.Replace("HydrogenTestFlight.mm", "");;
-				break;
-			}
-		}
-		
+
+		// Restrict our search area for performance reasons
+		string _hydrogenPath = HydrogenUtility.GetHydrogenPath();
+		string _baseLocation = _hydrogenPath + HydrogenUtility.DS + "Vendors" + HydrogenUtility.DS + "TestFlight" + HydrogenUtility.DS + "iOS";
+		string _extraLocation  = _hydrogenPath + HydrogenUtility.DS + "Extras" + HydrogenUtility.DS + "TestFlight" + HydrogenUtility.DS + "iOS";
+
+
 		EditorUtility.DisplayProgressBar("Installing", "Installing iOS Files ...", 0.1f);
 		
 		if (_baseLocation != "" && _extraLocation != "" )
 		{
 			// Create our output directories (Cool Chain Effect! +10 Fun)
-			Directory.CreateDirectory(Application.dataPath + DS + "Plugins" + DS + "iOS");
+			Directory.CreateDirectory(Application.dataPath + HydrogenUtility.DS + "Plugins" + HydrogenUtility.DS + "iOS");
 			
 			EditorUtility.DisplayProgressBar("Installing", "Copying iOS Files ...", 0.2f);
 			
 			// Copy over the main TestFlight iOS system
-			File.Copy(_baseLocation + DS + "libTestFlight.a", 
-				Application.dataPath + DS + "Plugins" + DS + "iOS" + DS + "libTestFlight.a", 
+			File.Copy(_baseLocation + HydrogenUtility.DS + "libTestFlight.a", 
+				Application.dataPath + HydrogenUtility.DS + "Plugins" + HydrogenUtility.DS + "iOS" + HydrogenUtility.DS + "libTestFlight.a", 
 				true);
 			
 			EditorUtility.DisplayProgressBar("Installing", "Copying iOS Files ...", 0.3f);
 			
-			File.Copy(_baseLocation + DS + "TestFlight.h", 
-				Application.dataPath + DS + "Plugins" + DS + "iOS" + DS + "TestFlight.h", 
+			File.Copy(_baseLocation + HydrogenUtility.DS + "TestFlight.h", 
+				Application.dataPath + HydrogenUtility.DS + "Plugins" + HydrogenUtility.DS + "iOS" + HydrogenUtility.DS + "TestFlight.h", 
 				true);
 			EditorUtility.DisplayProgressBar("Installing", "Copying iOS Files ...", 0.4f);
 			
-			File.Copy(_baseLocation + DS + "TestFlight+AsyncLogging.h", 
-				Application.dataPath + DS + "Plugins" + DS + "iOS" + DS + "TestFlight+AsyncLogging.h", 
+			File.Copy(_baseLocation + HydrogenUtility.DS + "TestFlight+AsyncLogging.h", 
+				Application.dataPath + HydrogenUtility.DS + "Plugins" + HydrogenUtility.DS + "iOS" + HydrogenUtility.DS + "TestFlight+AsyncLogging.h", 
 				true);
 			
 			EditorUtility.DisplayProgressBar("Installing", "Copying iOS Files ...", 0.5f);
 			
-			File.Copy(_baseLocation + DS + "TestFlight+ManualSessions.h", 
-				Application.dataPath + DS + "Plugins" + DS + "iOS" + DS + "TestFlight+ManualSessions.h", 
+			File.Copy(_baseLocation + HydrogenUtility.DS + "TestFlight+ManualSessions.h", 
+				Application.dataPath + HydrogenUtility.DS + "Plugins" + HydrogenUtility.DS + "iOS" + HydrogenUtility.DS + "TestFlight+ManualSessions.h", 
 				true);
 			
 			EditorUtility.DisplayProgressBar("Installing", "Copying iOS Extras ...", 0.6f);
 			
 			// Copy over our little bit of code to make it all work inside of Xcode
-			File.Copy(_extraLocation + DS + "HydrogenTestFlight.mm", 
-				Application.dataPath + DS + "Plugins" + DS + "iOS" + DS + "HydrogenTestFlight.mm", 
+			File.Copy(_extraLocation + HydrogenUtility.DS + "HydrogenTestFlight.mm", 
+				Application.dataPath + HydrogenUtility.DS + "Plugins" + HydrogenUtility.DS + "iOS" + HydrogenUtility.DS + "HydrogenTestFlight.mm", 
 				true);
 			
 			EditorUtility.DisplayProgressBar("Installing", "Finished Copying iOS Files ...", 0.7f);
@@ -126,70 +124,65 @@ public class TestFlightMenuItems  {
 		EditorUtility.ClearProgressBar();
 	}
 	
-	
-	[MenuItem("Hydrogen/Plugins/Install TestFlight for Android")]
+
+	[MenuItem("Assets/TestFlight/Install for Android", true)]
+	public static bool InstallTestFlightForAndroidCheck()
+	{
+		// Restrict our search area for performance reasons
+		string hydrogenPath = HydrogenUtility.GetHydrogenPath();
+		
+		if ( System.IO.Directory.GetFiles(hydrogenPath , "TestFlightLib.jar", System.IO.SearchOption.AllDirectories).Length == 0 ) 
+			return false;
+		if ( System.IO.Directory.GetFiles(hydrogenPath, "tf.properties", System.IO.SearchOption.AllDirectories).Length == 0 ) 
+			return false;
+
+		return true;
+	}
+
+
+	[MenuItem("Assets/TestFlight/Install for Android")]
 	public static void InstallTestFlightForAndroid()
 	{
 
 		EditorUtility.DisplayProgressBar("Installing", "Getting Path Information  ...", 0.00f);
 		
-		// Find the base location for the Android TestFlight files
-		string[] _locations = System.IO.Directory.GetFiles(Application.dataPath, "TestFlightLib.jar", System.IO.SearchOption.AllDirectories);
-		string _baseLocation = "";
-		foreach(string location in _locations)
-		{
-			if ( location.Contains("Hydrogen") && location.Contains("Vendors") && location.Contains("TestFlight") )
-			{
-				_baseLocation = location.Replace("TestFlightLib.jar", "");;
-				break;
-			}
-		}
-		
-		// Find the location of our extras that we want to add into the mix
-		string[] _extras = System.IO.Directory.GetFiles(Application.dataPath, "tf.properties", System.IO.SearchOption.AllDirectories);
-		string _extraLocation = "";
-		
-		foreach(string extra in _extras)
-		{
-			if ( extra.Contains("Hydrogen") && extra.Contains("Extras") && extra.Contains("TestFlight") )
-			{
-				_extraLocation = extra.Replace("tf.properties", "");;
-				break;
-			}
-		}
+		string _hydrogenPath = HydrogenUtility.GetHydrogenPath();
+		string _baseLocation = _hydrogenPath + HydrogenUtility.DS + "Vendors" + HydrogenUtility.DS + "TestFlight" + HydrogenUtility.DS + "Android";
+		string _extraLocation  = _hydrogenPath + HydrogenUtility.DS + "Extras" + HydrogenUtility.DS + "TestFlight" + HydrogenUtility.DS + "Android";
+
 		
 		EditorUtility.DisplayProgressBar("Installing", "Installing Android Files ...", 0.1f);
 		
 		if (_baseLocation != "" && _extraLocation != "" )
 		{
 			// Create our output directories (Cool Chain Effect! +10 Fun)
-			Directory.CreateDirectory(Application.dataPath + DS + "Plugins" + DS + "Android" + DS + "res" + DS + "raw");
+			Directory.CreateDirectory(Application.dataPath + HydrogenUtility.DS + "Plugins" + HydrogenUtility.DS + "Android" + HydrogenUtility.DS + "res" + HydrogenUtility.DS + "raw");
 			
 			EditorUtility.DisplayProgressBar("Installing", "Copying Android Files ...", 0.2f);
 			
 			// Copy over the main TestFlight Android system
-			File.Copy(_baseLocation + DS + "TestFlightLib.jar", 
-				Application.dataPath + DS + "Plugins" + DS + "Android" + DS + "TestFlightLib.jar", 
+			File.Copy(_baseLocation + HydrogenUtility.DS + "TestFlightLib.jar", 
+				Application.dataPath + HydrogenUtility.DS + "Plugins" + HydrogenUtility.DS + "Android" + HydrogenUtility.DS + "TestFlightLib.jar", 
 				true);
 			
 			EditorUtility.DisplayProgressBar("Installing", "Copying Android Extras ...", 0.3f);
 			
 			// Copy that little annoying file into position that makes TestFlight actually know that we have TestFlight packed away into the build
-			File.Copy(_extraLocation + DS + "tf.properties",
-				Application.dataPath + DS + "Plugins" + DS + "Android" + DS + "res" + DS + "raw" + DS + "tf.properties", 
+			File.Copy(_extraLocation + HydrogenUtility.DS + "tf.properties",
+				Application.dataPath + HydrogenUtility.DS + "Plugins" + HydrogenUtility.DS + "Android" + HydrogenUtility.DS + "res" + HydrogenUtility.DS + "raw" + HydrogenUtility.DS + "tf.properties", 
 				true);
 			
 			EditorUtility.DisplayProgressBar("Installing", "Copying Android Extras ...", 0.4f);
 			
 			// Grab a copy of Unity's AndroidManifest and shove it in the Android plugins folder (only if we don't already have one there)
-			if ( !File.Exists(Application.dataPath + DS + "Plugins" + DS + "Android" + DS + "AndroidManifest.xml"))
+			if ( !File.Exists(Application.dataPath + HydrogenUtility.DS + "Plugins" + HydrogenUtility.DS + "Android" + HydrogenUtility.DS + "AndroidManifest.xml"))
 			{
-				File.Copy (EditorApplication.applicationContentsPath + DS + "PlaybackEngines" + DS + "AndroidPlayer" + DS + "AndroidManifest.xml",
-					Application.dataPath + DS + "Plugins" + DS + "Android" + DS + "AndroidManifest.xml", true);
+				File.Copy (EditorApplication.applicationContentsPath + HydrogenUtility.DS + "PlaybackEngines" + HydrogenUtility.DS + "AndroidPlayer" + HydrogenUtility.DS + "AndroidManifest.xml",
+					Application.dataPath + HydrogenUtility.DS + "Plugins" + HydrogenUtility.DS + "Android" + HydrogenUtility.DS + "AndroidManifest.xml", true);
 			}
 			
 			// Add the required permissions for TestFlight
-			string[] _manifestLines = System.IO.File.ReadAllLines(Application.dataPath + DS + "Plugins" + DS + "Android" + DS + "AndroidManifest.xml");
+			string[] _manifestLines = System.IO.File.ReadAllLines(Application.dataPath + HydrogenUtility.DS + "Plugins" + HydrogenUtility.DS + "Android" + HydrogenUtility.DS + "AndroidManifest.xml");
 			int _insertionLocation = 0;
 			bool _foundInternet = false;
 			bool _foundNetState = false;
@@ -220,10 +213,10 @@ public class TestFlightMenuItems  {
 				Hydrogen.Array.AddAt(ref _manifestLines, _insertionLocation, "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />", true);
 			}
 			
-			System.IO.File.WriteAllLines(Application.dataPath + DS + "Plugins" + DS + "Android" + DS + "AndroidManifest.xml", _manifestLines);
+			System.IO.File.WriteAllLines(Application.dataPath + HydrogenUtility.DS + "Plugins" + HydrogenUtility.DS + "Android" + HydrogenUtility.DS + "AndroidManifest.xml", _manifestLines);
 			
 			
-			EditorUtility.DisplayProgressBar("Installing", "Finished Copying iOS Files ...", 0.7f);
+			EditorUtility.DisplayProgressBar("Installing", "Finished Copying Android Files ...", 0.7f);
 			
 			// Make it all pretty with Unity
 			AssetDatabase.Refresh();
