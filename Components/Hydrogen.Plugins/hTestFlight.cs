@@ -26,6 +26,7 @@
 #endregion
 
 using UnityEngine;
+using System.Collections;
 
 /// <summary>
 /// Hydrogen.Plugins.TestFlight Instance
@@ -81,9 +82,13 @@ public class hTestFlight : MonoBehaviour
 	{
 		// Should this gameObject be kept around :) I think so.
 		if ( presistant ) DontDestroyOnLoad( this.gameObject );
-		
-				
-		
+
+		// Let's get this party started, but in a somewhat safe manner
+		StartCoroutine(Initialize());
+	}
+
+	public IEnumerator Initialize()
+	{
 		// Depending on the platform there are some things that need to be handled before we can 
 		// take off and start submitting data
 		Hydrogen.Plugins.TestFlight.Initialize();
@@ -93,8 +98,11 @@ public class hTestFlight : MonoBehaviour
 #elif UNITY_ANDROID && !UNITY_EDITOR
 		Hydrogen.Plugins.TestFlight.TakeOff(tokenAndroid);
 #endif
+		yield return new WaitForEndOfFrame();
+
 		Hydrogen.Plugins.TestFlight.StartSession();
 	}
+	
 	
 	public void SubmitFeedback(string message)
 	{
