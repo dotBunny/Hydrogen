@@ -126,7 +126,6 @@ namespace Hydrogen
 
 				while (p != null)
 				{
-
 					T t = (T)targetObject.GetComponent( typeof ( T ) );
 					
 					// Return as soon as we find the component

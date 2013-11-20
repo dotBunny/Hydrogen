@@ -36,7 +36,7 @@ namespace Hydrogen
     public static class Texture
     {
         // simple bilinear filtering
-        public static Texture2D Resize(Texture2D texture, int newWidth, int newHeight)
+        public static Texture2D Resize(this Texture2D texture, int newWidth, int newHeight)
         {
             var resizedTexture = new Texture2D(newWidth, newHeight);
             var resizeFactor = new Vector2((float)texture.width / (float)newWidth, (float)texture.height / (float)newHeight);
@@ -110,7 +110,7 @@ namespace Hydrogen
             return resizedTexture;
         }
 
-        public static Texture2D Tile(Texture2D texture, int horizontalTiles, int verticalTiles)
+        public static Texture2D Tile(this Texture2D texture, int horizontalTiles, int verticalTiles)
         {
             // @TODO Ensure horizontalTiles and verticalTiles sanity
             var tiledTexture = new Texture2D(texture.width * horizontalTiles, texture.height * verticalTiles);
@@ -124,7 +124,7 @@ namespace Hydrogen
         }
 
         //@TODO error checking and assertions :)
-        public static Texture2D Crop(Texture2D texture, int x, int y, int width, int height)
+        public static Texture2D Crop(this Texture2D texture, int x, int y, int width, int height)
         {
 
             var result = new Texture2D(width, height);
@@ -139,7 +139,7 @@ namespace Hydrogen
             return (Mathf.Approximately(a.r, b.r) && Mathf.Approximately(a.g, b.g) && Mathf.Approximately(a.b, b.b) && Mathf.Approximately(a.a, b.a));
         }
 
-        public static Texture2D AutoCrop(Texture2D texture, Color borderColor)
+        public static Texture2D AutoCrop(this Texture2D texture, Color borderColor)
         {
             var image = texture.GetPixels();
             var width = texture.width;
@@ -201,7 +201,7 @@ namespace Hydrogen
             return Crop(texture, left, top, right - left, bottom - top);
         }
 
-        public static Texture2D FlipHorizontally(Texture2D texture)
+        public static Texture2D FlipHorizontally(this Texture2D texture)
         {
             var image = texture.GetPixels();
             var newImage = new Color[image.Length];
@@ -224,7 +224,7 @@ namespace Hydrogen
             return result;
         }
 
-        public static Texture2D FlipVertically(Texture2D texture)
+        public static Texture2D FlipVertically(this Texture2D texture)
         {
             var image = texture.GetPixels();
             var newImage = new Color[image.Length];
@@ -247,7 +247,7 @@ namespace Hydrogen
             return result;
         }
 
-        public static Texture2D RotateClockwise90Degrees(Texture2D texture)
+        public static Texture2D RotateClockwise90Degrees(this Texture2D texture)
         {
             var image = texture.GetPixels();
             var newImage = new Color[image.Length];
@@ -270,7 +270,7 @@ namespace Hydrogen
             return result;
         }
 
-        public static Texture2D RotateCounterClockwise90Degrees(Texture2D texture)
+        public static Texture2D RotateCounterClockwise90Degrees(this Texture2D texture)
         {
             var image = texture.GetPixels();
             var newImage = new Color[image.Length];
