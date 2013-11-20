@@ -45,13 +45,13 @@ namespace Hydrogen.Plugins
 		
 #if HYDROGEN_TESTFLIGHT && (UNITY_IPHONE || UNITY_IOS) && (!UNITY_EDITOR)
 		[DllImport ("__Internal")]
-		private static extern void TestFlight_Initialize ();
+		private static extern void TestFlight_Initialize (string deviceUniqueIdentifier);
 		public static void Initialize()
 		{
 			Session = false;
 			Flying = false;
-			
-			TestFlight_Initialize();
+
+			TestFlight_Initialize(UnityEngine.SystemInfo.deviceUniqueIdentifier);
 		}
 			
 		[DllImport ("__Internal")]
