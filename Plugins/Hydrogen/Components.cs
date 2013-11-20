@@ -165,7 +165,7 @@ namespace Hydrogen
 		///		}
 		///	}
 		/// </example>
-		public static bool HasComponent<T>(this GameObject targetObject, T cachedReference) where T : UnityEngine.Component
+		public static bool HasComponent<T>(this UnityEngine.GameObject targetObject, T cachedReference) where T : UnityEngine.Component
 		{
 			return cachedReference != null || targetObject.GetComponent(typeof( T ) ) != null;
 		}
@@ -184,7 +184,7 @@ namespace Hydrogen
 		///		_localAudioSource = gameObject.AddComponent<AudioSource>(_localAudioSource);
 		///	}
 		/// </example>
-		public static T AddComponent<T>(this GameObject targetObject, T cachedReference) where T : UnityEngine.Component
+		public static T AddComponent<T>(this UnityEngine.GameObject targetObject, T cachedReference) where T : UnityEngine.Component
 		{
 			if (cachedReference != null)
 			{
