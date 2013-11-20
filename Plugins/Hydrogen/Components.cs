@@ -148,5 +148,59 @@ namespace Hydrogen
 			
 			return cachedReference;
 		}
+
+		/// <summary>
+		/// Gets if a component is added to a GameObject
+		/// </summary>
+		/// <returns>If the component is added to the GameObject</returns>
+		/// <param name="targetObject">The root object to look on for the component.</param>
+		/// <param name="cachedReference">Possible pre-existing reference to component.</param>
+		/// <typeparam name="T">Object Type.</typeparam>
+		/// <example>
+		/// private AudioSource _localAudioSource = null;
+		/// public void Start()
+		/// {
+		///		if (gameObject.HasComponent(_localAudioSource) == false)
+		///		{
+		///			_localAudioSource = gameObject.AddComponent<AudioSource>();
+		///		}
+		///	}
+		/// </example>
+		public static bool HasComponent<T>(this GameObject targetObject, T cachedReference) where T : UnityEngine.Component
+		{
+			return cachedReference != null || targetObject.GetComponent(typeof( T ) ) != null;
+		}
+
+		/// <summary>
+		/// Adds a component to a GameObject, if that component is not already added.
+		/// </summary>
+		/// <returns>The desired component.</returns>
+		/// <param name="targetObject">The root object to add the component to.</param>
+		/// <param name="cachedReference">Possible pre-existing reference to component.</param>
+		/// <typeparam name="T">Object Type.</typeparam>
+		/// <example>
+		/// private AudioSource _localAudioSource = null;
+		/// public void Start()
+		/// {
+		///		_localAudioSource = gameObject.AddComponent<AudioSource>(_localAudioSource);
+		///	}
+		/// </example>
+		public static T AddComponent<T>(this GameObject targetObject, T cachedReference) where T : UnityEngine.Component
+		{
+			if (cachedReference != null)
+			{
+				return cachedReference;
+			}
+
+			T component = (T) targetObject.GetComponent(typeof( T ) );
+
+			if (component == null)
+			{
+				component = (T) targetObject.AddComponent(typeof( T ) );
+			}
+
+			return component;
+		}
+
 	}	
 }
