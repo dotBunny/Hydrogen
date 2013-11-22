@@ -1,6 +1,6 @@
 ﻿#region Copyright Notice & License Information
 // 
-// hWebStack.cs
+// hWebPool.cs
 //  
 // Author:
 //   Matthew Davey <matthew.davey@dotbunny.com>
