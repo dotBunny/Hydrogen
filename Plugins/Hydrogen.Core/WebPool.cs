@@ -57,10 +57,16 @@ namespace Hydrogen.Core
 			GameObject.DestroyImmediate(newWebObject);
 		}
 
-		public void GET(string URI, string contentType, string payload, string cookie, System.Action<int, string> callback)
+		public void GET(string URI, string cookie, System.Action<int, string> callback)
 		{
 			GameObject go = hObjectPool.Instance.Spawn(_poolID);
-			go.GetComponent<WebPoolItem>().Call(URI, contentType, payload, cookie, callback);
+			go.GetComponent<WebPoolItem>().GET(URI, cookie, callback);
+		}
+
+		public void POST(string URI, string contentType, string payload, string cookie, System.Action<int, string> callback)
+		{
+			GameObject go = hObjectPool.Instance.Spawn(_poolID);
+			go.GetComponent<WebPoolItem>().POST(URI, contentType, payload, cookie, callback);
 		}
 	}
 }
