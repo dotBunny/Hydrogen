@@ -23,9 +23,6 @@
 // COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-
 #endregion
 
 using System;
@@ -43,6 +40,13 @@ namespace Hydrogen.Core
 	{
 		private int _poolID;
 
+		public struct FormBinaryData
+		{
+			public string fieldName;
+			public byte[] data;
+			public string fileName;
+			public string mimeType;
+		}
 
 		public void Awake()
 		{
@@ -57,16 +61,39 @@ namespace Hydrogen.Core
 			GameObject.DestroyImmediate(newWebObject);
 		}
 
+
+		public void GET(string URI, System.Action<int, string> callback)
+		{
+			GET (URI, null, callback);
+		}
 		public void GET(string URI, string cookie, System.Action<int, string> callback)
 		{
 			GameObject go = hObjectPool.Instance.Spawn(_poolID);
 			go.GetComponent<WebPoolItem>().GET(URI, cookie, callback);
 		}
 
+
+		public void POST(string URI, string contentType, string payload)
+		{
+			POST (URI, contentType, payload, null, null);
+		}
 		public void POST(string URI, string contentType, string payload, string cookie, System.Action<int, string> callback)
 		{
 			GameObject go = hObjectPool.Instance.Spawn(_poolID);
 			go.GetComponent<WebPoolItem>().POST(URI, contentType, payload, cookie, callback);
 		}
+
+
+		public void Form(string URI, Dictionary<string, string> formStringData)
+		{
+			Form (URI, formStringData, null, null, null);
+		}
+
+		public void Form(string URI, Dictionary<string, string> formStringData, FormBinaryData[] formBinaryData, string cookie, System.Action<int, string> callback)
+		{
+			GameObject go = hObjectPool.Instance.Spawn(_poolID);
+			go.GetComponent<WebPoolItem>().Form(URI, formStringData, formBinaryData, cookie, callback);
+		}
+
 	}
 }

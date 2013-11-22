@@ -29,10 +29,16 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+// TODO: Update to handle however Unity fixes the bug with Status Codes
 namespace Hydrogen.Core
 {
 	/// <summary>
 	/// An internal web call used within the Hydrogen Framework. 
+	/// 
+	/// Currently this is broken for servers that alter their status codes based on their operation.
+	///
+	/// A bug has been filed with Unity demonstrating this:
+	/// http://fogbugz.unity3d.com/default.asp?577333_a0l3gs97bj9ubdis
 	/// </summary>
 	public class WebPoolItem : Hydrogen.Core.ObjectPoolItemBase
 	{
@@ -54,6 +60,7 @@ namespace Hydrogen.Core
 
 		}
 
+#region GET
 		public int GET(string URI, string cookie, System.Action<int, string> callback)
 		{
 			_hash = (Time.time.ToString() + URI + Random.Range(0,100)).GetHashCode();
@@ -63,6 +70,28 @@ namespace Hydrogen.Core
 			return _hash;
 		}
 
+		public IEnumerator GetReturnedText(string URI, string cookie, System.Action<int, string> callback)
+		{
+			// Process Headers
+			Hashtable headers = new Hashtable();
+			if ( cookie != null ) headers.Add("Cookie", cookie);
+			
+			// Make the call
+			WWW newCall = new WWW(URI, null, headers);
+			
+			yield return newCall;
+			
+			while ( !newCall.isDone ) yield return new WaitForSeconds(0.01f);
+
+			// Callback!
+			callback(_hash, newCall.text);
+			
+			hObjectPool.Instance.Despawn(this.gameObject, this.poolID);
+		}
+#endregion
+
+
+#region POST
 		public int POST(string URI, string contentType, string payload, string cookie, System.Action<int, string> callback)
 		{
 			_hash = (Time.time.ToString() + URI + payload + Random.Range(0,100)).GetHashCode();
@@ -70,25 +99,6 @@ namespace Hydrogen.Core
 			StartCoroutine(PostReturnedText (URI, contentType, payload, cookie, callback));
 			
 			return _hash;
-		}
-
-		public IEnumerator GetReturnedText(string URI, string cookie, System.Action<int, string> callback)
-		{
-				// Process Headers
-			Hashtable headers = new Hashtable();
-			if ( cookie != null ) headers.Add("Cookie", cookie);
-
-			// Make the call
-			WWW newCall = new WWW(URI, null, headers);
-
-			yield return newCall;
-
-			while ( !newCall.isDone ) yield return new WaitForSeconds(0.01f);
-
-			// Callback!
-			callback(_hash, newCall.text);
-
-			hObjectPool.Instance.Despawn(this.gameObject, this.poolID);
 		}
 
 		public IEnumerator PostReturnedText(string URI, string contentType, string payload, string cookie, System.Action<int, string> callback)
@@ -103,11 +113,49 @@ namespace Hydrogen.Core
 			headers.Add("Content-Length", postData.Length);
 			if ( cookie != null ) headers.Add("Cookie", cookie);
 			
-			// Make the call
-			//WWWForm newCall = new WWWForm();
-
-			///newCall.AddField
 			WWW newCall = new WWW(URI, postData, headers);
+			
+			yield return newCall;
+			
+			while ( !newCall.isDone ) yield return new WaitForSeconds(0.01f);
+
+			// Callback!
+			callback(_hash, newCall.text);
+			
+			hObjectPool.Instance.Despawn(this.gameObject, this.poolID);
+		}
+#endregion
+
+#region FORM
+		public int Form(string URI, Dictionary<string,string> formStringData, WebPool.FormBinaryData[] formBinaryData,  string cookie, System.Action<int, string> callback)
+		{
+			_hash = (Time.time.ToString() + URI + formStringData.GetHashCode().ToString() + Random.Range(0,100)).GetHashCode();
+			
+			StartCoroutine(FormReturnedText(URI, formStringData, formBinaryData, cookie, callback));
+			
+			return _hash;
+		}
+
+		public IEnumerator FormReturnedText(string URI, Dictionary<string, string> formStringData, WebPool.FormBinaryData[] formBinaryData, string cookie, System.Action<int, string> callback)
+		{
+			WWWForm newForm = new WWWForm();
+
+			// Add string data
+			foreach(string s in formStringData.Keys)
+			{
+				newForm.AddField(s, formStringData[s]);
+			}
+
+			// Add binary data
+			foreach(WebPool.FormBinaryData b in formBinaryData)
+			{
+				newForm.AddBinaryData(b.fieldName, b.data, b.fileName, b.mimeType);
+			}
+
+			Hashtable headers = newForm.headers;
+			if ( cookie != null ) headers.Add("Cookie", cookie);
+			
+			WWW newCall = new WWW(URI, newForm.data, headers);
 			
 			yield return newCall;
 			
@@ -118,5 +166,6 @@ namespace Hydrogen.Core
 			
 			hObjectPool.Instance.Despawn(this.gameObject, this.poolID);
 		}
+#endregion
 	}
 }
