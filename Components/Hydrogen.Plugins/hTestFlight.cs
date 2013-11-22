@@ -78,6 +78,15 @@ public class hTestFlight : MonoBehaviour
             return _staticInstance;
         }
     }
+
+	/// <summary>
+	/// Does an instance exist of this class?
+	/// </summary>
+	public static bool Exists()
+	{
+		if ( _staticInstance == null ) return false;
+		else return true;
+	}
 	
 	public void Awake()
 	{

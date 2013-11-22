@@ -37,7 +37,7 @@ using System.Collections;
 /// you still get the performance benefits.
 /// </remarks>
 [AddComponentMenu("Hydrogen/Object Pool Item")]
-public  class hObjectPoolItem : Hydrogen.Core.ObjectPoolItemBase {
+public class hObjectPoolItem : Hydrogen.Core.ObjectPoolItemBase {
 	
 	public float lifeTime = 0f;
 		
