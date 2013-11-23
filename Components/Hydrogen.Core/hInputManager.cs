@@ -127,11 +127,35 @@ public class hInputManager : MonoBehaviour
     }
     return false;
   }
-  //
-  //  public static bool RemoveAction(String name, hInputAction action, bool alsoRemoveBindings)
-  //  {
-  //    // TODO. Go through controls too!
-  //  }
+
+  public static bool RemoveAction(String name, bool alsoRemoveControls)
+  {
+    hInputManager instance = Instance;
+    hInputAction action = null;
+    if (instance._actions.TryGetValue(name, out action))
+    {
+      if (alsoRemoveControls)
+      {
+        bool hasMore = true;
+        while (hasMore)
+        {
+          hasMore = false;
+          foreach (InputControl control in instance._controls)
+          {
+            if (control.Action == action)
+            {
+              instance._controls.Remove(control);
+              hasMore = true;
+              break;
+            }
+          }
+        }
+      }
+      instance._actions.Remove(name);
+      return true;
+    }
+    return false;
+  }
 
   public static bool AddControl(String controlName, String actionName)
   {
@@ -486,13 +510,13 @@ namespace Hydrogen.Core
     protected InputControl(String name, hInputAction action)
     {
       Name = name;
-      _action = action;
+      Action = action;
     }
 
     public abstract void Capture();
 
     public String Name;
-    protected hInputAction _action;
+    public hInputAction Action;
 
   }
 
@@ -512,7 +536,7 @@ namespace Hydrogen.Core
       float value = Input.GetAxis(_axis);
       if (Mathf.Approximately(value, 0.0f) == false)
       {
-        _action(hInputEvent.ValueSet, value, 0.0f);
+        Action(hInputEvent.ValueSet, value, 0.0f);
       }
     }
   }
@@ -532,7 +556,7 @@ namespace Hydrogen.Core
       float value = Input.GetAxis(_axis);
       if (Mathf.Approximately(value, 0.0f) == false)
       {
-        _action(hInputEvent.ValueMoved, value, 0.0f);
+        Action(hInputEvent.ValueMoved, value, 0.0f);
       }
     }
   }
@@ -557,15 +581,15 @@ namespace Hydrogen.Core
       if (_now && !_last)
       {
         _timeBegan = Time.time;
-        _action(hInputEvent.Pressed, 1.0f, 0.0f);
+        Action(hInputEvent.Pressed, 1.0f, 0.0f);
       }
       else if (!_now && _last)
       {
-        _action(hInputEvent.Released, 0.0f, Time.time - _timeBegan);
+        Action(hInputEvent.Released, 0.0f, Time.time - _timeBegan);
       }
       else if (_now && _last)
       {
-        _action(hInputEvent.Down, 1.0f, Time.time - _timeBegan);
+        Action(hInputEvent.Down, 1.0f, Time.time - _timeBegan);
       }
     }
   }
@@ -590,15 +614,15 @@ namespace Hydrogen.Core
       if (_now && !_last)
       {
         _timeBegan = Time.time;
-        _action(hInputEvent.Pressed, 1.0f, 0.0f);
+        Action(hInputEvent.Pressed, 1.0f, 0.0f);
       }
       else if (!_now && _last)
       {
-        _action(hInputEvent.Released, 0.0f, Time.time - _timeBegan);
+        Action(hInputEvent.Released, 0.0f, Time.time - _timeBegan);
       }
       else if (_now && _last)
       {
-        _action(hInputEvent.Down, 1.0f, Time.time - _timeBegan);
+        Action(hInputEvent.Down, 1.0f, Time.time - _timeBegan);
       }
     }
   }
