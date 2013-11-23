@@ -133,7 +133,7 @@ public class hInputManager : MonoBehaviour
   //    // TODO. Go through controls too!
   //  }
 
-  public static bool AddBind(String controlName, String actionName)
+  public static bool AddControl(String controlName, String actionName)
   {
     hInputManager instance = Instance;
     hInputAction action = null;
@@ -156,36 +156,24 @@ public class hInputManager : MonoBehaviour
     }
   }
 
-  //  public static void AddBinds(String[] controlNames, String actionName)
-  //  {
-  //
-  //  }
-  //
-  //  public static void AddBinds(String[] controlNames, String[] actionNames)
-  //  {
-  //
-  //  }
-  //
-  //  public static void AddBinds(Dictionary<String, String> controlNamesToActionsNames)
-  //  {
-  //
-  //  }
-  //
-  //  public static void RemoveBind(String controlName)
-  //  {
-  //
-  //  }
-  //
-  //  public static void RemoveBinds(String[] controlNames)
-  //  {
-  //
-  //  }
-  //
-  //  public static void RemoveAllBinds()
-  //  {
-  //
-  //  }
-
+  public static void RemoveControl(String controlName)
+  {
+    hInputManager instance = Instance;
+    bool hasMore = true;
+    while (hasMore)
+    {
+      hasMore = false;
+      foreach (InputControl control in instance._controls)
+      {
+        if (control.Name == controlName)
+        {
+          instance._controls.Remove(control);
+          hasMore = true;
+          break;
+        }
+      }
+    }
+  }
 
 }
 
@@ -476,32 +464,34 @@ namespace Hydrogen.Core
       String axis;
       if (Axes.TryGetValue(name, out axis))
       {
-        return new InputAxisControl(axis, action);
+        return new InputAxisControl(name, axis, action);
       }
       if (DeltaAxes.TryGetValue(name, out axis))
       {
-        return new InputDeltaAxisControl(axis, action);
+        return new InputDeltaAxisControl(name, axis, action);
       }
       int button;
       if (MouseButtons.TryGetValue(name, out button))
       {
-        return new InputMouseButtonControl(button, action);
+        return new InputMouseButtonControl(name, button, action);
       }
       KeyCode keyCode;
       if (KeyboardButtons.TryGetValue(name, out keyCode))
       {
-        return new InputKeyboardButtonControl(keyCode, action);
+        return new InputKeyboardButtonControl(name, keyCode, action);
       }
       return null;
     }
 
-    protected InputControl(hInputAction action)
+    protected InputControl(String name, hInputAction action)
     {
+      Name = name;
       _action = action;
     }
 
     public abstract void Capture();
 
+    public String Name;
     protected hInputAction _action;
 
   }
@@ -511,8 +501,8 @@ namespace Hydrogen.Core
   {
     private String _axis;
 
-    public InputAxisControl(string axis, hInputAction action)
-      : base(action)
+    public InputAxisControl(string name, string axis, hInputAction action)
+      : base(name, action)
     {
       _axis = axis;
     }
@@ -531,8 +521,8 @@ namespace Hydrogen.Core
   {
     private String _axis;
 
-    public InputDeltaAxisControl(string axisName, hInputAction action)
-      : base(action)
+    public InputDeltaAxisControl(string name, string axisName, hInputAction action)
+      : base(name, action)
     {
       _axis = axisName;
     }
@@ -553,8 +543,8 @@ namespace Hydrogen.Core
     private bool _last, _now;
     private float _timeBegan;
 
-    public InputMouseButtonControl(int button, hInputAction action)
-      : base(action)
+    public InputMouseButtonControl(string name, int button, hInputAction action)
+      : base(name, action)
     {
       _button = button;
     }
@@ -586,8 +576,8 @@ namespace Hydrogen.Core
     private bool _last, _now;
     private float _timeBegan;
 
-    public InputKeyboardButtonControl(KeyCode key, hInputAction action)
-      : base(action)
+    public InputKeyboardButtonControl(string name, KeyCode key, hInputAction action)
+      : base(name, action)
     {
       _key = key;
     }
