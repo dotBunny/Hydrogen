@@ -24,7 +24,7 @@ base_url: "../"
   <div class="page-header">
     <h1 id="team">Core Team</h1>
   </div>
-  <p class="lead">Hydrogen is maintained by the founding team and a small group of invaluable core contributors.</p>
+  <p class="lead">Hydrogen is maintained by a small group of invaluable core contributors.</p>
   <div class="list-group bs-team">
     <div class="list-group-item">
       <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=reapazor&amp;type=follow"></iframe>
@@ -53,18 +53,47 @@ base_url: "../"
   <p>This project is about empowering the community to make great content with Unity. Every developer out there at some point has gotten something wonderful from the Unity community. This is "our" way of giving back to the community, and we would love to have your assistance at making it better!
   </p>
 
-  <h3 id="contributing-conventions">Pull Requests</h3>
-  <p>The fastest way to get Hydrogen into your project is to download the packaged version from the Unity Asset Store. Included in the package is a bunch of example content that demonstrates how the framework <em>may</em> be used.</p>
-    
-      
-  <h3 id="contributing-conventions">Naming Conventions</h3>
-  <p>The fastest way to get Hydrogen into your project is to download the packaged version from the Unity Asset Store. Included in the package is a bunch of example content that demonstrates how the framework <em>may</em> be used.</p>
-    
+  <h3 id="contributing-bootcamp">Bootcamp</h3>
+  <p>So you want to be awesome eh? Sounds good to me! How do you do that? Follow these steps to greatness!
+  	
+  	<h4>Step 1 - Fork It!</h4>
+  	<p>Assuming that you already have GIT setup and have a general understanding of how to use it, the first major thing is to fork the existing project on GitHub so that you can make some wonderful additions in your own protected workspace.</p>
+    <div class="bs-callout bs-callout-info">
+		  <h4>Fork Tutorial</h4>
+	      <p>GitHub provides a lovely tutorial <a href="https://help.github.com/articles/fork-a-repo">available here</a> that seriously can't be beat.</p>
+	 </div>
+	 
+	 <h4>Step 2 - Make Something Awesome</h4>
+	 <p>This can be as simple as a bug fix or an optimization, or if you are feeling adventurous a whole new feature.</p>
+	 
+	 <h4>Step 3 - Pull Request</h4>
+	 <p>Now you need to notify us about the addition and we will need to review it before it gets added to the main development repository. Thankfully, GitHub has a wonderful way of doing that through their Pull Request system.</p>
+	 <div class="bs-callout bs-callout-info">
+		  <h4>Pull Tutorial</h4>
+	      <p>GitHub, yet again provides a lovely tutorial <a href="https://help.github.com/articles/using-pull-requests">available here</a>.</p>
+	 </div>
+	 
+	 <h4>Step 4 - Good Karma</h4>
+	 <p>You've done it, you've now contributed to this wonderful project and have been bestowed with the good feeling deep down inside that you have given back something to the community that has been there for you in the past, and will be there for you in the future.</p>
+
+  <h3 id="contributing-conventions">Coding Conventions</h3>
+  <p>We try to following the normal .NET naming conventions where we can, with some adjustments to try and follow along Unity's own nomenclature. We try and avoid appending some of the standard things such as "Controller" or "Manager" onto our classes. Microsoft has a very thorough naming conventions guide available <a href="http://msdn.microsoft.com/en-us/library/xzf533w0(v=vs.71).aspx">here</a> on some basic practices when it comes to how to properly name .NET variables, methods, classes, etc. </p>
+      <div class="bs-callout bs-callout-warning">
+		  <h4>Private Member Variables</h4>
+	      <p>We currently use the practice of naming our private variables with a proceeding underscore. </p>
+{% highlight csharp %}
+  public class HelloWorld
+  {
+  	public string currentTime;
+  	private string _lastFrameTime;
+  }{% endhighlight %}
+	 	</div>
+
   <h3 id="contributing-component">Component Model</h3>
-  <p>The fastest way to get Hydrogen into your project is to download the packaged version from the Unity Asset Store. Included in the package is a bunch of example content that demonstrates how the framework <em>may</em> be used.</p>
+  <p>A guiding principle in Hydrogen's design is that a user can implement it however they want, but we do try and show them a good way of doing it. It is with that in mind that the 'h' prefixed classes came to be. Each one of them is an implementation of a class tucked away nicely in the Hydrogen namespace. This design has some interesting benefits, particularly in avoiding collisions with other classes and allowing for interesting permutations.</p>
   
   <h3 id="contributing-documentation">Documentation</h3>
-  <p>The fastest way to get Hydrogen into your project is to download the packaged version from the Unity Asset Store. Included in the package is a bunch of example content that demonstrates how the framework <em>may</em> be used.</p>
+  <p>The project uses the XML Documentation guidelines set forth by Microsoft, available <a href="http://msdn.microsoft.com/en-us/library/b2s063f7.aspx">here</a>.</p>
 </div>
     
     
@@ -74,7 +103,6 @@ base_url: "../"
   <div class="page-header">
     <h1 id="future">Future</h1>
   </div>
-  <p class="lead">Awesomeness for everyone</p>
-  <p></p>
-</div>
+  <p class="lead">More awesomeness, more examples, easier to use, more documentation!</p>
+  <p>There are lots of things that we would like to see ported over to Hydrogen from some of the internal codebases of <a href="http://dotbunny.com">dotBunny</a>, but this still remains a side project during regular work hours. So long as Unity keeps on taking leaps and bounds forward, you can expect to see this framework follow suit in making sure to adequately supplement what Unity lacks.</div>
 
