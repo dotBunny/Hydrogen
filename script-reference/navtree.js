@@ -19,7 +19,9 @@ var NAVTREE =
       [ "File List", "files.html", "files" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ]
+        [ "Functions", "globals_func.html", null ],
+        [ "Enumerations", "globals_enum.html", null ],
+        [ "Enumerator", "globals_eval.html", null ]
       ] ]
     ] ]
   ] ]
@@ -28,7 +30,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"dir_27bfb49e10942b2337de158651d24362.html"
+"dd/d91/class_hydrogen_1_1_regex.html#a286d5b10f71bc0314b60ea7b714e3bc7"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -5,5 +5,8 @@ var dir_07717b91e95eb2caf8a16a5499e6413b =
     ] ],
     [ "JSON.cs", "d5/d87/_j_s_o_n_8cs.html", [
       [ "JSON", "d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n.html", "d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n" ]
+    ] ],
+    [ "JSONObject.cs", "d0/dd2/_j_s_o_n_object_8cs.html", [
+      [ "JSONObject", "d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html", "d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object" ]
     ] ]
 ];

@@ -76,6 +76,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li class="current"><a href="globals.html"><span>All</span></a></li>
       <li><a href="globals_func.html"><span>Functions</span></a></li>
+      <li><a href="globals_enum.html"><span>Enumerations</span></a></li>
+      <li><a href="globals_eval.html"><span>Enumerator</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -98,7 +100,7 @@ $(document).ready(function(){initNavTree('globals.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -109,8 +111,29 @@ $(document).ready(function(){initNavTree('globals.html','');});
 
 <div class="contents">
 <div class="textblock">Here is a list of all file members with links to the files they belong to:</div><ul>
+<li>Down
+: <a class="el" href="de/d9d/h_input_manager_8cs.html#a93e43bd7e476795ef9522e2469e836eda08a38277b0309070706f6652eeae9a53">hInputManager.cs</a>
+</li>
+<li>hInputAction()
+: <a class="el" href="de/d9d/h_input_manager_8cs.html#a8f9a72b5f3c669473756804af9b0c647">hInputManager.cs</a>
+</li>
+<li>hInputEvent
+: <a class="el" href="de/d9d/h_input_manager_8cs.html#a93e43bd7e476795ef9522e2469e836ed">hInputManager.cs</a>
+</li>
+<li>Pressed
+: <a class="el" href="de/d9d/h_input_manager_8cs.html#a93e43bd7e476795ef9522e2469e836edad78a68f6a85421ae121c2cb5b73a1040">hInputManager.cs</a>
+</li>
+<li>Released
+: <a class="el" href="de/d9d/h_input_manager_8cs.html#a93e43bd7e476795ef9522e2469e836edaea1e34304a5d8ffa7c9b0ed8ede4ef1a">hInputManager.cs</a>
+</li>
 <li>Texture()
 : <a class="el" href="d2/d72/_unlit_transparent_texture_blended_8shader.html#a403c378a5f3a047735c83f62ae08e6a6">UnlitTransparentTextureBlended.shader</a>
+</li>
+<li>ValueMoved
+: <a class="el" href="de/d9d/h_input_manager_8cs.html#a93e43bd7e476795ef9522e2469e836eda7105d72fc12c123375008bcc0780fa95">hInputManager.cs</a>
+</li>
+<li>ValueSet
+: <a class="el" href="de/d9d/h_input_manager_8cs.html#a93e43bd7e476795ef9522e2469e836eda346ce9570279b835ce0a488b82c5e509">hInputManager.cs</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -118,7 +141,7 @@ $(document).ready(function(){initNavTree('globals.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Nov 24 2013 21:27:27 for Hydrogen Framework by
+    <li class="footer">Generated on Tue Nov 26 2013 13:18:27 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

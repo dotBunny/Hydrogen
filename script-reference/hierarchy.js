@@ -5,11 +5,13 @@ var hierarchy =
     [ "Hydrogen.Core.WebPool.FormBinaryData", "df/d8b/struct_hydrogen_1_1_core_1_1_web_pool_1_1_form_binary_data.html", null ],
     [ "Hydrogen.Serialization.INI", "d3/da4/class_hydrogen_1_1_serialization_1_1_i_n_i.html", null ],
     [ "Hydrogen.Serialization.JSON", "d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n.html", null ],
+    [ "Hydrogen.Serialization.JSONObject", "d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html", null ],
     [ "Hydrogen.Layers", "de/db6/class_hydrogen_1_1_layers.html", null ],
     [ "Hydrogen.Math", "d3/d69/class_hydrogen_1_1_math.html", null ],
     [ "Hydrogen.Memory", "d0/d2b/class_hydrogen_1_1_memory.html", null ],
     [ "Hydrogen.Mesh", "d7/de6/class_hydrogen_1_1_mesh.html", null ],
     [ "MonoBehaviour", null, [
+      [ "hInputManager", "d2/d9f/classh_input_manager.html", null ],
       [ "hTestFlight", "d3/dcb/classh_test_flight.html", null ],
       [ "Hydrogen.Core.ObjectPool", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html", [
         [ "hObjectPool", "de/d7c/classh_object_pool.html", null ]

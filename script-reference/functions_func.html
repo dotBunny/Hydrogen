@@ -93,6 +93,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_g"><span>g</span></a></li>
       <li><a href="#index_h"><span>h</span></a></li>
       <li><a href="#index_i"><span>i</span></a></li>
+      <li><a href="#index_j"><span>j</span></a></li>
       <li><a href="#index_l"><span>l</span></a></li>
       <li><a href="#index_n"><span>n</span></a></li>
       <li><a href="#index_o"><span>o</span></a></li>
@@ -123,7 +124,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -142,11 +143,17 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>Add&lt; T &gt;()
 : <a class="el" href="d9/d04/class_hydrogen_1_1_array.html#aab95ea01fc6b3cc4449583631dbc2a6d">Hydrogen.Array</a>
 </li>
+<li>AddAction()
+: <a class="el" href="d2/d9f/classh_input_manager.html#af70132ffa64fd82267aa3f335519a4f4">hInputManager</a>
+</li>
 <li>AddAt&lt; T &gt;()
 : <a class="el" href="d9/d04/class_hydrogen_1_1_array.html#a55f152f36b2fbba8af69f88e99c52466">Hydrogen.Array</a>
 </li>
 <li>AddComponent&lt; T &gt;()
 : <a class="el" href="d5/da1/class_hydrogen_1_1_components.html#a6661309b73588a849de5de1086e159ba">Hydrogen.Components</a>
+</li>
+<li>AddControl()
+: <a class="el" href="d2/d9f/classh_input_manager.html#a817ace9a92860e90a2144fd5f83ecfa0">hInputManager</a>
 </li>
 <li>AddCustomEnvironmentInformation()
 : <a class="el" href="d3/dcb/classh_test_flight.html#a5d2443400ac89513396a6b3d5564d21c">hTestFlight</a>
@@ -163,8 +170,8 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 </li>
 <li>Awake()
 : <a class="el" href="d3/dcb/classh_test_flight.html#a4811a88ecab88e9dbcd8cddfed1282a6">hTestFlight</a>
-, <a class="el" href="d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#ab3bae3dd7ada34beb762d6b9fcb1888c">Hydrogen.Core.ObjectPool</a>
 , <a class="el" href="dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a6d5e21e5eb6a7cb33cf771dfee02d0e9">Hydrogen.Core.WebPool</a>
+, <a class="el" href="d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#ab3bae3dd7ada34beb762d6b9fcb1888c">Hydrogen.Core.ObjectPool</a>
 </li>
 </ul>
 
@@ -201,7 +208,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
 <li>Deserialize()
 : <a class="el" href="d3/da4/class_hydrogen_1_1_serialization_1_1_i_n_i.html#af982121e6870c1844eb5ebde72f33d80">Hydrogen.Serialization.INI</a>
-, <a class="el" href="d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n.html#a0d046f8ec3ca8282fdc1cf57ce9aeb1a">Hydrogen.Serialization.JSON</a>
+, <a class="el" href="d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n.html#a5316a3e7d29091546b382fa6851cb9f0">Hydrogen.Serialization.JSON</a>
 </li>
 <li>Despawn()
 : <a class="el" href="d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a45bdc5e30cd8587838326137ee1b4244">Hydrogen.Core.ObjectPool</a>
@@ -231,6 +238,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>Exists()
 : <a class="el" href="d0/d8b/classh_web_pool.html#acb0f86c370eb278e0f75d15ca7fcb933">hWebPool</a>
 , <a class="el" href="de/d7c/classh_object_pool.html#a6be34edd90497857846b88957dc16779">hObjectPool</a>
+, <a class="el" href="d2/d9f/classh_input_manager.html#ae26862acec1b41942a26a7c4e84de619">hInputManager</a>
 , <a class="el" href="d3/dcb/classh_test_flight.html#a91607f29b6f8f92092bda5e3cda3cd6a">hTestFlight</a>
 </li>
 </ul>
@@ -244,19 +252,19 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 : <a class="el" href="d0/d85/class_hydrogen_1_1_texture.html#a60c509421da9063d9cd9ad1749958913">Hydrogen.Texture</a>
 </li>
 <li>Form()
-: <a class="el" href="d2/d21/class_hydrogen_1_1_core_1_1_web_pool_item.html#a8b5823db6cca8182bdc39b6ffeae1e7c">Hydrogen.Core.WebPoolItem</a>
-, <a class="el" href="dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a3b04dd22d3862fbf0b894b87083055c2">Hydrogen.Core.WebPool</a>
+: <a class="el" href="d2/d21/class_hydrogen_1_1_core_1_1_web_pool_item.html#adf1908d674ec84eded5f4f1e3cd2d11f">Hydrogen.Core.WebPoolItem</a>
+, <a class="el" href="dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#aa3623eaa77b87bbe9ec050b1d88b93e0">Hydrogen.Core.WebPool</a>
 </li>
 <li>FormReturnedText()
-: <a class="el" href="d2/d21/class_hydrogen_1_1_core_1_1_web_pool_item.html#a1293061efb3eea266a0f90d6bd5199df">Hydrogen.Core.WebPoolItem</a>
+: <a class="el" href="d2/d21/class_hydrogen_1_1_core_1_1_web_pool_item.html#a24d3a58668a3aab6e3894de580c7f73c">Hydrogen.Core.WebPoolItem</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
 <li>GET()
-: <a class="el" href="dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#aa1cc97ca85c3bb55769ab6008bf3a12e">Hydrogen.Core.WebPool</a>
-, <a class="el" href="d2/d21/class_hydrogen_1_1_core_1_1_web_pool_item.html#a9472f88efdaf9dbb6623b11b7a7afb90">Hydrogen.Core.WebPoolItem</a>
+: <a class="el" href="dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#aa7a87fc73ea35f495ea4c50fe66813d9">Hydrogen.Core.WebPool</a>
+, <a class="el" href="d2/d21/class_hydrogen_1_1_core_1_1_web_pool_item.html#ad39028e48e057adc1debc5145a20524b">Hydrogen.Core.WebPoolItem</a>
 </li>
 <li>GetComponentIfNull&lt; T &gt;()
 : <a class="el" href="d5/da1/class_hydrogen_1_1_components.html#a075bcaae3238501c6c9288eb49c05991">Hydrogen.Components</a>
@@ -268,7 +276,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 : <a class="el" href="d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#aea441a3992eb0e04f417d3c529338481">Hydrogen.Core.ObjectPool</a>
 </li>
 <li>GetReturnedText()
-: <a class="el" href="d2/d21/class_hydrogen_1_1_core_1_1_web_pool_item.html#a121261325b3b49dea3c4f67a21968583">Hydrogen.Core.WebPoolItem</a>
+: <a class="el" href="d2/d21/class_hydrogen_1_1_core_1_1_web_pool_item.html#a11abd97600266da51f7ec73b6e41bc80">Hydrogen.Core.WebPoolItem</a>
 </li>
 </ul>
 
@@ -294,6 +302,13 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 </li>
 <li>IsPositive()
 : <a class="el" href="d0/da0/class_hydrogen_1_1_validate.html#a410a0abf0e65709cb3262adde5a71572">Hydrogen.Validate</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_j"></a>- j -</h3><ul>
+<li>JSONObject()
+: <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a58112e8d08970e4e1dccf35b3f10383e">Hydrogen.Serialization.JSONObject</a>
 </li>
 </ul>
 
@@ -342,9 +357,30 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 : <a class="el" href="de/db6/class_hydrogen_1_1_layers.html#aee417be55db5fafe99ca34b6196bb4bb">Hydrogen.Layers</a>
 </li>
 <li>OnSpawned()
-: <a class="el" href="d2/d21/class_hydrogen_1_1_core_1_1_web_pool_item.html#ad3f896f1665c672cd2a44a1c57aaff0d">Hydrogen.Core.WebPoolItem</a>
+: <a class="el" href="d5/d59/classh_object_pool_item.html#a40e1048264e13d81102fa50e903d7edc">hObjectPoolItem</a>
 , <a class="el" href="db/d5e/class_hydrogen_1_1_core_1_1_object_pool_item_base.html#a999298854b5dc9571acdefbfcc6c39d1">Hydrogen.Core.ObjectPoolItemBase</a>
-, <a class="el" href="d5/d59/classh_object_pool_item.html#a40e1048264e13d81102fa50e903d7edc">hObjectPoolItem</a>
+, <a class="el" href="d2/d21/class_hydrogen_1_1_core_1_1_web_pool_item.html#ad3f896f1665c672cd2a44a1c57aaff0d">Hydrogen.Core.WebPoolItem</a>
+</li>
+<li>operator Color()
+: <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a520e1f5740eb69083479e6ca7625ad60">Hydrogen.Serialization.JSONObject</a>
+</li>
+<li>operator Color32()
+: <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a9e84bb73238067a5eacd0002cf25196f">Hydrogen.Serialization.JSONObject</a>
+</li>
+<li>operator JSONObject()
+: <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a999418b041bc37af10d8f4bfd2a46584">Hydrogen.Serialization.JSONObject</a>
+</li>
+<li>operator Quaternion()
+: <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#adc69eee0e2cf30e08542e470483191eb">Hydrogen.Serialization.JSONObject</a>
+</li>
+<li>operator Rect()
+: <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a8b360af9594cc3936856daabb66716e8">Hydrogen.Serialization.JSONObject</a>
+</li>
+<li>operator Vector2()
+: <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#ac8bfbbc258fb67dd48df06f3c710d29e">Hydrogen.Serialization.JSONObject</a>
+</li>
+<li>operator Vector3()
+: <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a32decf1cc1e2b86995055b1db22abbf6">Hydrogen.Serialization.JSONObject</a>
 </li>
 </ul>
 
@@ -355,12 +391,12 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 , <a class="el" href="d3/d8d/class_hydrogen_1_1_plugins_1_1_test_flight.html#a829a535b3ac54514a78374902fcf1d3c">Hydrogen.Plugins.TestFlight</a>
 </li>
 <li>POST()
-: <a class="el" href="dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a0ff6e798897dcdcb8851642949044ec4">Hydrogen.Core.WebPool</a>
-, <a class="el" href="d2/d21/class_hydrogen_1_1_core_1_1_web_pool_item.html#aae82c818df02cabfdc5147f4721da6c9">Hydrogen.Core.WebPoolItem</a>
+: <a class="el" href="dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#ae82d5d5e102bd354caadbb850cbd6eae">Hydrogen.Core.WebPool</a>
+, <a class="el" href="d2/d21/class_hydrogen_1_1_core_1_1_web_pool_item.html#a491fa53d8a0f4f661e9100e866bc62ab">Hydrogen.Core.WebPoolItem</a>
 , <a class="el" href="dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a6b5f1ce454270e65ee612a4fe9d312a2">Hydrogen.Core.WebPool</a>
 </li>
 <li>PostReturnedText()
-: <a class="el" href="d2/d21/class_hydrogen_1_1_core_1_1_web_pool_item.html#aecda0047c6dca4c182eabc970d424e0a">Hydrogen.Core.WebPoolItem</a>
+: <a class="el" href="d2/d21/class_hydrogen_1_1_core_1_1_web_pool_item.html#a27667d231af37adaf232c4d6ce6eee51">Hydrogen.Core.WebPoolItem</a>
 </li>
 <li>PregReplace()
 : <a class="el" href="dd/d91/class_hydrogen_1_1_regex.html#a286d5b10f71bc0314b60ea7b714e3bc7">Hydrogen.Regex</a>
@@ -378,8 +414,14 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>Remove&lt; T &gt;()
 : <a class="el" href="d9/d04/class_hydrogen_1_1_array.html#a471dc2e1869816944ecf3c4e0cac3aa2">Hydrogen.Array</a>
 </li>
+<li>RemoveAction()
+: <a class="el" href="d2/d9f/classh_input_manager.html#af1ac49f5af8f775c146f6a0b5bf8a90f">hInputManager</a>
+</li>
 <li>RemoveAt&lt; T &gt;()
 : <a class="el" href="d9/d04/class_hydrogen_1_1_array.html#aae5f21d3c51507daf38a79363c8d6e57">Hydrogen.Array</a>
+</li>
+<li>RemoveControl()
+: <a class="el" href="d2/d9f/classh_input_manager.html#abfba7455f7cfaffff1f04ace2493347c">hInputManager</a>
 </li>
 <li>RemoveFromPool()
 : <a class="el" href="d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a4a7d07affbee8e1b8087ac1f9ed5bd6d">Hydrogen.Core.ObjectPoolCollection</a>
@@ -402,7 +444,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
 <li>Serialize()
 : <a class="el" href="d3/da4/class_hydrogen_1_1_serialization_1_1_i_n_i.html#afb5c7f71cc6c4f8bd61431e65cf31a5b">Hydrogen.Serialization.INI</a>
-, <a class="el" href="d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n.html#a8f5f33418bd91b06796965d059f775d0">Hydrogen.Serialization.JSON</a>
+, <a class="el" href="d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n.html#a42c39dfcf389b40c0fa79f2912d7caca">Hydrogen.Serialization.JSON</a>
 </li>
 <li>SignedAngle()
 : <a class="el" href="d3/d69/class_hydrogen_1_1_math.html#a1524d3c41aac6a2f16f7c28b6948f260">Hydrogen.Math</a>
@@ -435,6 +477,24 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>Tile()
 : <a class="el" href="d0/d85/class_hydrogen_1_1_texture.html#a3a6559437a3854e2d7b43f0708cf883a">Hydrogen.Texture</a>
 </li>
+<li>ToArray&lt; T &gt;()
+: <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a73d23ff22f2ff54e93c1f03f0f1d45d1">Hydrogen.Serialization.JSONObject</a>
+</li>
+<li>ToBoolean()
+: <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a114cb14afc7e16fbc2934691bb07357b">Hydrogen.Serialization.JSONObject</a>
+</li>
+<li>ToFloat()
+: <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#aad72aa4d27e0fe077c4104896b9d57e9">Hydrogen.Serialization.JSONObject</a>
+</li>
+<li>ToInt()
+: <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a2e88e6d1839429d38b3b3c2fa8b3290a">Hydrogen.Serialization.JSONObject</a>
+</li>
+<li>ToJSON()
+: <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a12fc45d9e8ca8aeb56f7617bb69b033a">Hydrogen.Serialization.JSONObject</a>
+</li>
+<li>ToString()
+: <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a593ae9c32d3664ce516545643ff3ebdf">Hydrogen.Serialization.JSONObject</a>
+</li>
 <li>ToUnsigned()
 : <a class="el" href="d3/d69/class_hydrogen_1_1_math.html#aa891ad01b0a2ec4e0de08e14f7c188c9">Hydrogen.Math</a>
 </li>
@@ -463,7 +523,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sun Nov 24 2013 21:27:27 for Hydrogen Framework by
+    <li class="footer">Generated on Tue Nov 26 2013 13:18:27 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>
