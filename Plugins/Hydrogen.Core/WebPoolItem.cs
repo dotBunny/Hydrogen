@@ -44,6 +44,7 @@ namespace Hydrogen.Core
 	{
 		private int _hash;
 
+
 		public override void OnSpawned()
 		{
 			_hash = 0;
@@ -61,7 +62,7 @@ namespace Hydrogen.Core
 		}
 
 #region GET
-		public int GET(string URI, string cookie, System.Action<int, string> callback)
+		public int GET(string URI, string cookie, System.Action<int, Hashtable, string> callback)
 		{
 			_hash = (Time.time.ToString() + URI + Random.Range(0,100)).GetHashCode();
 
@@ -70,7 +71,7 @@ namespace Hydrogen.Core
 			return _hash;
 		}
 
-		public IEnumerator GetReturnedText(string URI, string cookie, System.Action<int, string> callback)
+		public IEnumerator GetReturnedText(string URI, string cookie, System.Action<int, Hashtable, string> callback)
 		{
 			// Process Headers
 			Hashtable headers = new Hashtable();
@@ -83,8 +84,11 @@ namespace Hydrogen.Core
 			
 			while ( !newCall.isDone ) yield return new WaitForSeconds(0.01f);
 
-			// Callback!
-			callback(_hash, newCall.text);
+			// Callback! (Avoid Unity Bitching)
+			try { 
+				callback(_hash, new Hashtable(newCall.responseHeaders), newCall.text);
+			}
+			catch (System.Exception e) { Debug.Log(e.ToString()); }
 			
 			hObjectPool.Instance.Despawn(this.gameObject, this.poolID);
 		}
@@ -92,7 +96,7 @@ namespace Hydrogen.Core
 
 
 #region POST
-		public int POST(string URI, string contentType, string payload, string cookie, System.Action<int, string> callback)
+		public int POST(string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
 		{
 			_hash = (Time.time.ToString() + URI + payload + Random.Range(0,100)).GetHashCode();
 			
@@ -101,7 +105,7 @@ namespace Hydrogen.Core
 			return _hash;
 		}
 
-		public IEnumerator PostReturnedText(string URI, string contentType, string payload, string cookie, System.Action<int, string> callback)
+		public IEnumerator PostReturnedText(string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
 		{
 			// Message Data
 			byte[] postData = System.Text.Encoding.ASCII.GetBytes(payload.ToCharArray());
@@ -114,20 +118,25 @@ namespace Hydrogen.Core
 			if ( cookie != null ) headers.Add("Cookie", cookie);
 			
 			WWW newCall = new WWW(URI, postData, headers);
-			
+
+
 			yield return newCall;
 			
 			while ( !newCall.isDone ) yield return new WaitForSeconds(0.01f);
 
+
 			// Callback!
-			callback(_hash, newCall.text);
+			try { 
+				callback(_hash, new Hashtable(newCall.responseHeaders), newCall.text);
+			}
+			catch (System.Exception e) { Debug.Log(e.ToString()); }
 			
 			hObjectPool.Instance.Despawn(this.gameObject, this.poolID);
 		}
 #endregion
 
 #region FORM
-		public int Form(string URI, Dictionary<string,string> formStringData, WebPool.FormBinaryData[] formBinaryData,  string cookie, System.Action<int, string> callback)
+		public int Form(string URI, Dictionary<string,string> formStringData, WebPool.FormBinaryData[] formBinaryData,  string cookie, System.Action<int, Hashtable, string> callback)
 		{
 			_hash = (Time.time.ToString() + URI + formStringData.GetHashCode().ToString() + Random.Range(0,100)).GetHashCode();
 			
@@ -136,7 +145,7 @@ namespace Hydrogen.Core
 			return _hash;
 		}
 
-		public IEnumerator FormReturnedText(string URI, Dictionary<string, string> formStringData, WebPool.FormBinaryData[] formBinaryData, string cookie, System.Action<int, string> callback)
+		public IEnumerator FormReturnedText(string URI, Dictionary<string, string> formStringData, WebPool.FormBinaryData[] formBinaryData, string cookie, System.Action<int, Hashtable, string> callback)
 		{
 			WWWForm newForm = new WWWForm();
 
@@ -162,7 +171,10 @@ namespace Hydrogen.Core
 			while ( !newCall.isDone ) yield return new WaitForSeconds(0.01f);
 			
 			// Callback!
-			callback(_hash, newCall.text);
+			try { 
+				callback(_hash, new Hashtable(newCall.responseHeaders), newCall.text);
+			}
+			catch (System.Exception e) { Debug.Log(e.ToString()); }
 			
 			hObjectPool.Instance.Despawn(this.gameObject, this.poolID);
 		}
