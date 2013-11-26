@@ -93,6 +93,5 @@ namespace Hydrogen.Core
 			GameObject go = hObjectPool.Instance.Spawn(_poolID);
 			go.GetComponent<WebPoolItem>().Form(URI, formStringData, formBinaryData, cookie, callback);
 		}
-
 	}
 }

@@ -85,10 +85,9 @@ namespace Hydrogen.Core
 			while ( !newCall.isDone ) yield return new WaitForSeconds(0.01f);
 
 			// Callback! (Avoid Unity Bitching)
-			try { 
+			if ( newCall.responseHeaders["STATUS"].Contains(" 200 ") ) 
 				callback(_hash, new Hashtable(newCall.responseHeaders), newCall.text);
-			}
-			catch (System.Exception e) { Debug.Log(e.ToString()); }
+			else callback(_hash, new Hashtable(newCall.responseHeaders), "");
 			
 			hObjectPool.Instance.Despawn(this.gameObject, this.poolID);
 		}
@@ -124,12 +123,9 @@ namespace Hydrogen.Core
 			
 			while ( !newCall.isDone ) yield return new WaitForSeconds(0.01f);
 
-
-			// Callback!
-			try { 
+			if ( newCall.responseHeaders["STATUS"].Contains(" 200 ") ) 
 				callback(_hash, new Hashtable(newCall.responseHeaders), newCall.text);
-			}
-			catch (System.Exception e) { Debug.Log(e.ToString()); }
+			else callback(_hash, new Hashtable(newCall.responseHeaders), "");
 			
 			hObjectPool.Instance.Despawn(this.gameObject, this.poolID);
 		}
@@ -171,10 +167,10 @@ namespace Hydrogen.Core
 			while ( !newCall.isDone ) yield return new WaitForSeconds(0.01f);
 			
 			// Callback!
-			try { 
+			if ( newCall.responseHeaders["STATUS"].Contains(" 200 ") ) 
 				callback(_hash, new Hashtable(newCall.responseHeaders), newCall.text);
-			}
-			catch (System.Exception e) { Debug.Log(e.ToString()); }
+			else callback(_hash, new Hashtable(newCall.responseHeaders), "");
+		
 			
 			hObjectPool.Instance.Despawn(this.gameObject, this.poolID);
 		}
