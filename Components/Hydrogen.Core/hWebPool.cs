@@ -64,10 +64,13 @@ public sealed class hWebPool : Hydrogen.Core.WebPool
 					_staticInstance = FindObjectOfType (typeof(hWebPool)) as hWebPool;
 					
 					// If we don't have it, lets make it!
-					if (_staticInstance == null) {
-						GameObject newWebPool = new GameObject("Web Pool");
-						newWebPool.AddComponent<hWebPool>();
-						_staticInstance = newWebPool.GetComponent<hWebPool>();	
+					if (_staticInstance == null) 
+					{
+						GameObject go = GameObject.Find("Hydrogen");
+						if ( go == null ) go = new GameObject("Hydrogen");
+
+						go.AddComponent<hWebPool>();
+						_staticInstance = go.GetComponent<hWebPool>();	
 					}
 				}
 			}

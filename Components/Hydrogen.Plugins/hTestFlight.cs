@@ -69,9 +69,12 @@ public class hTestFlight : MonoBehaviour
                     
 					// If we don't have it, lets make it!
 					if (_staticInstance == null) {
-						GameObject newTestFlight = new GameObject("TestFlight");
-						newTestFlight.AddComponent<hTestFlight>();
-						_staticInstance = newTestFlight.GetComponent<hTestFlight>();	
+
+						GameObject go = GameObject.Find("Hydrogen");
+						if ( go == null ) go = new GameObject("Hydrogen");
+
+						go.AddComponent<hTestFlight>();
+						_staticInstance = go.GetComponent<hTestFlight>();	
                     }
                 }
             }

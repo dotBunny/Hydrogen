@@ -64,10 +64,13 @@ public class hObjectPool : Hydrogen.Core.ObjectPool
                     _staticInstance = FindObjectOfType (typeof(hObjectPool)) as hObjectPool;
                     
 					// If we don't have it, lets make it!
-					if (_staticInstance == null) {
-						GameObject newPool = new GameObject("Object Pool");
-						newPool.AddComponent<hObjectPool>();
-						_staticInstance = newPool.GetComponent<hObjectPool>();	
+					if (_staticInstance == null)
+					{
+						GameObject go = GameObject.Find("Hydrogen");
+						if ( go == null ) go = new GameObject("Hydrogen");
+
+						go.AddComponent<hObjectPool>();
+						_staticInstance = go.GetComponent<hObjectPool>();	
                     }
                 }
             }

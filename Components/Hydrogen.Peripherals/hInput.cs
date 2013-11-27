@@ -56,9 +56,11 @@ public class hInput : Hydrogen.Peripherals.Input
           // If we don't have it, lets make it!
           if (_staticInstance == null)
           {
-            GameObject newPool = new GameObject("Input Manager");
-            newPool.AddComponent<hInput>();
-            _staticInstance = newPool.GetComponent<hInput>();
+			GameObject go = GameObject.Find("Hydrogen");
+			if ( go == null ) go = new GameObject("Hydrogen");
+
+            go.AddComponent<hInput>();
+            _staticInstance = go.GetComponent<hInput>();
           }
         }
       }
