@@ -45,7 +45,7 @@ namespace Hydrogen
 		/// <param name="obj">GameObject to test</param>
 		/// <param name="layerMask">LayerMask with all the layers to test against</param>
 		/// <returns>True if in any of the layers in the LayerMask</returns>
-		public static bool IsInLayerMask(UnityEngine.GameObject obj, UnityEngine.LayerMask layerMask)
+		public static bool IsInLayerMask(this UnityEngine.GameObject obj, UnityEngine.LayerMask layerMask)
 		{
 		    // Convert the object's layer to a bitfield for comparison
 		    int objLayerMask = (1 << obj.layer);
@@ -67,7 +67,7 @@ namespace Hydrogen
         /// <returns>
         /// 	<c>true</c> if value is a numeric type; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsNumericType(object value)
+        public static bool IsNumericType(this object value)
         {
             return (value is byte ||
                 value is sbyte ||
@@ -86,11 +86,11 @@ namespace Hydrogen
         /// Determines whether the specified value is positive.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <param name="zeroIsPositive">if set to <c>true</c> treats 0 as positive.</param>
+        /// <param name="zeroIsPositive">if set to <c>true</c> treats 0 as positive. Defaults to true.</param>
         /// <returns>
         /// 	<c>true</c> if the specified value is positive; otherwise, <c>false</c>.
         /// </returns>
-        public static bool IsPositive(object value, bool zeroIsPositive)
+        public static bool IsPositive(this object value, bool zeroIsPositive = true)
         {
             switch (Type.GetTypeCode(value.GetType()))
             {
@@ -123,6 +123,14 @@ namespace Hydrogen
             }
         }
 
+		/// <summary>
+		/// Determines if dictionaries are equal.
+		/// </summary>
+		/// <returns><c>true</c> if the left side equals the right side; otherwise, <c>false</c>.</returns>
+		/// <param name="first">Left Side Dictionary.</param>
+		/// <param name="second">Right Side Dictionary.</param>
+		/// <typeparam name="TKey">The 1st type parameter.</typeparam>
+		/// <typeparam name="TValue">The 2nd type parameter.</typeparam>
 		public static bool IsDictionaryEqual<TKey, TValue>(
 			this IDictionary<TKey, TValue> first, IDictionary<TKey, TValue> second)
 		{

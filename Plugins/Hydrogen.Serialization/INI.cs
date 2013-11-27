@@ -36,6 +36,7 @@ namespace Hydrogen.Serialization
 {
 	public class INI
 	{
+		//TODO: Add duplicated key option
 
 		public static Dictionary<string, string> Deserialize(string iniString, char seperatorCharacter = '=')
 		{

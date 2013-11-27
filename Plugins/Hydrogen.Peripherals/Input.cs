@@ -27,6 +27,7 @@
 #endregion
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Hydrogen.Core;
 using UnityEngine;
@@ -101,7 +102,7 @@ namespace Hydrogen.Peripherals
 			}
 			return false;
 		}
-		//TODO: make add control update as well
+
 		public bool AddControl(String controlName, String actionName)
 		{
 			InputAction action = null;
@@ -110,7 +111,8 @@ namespace Hydrogen.Peripherals
 			{
 				return false;
 			}
-			
+
+
 			InputControlBase control = InputControlBase.CreateControl(controlName, action);
 			
 			if (control != null)
@@ -141,6 +143,42 @@ namespace Hydrogen.Peripherals
 				}
 			}
 		}
+
+
+		public List<KeyValuePair<string, string>> GetControls()
+		{
+			List<KeyValuePair<string, string>> controlList = new List<KeyValuePair<string, string>>();
+
+			for ( int x = 0; x < _controls.Count; x++ )
+			{
+				controlList.Add( new KeyValuePair<string, string>(_controls[0].Name, "the action name used when AddControl") );
+			}
+		
+			return controlList;
+		}
+
+		/// <summary>
+		/// Set the controls from a list
+		/// </summary>
+		/// <remarks>
+		/// This is useful for loading saved settings
+		/// </remarks>
+		/// <returns><c>true</c>, if controls were set, <c>false</c> otherwise.</returns>
+		/// <param name="controlScheme">Control scheme.</param>
+		public bool SetControls(List<KeyValuePair<string, string>> controlScheme)
+		{
+			bool check = true;
+
+			for(int x = 0; x < controlScheme.Count; x++ )
+			{
+				if ( !AddControl(controlScheme[x].Key, controlScheme[x].Value) ) check = false;
+			}
+		
+			return check;
+		}
+
+
+
 		//TODO make serialization
 	}
 }
