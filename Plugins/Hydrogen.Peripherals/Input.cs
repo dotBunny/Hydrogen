@@ -101,7 +101,7 @@ namespace Hydrogen.Peripherals
 			}
 			return false;
 		}
-
+		//TODO: make add control update as well
 		public bool AddControl(String controlName, String actionName)
 		{
 			InputAction action = null;
@@ -141,5 +141,6 @@ namespace Hydrogen.Peripherals
 				}
 			}
 		}
+		//TODO make serialization
 	}
 }

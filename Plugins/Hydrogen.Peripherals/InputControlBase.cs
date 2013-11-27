@@ -313,7 +313,7 @@ namespace Hydrogen.Peripherals
 		
 		public static InputControlBase CreateControl(String name, InputAction action)
 		{
-			String axis;
+			string axis;
 			if (Axes.TryGetValue(name, out axis))
 			{
 				return new InputAxisControl(name, axis, action);

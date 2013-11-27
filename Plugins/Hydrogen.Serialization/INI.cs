@@ -48,12 +48,12 @@ namespace Hydrogen.Serialization
 					line = line.Trim();
 					if (line.Length == 0)
 						continue;
-					string[] s = line.Split(new char[]{seperatorCharacter}, 2);
-					
-					if (s.Length != 2)
+
+					if (!line.Contains(seperatorCharacter.ToString()) )
 						continue;
-					
-					entries.Add(s[0].Trim(), s[1].Trim());
+
+					int first = line.IndexOf(seperatorCharacter);
+					entries.Add(line.Substring(0, first).Trim(), line.Substring(first + 1).Trim());
 				}
 			}
 			return entries;
