@@ -342,8 +342,10 @@ namespace Hydrogen.Peripherals
 		}
 		
 		public abstract void Capture();
-		
+
+
 		public string Name { get; private set; }
+		public string ActionName { get; set; }
 		public InputAction Action { get; private set; }
 		
 	}

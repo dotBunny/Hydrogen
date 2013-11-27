@@ -28,6 +28,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hydrogen
 {
@@ -147,6 +148,44 @@ namespace Hydrogen
 				if (!comparer.Equals(kvp.Value, secondValue)) return false;
 			}
 			return true;
+		}
+
+		/// <summary>
+		/// Scrambleds the equals.
+		/// </summary>
+		/// <returns><c>true</c>, if equals was scrambleded, <c>false</c> otherwise.</returns>
+		/// <param name="list1">List1.</param>
+		/// <param name="list2">List2.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
+		public static bool ScrambledEquals<T>(IEnumerable<T> list1, IEnumerable<T> list2) 
+		{
+			var cnt = new Dictionary<T, int>();
+
+			foreach (T s in list1) 
+			{
+				if (cnt.ContainsKey(s)) 
+				{
+					cnt[s]++;
+				} 
+				else 
+				{
+					cnt.Add(s, 1);
+				}
+			}
+
+			foreach (T s in list2) 
+			{
+				if (cnt.ContainsKey(s)) 
+				{
+					cnt[s]--;
+				} 
+				else 
+				{
+					return false;
+				}
+			}
+
+			return cnt.Values.All(c => c == 0);
 		}
     }
 }

@@ -114,6 +114,7 @@ namespace Hydrogen.Peripherals
 
 
 			InputControlBase control = InputControlBase.CreateControl(controlName, action);
+			control.ActionName = actionName;
 			
 			if (control != null)
 			{
@@ -144,41 +145,49 @@ namespace Hydrogen.Peripherals
 			}
 		}
 
+		/// <summary>
+		/// Clears all controls.
+		/// </summary>
+		public void ClearControls()
+		{
+			_controls.Clear();
+		}
 
+		/// <summary>
+		/// Gets the controls.
+		/// </summary>
+		/// <returns>The controls as a ist<KeyValuePair<string, string>></returns>
 		public List<KeyValuePair<string, string>> GetControls()
 		{
 			List<KeyValuePair<string, string>> controlList = new List<KeyValuePair<string, string>>();
 
 			for ( int x = 0; x < _controls.Count; x++ )
 			{
-				controlList.Add( new KeyValuePair<string, string>(_controls[0].Name, "the action name used when AddControl") );
+				controlList.Add( new KeyValuePair<string, string>(_controls[x].ActionName, _controls[x].Name ));
 			}
 		
 			return controlList;
 		}
 
 		/// <summary>
-		/// Set the controls from a list
+		/// Set the controls from a List<KeyValuePair<string, string>>
 		/// </summary>
 		/// <remarks>
-		/// This is useful for loading saved settings
+		/// This is useful for loading saved settings, specifically using Hydrogen.Serialization.INI 
 		/// </remarks>
 		/// <returns><c>true</c>, if controls were set, <c>false</c> otherwise.</returns>
-		/// <param name="controlScheme">Control scheme.</param>
+		/// <param name="controlScheme">Control Scheme.</param>
 		public bool SetControls(List<KeyValuePair<string, string>> controlScheme)
 		{
 			bool check = true;
 
 			for(int x = 0; x < controlScheme.Count; x++ )
 			{
-				if ( !AddControl(controlScheme[x].Key, controlScheme[x].Value) ) check = false;
+				// Reverse because we're assuming this came from a serialized version of the config
+				if ( !AddControl(controlScheme[x].Value, controlScheme[x].Key) ) check = false;
 			}
 		
 			return check;
 		}
-
-
-
-		//TODO make serialization
 	}
 }

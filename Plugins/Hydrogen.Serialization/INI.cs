@@ -36,11 +36,15 @@ namespace Hydrogen.Serialization
 {
 	public class INI
 	{
-		//TODO: Add duplicated key option
-
-		public static Dictionary<string, string> Deserialize(string iniString, char seperatorCharacter = '=')
+		/// <summary>
+		/// Deserialize the specified iniString and seperatorCharacter.
+		/// </summary>
+		/// <param name="iniString">Ini string.</param>
+		/// <param name="seperatorCharacter">Seperator character.</param>
+		public static List<KeyValuePair<string, string>> Deserialize(string iniString, char seperatorCharacter = '=')
 		{
-			Dictionary<string, string> entries = new Dictionary<string, string>();
+			List<KeyValuePair<string, string>> entries = new List<KeyValuePair<string, string>>();
+
 			using (StringReader reader = new StringReader(iniString))
 			{
 				string line;
@@ -54,12 +58,18 @@ namespace Hydrogen.Serialization
 						continue;
 
 					int first = line.IndexOf(seperatorCharacter);
-					entries.Add(line.Substring(0, first).Trim(), line.Substring(first + 1).Trim());
+
+					entries.Add (new KeyValuePair<string, string>(line.Substring(0, first).Trim(), line.Substring(first + 1).Trim()));
 				}
 			}
 			return entries;
 		}
 
+		/// <summary>
+		/// Serialize the specified data and seperatorCharacter.
+		/// </summary>
+		/// <param name="data">Data.</param>
+		/// <param name="seperatorCharacter">Seperator character.</param>
 		public static string Serialize(Dictionary<string, string> data, char seperatorCharacter = '=')
 		{
 			StringBuilder iniString = new StringBuilder();
@@ -67,6 +77,23 @@ namespace Hydrogen.Serialization
 			foreach(string s in data.Keys)
 			{
 				iniString.AppendLine(s.Trim() + seperatorCharacter + data[s].Trim());
+			}
+
+			return iniString.ToString();
+		}
+
+		/// <summary>
+		/// Serialize the specified data and seperatorCharacter.
+		/// </summary>
+		/// <param name="data">Data.</param>
+		/// <param name="seperatorCharacter">Seperator character.</param>
+		public static string Serialize(List<KeyValuePair<string, string>> data, char seperatorCharacter = '=')
+		{
+			StringBuilder iniString = new StringBuilder();
+
+			for(int x = 0; x < data.Count; x++ )
+			{
+				iniString.AppendLine(data[x].Key.Trim() + seperatorCharacter + data[x].Value.Trim());
 			}
 
 			return iniString.ToString();
