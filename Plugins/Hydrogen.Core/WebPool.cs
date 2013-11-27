@@ -52,7 +52,7 @@ namespace Hydrogen.Core
 		{
 			// Create our buddy object
 			GameObject newWebObject = new GameObject();
-			newWebObject.AddComponent(typeof(Hydrogen.Core.WebPoolItem));
+			newWebObject.AddComponent(typeof(Hydrogen.Core.WebPoolWorker));
 			newWebObject.name = "Web Call";
 
 			_poolID = hObjectPool.Instance.Add(newWebObject);
@@ -69,7 +69,7 @@ namespace Hydrogen.Core
 		public void GET(string URI, string cookie, System.Action<int, Hashtable, string> callback)
 		{
 			GameObject go = hObjectPool.Instance.Spawn(_poolID);
-			go.GetComponent<WebPoolItem>().GET(URI, cookie, callback);
+			go.GetComponent<WebPoolWorker>().GET(URI, cookie, callback);
 		}
 
 
@@ -80,7 +80,7 @@ namespace Hydrogen.Core
 		public void POST(string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
 		{
 			GameObject go = hObjectPool.Instance.Spawn(_poolID);
-			go.GetComponent<WebPoolItem>().POST(URI, contentType, payload, cookie, callback);
+			go.GetComponent<WebPoolWorker>().POST(URI, contentType, payload, cookie, callback);
 		}
 
 
@@ -91,7 +91,7 @@ namespace Hydrogen.Core
 		public void Form(string URI, Dictionary<string, string> formStringData, FormBinaryData[] formBinaryData, string cookie, System.Action<int, Hashtable, string> callback)
 		{
 			GameObject go = hObjectPool.Instance.Spawn(_poolID);
-			go.GetComponent<WebPoolItem>().Form(URI, formStringData, formBinaryData, cookie, callback);
+			go.GetComponent<WebPoolWorker>().Form(URI, formStringData, formBinaryData, cookie, callback);
 		}
 	}
 }

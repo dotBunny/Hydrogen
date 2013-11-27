@@ -40,7 +40,7 @@ namespace Hydrogen.Core
 	/// A bug has been filed with Unity demonstrating this:
 	/// http://fogbugz.unity3d.com/default.asp?577333_a0l3gs97bj9ubdis
 	/// </summary>
-	public class WebPoolItem : Hydrogen.Core.ObjectPoolItemBase
+	public class WebPoolWorker : Hydrogen.Core.ObjectPoolItemBase
 	{
 		private int _hash;
 
