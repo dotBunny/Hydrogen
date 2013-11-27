@@ -1,4 +1,4 @@
-Hydrogen Framework - http://hydrogen.dotbunny.com/
+Hydrogen Framework (http://hydrogen.dotbunny.com/)
 ================================================================================================
 
 This is a simple to use framework which we use internally.We decided to make it free for everyone!
