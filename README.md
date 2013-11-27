@@ -1,9 +1,7 @@
 Hydrogen Framework
 ================================================================================================
 
-This is a simple to use framework which we use internally. 
-We decided to make it free for everyone! 
-Hopefully it helps someone out a bit :)
+This is a simple to use framework which we use internally.We decided to make it free for everyone!
 
 https://github.com/dotBunny/Hydrogen/
 
@@ -20,12 +18,13 @@ http://joncairns.com/2011/10/how-to-use-git-submodules/
 
 If you've downloaded the Asset Store version, its already installed for you :) 
 
+
 Support
 ------------------------------------------------------------------------------------------------
 
-Documentation and much more info can be found at http://hydrogen.dotbunny.com/
+Documentation and much more info can be found @ http://hydrogen.dotbunny.com/
 
-Any issues can be reported at http://github.com/dotBunny/Hydrogen/issues
+Any issues can be reported @ http://github.com/dotBunny/Hydrogen/issues
 
 We’ve created a channel on Vimeo showing off different parts of Hydrogen, check it out at
 http://vimeo.com/channels/hydrogen
