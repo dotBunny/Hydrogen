@@ -20,7 +20,7 @@
         <li{% if page.slug == "manual" %} class="active"{% endif %}>
           <a href="{{ page.base_url }}manual">Manual</a>
         </li>
-        <li{% if page.slug == "script-reference" %} class="active"{% endif %}>
+        <li>
           <a href="{{ page.base_url }}script-reference" target="_blank">Script Reference <span class="glyphicon glyphicon-new-window"></span></a>
         </li>
       </ul>
@@ -28,7 +28,10 @@
         <li{% if page.slug == "about" %} class="active"{% endif %}>
           <a href="{{ page.base_url }}about">About</a>
         </li>
-        <li{% if page.slug == "issues" %} class="active"{% endif %}>
+        <li>
+          <a href="https://trello.com/b/I0YrXZin/hydrogen-framework" target="_blank">Trello <span class="glyphicon glyphicon-new-window"></span></a>
+        </li>
+        <li>
           <a href="https://github.com/dotBunny/Hydrogen/issues?page=1&state=open" target="_blank">Issues <span class="glyphicon glyphicon-new-window"></span></a>
         </li>
       </ul>
