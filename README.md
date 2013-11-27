@@ -22,11 +22,16 @@ If you've downloaded the Asset Store version, its already installed for you :)
 Support
 ------------------------------------------------------------------------------------------------
 
-Documentation and much more info can be found @ http://hydrogen.dotbunny.com/
+Documentation and much more info can be found here:
 
-Any issues can be reported @ http://github.com/dotBunny/Hydrogen/issues
+http://hydrogen.dotbunny.com/
 
-We’ve created a channel on Vimeo showing off different parts of Hydrogen, check it out at
+Any issues can be reported here:
+
+http://github.com/dotBunny/Hydrogen/issues
+
+We’ve created a channel on Vimeo showing off different parts of Hydrogen, check it out:
+
 http://vimeo.com/channels/hydrogen
 
 Due to time commitments to our normal projects, support may be very limited.
