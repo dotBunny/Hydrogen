@@ -22,7 +22,7 @@ If you've downloaded the Asset Store version, its already installed for you :)
 Support
 ------------------------------------------------------------------------------------------------
 
-Documentation and much more info can be found here:
+Documentation, helpful tips on gettings started, and much more can be found at the projects homepage:
 
 http://hydrogen.dotbunny.com/
 
