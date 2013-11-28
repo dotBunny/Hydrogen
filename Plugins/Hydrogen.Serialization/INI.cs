@@ -6,7 +6,7 @@
 //   Matthew Davey <matthew.davey@dotbunny.com>
 //   Robin Southern
 //
-// Copyright (C) 2013 dotBunny Inc. (http://www.dotbunny.com)
+// Copyright (c) 2013 dotBunny Inc. (http://www.dotbunny.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
 // this software and associated documentation files (the "Software"), to deal in

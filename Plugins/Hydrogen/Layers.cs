@@ -6,8 +6,8 @@
 //   Bob Berkebile
 //   Matthew Davey <matthew.davey@dotbunny.com>
 //
-// Copyright (C) 2012 PixelPlacement (http://pixelplacement.com/)
-// Copyright (C) 2013 dotBunny Inc. (http://dotbunny.com/)
+// Copyright (c) 2012 PixelPlacement (http://pixelplacement.com/)
+// Copyright (c) 2013 dotBunny Inc. (http://dotbunny.com/)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
 // this software and associated documentation files (the "Software"), to deal in
