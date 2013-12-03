@@ -1,54 +1,50 @@
-
 #region Copyright Notice & License Information
-// 
+//
 // InputDeltaAxisControl.cs
-//  
+//
 // Author:
-//	 Matthew Davey <matthew.davey@dotbunny.com>
-//   Robin Southern <betajaen@ihoed.com>
+//       Matthew Davey <matthew.davey@dotbunny.com>
+//       Robin Southern <betajaen@ihoed.com>
 //
 // Copyright (c) 2013 dotBunny Inc. (http://www.dotbunny.com)
 //
-// Permission is hereby granted, free of charge, to any person obtaining a copy of
-// this software and associated documentation files (the "Software"), to deal in
-// the Software without restriction, including without limitation the rights to
-// use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-// the Software, and to permit persons to whom the Software is furnished to do so,
-// subject to the following conditions:
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
 //
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
-// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-// FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-// COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-// IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-// CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 #endregion
-
-using System;
-using System.Collections.Generic;
 
 namespace Hydrogen.Peripherals
 {
-	internal sealed class InputDeltaAxisControl : InputControlBase
-	{
-		private string _axis;
-		
-		public InputDeltaAxisControl(string name, string axisName, InputAction action)
-			: base(name, action)
+		sealed class InputDeltaAxisControl : InputControlBase
 		{
-			_axis = axisName;
+				readonly string _axis;
+
+				public InputDeltaAxisControl (string name, string axisName, InputAction action)
+			: base (name, action)
+				{
+						_axis = axisName;
+				}
+
+				public override void Capture ()
+				{
+						float value = UnityEngine.Input.GetAxis (_axis);
+						if (!UnityEngine.Mathf.Approximately (value, 0.0f)) {
+								Action (InputEvent.ValueMoved, value, 0.0f);
+						}
+				}
 		}
-		
-		public override void Capture()
-		{
-			float value = UnityEngine.Input.GetAxis(_axis);
-			if (UnityEngine.Mathf.Approximately(value, 0.0f) == false)
-			{
-				Action(InputEvent.ValueMoved, value, 0.0f);
-			}
-		}
-	}
 }
