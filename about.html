@@ -60,13 +60,20 @@ base_url: "../"
   <h3 id="contributing-bootcamp">Bootcamp</h3>
   <p>So you want to be awesome eh? Sounds good to me! How do you do that? Follow these steps to greatness!
   	
-  	<h4>Step 1 - Fork It!</h4>
+  	<h4>Step 1 - Fork It! (aka Clone Your Own)</h4>
   	<p>Assuming that you already have GIT setup and have a general understanding of how to use it, the first major thing is to fork the existing project on GitHub so that you can make some wonderful additions in your own protected workspace.</p>
+  	<p>What repository do I fork/clone do you ask? That question is tricky, for the average person wanting to contribute to the project, you are going to want to work with the base repository available at:</p>
+  	{% highlight bash %}$ git clone https://github.com/dotBunny/Hydrogen.git Hydrogen{% endhighlight %}
+  	<p>However, some adventuresome individuals may want to get their hands dirty and work on the whole package, from the documentation, to the website, its all available via:</p>
+  	{% highlight bash %}$ git clone https://github.com/dotBunny/Hydrogen-Package.git Hydrogen-Package{% endhighlight %}
+  	<p>The package version has numerous submodules already linked inside of it, so make sure you are doing a recursive clone.</p>
     <div class="bs-callout bs-callout-info">
 		  <h4>Fork Tutorial</h4>
 	      <p>GitHub provides a lovely tutorial <a href="https://help.github.com/articles/fork-a-repo">available here</a> that seriously can't be beat.</p>
 	 </div>
-	 
+	 <p>
+	 There are two repositories available to be forked/cloned,  the first being the primary library repository available at <a href="https://github.com/dotBunny/Hydrogen-Package">https://github.com/dotBunny/Hydrogen-Package</a>. 
+		 https://github.com/dotBunny/Hydrogen
 	 <h4>Step 2 - Make Something Awesome</h4>
 	 <p>This can be as simple as a bug fix or an optimization, or if you are feeling adventurous a whole new feature.</p>
 	 
@@ -80,17 +87,20 @@ base_url: "../"
 	 <h4>Step 4 - Good Karma</h4>
 	 <p>You've done it, you've now contributed to this wonderful project and have been bestowed with the good feeling deep down inside that you have given back something to the community that has been there for you in the past, and will be there for you in the future.</p>
 
-  <h3 id="contributing-conventions">Coding Conventions</h3>
-  <p>We try to following the normal .NET naming conventions where we can, with some adjustments to try and follow along Unity's own nomenclature. We try and avoid appending some of the standard things such as "Controller" or "Manager" onto our classes. Microsoft has a very thorough naming conventions guide available <a href="http://msdn.microsoft.com/en-us/library/xzf533w0(v=vs.71).aspx">here</a> on some basic practices when it comes to how to properly name .NET variables, methods, classes, etc. </p>
+	<h3 id="contributing-format">Code Format</h3>
+	  <p>We use <a href="http://xamarin.com/studio">Xamarin Studio</a> for all of our day to day operations; Unity's bundled <a href="http://monodevelop.com/">MonoDevelop</a> is an older version of it. Now, before you ask why Unity isn't using the latest and greatest, it isn't because they do not want too. Unity's implementation is limited by the version of <a href="http://mono-project.com/Main_Page">Mono</a> bundled with it. That version is tied to the major release number of Unity, as they do not break backwards compatibility on sub-releases. Currently, the bundled version doesn't support the built in Code Analysis features, however someday it hopefully will, therefore the Mono code formatting option is used.</p>
+	  <h3 id="contributing-conventions">Coding Conventions</h3>
+	  <p>We try to following the normal .NET naming conventions where we can, with some adjustments to try and follow along Unity's own nomenclature. We try and avoid appending some of the standard things such as "Controller" or "Manager" onto our classes. Microsoft has a very thorough naming conventions guide available <a href="http://msdn.microsoft.com/en-us/library/xzf533w0(v=vs.71).aspx">here</a> on some basic practices when it comes to how to properly name .NET variables, methods, classes, etc. </p>
       <div class="bs-callout bs-callout-warning">
 		  <h4>Private Member Variables</h4>
 	      <p>We currently use the practice of naming our private variables with a proceeding underscore. </p>
 {% highlight csharp %}
-  public class HelloWorld
-  {
-  	public string currentTime;
-  	private string _lastFrameTime;
-  }{% endhighlight %}
+public class HelloWorld
+{
+		public string MyMessage = "Ping";
+		private string _messageResponse = "Pong";
+}
+{% endhighlight %}
 	 	</div>
 
   <h3 id="contributing-component">Component Model</h3>
