@@ -113,9 +113,9 @@ public class hTestFlight : MonoBehaviour
 				Hydrogen.Plugins.TestFlight.Initialize ();
 		
 #if (UNITY_IPHONE || UNITY_IOS) && !UNITY_EDITOR
-				Hydrogen.Plugins.TestFlight.TakeOff(tokenIOS);
+				Hydrogen.Plugins.TestFlight.TakeOff(TokenIOS);
 #elif UNITY_ANDROID && !UNITY_EDITOR
-				Hydrogen.Plugins.TestFlight.TakeOff(tokenAndroid);
+				Hydrogen.Plugins.TestFlight.TakeOff(TokenAndroid);
 #endif
 				yield return new WaitForEndOfFrame ();
 
