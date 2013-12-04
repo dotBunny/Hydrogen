@@ -40,11 +40,14 @@ namespace Hydrogen.Core
 				public bool ManageParticles = true;
 				public bool TrackSpawnedObjects;
 				public bool CullExtraObjects;
+				public float CullInterval;
+				public bool DespawnPoolLocation = true;
 				bool _hasObjectPoolItem;
 				bool _hasParticleSystem;
 				bool _hasLegacyParticleEmitter;
 				bool _hasLegacyParticleAnimator;
 				bool _hasRigidbody;
+				float _cullTimer;
 
 				public bool HasObjectPoolItem {
 						get {
@@ -90,7 +93,7 @@ namespace Hydrogen.Core
 
 				public bool Initialized { get { return _initialized; } }
 
-				public ObjectPoolCollection (int preload, bool spawnMore, bool slowMessage, bool handleParticles, bool trackSpawned, bool cullExtras)
+				public ObjectPoolCollection (int preload, bool spawnMore, bool slowMessage, bool handleParticles, bool trackSpawned, bool cullExtras, float cullInterval)
 				{
 						ManageParticles = handleParticles;
 						PreloadAmount = preload;
@@ -98,6 +101,8 @@ namespace Hydrogen.Core
 						SendMessage = slowMessage;
 						TrackSpawnedObjects = trackSpawned;
 						CullExtraObjects = cullExtras;
+						CullInterval = cullInterval;
+						_cullTimer = cullInterval;
 				}
 
 				public void Initialize (GameObject gameObject, Transform parent, int poolID)
@@ -147,6 +152,7 @@ namespace Hydrogen.Core
 				public bool RemoveFromPool (GameObject gameObject, bool destroyObject)
 				{
 						if (destroyObject) {
+
 								Object.DestroyImmediate (gameObject);
 								return Array.Remove<GameObject> (ref _pooledObjects, gameObject);
 						}
@@ -154,6 +160,19 @@ namespace Hydrogen.Core
 
 				}
 
+				/// <summary>
+				/// Spawn an object from the pool at origin.
+				/// </summary>
+				public GameObject Spawn ()
+				{
+						return Spawn (Vector3.zero, Quaternion.identity);
+				}
+
+				/// <summary>
+				/// Spawn an object from the pool at the specified world location and rotation.
+				/// </summary>
+				/// <param name="location">Spawn Location</param>
+				/// <param name="rotation">Spawn Rotation</param>
 				public GameObject Spawn (Vector3 location, Quaternion rotation)
 				{
 						if (_pooledObjects != null && _pooledObjects.Length > 0) {
@@ -217,6 +236,10 @@ namespace Hydrogen.Core
 						if (!ManageParticles)
 								gameObject.transform.parent = _parentTransform;
 
+						if (DespawnPoolLocation) {
+								gameObject.transform.position = _parentTransform.position;
+						}
+
 						// Has our handler
 						if (_hasObjectPoolItem) {
 								if (ManageParticles) {
@@ -259,6 +282,24 @@ namespace Hydrogen.Core
 						if (TrackSpawnedObjects)
 								Array.Remove<GameObject> (ref _spawnedObjects, gameObject);
 						Array.Add<GameObject> (ref _pooledObjects, gameObject, false);	
+				}
+
+				public void CullUpdate ()
+				{
+						if (!TrackSpawnedObjects || !_hasObjectPoolItem)
+								return;
+
+						_cullTimer -= Time.deltaTime;
+
+						if (_cullTimer <= 0) {
+								for (int x = 0; x < SpawnedObjects.Length; x++) {
+										if (SpawnedObjects [x].GetComponent<ObjectPoolItemBase> ().IsInactive ()) {
+												Despawn (SpawnedObjects [x]);
+										}
+								}
+								// Establish Timer Again
+								_cullTimer = CullInterval;
+						}
 				}
 		}
 }

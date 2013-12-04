@@ -65,5 +65,12 @@ namespace Hydrogen.Core
 				/// hObjectPool.Instance.objectPools[poolID].DespawnImmediate(gameObject);
 				/// </remarks>
 				public abstract void DespawnSafely ();
+
+				/// <summary>
+				/// Is the object idle, and therefore can be despawned organically
+				/// </summary>
+				/// <returns><c>true</c> if this instance is inactive; otherwise, <c>false</c>.</returns>
+				/// <remarks>This will only work on tracked spawned objects.</remarks>
+				public abstract bool IsInactive ();
 		}
 }

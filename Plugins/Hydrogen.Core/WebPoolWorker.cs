@@ -61,6 +61,11 @@ namespace Hydrogen.Core
 
 				}
 
+				public override bool IsInactive ()
+				{
+						return false;
+				}
+
 				#region GET
 
 				public int GET (string URI, string cookie, System.Action<int, Hashtable, string> callback)

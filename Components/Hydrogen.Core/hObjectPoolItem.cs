@@ -68,6 +68,11 @@ public class hObjectPoolItem : Hydrogen.Core.ObjectPoolItemBase
 				StartCoroutine (WaitForParticles ());
 		}
 
+		public override bool IsInactive ()
+		{
+				return gameObject.rigidbody.IsSleeping ();
+		}
+
 		IEnumerator WaitForParticles ()
 		{
 				if (particleEmitter != null) {

@@ -46,7 +46,8 @@ namespace Hydrogen.Core
 				public bool DefaultSendMessage;
 				public bool DefaultHandleParticles = true;
 				public bool DefaultTrackSpawnedObjects;
-				public bool DefaultCullExtras = true;
+				public bool DefaultCullExtras;
+				public float DefaultCullInterval = 3f;
 				public ObjectPoolCollection[] ObjectPools;
 				Dictionary<string, int> _poolStringLookupTable;
 
@@ -70,6 +71,16 @@ namespace Hydrogen.Core
 						}
 				}
 
+				public void Update ()
+				{
+						for (int x = 0; x < ObjectPools.Length; x++) {
+
+								if (ObjectPools [x].TrackSpawnedObjects && ObjectPools [x].CullExtraObjects) {
+										ObjectPools [x].CullUpdate ();
+								}
+						}
+				}
+
 				public int GetPoolID (GameObject gameObject)
 				{
 						return GetPoolID (gameObject.name);
@@ -88,20 +99,20 @@ namespace Hydrogen.Core
 
 				public int[] Add (GameObject[] gameObjects)
 				{
-						return Add (gameObjects, DefaultPreloadAmount, DefaultSpawnMore, DefaultSendMessage, DefaultHandleParticles, DefaultTrackSpawnedObjects, DefaultCullExtras);
+						return Add (gameObjects, DefaultPreloadAmount, DefaultSpawnMore, DefaultSendMessage, DefaultHandleParticles, DefaultTrackSpawnedObjects, DefaultCullExtras, DefaultCullInterval);
 				}
 
 				public int[] Add (GameObject[] gameObjects, int preloadAmount)
 				{
-						return Add (gameObjects, preloadAmount, DefaultSpawnMore, DefaultSendMessage, DefaultHandleParticles, DefaultTrackSpawnedObjects, DefaultCullExtras);
+						return Add (gameObjects, preloadAmount, DefaultSpawnMore, DefaultSendMessage, DefaultHandleParticles, DefaultTrackSpawnedObjects, DefaultCullExtras, DefaultCullInterval);
 				}
 
-				public int[] Add (GameObject[] gameObjects, int preloadAmount, bool spawnMore, bool slowMessage, bool handleParticles, bool trackSpawned, bool cullExtras)
+				public int[] Add (GameObject[] gameObjects, int preloadAmount, bool spawnMore, bool slowMessage, bool handleParticles, bool trackSpawned, bool cullExtras, float cullInterval)
 				{
 						var returnIDs = new int[gameObjects.Length];
 			
 						for (int x = 0; x < gameObjects.Length; x++) {
-								returnIDs [x] = Add (gameObjects [x], preloadAmount, spawnMore, slowMessage, handleParticles, trackSpawned, cullExtras);
+								returnIDs [x] = Add (gameObjects [x], preloadAmount, spawnMore, slowMessage, handleParticles, trackSpawned, cullExtras, cullInterval);
 						}
 			
 						return returnIDs;
@@ -109,15 +120,15 @@ namespace Hydrogen.Core
 
 				public int Add (GameObject gameObject)
 				{
-						return Add (gameObject, DefaultPreloadAmount, DefaultSpawnMore, DefaultSendMessage, DefaultHandleParticles, DefaultTrackSpawnedObjects, DefaultCullExtras);
+						return Add (gameObject, DefaultPreloadAmount, DefaultSpawnMore, DefaultSendMessage, DefaultHandleParticles, DefaultTrackSpawnedObjects, DefaultCullExtras, DefaultCullInterval);
 				}
 
 				public int Add (GameObject gameObject, int preload)
 				{
-						return Add (gameObject, preload, DefaultSpawnMore, DefaultSendMessage, DefaultHandleParticles, DefaultTrackSpawnedObjects, DefaultCullExtras);
+						return Add (gameObject, preload, DefaultSpawnMore, DefaultSendMessage, DefaultHandleParticles, DefaultTrackSpawnedObjects, DefaultCullExtras, DefaultCullInterval);
 				}
 
-				public int Add (GameObject gameObject, int preload, bool spawnMore, bool slowMessage, bool handleParticles, bool trackSpawned, bool cullExtras)
+				public int Add (GameObject gameObject, int preload, bool spawnMore, bool slowMessage, bool handleParticles, bool trackSpawned, bool cullExtras, float cullInterval)
 				{
 						if (gameObject == null) {
 								throw new MissingReferenceException ("You are passing a null gameObject reference to hObjectPool.Instance.Add()");
@@ -126,7 +137,7 @@ namespace Hydrogen.Core
 						int tempLookup = GetPoolID (gameObject.name);
 						if (tempLookup == -1) {
 								// Create our new pool
-								var newPool = new ObjectPoolCollection (preload, spawnMore, slowMessage, handleParticles, trackSpawned, cullExtras);
+								var newPool = new ObjectPoolCollection (preload, spawnMore, slowMessage, handleParticles, trackSpawned, cullExtras, cullInterval);
 				
 								// Initialize pool
 								newPool.Initialize (gameObject, transform, ObjectPools.Length);
