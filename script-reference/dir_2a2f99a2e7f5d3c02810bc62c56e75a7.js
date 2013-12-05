@@ -13,7 +13,7 @@ var dir_2a2f99a2e7f5d3c02810bc62c56e75a7 =
       [ "WebPool", "dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html", "dd/dfe/class_hydrogen_1_1_core_1_1_web_pool" ],
       [ "FormBinaryData", "df/d8b/struct_hydrogen_1_1_core_1_1_web_pool_1_1_form_binary_data.html", "df/d8b/struct_hydrogen_1_1_core_1_1_web_pool_1_1_form_binary_data" ]
     ] ],
-    [ "WebPoolItem.cs", "dc/d47/_web_pool_item_8cs.html", [
-      [ "WebPoolItem", "d2/d21/class_hydrogen_1_1_core_1_1_web_pool_item.html", "d2/d21/class_hydrogen_1_1_core_1_1_web_pool_item" ]
+    [ "WebPoolWorker.cs", "d0/def/_web_pool_worker_8cs.html", [
+      [ "WebPoolWorker", "d7/da3/class_hydrogen_1_1_core_1_1_web_pool_worker.html", "d7/da3/class_hydrogen_1_1_core_1_1_web_pool_worker" ]
     ] ]
 ];

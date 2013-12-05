@@ -10,8 +10,8 @@ var classh_test_flight =
     [ "OnApplicationQuit", "d3/dcb/classh_test_flight.html#ac96991affd60f9614ddc2019f31ed5e9", null ],
     [ "PassCheckpoint", "d3/dcb/classh_test_flight.html#a165eabde8523e32e7b5e6b0fbeb8233d", null ],
     [ "SubmitFeedback", "d3/dcb/classh_test_flight.html#a62605f44a11a9e063519267634cbd6dd", null ],
-    [ "presistant", "d3/dcb/classh_test_flight.html#af9c5c4023af145042ff8970ceaa1b52c", null ],
-    [ "tokenAndroid", "d3/dcb/classh_test_flight.html#a16ca300ec628f05466e40476d17615b8", null ],
-    [ "tokenIOS", "d3/dcb/classh_test_flight.html#a3021552c9ed3a908d304dc17992f2257", null ],
+    [ "Presistant", "d3/dcb/classh_test_flight.html#a531bb26f050d850613b13f2accdc77c3", null ],
+    [ "TokenAndroid", "d3/dcb/classh_test_flight.html#a40ee0ebc78816553742064202b29937f", null ],
+    [ "TokenIOS", "d3/dcb/classh_test_flight.html#af500f6dead06b4c4317cca98c06a5751", null ],
     [ "Instance", "d3/dcb/classh_test_flight.html#abf6d6a7350195c5ffda8ceb51aa32610", null ]
 ];

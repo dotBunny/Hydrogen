@@ -21,7 +21,7 @@ var class_hydrogen_1_1_serialization_1_1_j_s_o_n_object =
     [ "ToInt", "d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a2e88e6d1839429d38b3b3c2fa8b3290a", null ],
     [ "ToJSON", "d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a12fc45d9e8ca8aeb56f7617bb69b033a", null ],
     [ "ToString", "d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a593ae9c32d3664ce516545643ff3ebdf", null ],
-    [ "fields", "d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a200baeb1ba4a385aa1c25a1e3d14fe84", null ],
-    [ "serialized", "d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a5e76093e6ae1c329721c3117f8a35973", null ],
+    [ "Fields", "d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a7e60e8af9d8923b51591540035c72ed2", null ],
+    [ "Serialized", "d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a78e473793a204d5909f63bb2f20de3bf", null ],
     [ "this[string fieldName]", "d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#afd1d4e216a94a955955be5809bcef153", null ]
 ];

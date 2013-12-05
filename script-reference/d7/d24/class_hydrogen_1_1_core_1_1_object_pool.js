@@ -2,10 +2,10 @@ var class_hydrogen_1_1_core_1_1_object_pool =
 [
     [ "Add", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a18d046d2605bbfc6e4f6f45f138b8feb", null ],
     [ "Add", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a7288fa23cbe68646eef1efc16f3a72b7", null ],
-    [ "Add", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a4d4bf5285d8c14cc95aa2f13d48200d5", null ],
+    [ "Add", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a8086f9da28c5a525d9e50f2b176c0c92", null ],
     [ "Add", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a61b1745386a13f3bab1d0336929f6fb8", null ],
     [ "Add", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a8d91d6f0f082ee8ba79fb560f1b94984", null ],
-    [ "Add", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a4c492c7991f1925b4a8b330a7abacff8", null ],
+    [ "Add", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a1acd44e83083f7734a7a1ce8f66ea82e", null ],
     [ "Awake", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#ab3bae3dd7ada34beb762d6b9fcb1888c", null ],
     [ "Despawn", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#abe55ff5fc3d71a405345b3cb77bb16f2", null ],
     [ "Despawn", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a45bdc5e30cd8587838326137ee1b4244", null ],
@@ -20,11 +20,13 @@ var class_hydrogen_1_1_core_1_1_object_pool =
     [ "Spawn", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a23d77cf5c2b40df8bebda60a16cd8809", null ],
     [ "Spawn", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a54061aa5923f9c4b2f9a7f835073a1cb", null ],
     [ "Spawn", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#ab54870f5b918d8a46ca041944f5604da", null ],
-    [ "defaultCullExtras", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#ad3e9471247132d097bb73170ee2ce014", null ],
-    [ "defaultHandleParticles", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a0902a96471491959dce55257035e0060", null ],
-    [ "defaultPreloadAmount", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a3ec7abed5c7eb6171b0f9bff859c7470", null ],
-    [ "defaultSendMessage", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a2aa74801fc21afa7ba4fa1c968166108", null ],
-    [ "defaultSpawnMore", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#aba2e9ee360110007300d7477c0ebe0e3", null ],
-    [ "defaultTrackSpawnedObjects", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a545128faae38796203f48071dde34c28", null ],
-    [ "objectPools", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a2bc9025687571a94bbf1ee150feccd37", null ]
+    [ "Update", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#ab433bbbd26d66da7c8eb038c36c399ae", null ],
+    [ "DefaultCullExtras", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#af50ab969cf07b674a2b6e5bbe6c0ed46", null ],
+    [ "DefaultCullInterval", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a7b694d410d11778556cf3ed73ff66698", null ],
+    [ "DefaultHandleParticles", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a82a70969249d604d58c12002783259f0", null ],
+    [ "DefaultPreloadAmount", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#ae2c45bac2ef638fb43693c0cde024fd3", null ],
+    [ "DefaultSendMessage", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#aa6ee03633f674135f9b5d3bd7e2de2fc", null ],
+    [ "DefaultSpawnMore", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a9f257ddfeecef6b15df9f442ace115e7", null ],
+    [ "DefaultTrackSpawnedObjects", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a04e6a433ec01e11a66461ce578270c6d", null ],
+    [ "ObjectPools", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52", null ]
 ];

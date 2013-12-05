@@ -1,6 +1,8 @@
 var class_hydrogen_1_1_validate =
 [
-    [ "IsInLayerMask", "d0/da0/class_hydrogen_1_1_validate.html#ab24d65059bb83b9309a239937da04bf6", null ],
-    [ "IsNumericType", "d0/da0/class_hydrogen_1_1_validate.html#a5f9aff9184c0e2132de580d117fe62fc", null ],
-    [ "IsPositive", "d0/da0/class_hydrogen_1_1_validate.html#a410a0abf0e65709cb3262adde5a71572", null ]
+    [ "IsDictionaryEqual< TKey, TValue >", "d0/da0/class_hydrogen_1_1_validate.html#ae7418fc45199cd2a6e887cc9bbf91f8b", null ],
+    [ "IsInLayerMask", "d0/da0/class_hydrogen_1_1_validate.html#ad72c89fa864d49ec1cab26d0212ff1c0", null ],
+    [ "IsNumericType", "d0/da0/class_hydrogen_1_1_validate.html#a470ebf36ee6e4336d078d4a3c62649e0", null ],
+    [ "IsPositive", "d0/da0/class_hydrogen_1_1_validate.html#a2ae4b5ffb1bcc7fa423d66f825d5fd71", null ],
+    [ "ScrambledEquals< T >", "d0/da0/class_hydrogen_1_1_validate.html#a3ae617198d6ebf5e4b076384dc0b2a45", null ]
 ];

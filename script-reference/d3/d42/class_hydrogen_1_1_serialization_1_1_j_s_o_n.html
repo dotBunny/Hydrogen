@@ -121,9 +121,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a5316a3e7d29091546b382fa6851cb9f0"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html">JSONObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n.html#a5316a3e7d29091546b382fa6851cb9f0">Deserialize</a> (string json)</td></tr>
 <tr class="memdesc:a5316a3e7d29091546b382fa6851cb9f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the string json into a value  <a href="#a5316a3e7d29091546b382fa6851cb9f0">More...</a><br/></td></tr>
 <tr class="separator:a5316a3e7d29091546b382fa6851cb9f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42c39dfcf389b40c0fa79f2912d7caca"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n.html#a42c39dfcf389b40c0fa79f2912d7caca">Serialize</a> (<a class="el" href="../../d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html">JSONObject</a> obj)</td></tr>
-<tr class="memdesc:a42c39dfcf389b40c0fa79f2912d7caca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a IDictionary / IList object or a simple type (string, int, etc.) into a <a class="el" href="../../d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n.html" title="This class encodes and decodes JSON strings. Spec. details, see http://www.json.org/ ...">JSON</a> string  <a href="#a42c39dfcf389b40c0fa79f2912d7caca">More...</a><br/></td></tr>
-<tr class="separator:a42c39dfcf389b40c0fa79f2912d7caca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2053b0800cab2d12bfd8fb4cdcbd9f2"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n.html#ae2053b0800cab2d12bfd8fb4cdcbd9f2">Serialize</a> (<a class="el" href="../../d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html">JSONObject</a> jsonObject)</td></tr>
+<tr class="memdesc:ae2053b0800cab2d12bfd8fb4cdcbd9f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a IDictionary / IList object or a simple type (string, int, etc.) into a <a class="el" href="../../d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n.html" title="This class encodes and decodes JSON strings. Spec. details, see http://www.json.org/ ...">JSON</a> string  <a href="#ae2053b0800cab2d12bfd8fb4cdcbd9f2">More...</a><br/></td></tr>
+<tr class="separator:ae2053b0800cab2d12bfd8fb4cdcbd9f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class encodes and decodes <a class="el" href="../../d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n.html" title="This class encodes and decodes JSON strings. Spec. details, see http://www.json.org/ ...">JSON</a> strings. Spec. details, see <a href="http://www.json.org/">http://www.json.org/</a> </p>
@@ -168,7 +168,7 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a42c39dfcf389b40c0fa79f2912d7caca"></a>
+<a class="anchor" id="ae2053b0800cab2d12bfd8fb4cdcbd9f2"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -179,7 +179,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">static string Hydrogen.Serialization.JSON.Serialize </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="../../d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html">JSONObject</a>&#160;</td>
-          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td class="paramname"><em>jsonObject</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -193,14 +193,14 @@ Static Public Member Functions</h2></td></tr>
 <p>Converts a IDictionary / IList object or a simple type (string, int, etc.) into a <a class="el" href="../../d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n.html" title="This class encodes and decodes JSON strings. Spec. details, see http://www.json.org/ ...">JSON</a> string </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">json</td><td>A Dictionary&lt;string, object&gt; / List&lt;object&gt;</td></tr>
+    <tr><td class="paramname">jsonObject</td><td>A Dictionary&lt;string, object&gt; / List&lt;object&gt;</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="../../d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n.html" title="This class encodes and decodes JSON strings. Spec. details, see http://www.json.org/ ...">JSON</a> encoded string, or null if object 'json' is not serializable</dd></dl>
 <p>string jsonString = Hydrogen.Serialization.JSON.Serialize(object); </p>
 
-<p>Definition at line <a class="el" href="../../d5/d87/_j_s_o_n_8cs_source.html#l00389">389</a> of file <a class="el" href="../../d5/d87/_j_s_o_n_8cs_source.html">JSON.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../d5/d87/_j_s_o_n_8cs_source.html#l00397">397</a> of file <a class="el" href="../../d5/d87/_j_s_o_n_8cs_source.html">JSON.cs</a>.</p>
 
 </div>
 </div>
@@ -213,7 +213,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d0/dff/namespace_hydrogen.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../db/dd1/namespace_hydrogen_1_1_serialization.html">Serialization</a></li><li class="navelem"><a class="el" href="../../d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n.html">JSON</a></li>
-    <li class="footer">Generated on Tue Nov 26 2013 13:18:27 for Hydrogen Framework by
+    <li class="footer">Generated on Wed Dec 4 2013 23:37:40 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

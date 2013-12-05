@@ -116,15 +116,19 @@ $(document).ready(function(){initNavTree('d9/d87/class_hydrogen_1_1_core_1_1_obj
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9882685795f7a6646760c452143ffb68"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a9882685795f7a6646760c452143ffb68">ObjectPoolCollection</a> (int preload, bool spawnMore, bool slowMessage, bool handleParticles, bool trackSpawned, bool cullExtras)</td></tr>
-<tr class="separator:a9882685795f7a6646760c452143ffb68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3039160d946d9a66a84dbc5f67d5f25"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#ac3039160d946d9a66a84dbc5f67d5f25">ObjectPoolCollection</a> (int preload, bool spawnMore, bool slowMessage, bool handleParticles, bool trackSpawned, bool cullExtras, float cullInterval)</td></tr>
+<tr class="separator:ac3039160d946d9a66a84dbc5f67d5f25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18d8a91fc7c92559cb2c54086b9a7a2e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a18d8a91fc7c92559cb2c54086b9a7a2e">Initialize</a> (GameObject gameObject, Transform parent, int poolID)</td></tr>
 <tr class="separator:a18d8a91fc7c92559cb2c54086b9a7a2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a807980dd3c966844b3b7255e67e4e2ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a807980dd3c966844b3b7255e67e4e2ed">AddToPool</a> ()</td></tr>
 <tr class="separator:a807980dd3c966844b3b7255e67e4e2ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a7d07affbee8e1b8087ac1f9ed5bd6d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a4a7d07affbee8e1b8087ac1f9ed5bd6d">RemoveFromPool</a> (GameObject gameObject, bool destroyObject)</td></tr>
 <tr class="separator:a4a7d07affbee8e1b8087ac1f9ed5bd6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa582ccb57debd311a01ff0d161561c8"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#afa582ccb57debd311a01ff0d161561c8">Spawn</a> ()</td></tr>
+<tr class="memdesc:afa582ccb57debd311a01ff0d161561c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawn an object from the pool at origin.  <a href="#afa582ccb57debd311a01ff0d161561c8">More...</a><br/></td></tr>
+<tr class="separator:afa582ccb57debd311a01ff0d161561c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad22d0cfb6cb7e636e536403d5697da59"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#ad22d0cfb6cb7e636e536403d5697da59">Spawn</a> (Vector3 location, Quaternion rotation)</td></tr>
+<tr class="memdesc:ad22d0cfb6cb7e636e536403d5697da59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawn an object from the pool at the specified world location and rotation.  <a href="#ad22d0cfb6cb7e636e536403d5697da59">More...</a><br/></td></tr>
 <tr class="separator:ad22d0cfb6cb7e636e536403d5697da59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52d907999f0bf92f3d3e5b6b02ac8d6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a52d907999f0bf92f3d3e5b6b02ac8d6c">Despawn</a> (GameObject gameObject)</td></tr>
 <tr class="separator:a52d907999f0bf92f3d3e5b6b02ac8d6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,36 +136,42 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ac94d88304a36281280d99dac708f246d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef752d0eedbc133735b4f2da8d3d8375"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#aef752d0eedbc133735b4f2da8d3d8375">DespawnImmediate</a> (GameObject gameObject)</td></tr>
 <tr class="separator:aef752d0eedbc133735b4f2da8d3d8375"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d9550a94cfffb538fc77cd742062227"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a6d9550a94cfffb538fc77cd742062227">CullUpdate</a> ()</td></tr>
+<tr class="separator:a6d9550a94cfffb538fc77cd742062227"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ad7f2b9a6272f910fe8199bbd2e8db81a"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#ad7f2b9a6272f910fe8199bbd2e8db81a">prefab</a></td></tr>
-<tr class="separator:ad7f2b9a6272f910fe8199bbd2e8db81a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6892792e178bea870ac9cac72fa7c73"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#ad6892792e178bea870ac9cac72fa7c73">preloadAmount</a></td></tr>
-<tr class="separator:ad6892792e178bea870ac9cac72fa7c73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4339e791a75357074b4ce21e401846fc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a4339e791a75357074b4ce21e401846fc">spawnMoreIfNeeded</a></td></tr>
-<tr class="separator:a4339e791a75357074b4ce21e401846fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6420502f74a7fa6d0825058c9443850"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#af6420502f74a7fa6d0825058c9443850">sendMessage</a> = false</td></tr>
-<tr class="separator:af6420502f74a7fa6d0825058c9443850"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c4e21ec5df0cec243f1bb71519ca915"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a5c4e21ec5df0cec243f1bb71519ca915">manageParticles</a> = true</td></tr>
-<tr class="separator:a5c4e21ec5df0cec243f1bb71519ca915"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac15db72c779d0151ede2ce9db281faad"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#ac15db72c779d0151ede2ce9db281faad">trackSpawnedObjects</a> = false</td></tr>
-<tr class="separator:ac15db72c779d0151ede2ce9db281faad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa422123cfc903ce77e8abf495c29c8c4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#aa422123cfc903ce77e8abf495c29c8c4">cullExtraObjects</a> = false</td></tr>
-<tr class="separator:aa422123cfc903ce77e8abf495c29c8c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a949df5be72b7c8b46c5ae7293d5078a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a949df5be72b7c8b46c5ae7293d5078a1">hasObjectPoolItem</a></td></tr>
-<tr class="separator:a949df5be72b7c8b46c5ae7293d5078a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5dabe815ddabaad7b2d5f7bd5fbc5e19"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a5dabe815ddabaad7b2d5f7bd5fbc5e19">hasParticleSystem</a></td></tr>
-<tr class="separator:a5dabe815ddabaad7b2d5f7bd5fbc5e19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade68108baaf0dda966f2a49f04db0f81"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#ade68108baaf0dda966f2a49f04db0f81">hasLegacyParticleEmitter</a></td></tr>
-<tr class="separator:ade68108baaf0dda966f2a49f04db0f81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a122012a4de7d5c703c2b8ffbfdf8e648"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a122012a4de7d5c703c2b8ffbfdf8e648">hasLegacyParticleAnimator</a></td></tr>
-<tr class="separator:a122012a4de7d5c703c2b8ffbfdf8e648"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f77c380f76571f2d24a766b28086670"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a0f77c380f76571f2d24a766b28086670">hasRigidbody</a></td></tr>
-<tr class="separator:a0f77c380f76571f2d24a766b28086670"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a668868b8af8490933dd0ebe7361d87e3"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a668868b8af8490933dd0ebe7361d87e3">Prefab</a></td></tr>
+<tr class="separator:a668868b8af8490933dd0ebe7361d87e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a7483fd27ede09ca31940b80f00d117"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a9a7483fd27ede09ca31940b80f00d117">PreloadAmount</a></td></tr>
+<tr class="separator:a9a7483fd27ede09ca31940b80f00d117"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa373fd5c429e5aad01f911896cdd6684"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#aa373fd5c429e5aad01f911896cdd6684">SpawnMoreIfNeeded</a></td></tr>
+<tr class="separator:aa373fd5c429e5aad01f911896cdd6684"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e5995fd63df76dfe6a86f1db0dab739"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a4e5995fd63df76dfe6a86f1db0dab739">SendMessage</a></td></tr>
+<tr class="separator:a4e5995fd63df76dfe6a86f1db0dab739"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20f82ddffe79dbac0c29af571334b472"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a20f82ddffe79dbac0c29af571334b472">ManageParticles</a> = true</td></tr>
+<tr class="separator:a20f82ddffe79dbac0c29af571334b472"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4e9498370bd2e987b740ffda1dc28c7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#ad4e9498370bd2e987b740ffda1dc28c7">TrackSpawnedObjects</a></td></tr>
+<tr class="separator:ad4e9498370bd2e987b740ffda1dc28c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d3c3cea6d5cc3db9fab30bbcf3d252f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a8d3c3cea6d5cc3db9fab30bbcf3d252f">CullExtraObjects</a></td></tr>
+<tr class="separator:a8d3c3cea6d5cc3db9fab30bbcf3d252f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b2e8572ca63bcdca11783700628d443"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a7b2e8572ca63bcdca11783700628d443">CullInterval</a></td></tr>
+<tr class="separator:a7b2e8572ca63bcdca11783700628d443"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7905c4d7efeec318cc34a35be8f47cef"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a7905c4d7efeec318cc34a35be8f47cef">DespawnPoolLocation</a> = true</td></tr>
+<tr class="separator:a7905c4d7efeec318cc34a35be8f47cef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
+<tr class="memitem:a7c687d1dfe253da6eac9e8555c24beee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a7c687d1dfe253da6eac9e8555c24beee">HasObjectPoolItem</a><code> [get]</code></td></tr>
+<tr class="separator:a7c687d1dfe253da6eac9e8555c24beee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3611473f54c8de1cc9c0fa59a192e41"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#ab3611473f54c8de1cc9c0fa59a192e41">HasRigidbody</a><code> [get]</code></td></tr>
+<tr class="separator:ab3611473f54c8de1cc9c0fa59a192e41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70ee80bcadfe234715c6951348db772b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a70ee80bcadfe234715c6951348db772b">HasParticleSystem</a><code> [get]</code></td></tr>
+<tr class="separator:a70ee80bcadfe234715c6951348db772b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cfbb509192efdb078561302b926857b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a2cfbb509192efdb078561302b926857b">HasLegacyParticleAnimator</a><code> [get]</code></td></tr>
+<tr class="separator:a2cfbb509192efdb078561302b926857b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17ce8a22cee39c6ac7faf2ec3c2a600f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a17ce8a22cee39c6ac7faf2ec3c2a600f">HasLegacyParticleEmitter</a><code> [get]</code></td></tr>
+<tr class="separator:a17ce8a22cee39c6ac7faf2ec3c2a600f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f3455614acaea12f6dd1f45bf5ebc79"><td class="memItemLeft" align="right" valign="top">GameObject[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a1f3455614acaea12f6dd1f45bf5ebc79">SpawnedObjects</a><code> [get]</code></td></tr>
 <tr class="separator:a1f3455614acaea12f6dd1f45bf5ebc79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c5599b90feb0c74cc164bc44d61cd94"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a8c5599b90feb0c74cc164bc44d61cd94">Initialized</a><code> [get]</code></td></tr>
@@ -169,9 +179,9 @@ Properties</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00033">33</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00034">34</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a9882685795f7a6646760c452143ffb68"></a>
+<a class="anchor" id="ac3039160d946d9a66a84dbc5f67d5f25"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -209,7 +219,13 @@ Properties</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>cullExtras</em>&#160;</td>
+          <td class="paramname"><em>cullExtras</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>cullInterval</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -219,7 +235,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00072">72</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00096">96</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
 
 </div>
 </div>
@@ -237,7 +253,24 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00122">122</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00134">134</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6d9550a94cfffb538fc77cd742062227"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Hydrogen.Core.ObjectPoolCollection.CullUpdate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00287">287</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
 
 </div>
 </div>
@@ -255,7 +288,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00221">221</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00229">229</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
 
 </div>
 </div>
@@ -283,7 +316,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00225">225</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00234">234</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
 
 </div>
 </div>
@@ -301,7 +334,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00277">277</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00279">279</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
 
 </div>
 </div>
@@ -335,7 +368,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00082">82</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00108">108</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
 
 </div>
 </div>
@@ -363,7 +396,26 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00141">141</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00152">152</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afa582ccb57debd311a01ff0d161561c8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GameObject Hydrogen.Core.ObjectPoolCollection.Spawn </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Spawn an object from the pool at origin. </p>
+
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00166">166</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
 
 </div>
 </div>
@@ -391,171 +443,68 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00157">157</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+<p>Spawn an object from the pool at the specified world location and rotation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">location</td><td>Spawn Location</td></tr>
+    <tr><td class="paramname">rotation</td><td>Spawn Rotation</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00176">176</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="aa422123cfc903ce77e8abf495c29c8c4"></a>
+<a class="anchor" id="a8d3c3cea6d5cc3db9fab30bbcf3d252f"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.cullExtraObjects = false</td>
+          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.CullExtraObjects</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00041">41</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00042">42</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a122012a4de7d5c703c2b8ffbfdf8e648"></a>
+<a class="anchor" id="a7b2e8572ca63bcdca11783700628d443"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.hasLegacyParticleAnimator</td>
+          <td class="memname">float Hydrogen.Core.ObjectPoolCollection.CullInterval</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00051">51</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00043">43</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ade68108baaf0dda966f2a49f04db0f81"></a>
+<a class="anchor" id="a7905c4d7efeec318cc34a35be8f47cef"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.hasLegacyParticleEmitter</td>
+          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.DespawnPoolLocation = true</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00049">49</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00044">44</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a949df5be72b7c8b46c5ae7293d5078a1"></a>
+<a class="anchor" id="a20f82ddffe79dbac0c29af571334b472"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.hasObjectPoolItem</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00045">45</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a5dabe815ddabaad7b2d5f7bd5fbc5e19"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.hasParticleSystem</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00047">47</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a0f77c380f76571f2d24a766b28086670"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.hasRigidbody</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00053">53</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a5c4e21ec5df0cec243f1bb71519ca915"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.manageParticles = true</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00039">39</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad7f2b9a6272f910fe8199bbd2e8db81a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">GameObject Hydrogen.Core.ObjectPoolCollection.prefab</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00035">35</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad6892792e178bea870ac9cac72fa7c73"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int Hydrogen.Core.ObjectPoolCollection.preloadAmount</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00036">36</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="af6420502f74a7fa6d0825058c9443850"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.sendMessage = false</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00038">38</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a4339e791a75357074b4ce21e401846fc"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.spawnMoreIfNeeded</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00037">37</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ac15db72c779d0151ede2ce9db281faad"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.trackSpawnedObjects = false</td>
+          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.ManageParticles = true</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -564,7 +513,187 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a668868b8af8490933dd0ebe7361d87e3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GameObject Hydrogen.Core.ObjectPoolCollection.Prefab</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00036">36</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9a7483fd27ede09ca31940b80f00d117"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Hydrogen.Core.ObjectPoolCollection.PreloadAmount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00037">37</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4e5995fd63df76dfe6a86f1db0dab739"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.SendMessage</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00039">39</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa373fd5c429e5aad01f911896cdd6684"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.SpawnMoreIfNeeded</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00038">38</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad4e9498370bd2e987b740ffda1dc28c7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.TrackSpawnedObjects</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00041">41</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Property Documentation</h2>
+<a class="anchor" id="a2cfbb509192efdb078561302b926857b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.HasLegacyParticleAnimator</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00070">70</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a17ce8a22cee39c6ac7faf2ec3c2a600f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.HasLegacyParticleEmitter</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00076">76</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a7c687d1dfe253da6eac9e8555c24beee"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.HasObjectPoolItem</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00052">52</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a70ee80bcadfe234715c6951348db772b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.HasParticleSystem</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00064">64</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab3611473f54c8de1cc9c0fa59a192e41"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Hydrogen.Core.ObjectPoolCollection.HasRigidbody</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00058">58</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a8c5599b90feb0c74cc164bc44d61cd94"></a>
 <div class="memitem">
 <div class="memproto">
@@ -583,7 +712,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00068">68</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00094">94</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
 
 </div>
 </div>
@@ -605,7 +734,7 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00065">65</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html#l00090">90</a> of file <a class="el" href="../../df/d37/_object_pool_collection_8cs_source.html">ObjectPoolCollection.cs</a>.</p>
 
 </div>
 </div>
@@ -618,7 +747,7 @@ Properties</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d0/dff/namespace_hydrogen.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../d1/d8f/namespace_hydrogen_1_1_core.html">Core</a></li><li class="navelem"><a class="el" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html">ObjectPoolCollection</a></li>
-    <li class="footer">Generated on Tue Nov 26 2013 13:18:27 for Hydrogen Framework by
+    <li class="footer">Generated on Wed Dec 4 2013 23:37:40 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

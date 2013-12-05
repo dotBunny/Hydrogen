@@ -1,16 +1,14 @@
 var searchData=
 [
   ['core',['Core',['../d1/d8f/namespace_hydrogen_1_1_core.html',1,'Hydrogen']]],
-  ['hascomponent_3c_20t_20_3e',['HasComponent&lt; T &gt;',['../d5/da1/class_hydrogen_1_1_components.html#a5497a1016525e573342c46878040475f',1,'Hydrogen::Components']]],
-  ['haslegacyparticleanimator',['hasLegacyParticleAnimator',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a122012a4de7d5c703c2b8ffbfdf8e648',1,'Hydrogen::Core::ObjectPoolCollection']]],
-  ['haslegacyparticleemitter',['hasLegacyParticleEmitter',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#ade68108baaf0dda966f2a49f04db0f81',1,'Hydrogen::Core::ObjectPoolCollection']]],
-  ['hasobjectpoolitem',['hasObjectPoolItem',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a949df5be72b7c8b46c5ae7293d5078a1',1,'Hydrogen::Core::ObjectPoolCollection']]],
-  ['hasparticlesystem',['hasParticleSystem',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a5dabe815ddabaad7b2d5f7bd5fbc5e19',1,'Hydrogen::Core::ObjectPoolCollection']]],
-  ['hasrigidbody',['hasRigidbody',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a0f77c380f76571f2d24a766b28086670',1,'Hydrogen::Core::ObjectPoolCollection']]],
-  ['hinputaction',['hInputAction',['../de/d9d/h_input_manager_8cs.html#a8f9a72b5f3c669473756804af9b0c647',1,'hInputManager.cs']]],
-  ['hinputevent',['hInputEvent',['../de/d9d/h_input_manager_8cs.html#a93e43bd7e476795ef9522e2469e836ed',1,'hInputManager.cs']]],
-  ['hinputmanager',['hInputManager',['../d2/d9f/classh_input_manager.html',1,'']]],
-  ['hinputmanager_2ecs',['hInputManager.cs',['../de/d9d/h_input_manager_8cs.html',1,'']]],
+  ['hascomponent_3c_20t_20_3e',['HasComponent&lt; T &gt;',['../d5/da1/class_hydrogen_1_1_components.html#a1b034ab238b2276e69ce8a2ef4a719a5',1,'Hydrogen::Components']]],
+  ['haslegacyparticleanimator',['HasLegacyParticleAnimator',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a2cfbb509192efdb078561302b926857b',1,'Hydrogen::Core::ObjectPoolCollection']]],
+  ['haslegacyparticleemitter',['HasLegacyParticleEmitter',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a17ce8a22cee39c6ac7faf2ec3c2a600f',1,'Hydrogen::Core::ObjectPoolCollection']]],
+  ['hasobjectpoolitem',['HasObjectPoolItem',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a7c687d1dfe253da6eac9e8555c24beee',1,'Hydrogen::Core::ObjectPoolCollection']]],
+  ['hasparticlesystem',['HasParticleSystem',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a70ee80bcadfe234715c6951348db772b',1,'Hydrogen::Core::ObjectPoolCollection']]],
+  ['hasrigidbody',['HasRigidbody',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#ab3611473f54c8de1cc9c0fa59a192e41',1,'Hydrogen::Core::ObjectPoolCollection']]],
+  ['hinput',['hInput',['../d6/d4c/classh_input.html',1,'']]],
+  ['hinput_2ecs',['hInput.cs',['../de/d26/h_input_8cs.html',1,'']]],
   ['hobjectpool',['hObjectPool',['../de/d7c/classh_object_pool.html',1,'']]],
   ['hobjectpool_2ecs',['hObjectPool.cs',['../d8/d7c/h_object_pool_8cs.html',1,'']]],
   ['hobjectpoolitem',['hObjectPoolItem',['../d5/d59/classh_object_pool_item.html',1,'']]],
@@ -20,6 +18,7 @@ var searchData=
   ['hwebpool',['hWebPool',['../d0/d8b/classh_web_pool.html',1,'']]],
   ['hwebpool_2ecs',['hWebPool.cs',['../df/d0e/h_web_pool_8cs.html',1,'']]],
   ['hydrogen',['Hydrogen',['../d0/dff/namespace_hydrogen.html',1,'']]],
+  ['peripherals',['Peripherals',['../d2/daf/namespace_hydrogen_1_1_peripherals.html',1,'Hydrogen']]],
   ['plugins',['Plugins',['../d5/d0b/namespace_hydrogen_1_1_plugins.html',1,'Hydrogen']]],
   ['serialization',['Serialization',['../db/dd1/namespace_hydrogen_1_1_serialization.html',1,'Hydrogen']]]
 ];

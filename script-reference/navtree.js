@@ -2,16 +2,24 @@ var NAVTREE =
 [
   [ "Hydrogen Framework", "index.html", [
     [ "Packages", null, [
-      [ "Packages", "namespaces.html", "namespaces" ]
+      [ "Packages", "namespaces.html", "namespaces" ],
+      [ "Package Functions", "namespacemembers.html", [
+        [ "All", "namespacemembers.html", null ],
+        [ "Functions", "namespacemembers_func.html", null ],
+        [ "Enumerations", "namespacemembers_enum.html", null ],
+        [ "Enumerator", "namespacemembers_eval.html", null ]
+      ] ]
     ] ],
     [ "Classes", null, [
       [ "Class List", "annotated.html", "annotated" ],
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
+        [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ],
+        [ "Enumerations", "functions_enum.html", null ],
+        [ "Enumerator", "functions_eval.html", null ],
         [ "Properties", "functions_prop.html", null ]
       ] ]
     ] ],
@@ -19,9 +27,7 @@ var NAVTREE =
       [ "File List", "files.html", "files" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ],
-        [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ]
+        [ "Functions", "globals_func.html", null ]
       ] ]
     ] ]
   ] ]
@@ -30,7 +36,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"dd/d91/class_hydrogen_1_1_regex.html#a286d5b10f71bc0314b60ea7b714e3bc7"
+"d9/d04/class_hydrogen_1_1_array.html#aab95ea01fc6b3cc4449583631dbc2a6d"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -114,16 +114,22 @@ $(document).ready(function(){initNavTree('d3/da4/class_hydrogen_1_1_serializatio
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:af982121e6870c1844eb5ebde72f33d80"><td class="memItemLeft" align="right" valign="top">static Dictionary&lt; string, string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/da4/class_hydrogen_1_1_serialization_1_1_i_n_i.html#af982121e6870c1844eb5ebde72f33d80">Deserialize</a> (string iniString, char seperatorCharacter= '=')</td></tr>
-<tr class="separator:af982121e6870c1844eb5ebde72f33d80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e15ff5eae53857605063a718ac8de7f"><td class="memItemLeft" align="right" valign="top">static List&lt; KeyValuePair<br class="typebreak"/>
+&lt; string, string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/da4/class_hydrogen_1_1_serialization_1_1_i_n_i.html#a2e15ff5eae53857605063a718ac8de7f">Deserialize</a> (string iniString, char seperatorCharacter= '=')</td></tr>
+<tr class="memdesc:a2e15ff5eae53857605063a718ac8de7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deserialize the specified iniString and seperatorCharacter.  <a href="#a2e15ff5eae53857605063a718ac8de7f">More...</a><br/></td></tr>
+<tr class="separator:a2e15ff5eae53857605063a718ac8de7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb5c7f71cc6c4f8bd61431e65cf31a5b"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/da4/class_hydrogen_1_1_serialization_1_1_i_n_i.html#afb5c7f71cc6c4f8bd61431e65cf31a5b">Serialize</a> (Dictionary&lt; string, string &gt; data, char seperatorCharacter= '=')</td></tr>
+<tr class="memdesc:afb5c7f71cc6c4f8bd61431e65cf31a5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serialize the specified data and seperatorCharacter.  <a href="#afb5c7f71cc6c4f8bd61431e65cf31a5b">More...</a><br/></td></tr>
 <tr class="separator:afb5c7f71cc6c4f8bd61431e65cf31a5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae198d8e49bb2494ce1877a57e13353bc"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/da4/class_hydrogen_1_1_serialization_1_1_i_n_i.html#ae198d8e49bb2494ce1877a57e13353bc">Serialize</a> (List&lt; KeyValuePair&lt; string, string &gt;&gt; data, char seperatorCharacter= '=')</td></tr>
+<tr class="memdesc:ae198d8e49bb2494ce1877a57e13353bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Serialize the specified data and seperatorCharacter.  <a href="#ae198d8e49bb2494ce1877a57e13353bc">More...</a><br/></td></tr>
+<tr class="separator:ae198d8e49bb2494ce1877a57e13353bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html#l00037">37</a> of file <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html">INI.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html#l00036">36</a> of file <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html">INI.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="af982121e6870c1844eb5ebde72f33d80"></a>
+<a class="anchor" id="a2e15ff5eae53857605063a718ac8de7f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -131,7 +137,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static Dictionary&lt;string, string&gt; Hydrogen.Serialization.INI.Deserialize </td>
+          <td class="memname">static List&lt;KeyValuePair&lt;string, string&gt; &gt; Hydrogen.Serialization.INI.Deserialize </td>
           <td>(</td>
           <td class="paramtype">string&#160;</td>
           <td class="paramname"><em>iniString</em>, </td>
@@ -155,7 +161,16 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html#l00040">40</a> of file <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html">INI.cs</a>.</p>
+<p>Deserialize the specified iniString and seperatorCharacter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">iniString</td><td>Ini string.</td></tr>
+    <tr><td class="paramname">seperatorCharacter</td><td>Seperator character.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html#l00043">43</a> of file <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html">INI.cs</a>.</p>
 
 </div>
 </div>
@@ -191,7 +206,61 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html#l00062">62</a> of file <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html">INI.cs</a>.</p>
+<p>Serialize the specified data and seperatorCharacter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Data.</td></tr>
+    <tr><td class="paramname">seperatorCharacter</td><td>Seperator character.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html#l00071">71</a> of file <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html">INI.cs</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae198d8e49bb2494ce1877a57e13353bc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static string Hydrogen.Serialization.INI.Serialize </td>
+          <td>(</td>
+          <td class="paramtype">List&lt; KeyValuePair&lt; string, string &gt;&gt;&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>seperatorCharacter</em> = <code>'='</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Serialize the specified data and seperatorCharacter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Data.</td></tr>
+    <tr><td class="paramname">seperatorCharacter</td><td>Seperator character.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html#l00087">87</a> of file <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html">INI.cs</a>.</p>
 
 </div>
 </div>
@@ -204,7 +273,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d0/dff/namespace_hydrogen.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../db/dd1/namespace_hydrogen_1_1_serialization.html">Serialization</a></li><li class="navelem"><a class="el" href="../../d3/da4/class_hydrogen_1_1_serialization_1_1_i_n_i.html">INI</a></li>
-    <li class="footer">Generated on Tue Nov 26 2013 13:18:27 for Hydrogen Framework by
+    <li class="footer">Generated on Wed Dec 4 2013 23:37:40 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

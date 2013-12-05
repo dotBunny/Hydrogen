@@ -1,6 +1,7 @@
 var namespace_hydrogen =
 [
     [ "Core", "d1/d8f/namespace_hydrogen_1_1_core.html", "d1/d8f/namespace_hydrogen_1_1_core" ],
+    [ "Peripherals", "d2/daf/namespace_hydrogen_1_1_peripherals.html", "d2/daf/namespace_hydrogen_1_1_peripherals" ],
     [ "Plugins", "d5/d0b/namespace_hydrogen_1_1_plugins.html", "d5/d0b/namespace_hydrogen_1_1_plugins" ],
     [ "Serialization", "db/dd1/namespace_hydrogen_1_1_serialization.html", "db/dd1/namespace_hydrogen_1_1_serialization" ],
     [ "Array", "d9/d04/class_hydrogen_1_1_array.html", "d9/d04/class_hydrogen_1_1_array" ],
