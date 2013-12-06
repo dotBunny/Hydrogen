@@ -31,7 +31,7 @@ using UnityEditor;
 
 public static class LibraryDocumentation
 {
-		[MenuItem ("Help/Library Documentation/Install for MonoDevelop", true)]
+		//[MenuItem ("Help/Library Documentation/Install for MonoDevelop", true)]
 		public static bool InstallLibraryDocumentationMonoDevelopCheck ()
 		{
 #if UNITY_EDITOR_OSX
@@ -50,8 +50,7 @@ public static class LibraryDocumentation
 				return false;
 #endif
 		}
-
-		[MenuItem ("Help/Library Documentation/Install for MonoDevelop")]
+		//[MenuItem ("Help/Library Documentation/Install for MonoDevelop")]
 		static void InstallLibraryDocumentationMonoDevelop ()
 		{
 #if UNITY_EDITOR_OSX

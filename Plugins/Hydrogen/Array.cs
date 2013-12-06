@@ -46,7 +46,6 @@ namespace Hydrogen
 				/// <typeparam name="T">Object Type.</typeparam>
 				public static bool AddAt<T> (ref T[] array, int position, T newObject, bool forceUnique)
 				{
-
 						// First Addition - Just Quick Add
 						if (array.Length == 0) {
 								array = new T[1];
