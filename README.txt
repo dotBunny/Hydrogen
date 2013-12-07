@@ -1,13 +1,13 @@
 Hydrogen Framework (http://hydrogen.dotbunny.com/)
-================================================================================================
+==================================================
 
-This is a simple to use framework which we use internally.We decided to make it free for everyone!
+This is a simple to use framework which we use internally. We decided to make it free for everyone!
 
 https://github.com/dotBunny/Hydrogen/
 
 
 Installation
-------------------------------------------------------------------------------------------------
+------------
 
 If you are cloning this repository you will more then likely need to copy it into the working 
 folder of your Unity project, unless you've included it in as a submodule on your own GIT repo.
@@ -20,7 +20,7 @@ If you've downloaded the Asset Store version, its already installed for you :)
 
 
 Support
-------------------------------------------------------------------------------------------------
+-------
 
 Documentation, helpful tips on getting started, and much more can be found at the projects homepage:
 
