@@ -94,8 +94,8 @@ base_url: "../"
           </tr>
           <tr>
             <td></td>
-            <td>XML Documentation</td>
-            <td>We have parsed and scraped the Unity documentation to create a set of XML Documentation that can be used with <a href="http://www.monodevelop.com">MonoDevelop</a>, <a href="http://xamarin.com/studio">Xamarin Studio</a>, and <a href="http://www.visualstudio.com/">Visual Studio</a> to name a few.</td>
+            <td>Class Library Documentation</td>
+            <td>We have parsed and scraped the Unity documentation to create a set of class library documentation (MonoDoc & XML formats) that can be used with <a href="http://www.monodevelop.com">MonoDevelop</a>, <a href="http://www.visualstudio.com/">Visual Studio</a>, and <a href="http://xamarin.com/studio">Xamarin Studio</a>, to name a few possibilities.</td>
           </tr>
           <tr>
             <td></td>
@@ -158,8 +158,64 @@ base_url: "../"
   </div>
 
 
+
     
-  <!-- Template
+  <!-- Class Library Documentation
+  ================================================== -->
+<div class="bs-docs-section">
+    <div class="page-header">
+      <h1 id="cld">Class Library Documentation</h1>
+    </div>
+    <p class="lead">With thousands of Unity users already having experienced the benefits of the old <a href="https://github.com/dotBunny/MonoDevelop.Unity">MonoDevelop.Unity</a> project, this is the spiritual successor that project.</p>
+    
+     <div class="row bs-examples">
+	
+		<div class="col-xs-6 col-md-4">
+			<img class="thumbnail" src="/assets/img/cld-summaries.jpg" alt="Summaries">
+		</div>
+		
+		<div class="col-xs-6 col-md-4">
+			<img class="thumbnail" src="/assets/img/cld-methods.jpg" alt="Methods">
+		</div>
+		
+		<div class="col-xs-6 col-md-4">
+			<img class="thumbnail" src="/assets/img/cld-mouseover.jpg" alt="Methods #2">
+		</div>
+	
+		<div class="clearfix visible-xs"></div>
+		
+    </div>
+    
+
+
+    <p>There is something to be said about being able to see what a method does from within your chosen IDE; without having to go look it up online or in some external documentation repository. We've rewritten our old documentation crawler from the ground up to scrap and parse even more details from Unity's provided documentation in order to produce the most complete 'third party' documentation files possible.</p>
+    
+    <div class="bs-callout bs-callout-danger" id="callout-less-compilation">
+      <h4>Bundled MonoDevelop Does Not Work</h4>
+      <p>Unfortunately, the currently bundled version of MonoDevelop with Unity has had it's MonoDoc add-in crippled. Without this functionality it is not possible to get the documentation to popup in editor. We've made Unity aware of this issue and can only hope that it will return in future releases.</p>
+    </div>
+    
+     <h3 id="cld-monodoc">MonoDoc Based</h3>
+	<p>Both MonoDevelop and Xamarin Studio can use the MonoDoc source repository to provide documentation for classes inside of their IDEs. The general idea here is to put the three source files (Unity.zip, Unity.tree and Unity.source) from the Extras/MonoDevelop folder into the most recent Mono.framework's MonoDoc source folder.</p>
+	
+	 <p>On a Mac, the location should look something like this:</p>
+{% highlight text %}/Library/Frameworks/Mono.framework/Versions/Current/lib/monodoc/sources{% endhighlight %}
+	<p>On a PC, the location should look something like this:</p>
+{% highlight text %}C:\Program Files\Mono-1.2.6\lib\monodoc\sources{% endhighlight %}
+	<p>If you do this correctly the documentation should automatically appear the next time that you launch your IDE of choice and are working with a project where any of the Unity class libraries are referenced. Enjoy! You would not believe how incredibly handy this is to have, and how much you will miss it when you do not have it.</p>
+	
+    
+    <h3 id="cld-visualstudio">Visual Studio</h3>
+	<p>Installing the xml based documentation is rather straight forward when it comes to Visual Studio, all you need to do is copy the Unity.xml file from the Extras/Visual Studio folder into where Unity keeps its referenced libraries, and after that Visual Studio takes care of the rest. You will need to move them to a folder similar, if not exactly the same as this:</p>
+	{% highlight text %}C:\Program Files (x86)\Unity\Editor\Data\Managed{% endhighlight %}
+	<p>Just like that, you will have access to the documentation while you type.</p>
+   
+</div>
+
+
+
+    
+  <!-- Examples
   ================================================== -->
   <div class="bs-docs-section">
     <div class="page-header">
@@ -197,7 +253,7 @@ base_url: "../"
 
  
 
-  <!-- License FAQs
+  <!-- License
   ================================================== -->
   <div class="bs-docs-section">
     <div class="page-header">
