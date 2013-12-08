@@ -28,9 +28,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../hydrogen-logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Hydrogen Framework
-   &#160;<span id="projectnumber">Master</span>
+   &#160;<span id="projectnumber">1.2.0</span>
    </div>
   </td>
  </tr>
@@ -47,7 +48,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
       <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="../../namespaces.html"><span>Packages</span></a></li>
       <li class="current"><a href="../../annotated.html"><span>Classes</span></a></li>
-      <li><a href="../../files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('d3/d42/class_hydrogen_1_1_serializatio
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -165,7 +165,12 @@ Static Public Member Functions</h2></td></tr>
 <p>Debug.Log("deserialized: " + dict.GetType()); Debug.Log("dict['array'][0]: " + ((List&lt;object&gt;) dict["array"])[0]); Debug.Log("dict['string']: " + (string) dict["string"]); Debug.Log("dict['float']: " + (double) dict["float"]); // floats come out as doubles Debug.Log("dict['int']: " + (long) dict["int"]); // ints come out as longs Debug.Log("dict['unicode']: " + (string) dict["unicode"]); </p>
 
 <p>Definition at line <a class="el" href="../../d5/d87/_j_s_o_n_8cs_source.html#l00064">64</a> of file <a class="el" href="../../d5/d87/_j_s_o_n_8cs_source.html">JSON.cs</a>.</p>
-
+<div class="fragment"><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                        <span class="comment">// save the string for debug information</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                        <span class="keywordflow">return</span> json == null ? null : Parser.Parse (json);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                }</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a class="anchor" id="ae2053b0800cab2d12bfd8fb4cdcbd9f2"></a>
@@ -201,19 +206,19 @@ Static Public Member Functions</h2></td></tr>
 <p>string jsonString = Hydrogen.Serialization.JSON.Serialize(object); </p>
 
 <p>Definition at line <a class="el" href="../../d5/d87/_j_s_o_n_8cs_source.html#l00397">397</a> of file <a class="el" href="../../d5/d87/_j_s_o_n_8cs_source.html">JSON.cs</a>.</p>
-
+<div class="fragment"><div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;                {</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;                        <span class="keywordflow">return</span> Serializer.Serialize (jsonObject);</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;                }</div>
+</div><!-- fragment -->
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/reapazor/Unity/Hydrogen-Package/Assets/Hydrogen Framework/Hydrogen/Plugins/Hydrogen.Serialization/<a class="el" href="../../d5/d87/_j_s_o_n_8cs_source.html">JSON.cs</a></li>
-</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d0/dff/namespace_hydrogen.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../db/dd1/namespace_hydrogen_1_1_serialization.html">Serialization</a></li><li class="navelem"><a class="el" href="../../d3/d42/class_hydrogen_1_1_serialization_1_1_j_s_o_n.html">JSON</a></li>
-    <li class="footer">Generated on Fri Dec 6 2013 17:35:38 for Hydrogen Framework by
+    <li class="footer">Generated on Sat Dec 7 2013 22:50:46 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

@@ -28,9 +28,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../hydrogen-logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Hydrogen Framework
-   &#160;<span id="projectnumber">Master</span>
+   &#160;<span id="projectnumber">1.2.0</span>
    </div>
   </td>
  </tr>
@@ -47,7 +48,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
       <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="../../namespaces.html"><span>Packages</span></a></li>
       <li class="current"><a href="../../annotated.html"><span>Classes</span></a></li>
-      <li><a href="../../files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('d3/da4/class_hydrogen_1_1_serializatio
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -171,7 +171,28 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 
 <p>Definition at line <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html#l00043">43</a> of file <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html">INI.cs</a>.</p>
-
+<div class="fragment"><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                        var entries = <span class="keyword">new</span> List&lt;KeyValuePair&lt;string, string&gt;&gt; ();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                        <span class="keyword">using</span> (var reader = <span class="keyword">new</span> StringReader (iniString)) {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                                <span class="keywordtype">string</span> line;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                                <span class="keywordflow">while</span> ((line = reader.ReadLine ()) != null) {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                                        line = line.Trim ();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                                        <span class="keywordflow">if</span> (line.Length == 0)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                                                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                                        <span class="keywordflow">if</span> (!line.Contains (seperatorCharacter.ToString ()))</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                                                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                                        <span class="keywordtype">int</span> first = line.IndexOf (seperatorCharacter);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                                        entries.Add (<span class="keyword">new</span> KeyValuePair&lt;string, string&gt; (</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                                                line.Substring (0, first).Trim (), line.Substring (first + 1).Trim ()));</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                                }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                        }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                        <span class="keywordflow">return</span> entries;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                }</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a class="anchor" id="afb5c7f71cc6c4f8bd61431e65cf31a5b"></a>
@@ -216,7 +237,16 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 
 <p>Definition at line <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html#l00071">71</a> of file <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html">INI.cs</a>.</p>
-
+<div class="fragment"><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                        var iniString = <span class="keyword">new</span> StringBuilder ();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                        <span class="keywordflow">foreach</span> (<span class="keywordtype">string</span> s <span class="keywordflow">in</span> data.Keys) {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                                iniString.AppendLine (s.Trim () + seperatorCharacter + data [s].Trim ());</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                        }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                        <span class="keywordflow">return</span> iniString.ToString ();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                }</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a class="anchor" id="ae198d8e49bb2494ce1877a57e13353bc"></a>
@@ -261,19 +291,25 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 
 <p>Definition at line <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html#l00087">87</a> of file <a class="el" href="../../d1/d66/_i_n_i_8cs_source.html">INI.cs</a>.</p>
-
+<div class="fragment"><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                        var iniString = <span class="keyword">new</span> StringBuilder ();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> x = 0; x &lt; data.Count; x++) {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                                iniString.AppendLine (data [x].Key.Trim () + seperatorCharacter + data [x].Value.Trim ());</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                        }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                        <span class="keywordflow">return</span> iniString.ToString ();</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                }</div>
+</div><!-- fragment -->
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>/Users/reapazor/Unity/Hydrogen-Package/Assets/Hydrogen Framework/Hydrogen/Plugins/Hydrogen.Serialization/<a class="el" href="../../d1/d66/_i_n_i_8cs_source.html">INI.cs</a></li>
-</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d0/dff/namespace_hydrogen.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../db/dd1/namespace_hydrogen_1_1_serialization.html">Serialization</a></li><li class="navelem"><a class="el" href="../../d3/da4/class_hydrogen_1_1_serialization_1_1_i_n_i.html">INI</a></li>
-    <li class="footer">Generated on Fri Dec 6 2013 17:35:38 for Hydrogen Framework by
+    <li class="footer">Generated on Sat Dec 7 2013 22:50:46 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

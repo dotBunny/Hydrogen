@@ -28,9 +28,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../hydrogen-logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Hydrogen Framework
-   &#160;<span id="projectnumber">Master</span>
+   &#160;<span id="projectnumber">1.2.0</span>
    </div>
   </td>
  </tr>
@@ -47,7 +48,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
       <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="../../namespaces.html"><span>Packages</span></a></li>
       <li><a href="../../annotated.html"><span>Classes</span></a></li>
-      <li class="current"><a href="../../files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -64,12 +64,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
           </span>
         </div>
       </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="../../files.html"><span>File&#160;List</span></a></li>
-      <li><a href="../../globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -92,7 +86,7 @@ $(document).ready(function(){initNavTree('d9/db1/_input_delta_axis_control_8cs_s
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Properties</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -106,7 +100,7 @@ $(document).ready(function(){initNavTree('d9/db1/_input_delta_axis_control_8cs_s
 <div class="title">InputDeltaAxisControl.cs</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="../../d9/db1/_input_delta_axis_control_8cs.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#region Copyright Notice &amp; License Information</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#region Copyright Notice &amp; License Information</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="comment">//</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// InputDeltaAxisControl.cs</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//</span></div>
@@ -141,7 +135,7 @@ $(document).ready(function(){initNavTree('d9/db1/_input_delta_axis_control_8cs_s
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        {</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                readonly <span class="keywordtype">string</span> _axis;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="../../d5/d6b/class_hydrogen_1_1_peripherals_1_1_input_delta_axis_control.html#a4f758fbd623fdb8733e8a995c064a248">   36</a></span>&#160;                <span class="keyword">public</span> <a class="code" href="../../d5/d6b/class_hydrogen_1_1_peripherals_1_1_input_delta_axis_control.html#a4f758fbd623fdb8733e8a995c064a248">InputDeltaAxisControl</a> (<span class="keywordtype">string</span> name, <span class="keywordtype">string</span> axisName, <a class="code" href="../../d2/daf/namespace_hydrogen_1_1_peripherals.html#af5064c1618bbc05b8c4a76b690a8e185">InputAction</a> action)</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="../../d5/d6b/class_hydrogen_1_1_peripherals_1_1_input_delta_axis_control.html#a4f758fbd623fdb8733e8a995c064a248">   36</a></span>&#160;                <span class="keyword">public</span> <a class="code" href="../../d5/d6b/class_hydrogen_1_1_peripherals_1_1_input_delta_axis_control.html#a4f758fbd623fdb8733e8a995c064a248">InputDeltaAxisControl</a> (<span class="keywordtype">string</span> name, <span class="keywordtype">string</span> axisName, InputAction action)</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            : base (name, action)</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                {</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                        _axis = axisName;</div>
@@ -159,7 +153,6 @@ $(document).ready(function(){initNavTree('d9/db1/_input_delta_axis_control_8cs_s
 <div class="ttc" id="class_hydrogen_1_1_peripherals_1_1_input_control_base_html"><div class="ttname"><a href="../../d3/d0a/class_hydrogen_1_1_peripherals_1_1_input_control_base.html">Hydrogen.Peripherals.InputControlBase</a></div><div class="ttdef"><b>Definition:</b> <a href="../../df/d4b/_input_control_base_8cs_source.html#l00036">InputControlBase.cs:36</a></div></div>
 <div class="ttc" id="class_hydrogen_1_1_peripherals_1_1_input_delta_axis_control_html_a4f758fbd623fdb8733e8a995c064a248"><div class="ttname"><a href="../../d5/d6b/class_hydrogen_1_1_peripherals_1_1_input_delta_axis_control.html#a4f758fbd623fdb8733e8a995c064a248">Hydrogen.Peripherals.InputDeltaAxisControl.InputDeltaAxisControl</a></div><div class="ttdeci">InputDeltaAxisControl(string name, string axisName, InputAction action)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/db1/_input_delta_axis_control_8cs_source.html#l00036">InputDeltaAxisControl.cs:36</a></div></div>
 <div class="ttc" id="class_hydrogen_1_1_peripherals_1_1_input_delta_axis_control_html_af58bf084a434974bcd1ee11831a96c87"><div class="ttname"><a href="../../d5/d6b/class_hydrogen_1_1_peripherals_1_1_input_delta_axis_control.html#af58bf084a434974bcd1ee11831a96c87">Hydrogen.Peripherals.InputDeltaAxisControl.Capture</a></div><div class="ttdeci">override void Capture()</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/db1/_input_delta_axis_control_8cs_source.html#l00042">InputDeltaAxisControl.cs:42</a></div></div>
-<div class="ttc" id="namespace_hydrogen_1_1_peripherals_html_af5064c1618bbc05b8c4a76b690a8e185"><div class="ttname"><a href="../../d2/daf/namespace_hydrogen_1_1_peripherals.html#af5064c1618bbc05b8c4a76b690a8e185">Hydrogen.Peripherals.InputAction</a></div><div class="ttdeci">delegate void InputAction(InputEvent evt, float value, float time)</div></div>
 <div class="ttc" id="class_hydrogen_1_1_peripherals_1_1_input_delta_axis_control_html"><div class="ttname"><a href="../../d5/d6b/class_hydrogen_1_1_peripherals_1_1_input_delta_axis_control.html">Hydrogen.Peripherals.InputDeltaAxisControl</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d9/db1/_input_delta_axis_control_8cs_source.html#l00032">InputDeltaAxisControl.cs:32</a></div></div>
 <div class="ttc" id="namespace_hydrogen_1_1_peripherals_html_a3876c8102da79cc57ded581352c8bd9e"><div class="ttname"><a href="../../d2/daf/namespace_hydrogen_1_1_peripherals.html#a3876c8102da79cc57ded581352c8bd9e">Hydrogen.Peripherals.InputEvent</a></div><div class="ttdeci">InputEvent</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/dc4/_input_8cs_source.html#l00037">Input.cs:37</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -167,8 +160,8 @@ $(document).ready(function(){initNavTree('d9/db1/_input_delta_axis_control_8cs_s
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="../../dir_84bbf7b3c7f28a5a18725745e1505219.html">Assets</a></li><li class="navelem"><a class="el" href="../../dir_b28097260afe8574b8406ba7dfbb81e6.html">Hydrogen Framework</a></li><li class="navelem"><a class="el" href="../../dir_27bfb49e10942b2337de158651d24362.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../dir_f456ffc0c0cbfbbdb67b3854d7def5c9.html">Plugins</a></li><li class="navelem"><a class="el" href="../../dir_25cc0ba72279330e09f34881a6618025.html">Hydrogen.Peripherals</a></li><li class="navelem"><a class="el" href="../../d9/db1/_input_delta_axis_control_8cs.html">InputDeltaAxisControl.cs</a></li>
-    <li class="footer">Generated on Fri Dec 6 2013 17:35:37 for Hydrogen Framework by
+    <li class="navelem"><a class="el" href="../../dir_84bbf7b3c7f28a5a18725745e1505219.html">Assets</a></li><li class="navelem"><a class="el" href="../../dir_b28097260afe8574b8406ba7dfbb81e6.html">Hydrogen Framework</a></li><li class="navelem"><a class="el" href="../../dir_27bfb49e10942b2337de158651d24362.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../dir_f456ffc0c0cbfbbdb67b3854d7def5c9.html">Plugins</a></li><li class="navelem"><a class="el" href="../../dir_25cc0ba72279330e09f34881a6618025.html">Hydrogen.Peripherals</a></li><li class="navelem"><b>InputDeltaAxisControl.cs</b></li>
+    <li class="footer">Generated on Sat Dec 7 2013 22:50:46 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>
