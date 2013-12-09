@@ -30,7 +30,7 @@
 namespace Hydrogen
 {
 		/// <summary>
-		/// Additional static functions, constants and classes used to extend existing Mesh support inside of Unity.
+		/// Additional static functions and constants used to extend existing Mesh support inside of Unity.
 		/// </summary>
 		public static class Mesh
 		{
@@ -38,10 +38,10 @@ namespace Hydrogen
 				/// The maximum vertices allowed in a Mesh.
 				/// </summary>
 				/// <remarks>This is a Unity imposed limitation, presumably this may grow over time.</remarks>
-				public const int MeshVerticesLimit = 65536;
+				public const int VerticesLimit = 65536;
 
 				/// <summary>
-				/// Return the index of the closest vertex to the targetPosition on the Mesh
+				/// Return the index of the closest vertex to the targetPosition on the Mesh.
 				/// </summary>
 				/// <returns>The vertex index on the mesh.</returns>
 				/// <param name="mesh">The mesh to compare against.</param>
