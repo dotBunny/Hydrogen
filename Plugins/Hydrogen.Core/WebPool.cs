@@ -48,19 +48,6 @@ namespace Hydrogen.Core
 						public string MimeType;
 				}
 
-				public void Awake ()
-				{
-						// Create our buddy object
-						var newWebObject = new GameObject ();
-						newWebObject.AddComponent (typeof(WebPoolWorker));
-						newWebObject.name = "Web Call";
-
-						_poolID = hObjectPool.Instance.Add (newWebObject);
-
-						// Remove our little buddy
-						Object.DestroyImmediate (newWebObject);
-				}
-
 				public void GET (string URI, System.Action<int, Hashtable, string> callback)
 				{
 						GET (URI, null, callback);
@@ -92,6 +79,19 @@ namespace Hydrogen.Core
 				{
 						GameObject go = hObjectPool.Instance.Spawn (_poolID);
 						go.GetComponent<WebPoolWorker> ().Form (URI, formStringData, formBinaryData, cookie, callback);
+				}
+
+				protected virtual void Awake ()
+				{
+						// Create our buddy object
+						var newWebObject = new GameObject ();
+						newWebObject.AddComponent (typeof(WebPoolWorker));
+						newWebObject.name = "Web Call";
+
+						_poolID = hObjectPool.Instance.Add (newWebObject);
+
+						// Remove our little buddy
+						Object.DestroyImmediate (newWebObject);
 				}
 		}
 }

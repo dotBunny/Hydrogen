@@ -36,29 +36,16 @@ namespace Hydrogen.Core
 		public abstract class ObjectPoolItemBase : MonoBehaviour
 		{
 				/// <summary>
+				/// The parent pool.
+				/// </summary>
+				internal ObjectPoolCollection ParentPool;
+				/// <summary>
 				/// The Object Pool ID from which this object belongs.
 				/// </summary>
 				internal int PoolID;
-				internal ObjectPoolCollection ParentPool;
 
 				/// <summary>
-				/// Raised when the object is 'spawned' from the pool.
-				/// </summary>
-				/// <remarks>
-				/// It does not set "active", you must handle that yourself.
-				/// </remarks>
-				public abstract void OnSpawned ();
-
-				/// <summary>
-				/// Raised when the object is 'despawned' back into the pool
-				/// </summary>
-				/// <remarks>
-				/// It does not set "active", you must handle that yourself.
-				/// </remarks>
-				public abstract void OnDespawned ();
-
-				/// <summary>
-				/// Simple function which delays the despawning based on whatever you define
+				/// Simple function which delays the despawning based on whatever you define.
 				/// </summary>
 				/// <remarks>
 				/// If you are going to utilize this make sure that your function contains:
@@ -67,10 +54,26 @@ namespace Hydrogen.Core
 				public abstract void DespawnSafely ();
 
 				/// <summary>
-				/// Is the object idle, and therefore can be despawned organically
+				/// Is the object idle, and therefore can be despawned organically?
 				/// </summary>
 				/// <returns><c>true</c> if this instance is inactive; otherwise, <c>false</c>.</returns>
 				/// <remarks>This will only work on tracked spawned objects.</remarks>
 				public abstract bool IsInactive ();
+
+				/// <summary>
+				/// Raised when the object is 'despawned' back into the pool.
+				/// </summary>
+				/// <remarks>
+				/// It does not set "active", you must handle that yourself.
+				/// </remarks>
+				public abstract void OnDespawned ();
+
+				/// <summary>
+				/// Raised when the object is 'spawned' from the pool.
+				/// </summary>
+				/// <remarks>
+				/// It does not set "active", you must handle that yourself.
+				/// </remarks>
+				public abstract void OnSpawned ();
 		}
 }

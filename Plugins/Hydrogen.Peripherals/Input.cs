@@ -48,7 +48,7 @@ namespace Hydrogen.Peripherals
 				Dictionary<String, InputAction> _actions;
 				List<InputControlBase> _controls;
 
-				void Awake ()
+				protected virtual void Awake ()
 				{
 						if (_controls == null)
 								_controls = new List<InputControlBase> ();
@@ -56,7 +56,7 @@ namespace Hydrogen.Peripherals
 								_actions = new Dictionary<String, InputAction> ();
 				}
 
-				void Update ()
+				protected virtual void Update ()
 				{
 						foreach (InputControlBase control in _controls) {
 								control.Capture ();

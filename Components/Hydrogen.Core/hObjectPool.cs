@@ -29,31 +29,36 @@
 using UnityEngine;
 
 /// <summary>
-/// Hydrogen.Core.ObjectPool Instance
+/// A drop in implementation of the Hydrogen.Core.ObjectPool. This simply makes the class an accessible singleton 
+/// with some very simple additional functionality.
 /// </summary>
 [AddComponentMenu ("Hydrogen/Object Pool Manager")]
-public class hObjectPool : Hydrogen.Core.ObjectPool
+public sealed class hObjectPool : Hydrogen.Core.ObjectPool
 {
 		/// <summary>
-		/// Internal fail safe to maintain instance across threads
+		/// Should this object pool survive scene switches?
+		/// </summary>
+		public bool Presistant = true;
+		/// <summary>
+		/// Internal reference to the static instance of the object pool.
+		/// </summary>
+		static volatile hObjectPool _staticInstance;
+		/// <summary>
+		/// Internal fail safe to maintain instance across threads.
 		/// </summary>
 		/// <remarks>
-		/// Multithreaded Safe Singleton Pattern
+		/// Multithreaded Safe Singleton Pattern.
 		/// </remarks>
 		/// <description>
 		/// http://msdn.microsoft.com/en-us/library/ms998558.aspx
 		/// </description>
 		static readonly System.Object _syncRoot = new System.Object ();
-		/// <summary>
-		/// Internal reference to the static instance of the object pool.
-		/// </summary>
-		static volatile hObjectPool _staticInstance;
 
 		/// <summary>
-		/// Gets the Object Pool instance, creating one if none is found.
+		/// Gets the object pool instance, creating one if none is found.
 		/// </summary>
 		/// <value>
-		/// The Object Pool
+		/// The Object Pool.
 		/// </value>
 		public static hObjectPool Instance {
 				get {
@@ -63,7 +68,8 @@ public class hObjectPool : Hydrogen.Core.ObjectPool
 
 										// If we don't have it, lets make it!
 										if (_staticInstance == null) {
-												var go = GameObject.Find ("Hydrogen") ?? new GameObject ("Hydrogen");
+												var go = GameObject.Find (Hydrogen.Components.DefaultSingletonName) ??
+												         new GameObject (Hydrogen.Components.DefaultSingletonName);
 
 												go.AddComponent<hObjectPool> ();
 												_staticInstance = go.GetComponent<hObjectPool> ();	
@@ -75,10 +81,24 @@ public class hObjectPool : Hydrogen.Core.ObjectPool
 		}
 
 		/// <summary>
-		/// Does an instance exist of this class?
+		/// Does an Object Pool already exist?
 		/// </summary>
 		public static bool Exists ()
 		{
 				return _staticInstance != null;
+		}
+
+		/// <summary>
+		/// Unity's Awake Event
+		/// </summary>
+		protected override void Awake ()
+		{	
+				// Make sure to do the object pools normal initialization
+				base.Awake ();
+
+				// Should this gameObject be kept around :) I think so.
+				if (Presistant)
+						DontDestroyOnLoad (gameObject);
+
 		}
 }

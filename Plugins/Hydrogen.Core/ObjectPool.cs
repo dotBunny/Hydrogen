@@ -51,36 +51,6 @@ namespace Hydrogen.Core
 				public ObjectPoolCollection[] ObjectPools;
 				Dictionary<string, int> _poolStringLookupTable;
 
-				public void Awake ()
-				{
-						if (ObjectPools == null)
-								ObjectPools = new ObjectPoolCollection[0];
-						if (_poolStringLookupTable == null)
-								_poolStringLookupTable = new Dictionary<string, int> ();
-
-						for (int x = 0; x < ObjectPools.Length; x++) {
-				
-								if (ObjectPools [x].Prefab == null) {
-										throw new MissingReferenceException ("You have not set the prefab in the hObjectPool Inspector for Object Pools->Element " + x);
-								}
-				
-								if (!ObjectPools [x].Initialized) {
-										ObjectPools [x].Initialize (ObjectPools [x].Prefab, transform, x);
-										_poolStringLookupTable.Add (ObjectPools [x].Prefab.name, x);
-								}
-						}
-				}
-
-				public void Update ()
-				{
-						for (int x = 0; x < ObjectPools.Length; x++) {
-
-								if (ObjectPools [x].TrackSpawnedObjects && ObjectPools [x].CullExtraObjects) {
-										ObjectPools [x].CullUpdate ();
-								}
-						}
-				}
-
 				public int GetPoolID (GameObject gameObject)
 				{
 						return GetPoolID (gameObject.name);
@@ -229,6 +199,36 @@ namespace Hydrogen.Core
 				public void Despawn (GameObject gameObject, int poolID)
 				{
 						ObjectPools [poolID].Despawn (gameObject);
+				}
+
+				protected virtual void Awake ()
+				{
+						if (ObjectPools == null)
+								ObjectPools = new ObjectPoolCollection[0];
+						if (_poolStringLookupTable == null)
+								_poolStringLookupTable = new Dictionary<string, int> ();
+
+						for (int x = 0; x < ObjectPools.Length; x++) {
+
+								if (ObjectPools [x].Prefab == null) {
+										throw new MissingReferenceException ("You have not set the prefab in the hObjectPool Inspector for Object Pools->Element " + x);
+								}
+
+								if (!ObjectPools [x].Initialized) {
+										ObjectPools [x].Initialize (ObjectPools [x].Prefab, transform, x);
+										_poolStringLookupTable.Add (ObjectPools [x].Prefab.name, x);
+								}
+						}
+				}
+
+				protected virtual void Update ()
+				{
+						for (int x = 0; x < ObjectPools.Length; x++) {
+
+								if (ObjectPools [x].TrackSpawnedObjects && ObjectPools [x].CullExtraObjects) {
+										ObjectPools [x].CullUpdate ();
+								}
+						}
 				}
 		}
 }

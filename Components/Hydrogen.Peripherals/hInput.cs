@@ -30,31 +30,36 @@
 using UnityEngine;
 
 /// <summary>
-/// Hydrogen.Peripherals.Input Instance
+/// A drop in implementation of the Hydrogen.Peripherals.Input manager.  This simply makes the class an accessible 
+/// singleton with some very simple additional functionality.
 /// </summary>
 [AddComponentMenu ("Hydrogen/Input Manager")]
-public class hInput : Hydrogen.Peripherals.Input
+public sealed class hInput : Hydrogen.Peripherals.Input
 {
 		/// <summary>
-		/// Internal fail safe to maintain instance across threads
+		/// Should this input manager survive scene switches?
+		/// </summary>
+		public bool Presistant = true;
+		/// <summary>
+		/// Internal reference to the static instance of the input manager.
+		/// </summary>
+		static volatile hInput _staticInstance;
+		/// <summary>
+		/// Internal fail safe to maintain instance across threads.
 		/// </summary>
 		/// <remarks>
-		/// Multithreaded Safe Singleton Pattern
+		/// Multithreaded Safe Singleton Pattern.
 		/// </remarks>
 		/// <description>
 		/// http://msdn.microsoft.com/en-us/library/ms998558.aspx
 		/// </description>
 		static readonly System.Object _syncRoot = new System.Object ();
-		/// <summary>
-		/// Internal reference to the static instance of the input manager.
-		/// </summary>
-		static volatile hInput _staticInstance;
 
 		/// <summary>
-		/// Gets the Input Manager instance, creating one if none is found.
+		/// Gets the input manager instance, creating one if none is found.
 		/// </summary>
 		/// <value>
-		/// The Input Manager
+		/// The Input Manager.
 		/// </value>
 		public static hInput Instance {
 				get {
@@ -64,7 +69,8 @@ public class hInput : Hydrogen.Peripherals.Input
 
 										// If we don't have it, lets make it!
 										if (_staticInstance == null) {
-												var go = GameObject.Find ("Hydrogen") ?? new GameObject ("Hydrogen");
+												var go = GameObject.Find (Hydrogen.Components.DefaultSingletonName) ??
+												         new GameObject (Hydrogen.Components.DefaultSingletonName);
 
 												go.AddComponent<hInput> ();
 												_staticInstance = go.GetComponent<hInput> ();
@@ -76,7 +82,20 @@ public class hInput : Hydrogen.Peripherals.Input
 		}
 
 		/// <summary>
-		/// Does an instance exist of this class?
+		/// Unity's Awake Event
+		/// </summary>
+		protected override void Awake ()
+		{
+				// Make sure to do the object pools normal initialization
+				base.Awake ();
+
+				// Should this gameObject be kept around :) I think so.
+				if (Presistant)
+						DontDestroyOnLoad (gameObject);
+		}
+
+		/// <summary>
+		/// Does an Input Manager already exist?
 		/// </summary>
 		public static bool Exists ()
 		{

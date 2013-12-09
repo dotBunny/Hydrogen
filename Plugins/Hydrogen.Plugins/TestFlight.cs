@@ -35,7 +35,7 @@ using System.Runtime.InteropServices;
 namespace Hydrogen.Plugins
 {
 		/// <summary>
-		/// An static method of interacting with the TestFlight system.. 
+		/// A static method of interacting with the TestFlight system.. 
 		/// 
 		/// It can be implemented in numourous ways, this simply serves as a place to call functions.
 		/// </summary>
@@ -124,6 +124,7 @@ namespace Hydrogen.Plugins
 				}
 
 
+
 #elif HYDROGEN_TESTFLIGHT && UNITY_ANDROID && !UNITY_EDITOR
 				static AndroidJavaClass _testFlight;
 				static AndroidJavaClass _unityPlayer;
@@ -180,6 +181,7 @@ namespace Hydrogen.Plugins
 						_testFlight.CallStatic ("startSession");
 						Session = true;
 				}
+
 
 
 

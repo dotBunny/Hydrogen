@@ -30,49 +30,84 @@ using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// This is one possible way of setting up a ObjectPoolItem to handle spawning 
-/// and despawning appropriately.
+/// A drop in implementation of the Hydrogen.Core.ObjectPoolItem. This is one possible way of setting up an 
+/// ObjectPoolItem to handle spawning and despawning appropriately.
 /// </summary>
 /// <remarks>
 /// Learn from it, make your own, as long as you extend from the base class
 /// you still get the performance benefits.
 /// </remarks>
 [AddComponentMenu ("Hydrogen/Object Pool Item")]
-public class hObjectPoolItem : Hydrogen.Core.ObjectPoolItemBase
+public sealed class hObjectPoolItem : Hydrogen.Core.ObjectPoolItemBase
 {
+		/// <summary>
+		/// Despawn gameObject after this number of seconds.
+		/// </summary>
+		/// <remarks>In seconds, use 0 to disable.</remarks>
 		public float LifeTime;
 
+		/// <summary>
+		/// Despawn the gameObject safely after all particles have done their thing. 
+		/// </summary>
+		/// <remarks>If you are going to utilize this make sure that your function contains:
+		/// hObjectPool.Instance.objectPools[poolID].DespawnImmediate(gameObject);</remarks>
+		public override void DespawnSafely ()
+		{
+				StartCoroutine (WaitForParticles ());
+		}
+
+		/// <summary>
+		/// Is the object idle, and therefore can be despawned organically?
+		/// </summary>
+		/// <returns>true</returns>
+		/// <c>false</c>
+		/// <remarks>This will only work on tracked spawned objects.</remarks>
+		public override bool IsInactive ()
+		{
+				// A simple rigidbody check, otherwise no bueno
+				return ParentPool.HasRigidbody && gameObject.rigidbody.IsSleeping ();
+		}
+
+		/// <summary>
+		/// Raised when the object is 'despawned' back into the pool.
+		/// </summary>
+		/// <remarks>It does not set "active", you must handle that yourself.</remarks>
+		public override void OnDespawned ()
+		{
+				// If our object has a rigidbody (cached check), make sure to zero its velocity.
+				if (ParentPool.HasRigidbody)
+						gameObject.rigidbody.velocity = Vector3.zero;
+		
+				// Disable the gameObject
+				gameObject.SetActive (false);
+		}
+
+		/// <summary>
+		/// Raised when the object is 'spawned' from the pool.
+		/// </summary>
+		/// <remarks>It does not set "active", you must handle that yourself.</remarks>
+		public override void OnSpawned ()
+		{
+				// Make sure our object is active please and thank you
+				gameObject.SetActive (true);
+
+				// If there is a LifeTime greater then 0, we set a timer to despawn
+				if (LifeTime > 0)
+						StartCoroutine (DespawnTimer ());
+		}
+
+		/// <summary>
+		/// Coroutine for despawning our gameObject after the timer value.
+		/// </summary>
 		IEnumerator DespawnTimer ()
 		{
 				yield return new WaitForSeconds (LifeTime);
 				hObjectPool.Instance.Despawn (gameObject, PoolID);
 		}
 
-		public override void OnDespawned ()
-		{
-				if (ParentPool.HasRigidbody)
-						gameObject.rigidbody.velocity = Vector3.zero;
-		
-				gameObject.SetActive (false);
-		}
-
-		public override void OnSpawned ()
-		{
-		
-				gameObject.SetActive (true);
-				StartCoroutine (DespawnTimer ());
-		}
-
-		public override void DespawnSafely ()
-		{
-				StartCoroutine (WaitForParticles ());
-		}
-
-		public override bool IsInactive ()
-		{
-				return gameObject.rigidbody.IsSleeping ();
-		}
-
+		/// <summary>
+		/// Coroutine to wait for particles to be finished, then despawn gameObject.
+		/// </summary>
 		IEnumerator WaitForParticles ()
 		{
 				if (particleEmitter != null) {
@@ -93,8 +128,11 @@ public class hObjectPoolItem : Hydrogen.Core.ObjectPoolItemBase
 								yield return null;
 						}
 				}
+
+				// Disable the gameObject
 				gameObject.SetActive (false);
-		
+
+				// Immediately get rid of the object as we don't want any artifacts showing up
 				hObjectPool.Instance.ObjectPools [PoolID].DespawnImmediate (gameObject);
 		}
 }
