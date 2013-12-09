@@ -31,12 +31,12 @@ using UnityEngine;
 namespace Hydrogen
 {
 		/// <summary>
-		/// Additional static functions, constants and classes used to extend existing NavMesh support inside of Unity.
+		/// Additional static functions used to extend existing NavMesh support inside of Unity.
 		/// </summary>
 		public static class NavMesh
 		{
 				/// <summary>
-				/// Determine if NavMeshAgent is at its destination
+				/// Determine if NavMeshAgent is at its destination.
 				/// </summary>
 				/// <returns><c>true</c>, if at destination was agented, <c>false</c> otherwise.</returns>
 				/// <param name="agent">The target NavMeshAgent.</param>
@@ -51,7 +51,7 @@ namespace Hydrogen
 				}
 
 				/// <summary>
-				/// Find a random position on the NavMesh
+				/// Find a random position on the NavMesh.
 				/// </summary>
 				/// <returns>The random position.</returns>
 				/// <param name="basePosition">A base position to use as an offset from.</param>

@@ -24,40 +24,72 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-#endregion
 
+#endregion
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Hydrogen
 {
 		/// <summary>
-		/// Additional static functions, constants and classes used to extend existing Validation support inside of Unity.
+		/// Additional static functions used to extend existing Validation support inside of Unity.
 		/// </summary>
-		//TODO: Need proper documentation
 		public static class Validate
 		{
 				/// <summary>
-				/// Checks if a GameObject is in a LayerMask
+				/// Are the colors approximately equal?
 				/// </summary>
-				/// <param name="obj">GameObject to test</param>
-				/// <param name="layerMask">LayerMask with all the layers to test against</param>
-				/// <returns>True if in any of the layers in the LayerMask</returns>
-				public static bool IsInLayerMask (this UnityEngine.GameObject obj, UnityEngine.LayerMask layerMask)
+				/// <returns><c>true</c>, if colors are approximately equal, <c>false</c> otherwise.</returns>
+				/// <param name="sourceColor">Left Side Color</param>
+				/// <param name="targetColor">Right Side Color</param>
+				public static bool IsColorApproximatelySame (this Color sourceColor, Color targetColor)
 				{
-						// Convert the object's layer to a bitfield for comparison
-						int objLayerMask = (1 << obj.layer);
-						return (layerMask.value & objLayerMask) > 0;
+						return (Mathf.Approximately (sourceColor.r, targetColor.r) &&
+						Mathf.Approximately (sourceColor.g, targetColor.g) &&
+						Mathf.Approximately (sourceColor.b, targetColor.b) &&
+						Mathf.Approximately (sourceColor.a, targetColor.a));
+				}
+
+				/// <summary>
+				/// Determines if dictionaries are equal.
+				/// </summary>
+				/// <returns><c>true</c> if the left side equals the right side; otherwise, <c>false</c>.</returns>
+				/// <param name="first">Left Side Dictionary.</param>
+				/// <param name="second">Right Side Dictionary.</param>
+				/// <typeparam name="TKey">The 1st type parameter.</typeparam>
+				/// <typeparam name="TValue">The 2nd type parameter.</typeparam>
+				public static bool IsDictionaryEqual<TKey, TValue> (
+						this IDictionary<TKey, TValue> first, IDictionary<TKey, TValue> second)
+				{
+						if (first == second)
+								return true;
+						if ((first == null) || (second == null))
+								return false;
+						if (first.Count != second.Count)
+								return false;
+
+						var comparer = EqualityComparer<TValue>.Default;
+
+						foreach (KeyValuePair<TKey, TValue> kvp in first) {
+								TValue secondValue;
+								if (!second.TryGetValue (kvp.Key, out secondValue))
+										return false;
+								if (!comparer.Equals (kvp.Value, secondValue))
+										return false;
+						}
+						return true;
 				}
 
 				/// <summary>
 				/// Determines whether the specified value is of numeric type.
 				/// </summary>
-				/// <param name="value">The object to check.</param>
+
 				/// <returns>
 				/// 	<c>true</c> if value is a numeric type; otherwise, <c>false</c>.
 				/// </returns>
+				/// <param name="value">The object to check.</param>
 				public static bool IsNumericType (this object value)
 				{
 						return (value is byte ||
@@ -76,11 +108,11 @@ namespace Hydrogen
 				/// <summary>
 				/// Determines whether the specified value is positive.
 				/// </summary>
-				/// <param name="value">The value.</param>
-				/// <param name="zeroIsPositive">if set to <c>true</c> treats 0 as positive. Defaults to true.</param>
 				/// <returns>
 				/// 	<c>true</c> if the specified value is positive; otherwise, <c>false</c>.
 				/// </returns>
+				/// <param name="value">The value.</param>
+				/// <param name="zeroIsPositive">if set to <c>true</c> treats 0 as positive. Defaults to true.</param>
 				public static bool IsPositive (this object value, bool zeroIsPositive = true)
 				{
 						switch (Type.GetTypeCode (value.GetType ())) {
@@ -114,39 +146,9 @@ namespace Hydrogen
 				}
 
 				/// <summary>
-				/// Determines if dictionaries are equal.
+				/// Determines whether the two scrambled enumerable objects are equal.
 				/// </summary>
-				/// <returns><c>true</c> if the left side equals the right side; otherwise, <c>false</c>.</returns>
-				/// <param name="first">Left Side Dictionary.</param>
-				/// <param name="second">Right Side Dictionary.</param>
-				/// <typeparam name="TKey">The 1st type parameter.</typeparam>
-				/// <typeparam name="TValue">The 2nd type parameter.</typeparam>
-				public static bool IsDictionaryEqual<TKey, TValue> (
-						this IDictionary<TKey, TValue> first, IDictionary<TKey, TValue> second)
-				{
-						if (first == second)
-								return true;
-						if ((first == null) || (second == null))
-								return false;
-						if (first.Count != second.Count)
-								return false;
-			
-						var comparer = EqualityComparer<TValue>.Default;
-			
-						foreach (KeyValuePair<TKey, TValue> kvp in first) {
-								TValue secondValue;
-								if (!second.TryGetValue (kvp.Key, out secondValue))
-										return false;
-								if (!comparer.Equals (kvp.Value, secondValue))
-										return false;
-						}
-						return true;
-				}
-
-				/// <summary>
-				/// Scrambleds the equals.
-				/// </summary>
-				/// <returns><c>true</c>, if equals was scrambleded, <c>false</c> otherwise.</returns>
+				/// <returns><c>true</c>, if they are equal, <c>false</c> otherwise.</returns>
 				/// <param name="list1">List1.</param>
 				/// <param name="list2">List2.</param>
 				/// <typeparam name="T">The 1st type parameter.</typeparam>

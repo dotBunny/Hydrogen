@@ -34,7 +34,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace Hydrogen
 {
 		/// <summary>
-		/// Additional static functions, constants and classes used to extend existing Memory support inside of Unity.
+		/// Additional static functions used to extend existing Memory support inside of Unity.
 		/// </summary>
 		public static class Memory
 		{

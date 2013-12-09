@@ -32,10 +32,40 @@ using UnityEngine;
 namespace Hydrogen
 {
 		/// <summary>
-		/// Additional static functions, constants and classes used to extend existing Component support inside of Unity.
+		/// Additional static functions and constants used to extend existing Component support inside of Unity.
 		/// </summary>
 		public static class Components
 		{
+				/// <summary>
+				/// The GameObject name used when creating singletons automatically via any of the Hydrogen components.
+				/// </summary>
+				public const string DefaultSingletonName = "Hydrogen";
+
+				/// <summary>
+				/// Adds a component to a GameObject, if that component is not already added.
+				/// </summary>
+				/// <returns>The desired component.</returns>
+				/// <param name="targetObject">The root object to add the component to.</param>
+				/// <param name="cachedReference">Possible pre-existing reference to component.</param>
+				/// <typeparam name="T">Object Type.</typeparam>
+				/// <example>
+				/// private AudioSource _localAudioSource = null;
+				/// public void Start()
+				/// {
+				///		_localAudioSource = gameObject.AddComponent<AudioSource>(_localAudioSource);
+				///	}
+				/// </example>
+				public static T AddComponent<T> (this GameObject targetObject, T cachedReference) where T : Component
+				{
+						if (cachedReference != null) {
+								return cachedReference;
+						}
+
+						T component = (T)targetObject.GetComponent (typeof(T)) ?? (T)targetObject.AddComponent (typeof(T));
+
+						return component;
+				}
+
 				/// <summary>
 				/// Get a component reference, checking if its already referenced.
 				/// </summary>
@@ -141,7 +171,7 @@ namespace Hydrogen
 				}
 
 				/// <summary>
-				/// Gets if a component is added to a GameObject
+				/// Does the GameObject have the component?
 				/// </summary>
 				/// <returns>If the component is added to the GameObject</returns>
 				/// <param name="targetObject">The root object to look on for the component.</param>
@@ -160,31 +190,6 @@ namespace Hydrogen
 				public static bool HasComponent<T> (this GameObject targetObject, T cachedReference) where T : Component
 				{
 						return cachedReference != null || targetObject.GetComponent (typeof(T)) != null;
-				}
-
-				/// <summary>
-				/// Adds a component to a GameObject, if that component is not already added.
-				/// </summary>
-				/// <returns>The desired component.</returns>
-				/// <param name="targetObject">The root object to add the component to.</param>
-				/// <param name="cachedReference">Possible pre-existing reference to component.</param>
-				/// <typeparam name="T">Object Type.</typeparam>
-				/// <example>
-				/// private AudioSource _localAudioSource = null;
-				/// public void Start()
-				/// {
-				///		_localAudioSource = gameObject.AddComponent<AudioSource>(_localAudioSource);
-				///	}
-				/// </example>
-				public static T AddComponent<T> (this GameObject targetObject, T cachedReference) where T : Component
-				{
-						if (cachedReference != null) {
-								return cachedReference;
-						}
-
-						T component = (T)targetObject.GetComponent (typeof(T)) ?? (T)targetObject.AddComponent (typeof(T));
-
-						return component;
 				}
 		}
 }

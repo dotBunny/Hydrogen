@@ -33,22 +33,19 @@ using UnityEngine;
 namespace Hydrogen
 {
 		/// <summary>
-		/// Additional static functions, constants and classes used to extend existing Layers support inside of Unity.
+		/// Additional static functions used to extend existing Layers support inside of Unity.
 		/// </summary>
 		public static class Layers
 		{
 				/// <summary>
-				/// Create a layer mask only including these layers.
+				/// Does the layerMask contain the specified layer?
 				/// </summary>
-				/// <returns>A layer mask including only the passed layers.</returns>
-				/// <param name="layers">Array of Layer IDs</param>
-				public static int OnlyIncluding (params int[] layers)
+				/// <returns><c>true</c>, if the layer is contained, <c>false</c> otherwise.</returns>
+				/// <param name="layerMask">The LayerMask to poll</param>
+				/// <param name="targetLayer">The layer to check.</param>
+				public static bool ContainsLayer (this LayerMask layerMask, int targetLayer)
 				{
-						int mask = 0;
-						foreach (int item in layers) {
-								mask |= 1 << item;
-						}
-						return mask;
+						return (layerMask.value & 1 << targetLayer) != 0;
 				}
 
 				/// <summary>
@@ -62,14 +59,30 @@ namespace Hydrogen
 				}
 
 				/// <summary>
-				/// Determine if the specified layer is contained within the layerMask.
+				/// Checks if a GameObject is in a LayerMask.
 				/// </summary>
-				/// <returns><c>true</c>, if the layer is contained, <c>false</c> otherwise.</returns>
-				/// <param name="layerMask">The LayerMask to poll</param>
-				/// <param name="targetLayer">The layer to check.</param>
-				public static bool ContainsLayer (LayerMask layerMask, int targetLayer)
+				/// <param name="obj">GameObject to test</param>
+				/// <param name="layerMask">LayerMask with all the layers to test against</param>
+				/// <returns>True if in any of the layers in the LayerMask</returns>
+				public static bool IsInLayerMask (this GameObject obj, LayerMask layerMask)
 				{
-						return (layerMask.value & 1 << targetLayer) != 0;
+						// Convert the object's layer to a bitfield for comparison
+						int objLayerMask = (1 << obj.layer);
+						return (layerMask.value & objLayerMask) > 0;
+				}
+
+				/// <summary>
+				/// Create a layer mask only including these layers.
+				/// </summary>
+				/// <returns>A layer mask including only the passed layers.</returns>
+				/// <param name="layers">Array of Layer IDs</param>
+				public static int OnlyIncluding (params int[] layers)
+				{
+						int mask = 0;
+						foreach (int item in layers) {
+								mask |= 1 << item;
+						}
+						return mask;
 				}
 		}
 }

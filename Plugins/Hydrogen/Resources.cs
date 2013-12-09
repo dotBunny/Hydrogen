@@ -29,7 +29,7 @@
 namespace Hydrogen
 {
 		/// <summary>
-		/// Additional static functions, constants and classes used to extend existing Resources support inside of Unity.
+		/// Additional static functions used to extend existing Resources support inside of Unity.
 		/// </summary>
 		public static class Resources
 		{

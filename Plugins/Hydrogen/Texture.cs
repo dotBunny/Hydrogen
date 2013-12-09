@@ -31,16 +31,212 @@ using UnityEngine;
 namespace Hydrogen
 {
 		/// <summary>
-		/// Additional static functions, constants and classes used to extend existing Texture support inside of Unity.
+		/// Additional static functions used to extend existing Texture support inside of Unity.
 		/// </summary>
-		//TODO: Need proper documentation
 		public static class Texture
 		{
-				// simple bilinear filtering
-				public static Texture2D Resize (this Texture2D texture, int newWidth, int newHeight)
+				/// <summary>
+				/// Autocrop the texture removes the borders from the texture. It searches the active layer for the 
+				/// largest possible border area that's color matches borderColor, and then crops this area from the 
+				/// image, as if you had used the Crop tool.
+				/// </summary>
+				/// <returns>The cropped image.</returns>
+				/// <param name="texture">The source texture.</param>
+				/// <param name="borderColor">The border color used in the crop calculations.</param>
+				public static Texture2D AutoCrop (this Texture2D texture, Color borderColor)
+				{
+						var image = texture.GetPixels ();
+						var width = texture.width;
+						var height = texture.height;
+
+						var left = -1;
+						var right = -1;
+						var top = -1;
+						var bottom = -1;
+						var x = 0;
+						int y;
+
+						while (left == -1 && x < width) {
+								for (y = 0; y < height; y++) {
+										if (!image [y * width + x].IsColorApproximatelySame (borderColor))
+												left = x;
+								}
+								x++;
+						}
+
+						x = width - 1;
+
+						while (right == -1 && x >= 0) {
+								for (y = 0; y < height; y++) {
+										if (!image [y * width + x].IsColorApproximatelySame (borderColor))
+												right = x;
+								}
+								x--;
+						}
+
+						y = 0;
+
+						while (top == -1 && y < height) {
+								for (x = 0; x < width; x++) {
+										if (!image [y * width + x].IsColorApproximatelySame (borderColor))
+												top = y;
+								}
+								y++;
+						}
+
+						y = height - 1;
+
+						while (bottom == -1 && y >= 0) {
+								for (x = 0; x < width; x++) {
+										if (!image [y * width + x].IsColorApproximatelySame (borderColor))
+												bottom = y;
+								}
+								y--;
+						}
+
+						return Crop (texture, left, top, right - left, bottom - top);
+				}
+
+				/// <summary>
+				/// The pixels (RGB) of both the destinationTexture and the sourceTexture are combined bitwise according to 
+				/// the simplified overwrite raster operation, and the result is then written to the destinationTexture. 
+				/// </summary>
+				/// <param name="destinationTexture">The destination texture.</param>
+				/// <param name="sourceTexture">The source texture.</param>
+				/// <param name="offsetX">Offset X.</param>
+				/// <param name="offsetY">Offset Y.</param>
+				public static void Blit (Texture2D destinationTexture, Texture2D sourceTexture, int offsetX, int offsetY)
+				{
+						var srcWidth = sourceTexture.width;
+						//		int srcHeight = src.height;
+						var dstWidth = destinationTexture.width;
+						//		int dstHeight = dst.height;
+						Color[] dstp = destinationTexture.GetPixels ();
+						Color[] srcp = sourceTexture.GetPixels ();
+
+						for (int y = 0; y < sourceTexture.height; y++) {
+								for (int x = 0; x < sourceTexture.width; x++) {
+										dstp [(y + offsetY) * dstWidth + x + offsetX] = srcp [y * srcWidth + x];
+								}
+						}
+
+						destinationTexture.SetPixels (dstp);
+				}
+
+				/// <summary>
+				/// The pixels (RGBA) of both the destinationTexture and the sourceTexture are combined bitwise according to 
+				/// the simplified overwrite raster operation, and the result is then written to the destinationTexture. 
+				/// </summary>
+				/// <param name="destinationTexture">The destination texture.</param>
+				/// <param name="sourceTexture">The source texture.</param>
+				/// <param name="offsetX">Offset X.</param>
+				/// <param name="offsetY">Offset Y.</param>
+				public static void BlitAlpha (Texture2D destinationTexture, Texture2D sourceTexture, int offsetX, int offsetY)
+				{
+						try {
+								var srcWidth = sourceTexture.width;
+								var srcHeight = sourceTexture.height;
+								var dstWidth = destinationTexture.width;
+								var dstps = destinationTexture.GetPixels ();
+								var srcps = sourceTexture.GetPixels ();
+								Color srcp;
+
+								for (int y = 0; y < srcHeight; y++) {
+										for (int x = 0; x < srcWidth; x++) {
+												int dstOffset = (y + offsetY) * dstWidth + x + offsetX;
+												int srcOffset = y * srcWidth + x;
+												srcp = srcps [srcOffset];
+												if (srcp.a > 0.001f) {
+														dstps [dstOffset] = Color.Lerp (dstps [dstOffset], srcp, srcp.a);
+												}
+										}
+								}
+
+								destinationTexture.SetPixels (dstps);
+						} catch (System.Exception e) {
+								Debug.Log ("[H] There was a problem Blitting the texture. " + e);
+						}
+				}
+
+				/// <summary>
+				/// Crop the specified texture starting at (X,Y) and extending out based on the width and height.
+				/// </summary>
+				/// <param name="sourceTexture">The texture to crop.</param>
+				/// <param name="offsetX">The X offset coordinate.</param>
+				/// <param name="offsetY">The Y offset coordinate.</param>
+				/// <param name="width">Target Width</param>
+				/// <param name="height">Target Height</param>
+				public static Texture2D Crop (this Texture2D sourceTexture, int offsetX, int offsetY, int width, int height)
+				{
+						var result = new Texture2D (width, height);
+
+						result.SetPixels (sourceTexture.GetPixels (offsetX, offsetY, width, height));
+
+						return result;
+				}
+
+				/// <summary>
+				/// Flip texture horizontally.
+				/// </summary>
+				/// <returns>The horizontally flipped texture.</returns>
+				/// <param name="texture">The source texture.</param>
+				public static Texture2D FlipHorizontally (this Texture2D texture)
+				{
+						var image = texture.GetPixels ();
+						var newImage = new Color[image.Length];
+
+						var width = texture.width;
+						var height = texture.height;
+
+						for (var y = 0; y < height; y++) {
+								for (var x = 0; x < width; x++) {
+										newImage [y * width + (x - width - 1)] = image [y * width + x];
+								}
+						}
+
+						var result = new Texture2D (width, height);
+
+						result.SetPixels (newImage);
+
+						return result;
+				}
+
+				/// <summary>
+				/// Flip texture vertically.
+				/// </summary>
+				/// <returns>The vertically flipped texture.</returns>
+				/// <param name="texture">The source texture..</param>
+				public static Texture2D FlipVertically (this Texture2D texture)
+				{
+						var image = texture.GetPixels ();
+						var newImage = new Color[image.Length];
+
+						var width = texture.width;
+						var height = texture.height;
+
+						for (var y = 0; y < height; y++) {
+								for (var x = 0; x < width; x++) {
+										newImage [(height - y - 1) * width + x] = image [y * width + x];
+								}
+						}
+
+						var result = new Texture2D (width, height);
+
+						result.SetPixels (newImage);
+
+						return result;
+				}
+
+				/// <summary>
+				/// Resize the texture to a specific width and height using bilinear filtering.
+				/// </summary>
+				/// <param name="sourceTexture">The source texture.</param>
+				/// <param name="newWidth">The new resized width.</param>
+				/// <param name="newHeight">The new resized height.</param>
+				public static Texture2D Resize (this Texture2D sourceTexture, int newWidth, int newHeight)
 				{
 						var resizedTexture = new Texture2D (newWidth, newHeight);
-						var resizeFactor = new Vector2 ((float)texture.width / (float)newWidth, (float)texture.height / (float)newHeight);
+						var resizeFactor = new Vector2 ((float)sourceTexture.width / (float)newWidth, (float)sourceTexture.height / (float)newHeight);
 
 						Vector2 fraction;
 						Vector2 oneMinusFraction;
@@ -51,7 +247,7 @@ namespace Hydrogen
 						Color c3;
 						Color c4;
 
-						Color[] image = texture.GetPixels ();
+						Color[] image = sourceTexture.GetPixels ();
 						Color[] result = resizedTexture.GetPixels ();
 
 						for (var y = 0; y < newHeight; y++) {
@@ -61,20 +257,20 @@ namespace Hydrogen
 
 										var ceilingX = floorX + 1;
 
-										if (ceilingX >= texture.width)
+										if (ceilingX >= sourceTexture.width)
 												ceilingX = floorX;
 
 										var ceilingY = floorY + 1;
-										if (ceilingY >= texture.height)
+										if (ceilingY >= sourceTexture.height)
 												ceilingY = floorY;
 
 										fraction = new Vector2 (x * resizeFactor.x - floorX, y * resizeFactor.y - floorY);
 										oneMinusFraction = one - fraction;
 
-										c1 = image [floorY * texture.width + floorX];
-										c2 = image [floorY * texture.width + ceilingX];
-										c3 = image [ceilingY * texture.width + floorX];
-										c4 = image [ceilingY * texture.width + ceilingX];
+										c1 = image [floorY * sourceTexture.width + floorX];
+										c2 = image [floorY * sourceTexture.width + ceilingX];
+										c3 = image [ceilingY * sourceTexture.width + floorX];
+										c4 = image [ceilingY * sourceTexture.width + ceilingX];
 
 										// Blue
 										float b1 = (oneMinusFraction.x * c1.b + fraction.x * c2.b);
@@ -109,130 +305,11 @@ namespace Hydrogen
 						return resizedTexture;
 				}
 
-				public static Texture2D Tile (this Texture2D texture, int horizontalTiles, int verticalTiles)
-				{
-						// @TODO Ensure horizontalTiles and verticalTiles sanity
-						var tiledTexture = new Texture2D (texture.width * horizontalTiles, texture.height * verticalTiles);
-						var texturePixels = texture.GetPixels ();
-						for (var i = 0; i < horizontalTiles; i++) {
-								for (var j = 0; j < verticalTiles; j++)
-										tiledTexture.SetPixels (i * texture.width, j * texture.height, texture.width, texture.height, texturePixels);
-						}
-
-						return tiledTexture;
-				}
-				//TODO error checking and assertions :)
-				public static Texture2D Crop (this Texture2D texture, int x, int y, int width, int height)
-				{
-
-						var result = new Texture2D (width, height);
-
-						result.SetPixels (texture.GetPixels (x, y, width, height));
-
-						return result;
-				}
-
-				static bool AreColorsApproximatelyEqual (Color a, Color b)
-				{
-						return (Mathf.Approximately (a.r, b.r) && Mathf.Approximately (a.g, b.g) && Mathf.Approximately (a.b, b.b) && Mathf.Approximately (a.a, b.a));
-				}
-
-				public static Texture2D AutoCrop (this Texture2D texture, Color borderColor)
-				{
-						var image = texture.GetPixels ();
-						var width = texture.width;
-						var height = texture.height;
-
-						var left = -1;
-						var right = -1;
-						var top = -1;
-						var bottom = -1;
-						var x = 0;
-						int y;
-
-						while (left == -1 && x < width) {
-								for (y = 0; y < height; y++) {
-										if (!AreColorsApproximatelyEqual (image [y * width + x], borderColor))
-												left = x;
-								}
-								x++;
-						}
-
-						x = width - 1;
-
-						while (right == -1 && x >= 0) {
-								for (y = 0; y < height; y++) {
-										if (!AreColorsApproximatelyEqual (image [y * width + x], borderColor))
-												right = x;
-								}
-								x--;
-						}
-
-						y = 0;
-
-						while (top == -1 && y < height) {
-								for (x = 0; x < width; x++) {
-										if (!AreColorsApproximatelyEqual (image [y * width + x], borderColor))
-												top = y;
-								}
-								y++;
-						}
-
-						y = height - 1;
-
-						while (bottom == -1 && y >= 0) {
-								for (x = 0; x < width; x++) {
-										if (!AreColorsApproximatelyEqual (image [y * width + x], borderColor))
-												bottom = y;
-								}
-								y--;
-						}
-
-						return Crop (texture, left, top, right - left, bottom - top);
-				}
-
-				public static Texture2D FlipHorizontally (this Texture2D texture)
-				{
-						var image = texture.GetPixels ();
-						var newImage = new Color[image.Length];
-
-						var width = texture.width;
-						var height = texture.height;
-
-						for (var y = 0; y < height; y++) {
-								for (var x = 0; x < width; x++) {
-										newImage [y * width + (x - width - 1)] = image [y * width + x];
-								}
-						}
-
-						var result = new Texture2D (width, height);
-
-						result.SetPixels (newImage);
-
-						return result;
-				}
-
-				public static Texture2D FlipVertically (this Texture2D texture)
-				{
-						var image = texture.GetPixels ();
-						var newImage = new Color[image.Length];
-
-						var width = texture.width;
-						var height = texture.height;
-
-						for (var y = 0; y < height; y++) {
-								for (var x = 0; x < width; x++) {
-										newImage [(height - y - 1) * width + x] = image [y * width + x];
-								}
-						}
-
-						var result = new Texture2D (width, height);
-
-						result.SetPixels (newImage);
-
-						return result;
-				}
-
+				/// <summary>
+				/// Rotate texture clockwise, 90 degrees.
+				/// </summary>
+				/// <returns>The rotated texture.</returns>
+				/// <param name="texture">The source texture.</param>
 				public static Texture2D RotateClockwise90Degrees (this Texture2D texture)
 				{
 						var image = texture.GetPixels ();
@@ -254,6 +331,11 @@ namespace Hydrogen
 						return result;
 				}
 
+				/// <summary>
+				/// Rotate texture counter clockwise, 90 degrees.
+				/// </summary>
+				/// <returns>The rotated texture.</returns>
+				/// <param name="texture">The source texture.</param>
 				public static Texture2D RotateCounterClockwise90Degrees (this Texture2D texture)
 				{
 						var image = texture.GetPixels ();
@@ -275,7 +357,37 @@ namespace Hydrogen
 						return result;
 				}
 
-				public static Texture2D Transpose (Texture2D texture)
+				/// <summary>
+				/// Tile the specified texture as outlined.
+				/// </summary>
+				/// <returns>The tiled texture.</returns>
+				/// <param name="texture">The texture to tile.</param>
+				/// <param name="horizontalTiles">Number of horizontal tiles.</param>
+				/// <param name="verticalTiles">Number of vertical tiles.</param>
+				public static Texture2D Tile (this Texture2D texture, int horizontalTiles, int verticalTiles)
+				{
+						// Sanity Check
+						if (horizontalTiles < 1)
+								horizontalTiles = 1;
+						if (verticalTiles < 1)
+								verticalTiles = 1;
+
+						var tiledTexture = new Texture2D (texture.width * horizontalTiles, texture.height * verticalTiles);
+						var texturePixels = texture.GetPixels ();
+						for (var i = 0; i < horizontalTiles; i++) {
+								for (var j = 0; j < verticalTiles; j++)
+										tiledTexture.SetPixels (i * texture.width, j * texture.height, texture.width, texture.height, texturePixels);
+						}
+
+						return tiledTexture;
+				}
+
+				/// <summary>
+				/// Transpose texture.
+				/// </summary>
+				/// <returns>The transposed texture.</returns>
+				/// <param name="texture">The source texture.</param>
+				public static Texture2D Transpose (this Texture2D texture)
 				{
 						var image = texture.GetPixels ();
 						var newImage = new Color[image.Length];
@@ -283,8 +395,8 @@ namespace Hydrogen
 						var width = texture.width;
 						var height = texture.height;
 
-						for (int y = 0; y < height; y++) {
-								for (int x = 0; x < width; x++) {
+						for (var y = 0; y < height; y++) {
+								for (var x = 0; x < width; x++) {
 										newImage [y * width + x] = image [x * width + y];
 								}
 						}
@@ -296,7 +408,12 @@ namespace Hydrogen
 						return result;
 				}
 
-				public static Texture2D TransposePerpendicular (Texture2D texture)
+				/// <summary>
+				/// Transpose texture perpendicularily.
+				/// </summary>
+				/// <returns>The transponsed texture.</returns>
+				/// <param name="texture">The source texture.</param>
+				public static Texture2D TransposePerpendicular (this Texture2D texture)
 				{
 						var image = texture.GetPixels ();
 						var newImage = new Color[image.Length];
@@ -315,52 +432,6 @@ namespace Hydrogen
 						result.SetPixels (newImage);
 
 						return result;
-				}
-
-				public static void Blit (Texture2D dst, Texture2D src, int offsetX, int offsetY)
-				{
-						var srcWidth = src.width;
-						//		int srcHeight = src.height;
-						var dstWidth = dst.width;
-						//		int dstHeight = dst.height;
-						Color[] dstp = dst.GetPixels ();
-						Color[] srcp = src.GetPixels ();
-
-						for (int y = 0; y < src.height; y++) {
-								for (int x = 0; x < src.width; x++) {
-										dstp [(y + offsetY) * dstWidth + x + offsetX] = srcp [y * srcWidth + x];
-								}
-						}
-
-						dst.SetPixels (dstp);
-				}
-
-				public static void BlitAlpha (Texture2D dstTexture, Texture2D srcTexture, int offsetX, int offsetY)
-				{
-						try {
-								var srcWidth = srcTexture.width;
-								var srcHeight = srcTexture.height;
-								var dstWidth = dstTexture.width;
-								//		int dstHeight = dstTexture.height;
-								var dstps = dstTexture.GetPixels ();
-								var srcps = srcTexture.GetPixels ();
-								Color srcp;
-
-								for (int y = 0; y < srcHeight; y++) {
-										for (int x = 0; x < srcWidth; x++) {
-												int dstOffset = (y + offsetY) * dstWidth + x + offsetX;
-												int srcOffset = y * srcWidth + x;
-												srcp = srcps [srcOffset];
-												if (srcp.a > 0.001f) {
-														dstps [dstOffset] = Color.Lerp (dstps [dstOffset], srcp, srcp.a);
-												}
-										}
-								}
-
-								dstTexture.SetPixels (dstps);
-						} catch (System.Exception e) {
-								Debug.Log ("[H] There was a problem Blitting the texture. " + e);
-						}
 				}
 		}
 }

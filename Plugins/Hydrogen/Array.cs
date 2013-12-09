@@ -31,10 +31,35 @@ using System.Linq;
 namespace Hydrogen
 {
 		/// <summary>
-		/// Additional static functions, constants and classes used to extend existing Array support inside of Unity.
+		/// Additional static functions used to extend existing Array support inside of Unity.
 		/// </summary>
 		public static class Array
 		{
+				/// <summary>
+				/// Add a unique item to an array.
+				/// </summary>
+				/// <returns><c>true</c>, if something was added, <c>false</c> otherwise.</returns>
+				/// <param name="array">The source array</param>
+				/// <param name="newObject">Object to be added.</param>
+				/// <param name="forceUnique">Should it check to see if there is an existing reference in the array?</param>
+				/// <typeparam name="T">Object Type.</typeparam>
+				public static bool Add<T> (ref T[] array, T newObject, bool forceUnique)
+				{
+						return AddAt (ref array, array.Length, newObject, forceUnique);
+				}
+
+				/// <summary>
+				/// Add an item to an array.
+				/// </summary>
+				/// <returns>Was anything added?</returns>
+				/// <param name="array">The source array</param>
+				/// <param name="newObject">Object to be added.</param>
+				/// <typeparam name="T">Object Type.</typeparam>
+				public static bool Add<T> (ref T[] array, T newObject)
+				{
+						return AddAt (ref array, array.Length, newObject, false);
+				}
+
 				/// <summary>
 				/// Add a unique item to an array.
 				/// </summary>
@@ -77,31 +102,6 @@ namespace Hydrogen
 						array = newArray;
 
 						return true;
-				}
-
-				/// <summary>
-				/// Add a unique item to an array.
-				/// </summary>
-				/// <returns><c>true</c>, if something was added, <c>false</c> otherwise.</returns>
-				/// <param name="array">The source array</param>
-				/// <param name="newObject">Object to be added.</param>
-				/// <param name="forceUnique">Should it check to see if there is an existing reference in the array?</param>
-				/// <typeparam name="T">Object Type.</typeparam>
-				public static bool Add<T> (ref T[] array, T newObject, bool forceUnique)
-				{
-						return AddAt (ref array, array.Length, newObject, forceUnique);
-				}
-
-				/// <summary>
-				/// Add an item to an array.
-				/// </summary>
-				/// <returns>Was anything added?</returns>
-				/// <param name="array">The source array</param>
-				/// <param name="newObject">Object to be added.</param>
-				/// <typeparam name="T">Object Type.</typeparam>
-				public static bool Add<T> (ref T[] array, T newObject)
-				{
-						return AddAt (ref array, array.Length, newObject, false);
 				}
 
 				/// <summary>
@@ -163,7 +163,7 @@ namespace Hydrogen
 						// Failsafe
 						if (index >= array.Length || index < 0)
 								return false;
-			
+
 						var newArray = new T[array.Length - 1];
 						var counter = 0;
 

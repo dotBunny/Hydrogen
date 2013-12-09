@@ -31,10 +31,54 @@ using System;
 namespace Hydrogen
 {
 		/// <summary>
-		/// Additional static functions, constants and classes used to extend existing Math support inside of Unity.
+		/// Additional static functions used to extend existing Math support inside of Unity.
 		/// </summary>
 		public static class Math
 		{
+				/// <summary>
+				/// Clamp and neutralize an angle.
+				/// </summary>
+				/// <returns>The clamped and neutralized angle.</returns>
+				/// <param name="angle">The source angle.</param>
+				/// <param name="minimumAngle">Minimum angle.</param>
+				/// <param name="maximumAngle">Maximum angle.</param>
+				public static float ClampAngle (float angle, float minimumAngle, float maximumAngle)
+				{
+						// Clamp that angle up
+						return UnityEngine.Mathf.Clamp (NeutralizeAngle (angle), minimumAngle, maximumAngle);
+				}
+
+				/// <summary>
+				/// Neutralizes the an angle, providing an angle below 360 degrees.
+				/// </summary>
+				/// <returns>The neutralized angle.</returns>
+				/// <param name="angle">The source angle.</param>
+				public static float NeutralizeAngle (float angle)
+				{
+						// Neutralize really fucked up angles
+						if (angle < 0)
+								return (angle % 360f) * -1;
+						else
+								return angle % 360f;
+				}
+
+				/// <summary>
+				/// The signed equivalent of the angle.
+				/// </summary>
+				/// <returns>The signed angle.</returns>
+				/// <param name="angle">The source angle.</param>
+				public static float SignedAngle (float angle)
+				{
+						angle = angle % 360f;
+
+						if (angle > 180f) {
+								return (180 - ((angle % 180f))) * -1f;
+						} else if (angle < -180) {
+								return ((angle % 180) * -1f);
+						}
+						return angle;
+				}
+
 				/// <summary>
 				/// Converts the specified values boxed type to its corresponding unsigned type.
 				/// </summary>
@@ -91,7 +135,7 @@ namespace Hydrogen
 								return (long)((int)value);
 						case TypeCode.Int64:
 								return (long)value;
-				
+
 						case TypeCode.Byte:
 								return (long)((byte)value);
 						case TypeCode.UInt16:
@@ -100,44 +144,17 @@ namespace Hydrogen
 								return (long)((uint)value);
 						case TypeCode.UInt64:
 								return (long)((ulong)value);
-				
+
 						case TypeCode.Single:
 								return (round ? (long)System.Math.Round ((float)value) : (long)((float)value));
 						case TypeCode.Double:
 								return (round ? (long)System.Math.Round ((double)value) : (long)((double)value));
 						case TypeCode.Decimal:
 								return (round ? (long)System.Math.Round ((decimal)value) : (long)((decimal)value));
-				
+
 						default:
 								return 0;
 						}
-				}
-
-				/// <summary>
-				/// Clamp and Neutralize an angle.
-				/// </summary>
-				/// <returns>The clamped and neutralized angle.</returns>
-				/// <param name="angle">The source angle.</param>
-				/// <param name="minimumAngle">Minimum angle.</param>
-				/// <param name="maximumAngle">Maximum angle.</param>
-				public static float ClampAngle (float angle, float minimumAngle, float maximumAngle)
-				{
-						// Clamp that angle up
-						return UnityEngine.Mathf.Clamp (NeutralizeAngle (angle), minimumAngle, maximumAngle);
-				}
-
-				/// <summary>
-				/// Neutralizes the an angle, providing an angle below 360 degrees.
-				/// </summary>
-				/// <returns>The neutralized angle.</returns>
-				/// <param name="angle">The source angle.</param>
-				public static float NeutralizeAngle (float angle)
-				{
-						// Neutralize really fucked up angles
-						if (angle < 0)
-								return (angle % 360f) * -1;
-						else
-								return angle % 360f;
 				}
 
 				/// <summary>
@@ -153,24 +170,6 @@ namespace Hydrogen
 								} else {
 										return 360f + angle;
 								}
-						}
-						return angle;
-				}
-
-				/// <summary>
-				/// The signed equivalent of the angle.
-				/// </summary>
-				/// <returns>The signed angle.</returns>
-				/// <param name="angle">The source angle.</param>
-				public static float SignedAngle (float angle)
-				{
-			
-						angle = angle % 360f;
-			
-						if (angle > 180f) {
-								return (180 - ((angle % 180f))) * -1f;
-						} else if (angle < -180) {
-								return ((angle % 180) * -1f);
 						}
 						return angle;
 				}
