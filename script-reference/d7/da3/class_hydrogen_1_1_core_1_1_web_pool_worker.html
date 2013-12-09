@@ -132,13 +132,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a13a723d8dbcfee75961f0a9a160474b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raised when the object is 'spawned' from the pool.  <a href="#a13a723d8dbcfee75961f0a9a160474b5">More...</a><br/></td></tr>
 <tr class="separator:a13a723d8dbcfee75961f0a9a160474b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21c4049319581e6d72c6a771f78e90cc"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da3/class_hydrogen_1_1_core_1_1_web_pool_worker.html#a21c4049319581e6d72c6a771f78e90cc">OnDespawned</a> ()</td></tr>
-<tr class="memdesc:a21c4049319581e6d72c6a771f78e90cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raised when the object is 'despawned' back into the pool  <a href="#a21c4049319581e6d72c6a771f78e90cc">More...</a><br/></td></tr>
+<tr class="memdesc:a21c4049319581e6d72c6a771f78e90cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raised when the object is 'despawned' back into the pool.  <a href="#a21c4049319581e6d72c6a771f78e90cc">More...</a><br/></td></tr>
 <tr class="separator:a21c4049319581e6d72c6a771f78e90cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac612528f8891fdf53ceb2151d8bbd273"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da3/class_hydrogen_1_1_core_1_1_web_pool_worker.html#ac612528f8891fdf53ceb2151d8bbd273">DespawnSafely</a> ()</td></tr>
-<tr class="memdesc:ac612528f8891fdf53ceb2151d8bbd273"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple function which delays the despawning based on whatever you define  <a href="#ac612528f8891fdf53ceb2151d8bbd273">More...</a><br/></td></tr>
+<tr class="memdesc:ac612528f8891fdf53ceb2151d8bbd273"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple function which delays the despawning based on whatever you define.  <a href="#ac612528f8891fdf53ceb2151d8bbd273">More...</a><br/></td></tr>
 <tr class="separator:ac612528f8891fdf53ceb2151d8bbd273"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a585379813867ae4c79d433bfc6327ac7"><td class="memItemLeft" align="right" valign="top">override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da3/class_hydrogen_1_1_core_1_1_web_pool_worker.html#a585379813867ae4c79d433bfc6327ac7">IsInactive</a> ()</td></tr>
-<tr class="memdesc:a585379813867ae4c79d433bfc6327ac7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the object idle, and therefore can be despawned organically  <a href="#a585379813867ae4c79d433bfc6327ac7">More...</a><br/></td></tr>
+<tr class="memdesc:a585379813867ae4c79d433bfc6327ac7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the object idle, and therefore can be despawned organically?  <a href="#a585379813867ae4c79d433bfc6327ac7">More...</a><br/></td></tr>
 <tr class="separator:a585379813867ae4c79d433bfc6327ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af983da31bd161b11acd55e4346ab6cfa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/da3/class_hydrogen_1_1_core_1_1_web_pool_worker.html#af983da31bd161b11acd55e4346ab6cfa">GET</a> (string URI, string cookie, System.Action&lt; int, Hashtable, string &gt; callback)</td></tr>
 <tr class="separator:af983da31bd161b11acd55e4346ab6cfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,7 +181,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Simple function which delays the despawning based on whatever you define </p>
+<p>Simple function which delays the despawning based on whatever you define. </p>
 <p>If you are going to utilize this make sure that your function contains: hObjectPool.Instance.objectPools[poolID].DespawnImmediate(gameObject); </p>
 
 <p>Implements <a class="el" href="../../db/d5e/class_hydrogen_1_1_core_1_1_object_pool_item_base.html#a48449a63cf3fd321916be9f6e99264aa">Hydrogen.Core.ObjectPoolItemBase</a>.</p>
@@ -445,7 +445,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Is the object idle, and therefore can be despawned organically </p>
+<p>Is the object idle, and therefore can be despawned organically? </p>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> if this instance is inactive; otherwise, <code>false</code>.</dd></dl>
 <p>This will only work on tracked spawned objects.</p>
 
@@ -479,7 +479,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Raised when the object is 'despawned' back into the pool </p>
+<p>Raised when the object is 'despawned' back into the pool. </p>
 <p>It does not set "active", you must handle that yourself. </p>
 
 <p>Implements <a class="el" href="../../db/d5e/class_hydrogen_1_1_core_1_1_object_pool_item_base.html#a8cd7f62b56f14eecaedb7ca77db30f6f">Hydrogen.Core.ObjectPoolItemBase</a>.</p>
@@ -657,7 +657,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d0/dff/namespace_hydrogen.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../d1/d8f/namespace_hydrogen_1_1_core.html">Core</a></li><li class="navelem"><a class="el" href="../../d7/da3/class_hydrogen_1_1_core_1_1_web_pool_worker.html">WebPoolWorker</a></li>
-    <li class="footer">Generated on Sat Dec 7 2013 22:50:46 for Hydrogen Framework by
+    <li class="footer">Generated on Mon Dec 9 2013 00:53:09 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

@@ -106,6 +106,8 @@ $(document).ready(function(){initNavTree('d0/d8b/classh_web_pool.html','../../')
 <div class="header">
   <div class="summary">
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#properties">Properties</a> &#124;
 <a href="../../da/dd9/classh_web_pool-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -113,7 +115,7 @@ $(document).ready(function(){initNavTree('d0/d8b/classh_web_pool.html','../../')
 </div><!--header-->
 <div class="contents">
 
-<p>Hydrogen.Core.WebStack Instance  
+<p>A drop in implementation of the <a class="el" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html" title="An internal web pool system used within the Hydrogen Framework. ">Hydrogen.Core.WebPool</a>. This simply makes the class an accessible singleton with some very simple additional functionality.  
  <a href="../../d0/d8b/classh_web_pool.html#details">More...</a></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="../../closed.png" alt="+"/> Inheritance diagram for hWebPool:</div>
@@ -130,20 +132,30 @@ $(document).ready(function(){initNavTree('d0/d8b/classh_web_pool.html','../../')
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:acb0f86c370eb278e0f75d15ca7fcb933"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d8b/classh_web_pool.html#acb0f86c370eb278e0f75d15ca7fcb933">Exists</a> ()</td></tr>
-<tr class="memdesc:acb0f86c370eb278e0f75d15ca7fcb933"><td class="mdescLeft">&#160;</td><td class="mdescRight">Does an instance exist of this class?  <a href="#acb0f86c370eb278e0f75d15ca7fcb933">More...</a><br/></td></tr>
+<tr class="memdesc:acb0f86c370eb278e0f75d15ca7fcb933"><td class="mdescLeft">&#160;</td><td class="mdescRight">Does a Web Pool already exist?  <a href="#acb0f86c370eb278e0f75d15ca7fcb933">More...</a><br/></td></tr>
 <tr class="separator:acb0f86c370eb278e0f75d15ca7fcb933"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:add1fed3eb1ab97a39b9e51243d0551da"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d8b/classh_web_pool.html#add1fed3eb1ab97a39b9e51243d0551da">Presistant</a> = true</td></tr>
+<tr class="memdesc:add1fed3eb1ab97a39b9e51243d0551da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Should this web pool survive scene switches?  <a href="#add1fed3eb1ab97a39b9e51243d0551da">More...</a><br/></td></tr>
+<tr class="separator:add1fed3eb1ab97a39b9e51243d0551da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a00c9b2808bd53320b2e37dbf4dfe117f"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d8b/classh_web_pool.html#a00c9b2808bd53320b2e37dbf4dfe117f">Awake</a> ()</td></tr>
+<tr class="memdesc:a00c9b2808bd53320b2e37dbf4dfe117f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unity's Awake Event  <a href="#a00c9b2808bd53320b2e37dbf4dfe117f">More...</a><br/></td></tr>
+<tr class="separator:a00c9b2808bd53320b2e37dbf4dfe117f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:a36bfcf7df09718d58b8529a8e19670f4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="../../d0/d8b/classh_web_pool.html">hWebPool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d8b/classh_web_pool.html#a36bfcf7df09718d58b8529a8e19670f4">Instance</a><code> [get]</code></td></tr>
-<tr class="memdesc:a36bfcf7df09718d58b8529a8e19670f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the Web Stack instance, creating one if none is found.  <a href="#a36bfcf7df09718d58b8529a8e19670f4">More...</a><br/></td></tr>
+<tr class="memdesc:a36bfcf7df09718d58b8529a8e19670f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the web pool instance, creating one if none is found.  <a href="#a36bfcf7df09718d58b8529a8e19670f4">More...</a><br/></td></tr>
 <tr class="separator:a36bfcf7df09718d58b8529a8e19670f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_methods_class_hydrogen_1_1_core_1_1_web_pool"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_hydrogen_1_1_core_1_1_web_pool')"><img src="../../closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html">Hydrogen.Core.WebPool</a></td></tr>
-<tr class="memitem:a6d5e21e5eb6a7cb33cf771dfee02d0e9 inherit pub_methods_class_hydrogen_1_1_core_1_1_web_pool"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a6d5e21e5eb6a7cb33cf771dfee02d0e9">Awake</a> ()</td></tr>
-<tr class="separator:a6d5e21e5eb6a7cb33cf771dfee02d0e9 inherit pub_methods_class_hydrogen_1_1_core_1_1_web_pool"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7a87fc73ea35f495ea4c50fe66813d9 inherit pub_methods_class_hydrogen_1_1_core_1_1_web_pool"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#aa7a87fc73ea35f495ea4c50fe66813d9">GET</a> (string URI, System.Action&lt; int, Hashtable, string &gt; callback)</td></tr>
 <tr class="separator:aa7a87fc73ea35f495ea4c50fe66813d9 inherit pub_methods_class_hydrogen_1_1_core_1_1_web_pool"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac42d6c5c2a6fa7c2ff5f973b9f30dc74 inherit pub_methods_class_hydrogen_1_1_core_1_1_web_pool"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#ac42d6c5c2a6fa7c2ff5f973b9f30dc74">GET</a> (string URI, string cookie, System.Action&lt; int, Hashtable, string &gt; callback)</td></tr>
@@ -158,10 +170,48 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:aa3623eaa77b87bbe9ec050b1d88b93e0 inherit pub_methods_class_hydrogen_1_1_core_1_1_web_pool"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Hydrogen.Core.WebStack Instance </p>
+<div class="textblock"><p>A drop in implementation of the <a class="el" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html" title="An internal web pool system used within the Hydrogen Framework. ">Hydrogen.Core.WebPool</a>. This simply makes the class an accessible singleton with some very simple additional functionality. </p>
 
-<p>Definition at line <a class="el" href="../../df/d0e/h_web_pool_8cs_source.html#l00035">35</a> of file <a class="el" href="../../df/d0e/h_web_pool_8cs_source.html">hWebPool.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../df/d0e/h_web_pool_8cs_source.html#l00036">36</a> of file <a class="el" href="../../df/d0e/h_web_pool_8cs_source.html">hWebPool.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a00c9b2808bd53320b2e37dbf4dfe117f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">override void hWebPool.Awake </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Unity's Awake Event </p>
+
+<p>Reimplemented from <a class="el" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#af3886616a757432ca7959d69ff05fded">Hydrogen.Core.WebPool</a>.</p>
+
+<p>Definition at line <a class="el" href="../../df/d0e/h_web_pool_8cs_source.html#l00086">86</a> of file <a class="el" href="../../df/d0e/h_web_pool_8cs_source.html">hWebPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                <span class="comment">// Make sure to do the object pools normal initialization</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                base.Awake ();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                <span class="comment">// Should this gameObject be kept around :) I think so.</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="../../d0/d8b/classh_web_pool.html#add1fed3eb1ab97a39b9e51243d0551da">Presistant</a>)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                        DontDestroyOnLoad (gameObject);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        }</div>
+<div class="ttc" id="classh_web_pool_html_add1fed3eb1ab97a39b9e51243d0551da"><div class="ttname"><a href="../../d0/d8b/classh_web_pool.html#add1fed3eb1ab97a39b9e51243d0551da">hWebPool.Presistant</a></div><div class="ttdeci">bool Presistant</div><div class="ttdoc">Should this web pool survive scene switches? </div><div class="ttdef"><b>Definition:</b> <a href="../../df/d0e/h_web_pool_8cs_source.html#l00041">hWebPool.cs:41</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
 <a class="anchor" id="acb0f86c370eb278e0f75d15ca7fcb933"></a>
 <div class="memitem">
 <div class="memproto">
@@ -183,13 +233,30 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Does an instance exist of this class? </p>
+<p>Does a Web Pool already exist? </p>
 
-<p>Definition at line <a class="el" href="../../df/d0e/h_web_pool_8cs_source.html#l00080">80</a> of file <a class="el" href="../../df/d0e/h_web_pool_8cs_source.html">hWebPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                <span class="keywordflow">return</span> _staticInstance != null;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        }</div>
+<p>Definition at line <a class="el" href="../../df/d0e/h_web_pool_8cs_source.html#l00099">99</a> of file <a class="el" href="../../df/d0e/h_web_pool_8cs_source.html">hWebPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                <span class="keywordflow">return</span> _staticInstance != null;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        }</div>
 </div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="add1fed3eb1ab97a39b9e51243d0551da"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool hWebPool.Presistant = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Should this web pool survive scene switches? </p>
+
+<p>Definition at line <a class="el" href="../../df/d0e/h_web_pool_8cs_source.html#l00041">41</a> of file <a class="el" href="../../df/d0e/h_web_pool_8cs_source.html">hWebPool.cs</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Property Documentation</h2>
@@ -211,10 +278,10 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Gets the Web Stack instance, creating one if none is found. </p>
-<p>The Object Pool </p>
+<p>Gets the web pool instance, creating one if none is found. </p>
+<p>The Web Pool. </p>
 
-<p>Definition at line <a class="el" href="../../df/d0e/h_web_pool_8cs_source.html#l00058">58</a> of file <a class="el" href="../../df/d0e/h_web_pool_8cs_source.html">hWebPool.cs</a>.</p>
+<p>Definition at line <a class="el" href="../../df/d0e/h_web_pool_8cs_source.html#l00063">63</a> of file <a class="el" href="../../df/d0e/h_web_pool_8cs_source.html">hWebPool.cs</a>.</p>
 
 </div>
 </div>
@@ -224,7 +291,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d0/d8b/classh_web_pool.html">hWebPool</a></li>
-    <li class="footer">Generated on Sat Dec 7 2013 22:50:46 for Hydrogen Framework by
+    <li class="footer">Generated on Mon Dec 9 2013 00:53:09 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

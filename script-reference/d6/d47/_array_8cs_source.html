@@ -133,7 +133,7 @@ $(document).ready(function(){initNavTree('d6/d47/_array_8cs_source.html','../../
 <div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="../../d0/dff/namespace_hydrogen.html">   31</a></span>&#160;<span class="keyword">namespace </span>Hydrogen</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{<span class="comment"></span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">        /// Additional static functions, constants and classes used to extend existing Array support inside of Unity.</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">        /// Additional static functions used to extend existing Array support inside of Unity.</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="../../d9/d04/class_hydrogen_1_1_array.html">   36</a></span>&#160;<span class="comment"></span>        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class </span><a class="code" href="../../d9/d04/class_hydrogen_1_1_array.html">Array</a></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        {<span class="comment"></span></div>
@@ -141,69 +141,69 @@ $(document).ready(function(){initNavTree('d6/d47/_array_8cs_source.html','../../
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">                /// Add a unique item to an array.</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">                /// &lt;/summary&gt;</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">                /// &lt;returns&gt;&lt;c&gt;true&lt;/c&gt;, if something was added, &lt;c&gt;false&lt;/c&gt; otherwise.&lt;/returns&gt;</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">                /// &lt;param name=&quot;array&quot;&gt;The source array.&lt;/param&gt;</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">                /// &lt;param name=&quot;position&quot;&gt;The position (index) where to insert the object.&lt;/param&gt;</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">                /// &lt;param name=&quot;newObject&quot;&gt;Object to be added.&lt;/param&gt;</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">                /// &lt;param name=&quot;forceUnique&quot;&gt;Should it check to see if there is an existing reference in the array?&lt;/param&gt;</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">                /// &lt;typeparam name=&quot;T&quot;&gt;Object Type.&lt;/typeparam&gt;</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="../../d9/d04/class_hydrogen_1_1_array.html#a55f152f36b2fbba8af69f88e99c52466">   47</a></span>&#160;<span class="comment"></span>                <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="../../d9/d04/class_hydrogen_1_1_array.html#a55f152f36b2fbba8af69f88e99c52466">AddAt&lt;T&gt;</a> (ref T[] array, <span class="keywordtype">int</span> position, T newObject, <span class="keywordtype">bool</span> forceUnique)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                        <span class="comment">// First Addition - Just Quick Add</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                        <span class="keywordflow">if</span> (array.Length == 0) {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                                array = <span class="keyword">new</span> T[1];</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                                array [0] = newObject;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                        }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                        <span class="comment">// Check if we already have this target and unique is required  </span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                        <span class="keywordflow">if</span> (forceUnique) {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                                <span class="keywordflow">if</span> (array.Any (t =&gt; t.Equals (newObject))) {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                                        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                                }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                        }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                        <span class="comment">// Create new array</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                        var newArray = <span class="keyword">new</span> T[array.Length + 1];</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                        <span class="keywordflow">for</span> (var x = 0; x &lt;= array.Length; x++) {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                                <span class="keywordflow">if</span> (x &lt; position) {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                                        newArray [x] = array [x];</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (x == position) {</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                                        newArray [x] = newObject;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (x &gt; position) {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                                        newArray [x] = array [x - 1];</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                                }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                        }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                        <span class="comment">// Assign array</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                        array = newArray;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">                /// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">                /// Add a unique item to an array.</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">                /// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">                /// &lt;returns&gt;&lt;c&gt;true&lt;/c&gt;, if something was added, &lt;c&gt;false&lt;/c&gt; otherwise.&lt;/returns&gt;</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">                /// &lt;param name=&quot;array&quot;&gt;The source array&lt;/param&gt;</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">                /// &lt;param name=&quot;newObject&quot;&gt;Object to be added.&lt;/param&gt;</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">                /// &lt;param name=&quot;forceUnique&quot;&gt;Should it check to see if there is an existing reference in the array?&lt;/param&gt;</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">                /// &lt;typeparam name=&quot;T&quot;&gt;Object Type.&lt;/typeparam&gt;</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="../../d9/d04/class_hydrogen_1_1_array.html#ab086996fd838db5c36388f0d7b4c8eae">   90</a></span>&#160;<span class="comment"></span>                <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="../../d9/d04/class_hydrogen_1_1_array.html#ab086996fd838db5c36388f0d7b4c8eae">Add&lt;T&gt;</a> (ref T[] array, T newObject, <span class="keywordtype">bool</span> forceUnique)</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                        <span class="keywordflow">return</span> AddAt (ref array, array.Length, newObject, forceUnique);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                }</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">                /// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">                /// Add an item to an array.</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">                /// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">                /// &lt;returns&gt;Was anything added?&lt;/returns&gt;</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">                /// &lt;param name=&quot;array&quot;&gt;The source array&lt;/param&gt;</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">                /// &lt;param name=&quot;newObject&quot;&gt;Object to be added.&lt;/param&gt;</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">                /// &lt;typeparam name=&quot;T&quot;&gt;Object Type.&lt;/typeparam&gt;</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="../../d9/d04/class_hydrogen_1_1_array.html#aab95ea01fc6b3cc4449583631dbc2a6d">  102</a></span>&#160;<span class="comment"></span>                <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="../../d9/d04/class_hydrogen_1_1_array.html#ab086996fd838db5c36388f0d7b4c8eae">Add&lt;T&gt;</a> (ref T[] array, T newObject)</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                        <span class="keywordflow">return</span> AddAt (ref array, array.Length, newObject, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">                /// &lt;param name=&quot;array&quot;&gt;The source array&lt;/param&gt;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">                /// &lt;param name=&quot;newObject&quot;&gt;Object to be added.&lt;/param&gt;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">                /// &lt;param name=&quot;forceUnique&quot;&gt;Should it check to see if there is an existing reference in the array?&lt;/param&gt;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">                /// &lt;typeparam name=&quot;T&quot;&gt;Object Type.&lt;/typeparam&gt;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="../../d9/d04/class_hydrogen_1_1_array.html#ab086996fd838db5c36388f0d7b4c8eae">   46</a></span>&#160;<span class="comment"></span>                <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="../../d9/d04/class_hydrogen_1_1_array.html#ab086996fd838db5c36388f0d7b4c8eae">Add&lt;T&gt;</a> (ref T[] array, T newObject, <span class="keywordtype">bool</span> forceUnique)</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                        <span class="keywordflow">return</span> AddAt (ref array, array.Length, newObject, forceUnique);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                }</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">                /// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">                /// Add an item to an array.</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">                /// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">                /// &lt;returns&gt;Was anything added?&lt;/returns&gt;</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">                /// &lt;param name=&quot;array&quot;&gt;The source array&lt;/param&gt;</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">                /// &lt;param name=&quot;newObject&quot;&gt;Object to be added.&lt;/param&gt;</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">                /// &lt;typeparam name=&quot;T&quot;&gt;Object Type.&lt;/typeparam&gt;</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="../../d9/d04/class_hydrogen_1_1_array.html#aab95ea01fc6b3cc4449583631dbc2a6d">   58</a></span>&#160;<span class="comment"></span>                <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="../../d9/d04/class_hydrogen_1_1_array.html#ab086996fd838db5c36388f0d7b4c8eae">Add&lt;T&gt;</a> (ref T[] array, T newObject)</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                        <span class="keywordflow">return</span> AddAt (ref array, array.Length, newObject, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">                /// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">                /// Add a unique item to an array.</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">                /// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">                /// &lt;returns&gt;&lt;c&gt;true&lt;/c&gt;, if something was added, &lt;c&gt;false&lt;/c&gt; otherwise.&lt;/returns&gt;</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">                /// &lt;param name=&quot;array&quot;&gt;The source array.&lt;/param&gt;</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">                /// &lt;param name=&quot;position&quot;&gt;The position (index) where to insert the object.&lt;/param&gt;</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">                /// &lt;param name=&quot;newObject&quot;&gt;Object to be added.&lt;/param&gt;</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">                /// &lt;param name=&quot;forceUnique&quot;&gt;Should it check to see if there is an existing reference in the array?&lt;/param&gt;</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">                /// &lt;typeparam name=&quot;T&quot;&gt;Object Type.&lt;/typeparam&gt;</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="../../d9/d04/class_hydrogen_1_1_array.html#a55f152f36b2fbba8af69f88e99c52466">   72</a></span>&#160;<span class="comment"></span>                <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="../../d9/d04/class_hydrogen_1_1_array.html#a55f152f36b2fbba8af69f88e99c52466">AddAt&lt;T&gt;</a> (ref T[] array, <span class="keywordtype">int</span> position, T newObject, <span class="keywordtype">bool</span> forceUnique)</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                        <span class="comment">// First Addition - Just Quick Add</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                        <span class="keywordflow">if</span> (array.Length == 0) {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                                array = <span class="keyword">new</span> T[1];</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                                array [0] = newObject;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                        }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                        <span class="comment">// Check if we already have this target and unique is required  </span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                        <span class="keywordflow">if</span> (forceUnique) {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                                <span class="keywordflow">if</span> (array.Any (t =&gt; t.Equals (newObject))) {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                                        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                                }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                        }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                        <span class="comment">// Create new array</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                        var newArray = <span class="keyword">new</span> T[array.Length + 1];</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                        <span class="keywordflow">for</span> (var x = 0; x &lt;= array.Length; x++) {</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                                <span class="keywordflow">if</span> (x &lt; position) {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                                        newArray [x] = array [x];</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (x == position) {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                                        newArray [x] = newObject;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                                } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (x &gt; position) {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                                        newArray [x] = array [x - 1];</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                                }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                        }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                        <span class="comment">// Assign array</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                        array = newArray;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                }</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">                /// &lt;summary&gt;</span></div>
@@ -265,7 +265,7 @@ $(document).ready(function(){initNavTree('d6/d47/_array_8cs_source.html','../../
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                        <span class="comment">// Failsafe</span></div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                        <span class="keywordflow">if</span> (index &gt;= array.Length || index &lt; 0)</div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                        var newArray = <span class="keyword">new</span> T[array.Length - 1];</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                        var counter = 0;</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;</div>
@@ -280,11 +280,11 @@ $(document).ready(function(){initNavTree('d6/d47/_array_8cs_source.html','../../
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                }</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        }</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;}</div>
-<div class="ttc" id="class_hydrogen_1_1_array_html_a55f152f36b2fbba8af69f88e99c52466"><div class="ttname"><a href="../../d9/d04/class_hydrogen_1_1_array.html#a55f152f36b2fbba8af69f88e99c52466">Hydrogen.Array.AddAt&lt; T &gt;</a></div><div class="ttdeci">static bool AddAt&lt; T &gt;(ref T[] array, int position, T newObject, bool forceUnique)</div><div class="ttdoc">Add a unique item to an array. </div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d47/_array_8cs_source.html#l00047">Array.cs:47</a></div></div>
-<div class="ttc" id="class_hydrogen_1_1_array_html"><div class="ttname"><a href="../../d9/d04/class_hydrogen_1_1_array.html">Hydrogen.Array</a></div><div class="ttdoc">Additional static functions, constants and classes used to extend existing Array support inside of Un...</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d47/_array_8cs_source.html#l00036">Array.cs:36</a></div></div>
+<div class="ttc" id="class_hydrogen_1_1_array_html_a55f152f36b2fbba8af69f88e99c52466"><div class="ttname"><a href="../../d9/d04/class_hydrogen_1_1_array.html#a55f152f36b2fbba8af69f88e99c52466">Hydrogen.Array.AddAt&lt; T &gt;</a></div><div class="ttdeci">static bool AddAt&lt; T &gt;(ref T[] array, int position, T newObject, bool forceUnique)</div><div class="ttdoc">Add a unique item to an array. </div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d47/_array_8cs_source.html#l00072">Array.cs:72</a></div></div>
+<div class="ttc" id="class_hydrogen_1_1_array_html"><div class="ttname"><a href="../../d9/d04/class_hydrogen_1_1_array.html">Hydrogen.Array</a></div><div class="ttdoc">Additional static functions used to extend existing Array support inside of Unity. </div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d47/_array_8cs_source.html#l00036">Array.cs:36</a></div></div>
 <div class="ttc" id="class_hydrogen_1_1_array_html_aae5f21d3c51507daf38a79363c8d6e57"><div class="ttname"><a href="../../d9/d04/class_hydrogen_1_1_array.html#aae5f21d3c51507daf38a79363c8d6e57">Hydrogen.Array.RemoveAt&lt; T &gt;</a></div><div class="ttdeci">static bool RemoveAt&lt; T &gt;(ref T[] array, int index)</div><div class="ttdoc">Removes an object in an array at the provided index. </div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d47/_array_8cs_source.html#l00161">Array.cs:161</a></div></div>
 <div class="ttc" id="class_hydrogen_1_1_array_html_adbd5d4e6c63963c1f1a61f32f8896bec"><div class="ttname"><a href="../../d9/d04/class_hydrogen_1_1_array.html#adbd5d4e6c63963c1f1a61f32f8896bec">Hydrogen.Array.Contains&lt; T &gt;</a></div><div class="ttdeci">static bool Contains&lt; T &gt;(ref T[] array, T targetObject)</div><div class="ttdoc">Determine if the specified array contains the targetObject. </div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d47/_array_8cs_source.html#l00114">Array.cs:114</a></div></div>
-<div class="ttc" id="class_hydrogen_1_1_array_html_ab086996fd838db5c36388f0d7b4c8eae"><div class="ttname"><a href="../../d9/d04/class_hydrogen_1_1_array.html#ab086996fd838db5c36388f0d7b4c8eae">Hydrogen.Array.Add&lt; T &gt;</a></div><div class="ttdeci">static bool Add&lt; T &gt;(ref T[] array, T newObject, bool forceUnique)</div><div class="ttdoc">Add a unique item to an array. </div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d47/_array_8cs_source.html#l00090">Array.cs:90</a></div></div>
+<div class="ttc" id="class_hydrogen_1_1_array_html_ab086996fd838db5c36388f0d7b4c8eae"><div class="ttname"><a href="../../d9/d04/class_hydrogen_1_1_array.html#ab086996fd838db5c36388f0d7b4c8eae">Hydrogen.Array.Add&lt; T &gt;</a></div><div class="ttdeci">static bool Add&lt; T &gt;(ref T[] array, T newObject, bool forceUnique)</div><div class="ttdoc">Add a unique item to an array. </div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d47/_array_8cs_source.html#l00046">Array.cs:46</a></div></div>
 <div class="ttc" id="class_hydrogen_1_1_array_html_a471dc2e1869816944ecf3c4e0cac3aa2"><div class="ttname"><a href="../../d9/d04/class_hydrogen_1_1_array.html#a471dc2e1869816944ecf3c4e0cac3aa2">Hydrogen.Array.Remove&lt; T &gt;</a></div><div class="ttdeci">static bool Remove&lt; T &gt;(ref T[] array, T oldObject)</div><div class="ttdoc">Removes all references for an object from array. </div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d47/_array_8cs_source.html#l00126">Array.cs:126</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -292,7 +292,7 @@ $(document).ready(function(){initNavTree('d6/d47/_array_8cs_source.html','../../
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_84bbf7b3c7f28a5a18725745e1505219.html">Assets</a></li><li class="navelem"><a class="el" href="../../dir_b28097260afe8574b8406ba7dfbb81e6.html">Hydrogen Framework</a></li><li class="navelem"><a class="el" href="../../dir_27bfb49e10942b2337de158651d24362.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../dir_f456ffc0c0cbfbbdb67b3854d7def5c9.html">Plugins</a></li><li class="navelem"><a class="el" href="../../dir_29d6c47995713fa156ad9d8c4212e447.html">Hydrogen</a></li><li class="navelem"><b>Array.cs</b></li>
-    <li class="footer">Generated on Sat Dec 7 2013 22:50:46 for Hydrogen Framework by
+    <li class="footer">Generated on Mon Dec 9 2013 00:53:08 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

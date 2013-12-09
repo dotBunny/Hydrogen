@@ -8,7 +8,7 @@ var searchData=
   ['removecontrol',['RemoveControl',['../d9/d31/class_hydrogen_1_1_peripherals_1_1_input.html#ab19cf0e68a19e71e6a0c97202513cd09',1,'Hydrogen::Peripherals::Input']]],
   ['removefrompool',['RemoveFromPool',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a4a7d07affbee8e1b8087ac1f9ed5bd6d',1,'Hydrogen::Core::ObjectPoolCollection']]],
   ['replacemetachars',['ReplaceMetaChars',['../dd/d91/class_hydrogen_1_1_regex.html#aa9287becb42f37298da4256ec7b89cb4',1,'Hydrogen::Regex']]],
-  ['resize',['Resize',['../d0/d85/class_hydrogen_1_1_texture.html#abd0e603f952ce39042bb5627339fb63f',1,'Hydrogen::Texture']]],
+  ['resize',['Resize',['../d0/d85/class_hydrogen_1_1_texture.html#a47dd61e97ca33e82b114e0da868a0966',1,'Hydrogen::Texture']]],
   ['rotateclockwise90degrees',['RotateClockwise90Degrees',['../d0/d85/class_hydrogen_1_1_texture.html#aa319aa0d17d290b934b3f38e32d9fffd',1,'Hydrogen::Texture']]],
   ['rotatecounterclockwise90degrees',['RotateCounterClockwise90Degrees',['../d0/d85/class_hydrogen_1_1_texture.html#ac727a59ad6da2c0b6157241d1226b726',1,'Hydrogen::Texture']]]
 ];

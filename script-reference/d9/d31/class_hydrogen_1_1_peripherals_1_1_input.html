@@ -106,6 +106,7 @@ $(document).ready(function(){initNavTree('d9/d31/class_hydrogen_1_1_peripherals_
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="../../d1/dee/class_hydrogen_1_1_peripherals_1_1_input-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Hydrogen.Peripherals.Input Class Reference</div>  </div>
@@ -119,7 +120,7 @@ $(document).ready(function(){initNavTree('d9/d31/class_hydrogen_1_1_peripherals_
  <div class="center">
   <img src="../../d9/d31/class_hydrogen_1_1_peripherals_1_1_input.png" usemap="#Hydrogen.Peripherals.Input_map" alt=""/>
   <map id="Hydrogen.Peripherals.Input_map" name="Hydrogen.Peripherals.Input_map">
-<area href="../../d6/d4c/classh_input.html" title="Hydrogen.Peripherals.Input Instance " alt="hInput" shape="rect" coords="0,112,168,136"/>
+<area href="../../d6/d4c/classh_input.html" title="A drop in implementation of the Hydrogen.Peripherals.Input manager. This simply makes the class an ac..." alt="hInput" shape="rect" coords="0,112,168,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -143,6 +144,13 @@ string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 <tr class="memitem:aa6f570b918832467f8e14596a5bfc377"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d31/class_hydrogen_1_1_peripherals_1_1_input.html#aa6f570b918832467f8e14596a5bfc377">SetControls</a> (List&lt; KeyValuePair&lt; string, string &gt;&gt; controlScheme)</td></tr>
 <tr class="memdesc:aa6f570b918832467f8e14596a5bfc377"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the controls from a List&lt;KeyValuePair&lt;string, string&gt;&gt;  <a href="#aa6f570b918832467f8e14596a5bfc377">More...</a><br/></td></tr>
 <tr class="separator:aa6f570b918832467f8e14596a5bfc377"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a7fcf5da30370b00f5ee03f29b92b0e8d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d31/class_hydrogen_1_1_peripherals_1_1_input.html#a7fcf5da30370b00f5ee03f29b92b0e8d">Awake</a> ()</td></tr>
+<tr class="separator:a7fcf5da30370b00f5ee03f29b92b0e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd452af8ef086b77d18313801eb9c3ef"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d31/class_hydrogen_1_1_peripherals_1_1_input.html#afd452af8ef086b77d18313801eb9c3ef">Update</a> ()</td></tr>
+<tr class="separator:afd452af8ef086b77d18313801eb9c3ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -226,6 +234,39 @@ string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                }</div>
 <div class="ttc" id="namespace_hydrogen_1_1_peripherals_html_af5064c1618bbc05b8c4a76b690a8e185"><div class="ttname"><a href="../../d2/daf/namespace_hydrogen_1_1_peripherals.html#af5064c1618bbc05b8c4a76b690a8e185">Hydrogen.Peripherals.InputAction</a></div><div class="ttdeci">delegate void InputAction(InputEvent evt, float value, float time)</div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a7fcf5da30370b00f5ee03f29b92b0e8d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Hydrogen.Peripherals.Input.Awake </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="../../d6/d4c/classh_input.html#a0c8bde50ae6adb371c30f43d3ab96837">hInput</a>.</p>
+
+<p>Definition at line <a class="el" href="../../d4/dc4/_input_8cs_source.html#l00051">51</a> of file <a class="el" href="../../d4/dc4/_input_8cs_source.html">Input.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                        <span class="keywordflow">if</span> (_controls == null)</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                                _controls = <span class="keyword">new</span> List&lt;InputControlBase&gt; ();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                        <span class="keywordflow">if</span> (_actions == null)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                                _actions = <span class="keyword">new</span> Dictionary&lt;String, InputAction&gt; ();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -400,13 +441,43 @@ string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el
 </div><!-- fragment -->
 </div>
 </div>
+<a class="anchor" id="afd452af8ef086b77d18313801eb9c3ef"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Hydrogen.Peripherals.Input.Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="../../d4/dc4/_input_8cs_source.html#l00059">59</a> of file <a class="el" href="../../d4/dc4/_input_8cs_source.html">Input.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                        <span class="keywordflow">foreach</span> (InputControlBase control <span class="keywordflow">in</span> _controls) {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                                control.Capture ();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                        }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                }</div>
+</div><!-- fragment -->
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d0/dff/namespace_hydrogen.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../d2/daf/namespace_hydrogen_1_1_peripherals.html">Peripherals</a></li><li class="navelem"><a class="el" href="../../d9/d31/class_hydrogen_1_1_peripherals_1_1_input.html">Input</a></li>
-    <li class="footer">Generated on Sat Dec 7 2013 22:50:46 for Hydrogen Framework by
+    <li class="footer">Generated on Mon Dec 9 2013 00:53:09 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

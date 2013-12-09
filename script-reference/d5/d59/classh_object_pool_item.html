@@ -113,7 +113,7 @@ $(document).ready(function(){initNavTree('d5/d59/classh_object_pool_item.html','
 </div><!--header-->
 <div class="contents">
 
-<p>This is one possible way of setting up a ObjectPoolItem to handle spawning and despawning appropriately.  
+<p>A drop in implementation of the Hydrogen.Core.ObjectPoolItem. This is one possible way of setting up an ObjectPoolItem to handle spawning and despawning appropriately.  
  <a href="../../d5/d59/classh_object_pool_item.html#details">More...</a></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="../../closed.png" alt="+"/> Inheritance diagram for hObjectPoolItem:</div>
@@ -129,26 +129,27 @@ $(document).ready(function(){initNavTree('d5/d59/classh_object_pool_item.html','
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ac40722e1826d20e98499b9dab392cfbe"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d59/classh_object_pool_item.html#ac40722e1826d20e98499b9dab392cfbe">DespawnSafely</a> ()</td></tr>
+<tr class="memdesc:ac40722e1826d20e98499b9dab392cfbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Despawn the gameObject safely after all particles have done their thing.  <a href="#ac40722e1826d20e98499b9dab392cfbe">More...</a><br/></td></tr>
+<tr class="separator:ac40722e1826d20e98499b9dab392cfbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a633716e62c76d94725772a30e91118f6"><td class="memItemLeft" align="right" valign="top">override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d59/classh_object_pool_item.html#a633716e62c76d94725772a30e91118f6">IsInactive</a> ()</td></tr>
+<tr class="memdesc:a633716e62c76d94725772a30e91118f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the object idle, and therefore can be despawned organically?  <a href="#a633716e62c76d94725772a30e91118f6">More...</a><br/></td></tr>
+<tr class="separator:a633716e62c76d94725772a30e91118f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae91fe25b114406fc8255fd295d8c0074"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d59/classh_object_pool_item.html#ae91fe25b114406fc8255fd295d8c0074">OnDespawned</a> ()</td></tr>
-<tr class="memdesc:ae91fe25b114406fc8255fd295d8c0074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raised when the object is 'despawned' back into the pool  <a href="#ae91fe25b114406fc8255fd295d8c0074">More...</a><br/></td></tr>
+<tr class="memdesc:ae91fe25b114406fc8255fd295d8c0074"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raised when the object is 'despawned' back into the pool.  <a href="#ae91fe25b114406fc8255fd295d8c0074">More...</a><br/></td></tr>
 <tr class="separator:ae91fe25b114406fc8255fd295d8c0074"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40e1048264e13d81102fa50e903d7edc"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d59/classh_object_pool_item.html#a40e1048264e13d81102fa50e903d7edc">OnSpawned</a> ()</td></tr>
 <tr class="memdesc:a40e1048264e13d81102fa50e903d7edc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raised when the object is 'spawned' from the pool.  <a href="#a40e1048264e13d81102fa50e903d7edc">More...</a><br/></td></tr>
 <tr class="separator:a40e1048264e13d81102fa50e903d7edc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac40722e1826d20e98499b9dab392cfbe"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d59/classh_object_pool_item.html#ac40722e1826d20e98499b9dab392cfbe">DespawnSafely</a> ()</td></tr>
-<tr class="memdesc:ac40722e1826d20e98499b9dab392cfbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simple function which delays the despawning based on whatever you define  <a href="#ac40722e1826d20e98499b9dab392cfbe">More...</a><br/></td></tr>
-<tr class="separator:ac40722e1826d20e98499b9dab392cfbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a633716e62c76d94725772a30e91118f6"><td class="memItemLeft" align="right" valign="top">override bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d59/classh_object_pool_item.html#a633716e62c76d94725772a30e91118f6">IsInactive</a> ()</td></tr>
-<tr class="memdesc:a633716e62c76d94725772a30e91118f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the object idle, and therefore can be despawned organically  <a href="#a633716e62c76d94725772a30e91118f6">More...</a><br/></td></tr>
-<tr class="separator:a633716e62c76d94725772a30e91118f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a453e658419cde6dd3f5b6dd24cdfa750"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d59/classh_object_pool_item.html#a453e658419cde6dd3f5b6dd24cdfa750">LifeTime</a></td></tr>
+<tr class="memdesc:a453e658419cde6dd3f5b6dd24cdfa750"><td class="mdescLeft">&#160;</td><td class="mdescRight">Despawn gameObject after this number of seconds.  <a href="#a453e658419cde6dd3f5b6dd24cdfa750">More...</a><br/></td></tr>
 <tr class="separator:a453e658419cde6dd3f5b6dd24cdfa750"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This is one possible way of setting up a ObjectPoolItem to handle spawning and despawning appropriately. </p>
+<div class="textblock"><p>A drop in implementation of the Hydrogen.Core.ObjectPoolItem. This is one possible way of setting up an ObjectPoolItem to handle spawning and despawning appropriately. </p>
 <p>Learn from it, make your own, as long as you extend from the base class you still get the performance benefits. </p>
 
 <p>Definition at line <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html#l00041">41</a> of file <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html">hObjectPoolItem.cs</a>.</p>
@@ -174,15 +175,15 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Simple function which delays the despawning based on whatever you define </p>
-<p>If you are going to utilize this make sure that your function contains: hObjectPool.Instance.objectPools[poolID].DespawnImmediate(gameObject); </p>
+<p>Despawn the gameObject safely after all particles have done their thing. </p>
+<p>If you are going to utilize this make sure that your function contains: hObjectPool.Instance.objectPools[poolID].DespawnImmediate(gameObject);</p>
 
 <p>Implements <a class="el" href="../../db/d5e/class_hydrogen_1_1_core_1_1_object_pool_item_base.html#a48449a63cf3fd321916be9f6e99264aa">Hydrogen.Core.ObjectPoolItemBase</a>.</p>
 
-<p>Definition at line <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html#l00066">66</a> of file <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html">hObjectPoolItem.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                StartCoroutine (WaitForParticles ());</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        }</div>
+<p>Definition at line <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html#l00054">54</a> of file <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html">hObjectPoolItem.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                StartCoroutine (WaitForParticles ());</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -207,16 +208,18 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Is the object idle, and therefore can be despawned organically </p>
-<dl class="section return"><dt>Returns</dt><dd><code>true</code> if this instance is inactive; otherwise, <code>false</code>.</dd></dl>
+<p>Is the object idle, and therefore can be despawned organically? </p>
+<dl class="section return"><dt>Returns</dt><dd>true</dd></dl>
+<p><code>false</code> </p>
 <p>This will only work on tracked spawned objects.</p>
 
 <p>Implements <a class="el" href="../../db/d5e/class_hydrogen_1_1_core_1_1_object_pool_item_base.html#ad404affbfc49dc9fb484a8c1a5d67a44">Hydrogen.Core.ObjectPoolItemBase</a>.</p>
 
-<p>Definition at line <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html#l00071">71</a> of file <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html">hObjectPoolItem.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                <span class="keywordflow">return</span> gameObject.rigidbody.IsSleeping ();</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        }</div>
+<p>Definition at line <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html#l00065">65</a> of file <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html">hObjectPoolItem.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                <span class="comment">// A simple rigidbody check, otherwise no bueno</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                <span class="keywordflow">return</span> ParentPool.HasRigidbody &amp;&amp; gameObject.rigidbody.IsSleeping ();</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -241,18 +244,20 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Raised when the object is 'despawned' back into the pool </p>
-<p>It does not set "active", you must handle that yourself. </p>
+<p>Raised when the object is 'despawned' back into the pool. </p>
+<p>It does not set "active", you must handle that yourself.</p>
 
 <p>Implements <a class="el" href="../../db/d5e/class_hydrogen_1_1_core_1_1_object_pool_item_base.html#a8cd7f62b56f14eecaedb7ca77db30f6f">Hydrogen.Core.ObjectPoolItemBase</a>.</p>
 
-<p>Definition at line <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html#l00051">51</a> of file <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html">hObjectPoolItem.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                <span class="keywordflow">if</span> (ParentPool.<a class="code" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#ab3611473f54c8de1cc9c0fa59a192e41">HasRigidbody</a>)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                        gameObject.rigidbody.velocity = Vector3.zero;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                gameObject.SetActive (<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
+<p>Definition at line <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html#l00075">75</a> of file <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html">hObjectPoolItem.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <span class="comment">// If our object has a rigidbody (cached check), make sure to zero its velocity.</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                <span class="keywordflow">if</span> (ParentPool.<a class="code" href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#ab3611473f54c8de1cc9c0fa59a192e41">HasRigidbody</a>)</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                        gameObject.rigidbody.velocity = Vector3.zero;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                <span class="comment">// Disable the gameObject</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                gameObject.SetActive (<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        }</div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_collection_html_ab3611473f54c8de1cc9c0fa59a192e41"><div class="ttname"><a href="../../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#ab3611473f54c8de1cc9c0fa59a192e41">Hydrogen.Core.ObjectPoolCollection.HasRigidbody</a></div><div class="ttdeci">bool HasRigidbody</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d37/_object_pool_collection_8cs_source.html#l00058">ObjectPoolCollection.cs:58</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -279,16 +284,20 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Raised when the object is 'spawned' from the pool. </p>
-<p>It does not set "active", you must handle that yourself. </p>
+<p>It does not set "active", you must handle that yourself.</p>
 
 <p>Implements <a class="el" href="../../db/d5e/class_hydrogen_1_1_core_1_1_object_pool_item_base.html#a999298854b5dc9571acdefbfcc6c39d1">Hydrogen.Core.ObjectPoolItemBase</a>.</p>
 
-<p>Definition at line <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html#l00059">59</a> of file <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html">hObjectPoolItem.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                gameObject.SetActive (<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                StartCoroutine (DespawnTimer ());</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        }</div>
+<p>Definition at line <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html#l00089">89</a> of file <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html">hObjectPoolItem.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                <span class="comment">// Make sure our object is active please and thank you</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                gameObject.SetActive (<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                <span class="comment">// If there is a LifeTime greater then 0, we set a timer to despawn</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="../../d5/d59/classh_object_pool_item.html#a453e658419cde6dd3f5b6dd24cdfa750">LifeTime</a> &gt; 0)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                        StartCoroutine (DespawnTimer ());</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        }</div>
+<div class="ttc" id="classh_object_pool_item_html_a453e658419cde6dd3f5b6dd24cdfa750"><div class="ttname"><a href="../../d5/d59/classh_object_pool_item.html#a453e658419cde6dd3f5b6dd24cdfa750">hObjectPoolItem.LifeTime</a></div><div class="ttdeci">float LifeTime</div><div class="ttdoc">Despawn gameObject after this number of seconds. </div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d55/h_object_pool_item_8cs_source.html#l00047">hObjectPoolItem.cs:47</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -303,7 +312,10 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html#l00043">43</a> of file <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html">hObjectPoolItem.cs</a>.</p>
+<p>Despawn gameObject after this number of seconds. </p>
+<p>In seconds, use 0 to disable.</p>
+
+<p>Definition at line <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html#l00047">47</a> of file <a class="el" href="../../dd/d55/h_object_pool_item_8cs_source.html">hObjectPoolItem.cs</a>.</p>
 
 </div>
 </div>
@@ -313,7 +325,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d5/d59/classh_object_pool_item.html">hObjectPoolItem</a></li>
-    <li class="footer">Generated on Sat Dec 7 2013 22:50:46 for Hydrogen Framework by
+    <li class="footer">Generated on Mon Dec 9 2013 00:53:09 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

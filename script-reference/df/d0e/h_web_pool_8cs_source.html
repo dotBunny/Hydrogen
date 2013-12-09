@@ -131,69 +131,91 @@ $(document).ready(function(){initNavTree('df/d0e/h_web_pool_8cs_source.html','..
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">using</span> UnityEngine;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">/// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">/// Hydrogen.Core.WebStack Instance</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"></span>[AddComponentMenu (<span class="stringliteral">&quot;Hydrogen/Web Pool Manager&quot;</span>)]</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="../../d0/d8b/classh_web_pool.html">   35</a></span>&#160;<span class="keyword">public</span> sealed <span class="keyword">class </span><a class="code" href="../../d0/d8b/classh_web_pool.html">hWebPool</a> : Hydrogen.Core.WebPool</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{<span class="comment"></span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">        /// Internal fail safe to maintain instance across threads</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">        /// &lt;remarks&gt;</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">        /// Multithreaded Safe Singleton Pattern</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">        /// &lt;/remarks&gt;</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">        /// &lt;description&gt;</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">        /// http://msdn.microsoft.com/en-us/library/ms998558.aspx</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">        /// &lt;/description&gt;</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"></span>        <span class="keyword">static</span> readonly System.Object _syncRoot = <span class="keyword">new</span> System.Object ();<span class="comment"></span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">        /// Internal reference to the static instance of the web stack.</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span>        <span class="keyword">static</span> <span class="keyword">volatile</span> <a class="code" href="../../d0/d8b/classh_web_pool.html">hWebPool</a> _staticInstance;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">        /// Gets the Web Stack instance, creating one if none is found.</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">        /// &lt;value&gt;</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">        /// The Object Pool</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">        /// &lt;/value&gt;</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="../../d0/d8b/classh_web_pool.html#a36bfcf7df09718d58b8529a8e19670f4">   58</a></span>&#160;<span class="comment"></span>        <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d0/d8b/classh_web_pool.html">hWebPool</a> <a class="code" href="../../d0/d8b/classh_web_pool.html#a36bfcf7df09718d58b8529a8e19670f4">Instance</a> {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <span class="keyword">get</span> {</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                        <span class="keywordflow">if</span> (_staticInstance == null) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                                lock (_syncRoot) {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                                        _staticInstance = FindObjectOfType (typeof(<a class="code" href="../../d0/d8b/classh_web_pool.html">hWebPool</a>)) as <a class="code" href="../../d0/d8b/classh_web_pool.html">hWebPool</a>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                                        <span class="comment">// If we don&#39;t have it, lets make it!</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                                        <span class="keywordflow">if</span> (_staticInstance == null) {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                                                var go = GameObject.Find (<span class="stringliteral">&quot;Hydrogen&quot;</span>) ?? <span class="keyword">new</span> GameObject (<span class="stringliteral">&quot;Hydrogen&quot;</span>);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                                                go.AddComponent&lt;hWebPool&gt; ();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                                                _staticInstance = go.GetComponent&lt;hWebPool&gt; ();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                                        }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                                }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                        }</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                        <span class="keywordflow">return</span> _staticInstance;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">        /// Does an instance exist of this class?</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="../../d0/d8b/classh_web_pool.html#acb0f86c370eb278e0f75d15ca7fcb933">   80</a></span>&#160;<span class="comment"></span>        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="../../d0/d8b/classh_web_pool.html#acb0f86c370eb278e0f75d15ca7fcb933">Exists</a> ()</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                <span class="keywordflow">return</span> _staticInstance != null;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        }</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
-<div class="ttc" id="classh_web_pool_html"><div class="ttname"><a href="../../d0/d8b/classh_web_pool.html">hWebPool</a></div><div class="ttdoc">Hydrogen.Core.WebStack Instance </div><div class="ttdef"><b>Definition:</b> <a href="../../df/d0e/h_web_pool_8cs_source.html#l00035">hWebPool.cs:35</a></div></div>
-<div class="ttc" id="classh_web_pool_html_a36bfcf7df09718d58b8529a8e19670f4"><div class="ttname"><a href="../../d0/d8b/classh_web_pool.html#a36bfcf7df09718d58b8529a8e19670f4">hWebPool.Instance</a></div><div class="ttdeci">static hWebPool Instance</div><div class="ttdoc">Gets the Web Stack instance, creating one if none is found. </div><div class="ttdef"><b>Definition:</b> <a href="../../df/d0e/h_web_pool_8cs_source.html#l00058">hWebPool.cs:58</a></div></div>
-<div class="ttc" id="classh_web_pool_html_acb0f86c370eb278e0f75d15ca7fcb933"><div class="ttname"><a href="../../d0/d8b/classh_web_pool.html#acb0f86c370eb278e0f75d15ca7fcb933">hWebPool.Exists</a></div><div class="ttdeci">static bool Exists()</div><div class="ttdoc">Does an instance exist of this class? </div><div class="ttdef"><b>Definition:</b> <a href="../../df/d0e/h_web_pool_8cs_source.html#l00080">hWebPool.cs:80</a></div></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">/// A drop in implementation of the Hydrogen.Core.WebPool. This simply makes the class an accessible singleton </span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/// with some very simple additional functionality.</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"></span>[AddComponentMenu (<span class="stringliteral">&quot;Hydrogen/Web Pool Manager&quot;</span>)]</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="../../d0/d8b/classh_web_pool.html">   36</a></span>&#160;<span class="keyword">public</span> sealed <span class="keyword">class </span><a class="code" href="../../d0/d8b/classh_web_pool.html">hWebPool</a> : Hydrogen.Core.WebPool</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{<span class="comment"></span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">        /// Should this web pool survive scene switches?</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="../../d0/d8b/classh_web_pool.html#add1fed3eb1ab97a39b9e51243d0551da">   41</a></span>&#160;<span class="comment"></span>        <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="../../d0/d8b/classh_web_pool.html#add1fed3eb1ab97a39b9e51243d0551da">Presistant</a> = <span class="keyword">true</span>;<span class="comment"></span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">        /// Internal reference to the static instance of the web pool.</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span>        <span class="keyword">static</span> <span class="keyword">volatile</span> <a class="code" href="../../d0/d8b/classh_web_pool.html">hWebPool</a> _staticInstance;<span class="comment"></span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">        /// Internal fail safe to maintain instance across threads.</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">        /// &lt;remarks&gt;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">        /// Multithreaded Safe Singleton Pattern.</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">        /// &lt;/remarks&gt;</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">        /// &lt;description&gt;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">        /// http://msdn.microsoft.com/en-us/library/ms998558.aspx</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">        /// &lt;/description&gt;</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span>        <span class="keyword">static</span> readonly System.Object _syncRoot = <span class="keyword">new</span> System.Object ();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">        /// Gets the web pool instance, creating one if none is found.</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">        /// &lt;value&gt;</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">        /// The Web Pool.</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">        /// &lt;/value&gt;</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="../../d0/d8b/classh_web_pool.html#a36bfcf7df09718d58b8529a8e19670f4">   63</a></span>&#160;<span class="comment"></span>        <span class="keyword">public</span> <span class="keyword">static</span> <a class="code" href="../../d0/d8b/classh_web_pool.html">hWebPool</a> <a class="code" href="../../d0/d8b/classh_web_pool.html#a36bfcf7df09718d58b8529a8e19670f4">Instance</a> {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="keyword">get</span> {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                        <span class="keywordflow">if</span> (_staticInstance == null) {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                                lock (_syncRoot) {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                                        _staticInstance = FindObjectOfType (typeof(<a class="code" href="../../d0/d8b/classh_web_pool.html">hWebPool</a>)) as <a class="code" href="../../d0/d8b/classh_web_pool.html">hWebPool</a>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                                        <span class="comment">// If we don&#39;t have it, lets make it!</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                                        <span class="keywordflow">if</span> (_staticInstance == null) {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                                                var go = GameObject.Find (Hydrogen.Components.DefaultSingletonName) ??</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                                                         <span class="keyword">new</span> GameObject (Hydrogen.Components.DefaultSingletonName);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                                                go.AddComponent&lt;<a class="code" href="../../de/d7c/classh_object_pool.html">hObjectPool</a>&gt; ();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                                                _staticInstance = go.GetComponent&lt;hWebPool&gt; (); </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                                        }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                                }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                        }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                        <span class="keywordflow">return</span> _staticInstance;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">        /// Unity&#39;s Awake Event</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="../../d0/d8b/classh_web_pool.html#a00c9b2808bd53320b2e37dbf4dfe117f">   86</a></span>&#160;<span class="comment"></span>        <span class="keyword">protected</span> <span class="keyword">override</span> <span class="keywordtype">void</span> <a class="code" href="../../d0/d8b/classh_web_pool.html#a00c9b2808bd53320b2e37dbf4dfe117f">Awake</a> ()</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                <span class="comment">// Make sure to do the object pools normal initialization</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                base.Awake ();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                <span class="comment">// Should this gameObject be kept around :) I think so.</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="../../d0/d8b/classh_web_pool.html#add1fed3eb1ab97a39b9e51243d0551da">Presistant</a>)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                        DontDestroyOnLoad (gameObject);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">        /// Does a Web Pool already exist?</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="../../d0/d8b/classh_web_pool.html#acb0f86c370eb278e0f75d15ca7fcb933">   99</a></span>&#160;<span class="comment"></span>        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="../../d0/d8b/classh_web_pool.html#acb0f86c370eb278e0f75d15ca7fcb933">Exists</a> ()</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                <span class="keywordflow">return</span> _staticInstance != null;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}</div>
+<div class="ttc" id="classh_web_pool_html_add1fed3eb1ab97a39b9e51243d0551da"><div class="ttname"><a href="../../d0/d8b/classh_web_pool.html#add1fed3eb1ab97a39b9e51243d0551da">hWebPool.Presistant</a></div><div class="ttdeci">bool Presistant</div><div class="ttdoc">Should this web pool survive scene switches? </div><div class="ttdef"><b>Definition:</b> <a href="../../df/d0e/h_web_pool_8cs_source.html#l00041">hWebPool.cs:41</a></div></div>
+<div class="ttc" id="classh_web_pool_html"><div class="ttname"><a href="../../d0/d8b/classh_web_pool.html">hWebPool</a></div><div class="ttdoc">A drop in implementation of the Hydrogen.Core.WebPool. This simply makes the class an accessible sing...</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d0e/h_web_pool_8cs_source.html#l00036">hWebPool.cs:36</a></div></div>
+<div class="ttc" id="classh_web_pool_html_a00c9b2808bd53320b2e37dbf4dfe117f"><div class="ttname"><a href="../../d0/d8b/classh_web_pool.html#a00c9b2808bd53320b2e37dbf4dfe117f">hWebPool.Awake</a></div><div class="ttdeci">override void Awake()</div><div class="ttdoc">Unity&amp;#39;s Awake Event </div><div class="ttdef"><b>Definition:</b> <a href="../../df/d0e/h_web_pool_8cs_source.html#l00086">hWebPool.cs:86</a></div></div>
+<div class="ttc" id="classh_object_pool_html"><div class="ttname"><a href="../../de/d7c/classh_object_pool.html">hObjectPool</a></div><div class="ttdoc">A drop in implementation of the Hydrogen.Core.ObjectPool. This simply makes the class an accessible s...</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d7c/h_object_pool_8cs_source.html#l00036">hObjectPool.cs:36</a></div></div>
+<div class="ttc" id="classh_web_pool_html_a36bfcf7df09718d58b8529a8e19670f4"><div class="ttname"><a href="../../d0/d8b/classh_web_pool.html#a36bfcf7df09718d58b8529a8e19670f4">hWebPool.Instance</a></div><div class="ttdeci">static hWebPool Instance</div><div class="ttdoc">Gets the web pool instance, creating one if none is found. </div><div class="ttdef"><b>Definition:</b> <a href="../../df/d0e/h_web_pool_8cs_source.html#l00063">hWebPool.cs:63</a></div></div>
+<div class="ttc" id="classh_web_pool_html_acb0f86c370eb278e0f75d15ca7fcb933"><div class="ttname"><a href="../../d0/d8b/classh_web_pool.html#acb0f86c370eb278e0f75d15ca7fcb933">hWebPool.Exists</a></div><div class="ttdeci">static bool Exists()</div><div class="ttdoc">Does a Web Pool already exist? </div><div class="ttdef"><b>Definition:</b> <a href="../../df/d0e/h_web_pool_8cs_source.html#l00099">hWebPool.cs:99</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_84bbf7b3c7f28a5a18725745e1505219.html">Assets</a></li><li class="navelem"><a class="el" href="../../dir_b28097260afe8574b8406ba7dfbb81e6.html">Hydrogen Framework</a></li><li class="navelem"><a class="el" href="../../dir_27bfb49e10942b2337de158651d24362.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../dir_1e2f3b5c4cee9ad835ae412ed9f36005.html">Components</a></li><li class="navelem"><a class="el" href="../../dir_a8b36307de1c986159b60476a75e2185.html">Hydrogen.Core</a></li><li class="navelem"><b>hWebPool.cs</b></li>
-    <li class="footer">Generated on Sat Dec 7 2013 22:50:46 for Hydrogen Framework by
+    <li class="footer">Generated on Mon Dec 9 2013 00:53:08 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

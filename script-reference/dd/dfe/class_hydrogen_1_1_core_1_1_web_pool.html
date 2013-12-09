@@ -107,6 +107,7 @@ $(document).ready(function(){initNavTree('dd/dfe/class_hydrogen_1_1_core_1_1_web
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="../../d7/d37/class_hydrogen_1_1_core_1_1_web_pool-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Hydrogen.Core.WebPool Class Reference</div>  </div>
@@ -123,7 +124,7 @@ $(document).ready(function(){initNavTree('dd/dfe/class_hydrogen_1_1_core_1_1_web
  <div class="center">
   <img src="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.png" usemap="#Hydrogen.Core.WebPool_map" alt=""/>
   <map id="Hydrogen.Core.WebPool_map" name="Hydrogen.Core.WebPool_map">
-<area href="../../d0/d8b/classh_web_pool.html" title="Hydrogen.Core.WebStack Instance " alt="hWebPool" shape="rect" coords="0,112,154,136"/>
+<area href="../../d0/d8b/classh_web_pool.html" title="A drop in implementation of the Hydrogen.Core.WebPool. This simply makes the class an accessible sing..." alt="hWebPool" shape="rect" coords="0,112,154,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -134,8 +135,6 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6d5e21e5eb6a7cb33cf771dfee02d0e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a6d5e21e5eb6a7cb33cf771dfee02d0e9">Awake</a> ()</td></tr>
-<tr class="separator:a6d5e21e5eb6a7cb33cf771dfee02d0e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7a87fc73ea35f495ea4c50fe66813d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#aa7a87fc73ea35f495ea4c50fe66813d9">GET</a> (string URI, System.Action&lt; int, Hashtable, string &gt; callback)</td></tr>
 <tr class="separator:aa7a87fc73ea35f495ea4c50fe66813d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac42d6c5c2a6fa7c2ff5f973b9f30dc74"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#ac42d6c5c2a6fa7c2ff5f973b9f30dc74">GET</a> (string URI, string cookie, System.Action&lt; int, Hashtable, string &gt; callback)</td></tr>
@@ -148,37 +147,52 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a376da5939f7b7062e033f1a49627886e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3623eaa77b87bbe9ec050b1d88b93e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#aa3623eaa77b87bbe9ec050b1d88b93e0">Form</a> (string URI, Dictionary&lt; string, string &gt; formStringData, <a class="el" href="../../df/d8b/struct_hydrogen_1_1_core_1_1_web_pool_1_1_form_binary_data.html">FormBinaryData</a>[] formBinaryData, string cookie, System.Action&lt; int, Hashtable, string &gt; callback)</td></tr>
 <tr class="separator:aa3623eaa77b87bbe9ec050b1d88b93e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:af3886616a757432ca7959d69ff05fded"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#af3886616a757432ca7959d69ff05fded">Awake</a> ()</td></tr>
+<tr class="separator:af3886616a757432ca7959d69ff05fded"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An internal web pool system used within the <a class="el" href="../../d0/dff/namespace_hydrogen.html">Hydrogen</a> Framework. </p>
 
 <p>Definition at line <a class="el" href="../../d9/df4/_web_pool_8cs_source.html#l00039">39</a> of file <a class="el" href="../../d9/df4/_web_pool_8cs_source.html">WebPool.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a6d5e21e5eb6a7cb33cf771dfee02d0e9"></a>
+<a class="anchor" id="af3886616a757432ca7959d69ff05fded"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Hydrogen.Core.WebPool.Awake </td>
+          <td class="memname">virtual void Hydrogen.Core.WebPool.Awake </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../d9/df4/_web_pool_8cs_source.html#l00051">51</a> of file <a class="el" href="../../d9/df4/_web_pool_8cs_source.html">WebPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                        <span class="comment">// Create our buddy object</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                        var newWebObject = <span class="keyword">new</span> GameObject ();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                        newWebObject.AddComponent (typeof(WebPoolWorker));</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                        newWebObject.name = <span class="stringliteral">&quot;Web Call&quot;</span>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                        _poolID = hObjectPool.Instance.Add (newWebObject);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                        <span class="comment">// Remove our little buddy</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                        Object.DestroyImmediate (newWebObject);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                }</div>
+<p>Reimplemented in <a class="el" href="../../d0/d8b/classh_web_pool.html#a00c9b2808bd53320b2e37dbf4dfe117f">hWebPool</a>.</p>
+
+<p>Definition at line <a class="el" href="../../d9/df4/_web_pool_8cs_source.html#l00084">84</a> of file <a class="el" href="../../d9/df4/_web_pool_8cs_source.html">WebPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                        <span class="comment">// Create our buddy object</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                        var newWebObject = <span class="keyword">new</span> GameObject ();</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                        newWebObject.AddComponent (typeof(WebPoolWorker));</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                        newWebObject.name = <span class="stringliteral">&quot;Web Call&quot;</span>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                        _poolID = hObjectPool.Instance.Add (newWebObject);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                        <span class="comment">// Remove our little buddy</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                        Object.DestroyImmediate (newWebObject);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -206,11 +220,11 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../d9/df4/_web_pool_8cs_source.html#l00086">86</a> of file <a class="el" href="../../d9/df4/_web_pool_8cs_source.html">WebPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                {</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                        <a class="code" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a376da5939f7b7062e033f1a49627886e">Form</a> (URI, formStringData, null, null, null);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                }</div>
-<div class="ttc" id="class_hydrogen_1_1_core_1_1_web_pool_html_a376da5939f7b7062e033f1a49627886e"><div class="ttname"><a href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a376da5939f7b7062e033f1a49627886e">Hydrogen.Core.WebPool.Form</a></div><div class="ttdeci">void Form(string URI, Dictionary&lt; string, string &gt; formStringData)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/df4/_web_pool_8cs_source.html#l00086">WebPool.cs:86</a></div></div>
+<p>Definition at line <a class="el" href="../../d9/df4/_web_pool_8cs_source.html#l00073">73</a> of file <a class="el" href="../../d9/df4/_web_pool_8cs_source.html">WebPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                        <a class="code" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a376da5939f7b7062e033f1a49627886e">Form</a> (URI, formStringData, null, null, null);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                }</div>
+<div class="ttc" id="class_hydrogen_1_1_core_1_1_web_pool_html_a376da5939f7b7062e033f1a49627886e"><div class="ttname"><a href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a376da5939f7b7062e033f1a49627886e">Hydrogen.Core.WebPool.Form</a></div><div class="ttdeci">void Form(string URI, Dictionary&lt; string, string &gt; formStringData)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/df4/_web_pool_8cs_source.html#l00073">WebPool.cs:73</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -256,12 +270,12 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../d9/df4/_web_pool_8cs_source.html#l00091">91</a> of file <a class="el" href="../../d9/df4/_web_pool_8cs_source.html">WebPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                {</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                        GameObject go = hObjectPool.Instance.Spawn (_poolID);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                        go.GetComponent&lt;WebPoolWorker&gt; ().<a class="code" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a376da5939f7b7062e033f1a49627886e">Form</a> (URI, formStringData, formBinaryData, cookie, callback);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                }</div>
-<div class="ttc" id="class_hydrogen_1_1_core_1_1_web_pool_html_a376da5939f7b7062e033f1a49627886e"><div class="ttname"><a href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a376da5939f7b7062e033f1a49627886e">Hydrogen.Core.WebPool.Form</a></div><div class="ttdeci">void Form(string URI, Dictionary&lt; string, string &gt; formStringData)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/df4/_web_pool_8cs_source.html#l00086">WebPool.cs:86</a></div></div>
+<p>Definition at line <a class="el" href="../../d9/df4/_web_pool_8cs_source.html#l00078">78</a> of file <a class="el" href="../../d9/df4/_web_pool_8cs_source.html">WebPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                        GameObject go = hObjectPool.Instance.Spawn (_poolID);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                        go.GetComponent&lt;WebPoolWorker&gt; ().<a class="code" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a376da5939f7b7062e033f1a49627886e">Form</a> (URI, formStringData, formBinaryData, cookie, callback);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                }</div>
+<div class="ttc" id="class_hydrogen_1_1_core_1_1_web_pool_html_a376da5939f7b7062e033f1a49627886e"><div class="ttname"><a href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a376da5939f7b7062e033f1a49627886e">Hydrogen.Core.WebPool.Form</a></div><div class="ttdeci">void Form(string URI, Dictionary&lt; string, string &gt; formStringData)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/df4/_web_pool_8cs_source.html#l00073">WebPool.cs:73</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -289,11 +303,11 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../d9/df4/_web_pool_8cs_source.html#l00064">64</a> of file <a class="el" href="../../d9/df4/_web_pool_8cs_source.html">WebPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                        <a class="code" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#aa7a87fc73ea35f495ea4c50fe66813d9">GET</a> (URI, null, callback);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                }</div>
-<div class="ttc" id="class_hydrogen_1_1_core_1_1_web_pool_html_aa7a87fc73ea35f495ea4c50fe66813d9"><div class="ttname"><a href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#aa7a87fc73ea35f495ea4c50fe66813d9">Hydrogen.Core.WebPool.GET</a></div><div class="ttdeci">void GET(string URI, System.Action&lt; int, Hashtable, string &gt; callback)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/df4/_web_pool_8cs_source.html#l00064">WebPool.cs:64</a></div></div>
+<p>Definition at line <a class="el" href="../../d9/df4/_web_pool_8cs_source.html#l00051">51</a> of file <a class="el" href="../../d9/df4/_web_pool_8cs_source.html">WebPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                        <a class="code" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#aa7a87fc73ea35f495ea4c50fe66813d9">GET</a> (URI, null, callback);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                }</div>
+<div class="ttc" id="class_hydrogen_1_1_core_1_1_web_pool_html_aa7a87fc73ea35f495ea4c50fe66813d9"><div class="ttname"><a href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#aa7a87fc73ea35f495ea4c50fe66813d9">Hydrogen.Core.WebPool.GET</a></div><div class="ttdeci">void GET(string URI, System.Action&lt; int, Hashtable, string &gt; callback)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/df4/_web_pool_8cs_source.html#l00051">WebPool.cs:51</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -327,12 +341,12 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../d9/df4/_web_pool_8cs_source.html#l00069">69</a> of file <a class="el" href="../../d9/df4/_web_pool_8cs_source.html">WebPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                        GameObject go = hObjectPool.Instance.Spawn (_poolID);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                        go.GetComponent&lt;WebPoolWorker&gt; ().<a class="code" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#aa7a87fc73ea35f495ea4c50fe66813d9">GET</a> (URI, cookie, callback);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                }</div>
-<div class="ttc" id="class_hydrogen_1_1_core_1_1_web_pool_html_aa7a87fc73ea35f495ea4c50fe66813d9"><div class="ttname"><a href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#aa7a87fc73ea35f495ea4c50fe66813d9">Hydrogen.Core.WebPool.GET</a></div><div class="ttdeci">void GET(string URI, System.Action&lt; int, Hashtable, string &gt; callback)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/df4/_web_pool_8cs_source.html#l00064">WebPool.cs:64</a></div></div>
+<p>Definition at line <a class="el" href="../../d9/df4/_web_pool_8cs_source.html#l00056">56</a> of file <a class="el" href="../../d9/df4/_web_pool_8cs_source.html">WebPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                        GameObject go = hObjectPool.Instance.Spawn (_poolID);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                        go.GetComponent&lt;WebPoolWorker&gt; ().<a class="code" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#aa7a87fc73ea35f495ea4c50fe66813d9">GET</a> (URI, cookie, callback);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                }</div>
+<div class="ttc" id="class_hydrogen_1_1_core_1_1_web_pool_html_aa7a87fc73ea35f495ea4c50fe66813d9"><div class="ttname"><a href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#aa7a87fc73ea35f495ea4c50fe66813d9">Hydrogen.Core.WebPool.GET</a></div><div class="ttdeci">void GET(string URI, System.Action&lt; int, Hashtable, string &gt; callback)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/df4/_web_pool_8cs_source.html#l00051">WebPool.cs:51</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -366,11 +380,11 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../d9/df4/_web_pool_8cs_source.html#l00075">75</a> of file <a class="el" href="../../d9/df4/_web_pool_8cs_source.html">WebPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                        <a class="code" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a6b5f1ce454270e65ee612a4fe9d312a2">POST</a> (URI, contentType, payload, null, null);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                }</div>
-<div class="ttc" id="class_hydrogen_1_1_core_1_1_web_pool_html_a6b5f1ce454270e65ee612a4fe9d312a2"><div class="ttname"><a href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a6b5f1ce454270e65ee612a4fe9d312a2">Hydrogen.Core.WebPool.POST</a></div><div class="ttdeci">void POST(string URI, string contentType, string payload)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/df4/_web_pool_8cs_source.html#l00075">WebPool.cs:75</a></div></div>
+<p>Definition at line <a class="el" href="../../d9/df4/_web_pool_8cs_source.html#l00062">62</a> of file <a class="el" href="../../d9/df4/_web_pool_8cs_source.html">WebPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                        <a class="code" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a6b5f1ce454270e65ee612a4fe9d312a2">POST</a> (URI, contentType, payload, null, null);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                }</div>
+<div class="ttc" id="class_hydrogen_1_1_core_1_1_web_pool_html_a6b5f1ce454270e65ee612a4fe9d312a2"><div class="ttname"><a href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a6b5f1ce454270e65ee612a4fe9d312a2">Hydrogen.Core.WebPool.POST</a></div><div class="ttdeci">void POST(string URI, string contentType, string payload)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/df4/_web_pool_8cs_source.html#l00062">WebPool.cs:62</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -416,12 +430,12 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="../../d9/df4/_web_pool_8cs_source.html#l00080">80</a> of file <a class="el" href="../../d9/df4/_web_pool_8cs_source.html">WebPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                        GameObject go = hObjectPool.Instance.Spawn (_poolID);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                        go.GetComponent&lt;WebPoolWorker&gt; ().<a class="code" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a6b5f1ce454270e65ee612a4fe9d312a2">POST</a> (URI, contentType, payload, cookie, callback);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                }</div>
-<div class="ttc" id="class_hydrogen_1_1_core_1_1_web_pool_html_a6b5f1ce454270e65ee612a4fe9d312a2"><div class="ttname"><a href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a6b5f1ce454270e65ee612a4fe9d312a2">Hydrogen.Core.WebPool.POST</a></div><div class="ttdeci">void POST(string URI, string contentType, string payload)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/df4/_web_pool_8cs_source.html#l00075">WebPool.cs:75</a></div></div>
+<p>Definition at line <a class="el" href="../../d9/df4/_web_pool_8cs_source.html#l00067">67</a> of file <a class="el" href="../../d9/df4/_web_pool_8cs_source.html">WebPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                        GameObject go = hObjectPool.Instance.Spawn (_poolID);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                        go.GetComponent&lt;WebPoolWorker&gt; ().<a class="code" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a6b5f1ce454270e65ee612a4fe9d312a2">POST</a> (URI, contentType, payload, cookie, callback);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                }</div>
+<div class="ttc" id="class_hydrogen_1_1_core_1_1_web_pool_html_a6b5f1ce454270e65ee612a4fe9d312a2"><div class="ttname"><a href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html#a6b5f1ce454270e65ee612a4fe9d312a2">Hydrogen.Core.WebPool.POST</a></div><div class="ttdeci">void POST(string URI, string contentType, string payload)</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/df4/_web_pool_8cs_source.html#l00062">WebPool.cs:62</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -431,7 +445,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d0/dff/namespace_hydrogen.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../d1/d8f/namespace_hydrogen_1_1_core.html">Core</a></li><li class="navelem"><a class="el" href="../../dd/dfe/class_hydrogen_1_1_core_1_1_web_pool.html">WebPool</a></li>
-    <li class="footer">Generated on Sat Dec 7 2013 22:50:46 for Hydrogen Framework by
+    <li class="footer">Generated on Mon Dec 9 2013 00:53:09 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

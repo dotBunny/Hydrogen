@@ -112,27 +112,30 @@ $(document).ready(function(){initNavTree('de/db6/class_hydrogen_1_1_layers.html'
 </div><!--header-->
 <div class="contents">
 
-<p>Additional static functions, constants and classes used to extend existing <a class="el" href="../../de/db6/class_hydrogen_1_1_layers.html" title="Additional static functions, constants and classes used to extend existing Layers support inside of U...">Layers</a> support inside of Unity.  
+<p>Additional static functions used to extend existing <a class="el" href="../../de/db6/class_hydrogen_1_1_layers.html" title="Additional static functions used to extend existing Layers support inside of Unity. ">Layers</a> support inside of Unity.  
  <a href="../../de/db6/class_hydrogen_1_1_layers.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aee417be55db5fafe99ca34b6196bb4bb"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/db6/class_hydrogen_1_1_layers.html#aee417be55db5fafe99ca34b6196bb4bb">OnlyIncluding</a> (params int[] layers)</td></tr>
-<tr class="memdesc:aee417be55db5fafe99ca34b6196bb4bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a layer mask only including these layers.  <a href="#aee417be55db5fafe99ca34b6196bb4bb">More...</a><br/></td></tr>
-<tr class="separator:aee417be55db5fafe99ca34b6196bb4bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42ec9bc36a93c83f2d87da855997cde8"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/db6/class_hydrogen_1_1_layers.html#a42ec9bc36a93c83f2d87da855997cde8">ContainsLayer</a> (this LayerMask layerMask, int targetLayer)</td></tr>
+<tr class="memdesc:a42ec9bc36a93c83f2d87da855997cde8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Does the layerMask contain the specified layer?  <a href="#a42ec9bc36a93c83f2d87da855997cde8">More...</a><br/></td></tr>
+<tr class="separator:a42ec9bc36a93c83f2d87da855997cde8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a060fd873e101f85e9c6832ac49999239"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/db6/class_hydrogen_1_1_layers.html#a060fd873e101f85e9c6832ac49999239">EverythingBut</a> (params int[] layers)</td></tr>
 <tr class="memdesc:a060fd873e101f85e9c6832ac49999239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a layer mask of everything but these layers.  <a href="#a060fd873e101f85e9c6832ac49999239">More...</a><br/></td></tr>
 <tr class="separator:a060fd873e101f85e9c6832ac49999239"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcc21894a13964513c16c71b88ecd44e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/db6/class_hydrogen_1_1_layers.html#abcc21894a13964513c16c71b88ecd44e">ContainsLayer</a> (LayerMask layerMask, int targetLayer)</td></tr>
-<tr class="memdesc:abcc21894a13964513c16c71b88ecd44e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine if the specified layer is contained within the layerMask.  <a href="#abcc21894a13964513c16c71b88ecd44e">More...</a><br/></td></tr>
-<tr class="separator:abcc21894a13964513c16c71b88ecd44e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5830cf39e30c73518170daaad97e959c"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/db6/class_hydrogen_1_1_layers.html#a5830cf39e30c73518170daaad97e959c">IsInLayerMask</a> (this GameObject obj, LayerMask layerMask)</td></tr>
+<tr class="memdesc:a5830cf39e30c73518170daaad97e959c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a GameObject is in a LayerMask.  <a href="#a5830cf39e30c73518170daaad97e959c">More...</a><br/></td></tr>
+<tr class="separator:a5830cf39e30c73518170daaad97e959c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee417be55db5fafe99ca34b6196bb4bb"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/db6/class_hydrogen_1_1_layers.html#aee417be55db5fafe99ca34b6196bb4bb">OnlyIncluding</a> (params int[] layers)</td></tr>
+<tr class="memdesc:aee417be55db5fafe99ca34b6196bb4bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a layer mask only including these layers.  <a href="#aee417be55db5fafe99ca34b6196bb4bb">More...</a><br/></td></tr>
+<tr class="separator:aee417be55db5fafe99ca34b6196bb4bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Additional static functions, constants and classes used to extend existing <a class="el" href="../../de/db6/class_hydrogen_1_1_layers.html" title="Additional static functions, constants and classes used to extend existing Layers support inside of U...">Layers</a> support inside of Unity. </p>
+<div class="textblock"><p>Additional static functions used to extend existing <a class="el" href="../../de/db6/class_hydrogen_1_1_layers.html" title="Additional static functions used to extend existing Layers support inside of Unity. ">Layers</a> support inside of Unity. </p>
 
 <p>Definition at line <a class="el" href="../../d7/d4f/_layers_8cs_source.html#l00038">38</a> of file <a class="el" href="../../d7/d4f/_layers_8cs_source.html">Layers.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="abcc21894a13964513c16c71b88ecd44e"></a>
+<a class="anchor" id="a42ec9bc36a93c83f2d87da855997cde8"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -142,7 +145,7 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">static bool Hydrogen.Layers.ContainsLayer </td>
           <td>(</td>
-          <td class="paramtype">LayerMask&#160;</td>
+          <td class="paramtype">this LayerMask&#160;</td>
           <td class="paramname"><em>layerMask</em>, </td>
         </tr>
         <tr>
@@ -164,7 +167,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Determine if the specified layer is contained within the layerMask. </p>
+<p>Does the layerMask contain the specified layer? </p>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code>, if the layer is contained, <code>false</code> otherwise.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -174,10 +177,10 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../d7/d4f/_layers_8cs_source.html#l00070">70</a> of file <a class="el" href="../../d7/d4f/_layers_8cs_source.html">Layers.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                        <span class="keywordflow">return</span> (layerMask.value &amp; 1 &lt;&lt; targetLayer) != 0;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                }</div>
+<p>Definition at line <a class="el" href="../../d7/d4f/_layers_8cs_source.html#l00046">46</a> of file <a class="el" href="../../d7/d4f/_layers_8cs_source.html">Layers.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                        <span class="keywordflow">return</span> (layerMask.value &amp; 1 &lt;&lt; targetLayer) != 0;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -207,16 +210,67 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>A layer mask of everything but the passed layers.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">layers</td><td><a class="el" href="../../d9/d04/class_hydrogen_1_1_array.html" title="Additional static functions, constants and classes used to extend existing Array support inside of Un...">Array</a> of Layer IDs.</td></tr>
+    <tr><td class="paramname">layers</td><td><a class="el" href="../../d9/d04/class_hydrogen_1_1_array.html" title="Additional static functions used to extend existing Array support inside of Unity. ">Array</a> of Layer IDs.</td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../d7/d4f/_layers_8cs_source.html#l00059">59</a> of file <a class="el" href="../../d7/d4f/_layers_8cs_source.html">Layers.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                        <span class="keywordflow">return</span> ~<a class="code" href="../../de/db6/class_hydrogen_1_1_layers.html#aee417be55db5fafe99ca34b6196bb4bb">OnlyIncluding</a> (layers);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                }</div>
-<div class="ttc" id="class_hydrogen_1_1_layers_html_aee417be55db5fafe99ca34b6196bb4bb"><div class="ttname"><a href="../../de/db6/class_hydrogen_1_1_layers.html#aee417be55db5fafe99ca34b6196bb4bb">Hydrogen.Layers.OnlyIncluding</a></div><div class="ttdeci">static int OnlyIncluding(params int[] layers)</div><div class="ttdoc">Create a layer mask only including these layers. </div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d4f/_layers_8cs_source.html#l00045">Layers.cs:45</a></div></div>
+<p>Definition at line <a class="el" href="../../d7/d4f/_layers_8cs_source.html#l00056">56</a> of file <a class="el" href="../../d7/d4f/_layers_8cs_source.html">Layers.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                        <span class="keywordflow">return</span> ~<a class="code" href="../../de/db6/class_hydrogen_1_1_layers.html#aee417be55db5fafe99ca34b6196bb4bb">OnlyIncluding</a> (layers);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                }</div>
+<div class="ttc" id="class_hydrogen_1_1_layers_html_aee417be55db5fafe99ca34b6196bb4bb"><div class="ttname"><a href="../../de/db6/class_hydrogen_1_1_layers.html#aee417be55db5fafe99ca34b6196bb4bb">Hydrogen.Layers.OnlyIncluding</a></div><div class="ttdeci">static int OnlyIncluding(params int[] layers)</div><div class="ttdoc">Create a layer mask only including these layers. </div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d4f/_layers_8cs_source.html#l00079">Layers.cs:79</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a class="anchor" id="a5830cf39e30c73518170daaad97e959c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool Hydrogen.Layers.IsInLayerMask </td>
+          <td>(</td>
+          <td class="paramtype">this GameObject&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">LayerMask&#160;</td>
+          <td class="paramname"><em>layerMask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Checks if a GameObject is in a LayerMask. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obj</td><td>GameObject to test</td></tr>
+    <tr><td class="paramname">layerMask</td><td>LayerMask with all the layers to test against</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if in any of the layers in the LayerMask</dd></dl>
+
+<p>Definition at line <a class="el" href="../../d7/d4f/_layers_8cs_source.html#l00067">67</a> of file <a class="el" href="../../d7/d4f/_layers_8cs_source.html">Layers.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                        <span class="comment">// Convert the object&#39;s layer to a bitfield for comparison</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                        <span class="keywordtype">int</span> objLayerMask = (1 &lt;&lt; obj.layer);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                        <span class="keywordflow">return</span> (layerMask.value &amp; objLayerMask) &gt; 0;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -246,19 +300,19 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>A layer mask including only the passed layers.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">layers</td><td><a class="el" href="../../d9/d04/class_hydrogen_1_1_array.html" title="Additional static functions, constants and classes used to extend existing Array support inside of Un...">Array</a> of Layer IDs</td></tr>
+    <tr><td class="paramname">layers</td><td><a class="el" href="../../d9/d04/class_hydrogen_1_1_array.html" title="Additional static functions used to extend existing Array support inside of Unity. ">Array</a> of Layer IDs</td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../d7/d4f/_layers_8cs_source.html#l00045">45</a> of file <a class="el" href="../../d7/d4f/_layers_8cs_source.html">Layers.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                        <span class="keywordtype">int</span> mask = 0;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                        <span class="keywordflow">foreach</span> (<span class="keywordtype">int</span> item <span class="keywordflow">in</span> layers) {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                                mask |= 1 &lt;&lt; item;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                        }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                        <span class="keywordflow">return</span> mask;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                }</div>
+<p>Definition at line <a class="el" href="../../d7/d4f/_layers_8cs_source.html#l00079">79</a> of file <a class="el" href="../../d7/d4f/_layers_8cs_source.html">Layers.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                        <span class="keywordtype">int</span> mask = 0;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                        <span class="keywordflow">foreach</span> (<span class="keywordtype">int</span> item <span class="keywordflow">in</span> layers) {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                                mask |= 1 &lt;&lt; item;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                        }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                        <span class="keywordflow">return</span> mask;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -268,7 +322,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d0/dff/namespace_hydrogen.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../de/db6/class_hydrogen_1_1_layers.html">Layers</a></li>
-    <li class="footer">Generated on Sat Dec 7 2013 22:50:46 for Hydrogen Framework by
+    <li class="footer">Generated on Mon Dec 9 2013 00:53:09 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>
