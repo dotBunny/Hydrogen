@@ -1,4 +1,4 @@
-﻿#region Copyright Notice & License Information
+#region Copyright Notice & License Information
 //
 // XML.cs
 //
@@ -36,25 +36,25 @@ namespace Hydrogen
 		public class XML
 		{
 				/// <summary>
-				/// To convert a Byte Array of Unicode values (UTF-8 encoded) to a complete String.
+				/// Converts the String to UTF8 Byte array and is used in Deserialization.
 				/// </summary>
-				/// <returns>String converted from Unicode Byte Array</returns>
-				/// <param name="characters">Unicode Byte Array to be converted to String</param>
-				public static String UTF8ByteArrayToString (Byte[] characters)
-				{
-						var encoding = new System.Text.UTF8Encoding ();
-						return encoding.GetString (characters);
-				}
-
-				/// <summary>
-				/// Converts the String to UTF8 Byte array and is used in Deserialization
-				/// </summary>
-				/// <returns>A byte array</returns>
-				/// <param name="pXmlString">The source string</param>
+				/// <returns>A byte array.</returns>
+				/// <param name="pXmlString">The source string.</param>
 				public static Byte[] StringToUTF8ByteArray (String pXmlString)
 				{
 						var encoding = new System.Text.UTF8Encoding ();
 						return encoding.GetBytes (pXmlString);
+				}
+
+				/// <summary>
+				/// To convert a Byte Array of Unicode values (UTF-8 encoded) to a complete String.
+				/// </summary>
+				/// <returns>String converted from Unicode Byte Array.</returns>
+				/// <param name="characters">Unicode Byte Array to be converted to String.</param>
+				public static String UTF8ByteArrayToString (Byte[] characters)
+				{
+						var encoding = new System.Text.UTF8Encoding ();
+						return encoding.GetString (characters);
 				}
 		}
 }

@@ -31,12 +31,13 @@ using UnityEngine;
 namespace Hydrogen.Core
 {
 		/// <summary>
-		/// 
+		/// The base for all classes which want to extend the behaviour of an ObjectPoolItem, these methods need to be 
+		/// implemented for the efficient use of the Object Pool system.
 		/// </summary>
 		public abstract class ObjectPoolItemBase : MonoBehaviour
 		{
 				/// <summary>
-				/// The parent pool.
+				/// The parent pool of the GameObject.
 				/// </summary>
 				internal ObjectPoolCollection ParentPool;
 				/// <summary>
@@ -54,14 +55,14 @@ namespace Hydrogen.Core
 				public abstract void DespawnSafely ();
 
 				/// <summary>
-				/// Is the object idle, and therefore can be despawned organically?
+				/// Is the GameObject idle, and therefore can be despawned organically?
 				/// </summary>
 				/// <returns><c>true</c> if this instance is inactive; otherwise, <c>false</c>.</returns>
 				/// <remarks>This will only work on tracked spawned objects.</remarks>
 				public abstract bool IsInactive ();
 
 				/// <summary>
-				/// Raised when the object is 'despawned' back into the pool.
+				/// Raised when the GameObject is despawned back into it's Object Pool.
 				/// </summary>
 				/// <remarks>
 				/// It does not set "active", you must handle that yourself.
@@ -69,7 +70,7 @@ namespace Hydrogen.Core
 				public abstract void OnDespawned ();
 
 				/// <summary>
-				/// Raised when the object is 'spawned' from the pool.
+				/// Raised when the GameObject is spawned from it's Object Pool.
 				/// </summary>
 				/// <remarks>
 				/// It does not set "active", you must handle that yourself.

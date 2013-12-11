@@ -41,10 +41,6 @@ public sealed class hInput : Hydrogen.Peripherals.Input
 		/// </summary>
 		public bool Presistant = true;
 		/// <summary>
-		/// Internal reference to the static instance of the input manager.
-		/// </summary>
-		static volatile hInput _staticInstance;
-		/// <summary>
 		/// Internal fail safe to maintain instance across threads.
 		/// </summary>
 		/// <remarks>
@@ -54,6 +50,10 @@ public sealed class hInput : Hydrogen.Peripherals.Input
 		/// http://msdn.microsoft.com/en-us/library/ms998558.aspx
 		/// </description>
 		static readonly System.Object _syncRoot = new System.Object ();
+		/// <summary>
+		/// Internal reference to the static instance of the input manager.
+		/// </summary>
+		static volatile hInput _staticInstance;
 
 		/// <summary>
 		/// Gets the input manager instance, creating one if none is found.
@@ -82,6 +82,14 @@ public sealed class hInput : Hydrogen.Peripherals.Input
 		}
 
 		/// <summary>
+		/// Does an Input Manager already exist?
+		/// </summary>
+		public static bool Exists ()
+		{
+				return _staticInstance != null;
+		}
+
+		/// <summary>
 		/// Unity's Awake Event
 		/// </summary>
 		protected override void Awake ()
@@ -92,13 +100,5 @@ public sealed class hInput : Hydrogen.Peripherals.Input
 				// Should this gameObject be kept around :) I think so.
 				if (Presistant)
 						DontDestroyOnLoad (gameObject);
-		}
-
-		/// <summary>
-		/// Does an Input Manager already exist?
-		/// </summary>
-		public static bool Exists ()
-		{
-				return _staticInstance != null;
 		}
 }

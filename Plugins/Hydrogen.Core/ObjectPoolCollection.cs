@@ -29,25 +29,96 @@ using UnityEngine;
 
 namespace Hydrogen.Core
 {
-		// TODO DOCUMENT!
+		/// <summary>
+		/// The actual pool used by the pooling system, multiple instances of these will be created per unique 
+		/// Prefab or GameObject.
+		/// </summary>
 		[System.Serializable]
 		public class ObjectPoolCollection
 		{
-				public GameObject Prefab;
-				public int PreloadAmount;
-				public bool SpawnMoreIfNeeded;
-				public bool SendMessage;
-				public bool ManageParticles = true;
-				public bool TrackSpawnedObjects;
-				public bool CullExtraObjects;
+				/// <summary>
+				/// Should extra objects be culled when not in use?
+				/// </summary>
+				public bool CullExtras;
+				/// <summary>
+				/// How often should we look at culling extra objects.
+				/// </summary>
 				public float CullInterval;
+				/// <summary>
+				/// Should despawned object be returned to it's pool's origin position?
+				/// </summary>
 				public bool DespawnPoolLocation = true;
-				bool _hasObjectPoolItem;
-				bool _hasParticleSystem;
-				bool _hasLegacyParticleEmitter;
-				bool _hasLegacyParticleAnimator;
-				bool _hasRigidbody;
+				/// <summary>
+				/// Should particle systems be appropriately handled when despawning?
+				/// </summary>
+				public bool ManageParticles = true;
+				/// <summary>
+				/// Reference to the Prefab or GameObject used by this Object Pool.
+				/// </summary>
+				public GameObject Prefab;
+				/// <summary>
+				/// The number of objects to preload in an Object Pool.
+				/// </summary>
+				public int PreloadAmount;
+				/// <summary>
+				/// Should Unity's SendMessage be used. (OnSpawned, WaitToDespawn, OnDespawned)
+				/// </summary>
+				public bool SendMessage;
+				/// <summary>
+				/// Should additional objects be spawned as needed?
+				/// </summary>
+				public bool SpawnMore;
+				/// <summary>
+				/// Should objects be tracked when they are spawned?
+				/// </summary>
+				/// <remarks>
+				/// Useful for when you need to keep track of what objects are in use.
+				/// </remarks>
+				public bool TrackObjects;
+				/// <summary>
+				/// Timer used to determine when its appropriate to update objects that need to be culled.
+				/// </summary>
 				float _cullTimer;
+				/// <summary>
+				/// Does the Prefab contain a legacy Particle Animator?
+				/// </summary>
+				bool _hasLegacyParticleAnimator;
+				/// <summary>
+				/// Does the Prefab contain a legacy Particle Emitter?
+				/// </summary>
+				bool _hasLegacyParticleEmitter;
+				/// <summary>
+				/// Does the Prefab have a ObjectPoolItem based component attached to it?
+				/// </summary>
+				bool _hasObjectPoolItem;
+				/// <summary>
+				/// Does the Prefab contain a Particle System?
+				/// </summary>
+				bool _hasParticleSystem;
+				/// <summary>
+				/// Does the Prefab have a Rigidbody?
+				/// </summary>
+				bool _hasRigidbody;
+				/// <summary>
+				/// Has the Object Pool been initialized?
+				/// </summary>
+				bool _initialized;
+				/// <summary>
+				/// Local reference to the parent transform.
+				/// </summary>
+				Transform _parentTransform;
+				/// <summary>
+				/// This pool's ID
+				/// </summary>
+				int _poolID;
+				/// <summary>
+				/// An internal array of available objects.
+				/// </summary>
+				GameObject[] _pooledObjects;
+				/// <summary>
+				/// An array of all spawned objects (Requires TrackObject during construction)
+				/// </summary>
+				GameObject[] _spawnedObjects;
 
 				public bool HasObjectPoolItem {
 						get {
@@ -79,62 +150,29 @@ namespace Hydrogen.Core
 						}
 				}
 
-				/// <summary>
-				/// The pooled objects currently available.
-				/// </summary>
-				GameObject[] _pooledObjects;
-				Transform _parentTransform;
-				int _poolID;
-				GameObject[] _spawnedObjects;
-
 				public GameObject[] SpawnedObjects { get { return _spawnedObjects; } }
 
-				bool _initialized;
-
-				public bool Initialized { get { return _initialized; } }
+				public bool Initialized { 
+						get { 
+								return _initialized;
+						}
+				}
 
 				public ObjectPoolCollection (int preload, bool spawnMore, bool slowMessage, bool handleParticles, bool trackSpawned, bool cullExtras, float cullInterval)
 				{
 						ManageParticles = handleParticles;
 						PreloadAmount = preload;
-						SpawnMoreIfNeeded = spawnMore;
+						SpawnMore = spawnMore;
 						SendMessage = slowMessage;
-						TrackSpawnedObjects = trackSpawned;
-						CullExtraObjects = cullExtras;
+						TrackObjects = trackSpawned;
+						CullExtras = cullExtras;
 						CullInterval = cullInterval;
 						_cullTimer = cullInterval;
-				}
-
-				public void Initialize (GameObject gameObject, Transform parent, int poolID)
-				{
-						Prefab = gameObject;
-
-						_parentTransform = parent;
-						_poolID = poolID;
-						_pooledObjects = new GameObject[0];
-
-						_hasObjectPoolItem |= Prefab.GetComponent<ObjectPoolItemBase> ();
-
-						_hasRigidbody |= gameObject.GetComponent<Rigidbody> ();
-
-						if (ManageParticles) {
-								_hasLegacyParticleEmitter |= gameObject.GetComponent<ParticleEmitter> ();
-								_hasLegacyParticleAnimator |= gameObject.GetComponent<ParticleAnimator> ();
-								_hasParticleSystem |= gameObject.GetComponent<ParticleSystem> ();
-						}
-
-						ManageParticles &= _hasLegacyParticleAnimator || _hasLegacyParticleEmitter || _hasParticleSystem;
-
-						for (int x = 0; x < PreloadAmount; x++) {
-								AddToPool ();
-						}
-						_initialized = true;
 				}
 
 				public void AddToPool ()
 				{
 						var newObject = Object.Instantiate (Prefab) as GameObject;
-
 						newObject.name = Prefab.name;
 
 
@@ -149,81 +187,48 @@ namespace Hydrogen.Core
 						Despawn (newObject, true);
 				}
 
-				public bool RemoveFromPool (GameObject gameObject, bool destroyObject)
+				public void Initialize (GameObject prefab, Transform parent, int poolID)
 				{
-						if (destroyObject) {
+						Prefab = prefab;
 
-								Object.DestroyImmediate (gameObject);
-								return Array.Remove<GameObject> (ref _pooledObjects, gameObject);
+						_parentTransform = parent;
+						_poolID = poolID;
+						_pooledObjects = new GameObject[0];
+
+						_hasObjectPoolItem |= Prefab.GetComponent<ObjectPoolItemBase> ();
+
+						_hasRigidbody |= prefab.GetComponent<Rigidbody> ();
+
+						if (ManageParticles) {
+								_hasLegacyParticleEmitter |= prefab.GetComponent<ParticleEmitter> ();
+								_hasLegacyParticleAnimator |= prefab.GetComponent<ParticleAnimator> ();
+								_hasParticleSystem |= prefab.GetComponent<ParticleSystem> ();
 						}
-						return Array.Remove<GameObject> (ref _pooledObjects, gameObject);
 
-				}
+						ManageParticles &= _hasLegacyParticleAnimator || _hasLegacyParticleEmitter || _hasParticleSystem;
 
-				/// <summary>
-				/// Spawn an object from the pool at origin.
-				/// </summary>
-				public GameObject Spawn ()
-				{
-						return Spawn (Vector3.zero, Quaternion.identity);
-				}
-
-				/// <summary>
-				/// Spawn an object from the pool at the specified world location and rotation.
-				/// </summary>
-				/// <param name="location">Spawn Location</param>
-				/// <param name="rotation">Spawn Rotation</param>
-				public GameObject Spawn (Vector3 location, Quaternion rotation)
-				{
-						if (_pooledObjects != null && _pooledObjects.Length > 0) {
-								GameObject spawnedObject = _pooledObjects [0];
-				
-								if (spawnedObject == null) {
-										Debug.LogError (
-												"[h] A GameObject (" + Prefab.name + ") has been destroyed," +
-												"but is still referenced by the Object Pool. If you must destroy a GameObject manually," +
-												"please make sure to remove it from the pool as well:" +
-												"hObjectPool.Instance.Remove(GameObject);");
-
-										return null;
-								}
-
-								Array.RemoveAt<GameObject> (ref _pooledObjects, 0);
-
-								// Move and rotate before we call on spawned
-								spawnedObject.transform.position = location;
-								spawnedObject.transform.rotation = rotation;
-
-								if (ManageParticles) {
-										spawnedObject.GetComponent<ParticleAnimator> ().autodestruct &= !_hasLegacyParticleAnimator;
-										spawnedObject.GetComponent<ParticleEmitter> ().emit |= _hasLegacyParticleEmitter;
-								}
-
-								if (_hasObjectPoolItem) {
-										//spawnedObject.GetComponent<ObjectPoolItemBase>().poolID = _poolID; 
-
-										spawnedObject.GetComponent<ObjectPoolItemBase> ().OnSpawned ();
-								} else if (SendMessage) {
-										spawnedObject.SendMessage ("OnSpawned", SendMessageOptions.DontRequireReceiver);
-								} else {
-										spawnedObject.SetActive (true);
-								}
-
-								if (TrackSpawnedObjects) {
-										// No already spawned objects
-										if (_spawnedObjects == null)
-												_spawnedObjects = new GameObject[0];
-
-										Array.Add<GameObject> (ref _spawnedObjects, spawnedObject, false);
-								}
-
-								return spawnedObject;
-						}
-						if (SpawnMoreIfNeeded) {
+						for (int x = 0; x < PreloadAmount; x++) {
 								AddToPool ();
-								return Spawn (location, rotation);
 						}
-						return null;
+						_initialized = true;
+				}
+
+				public void CullUpdate ()
+				{
+						if (!TrackObjects || !_hasObjectPoolItem)
+								return;
+
+						_cullTimer -= Time.deltaTime;
+
+						if (_cullTimer <= 0) {
+								for (int x = 0; x < SpawnedObjects.Length; x++) {
+										if (SpawnedObjects [x].GetComponent<ObjectPoolItemBase> ().IsInactive ()) {
+												Despawn (SpawnedObjects [x]);
+										}
+								}
+								// Establish Timer Again
+								_cullTimer = CullInterval;
+						}
 				}
 
 				public void Despawn (GameObject gameObject)
@@ -235,10 +240,6 @@ namespace Hydrogen.Core
 				{
 						if (!ManageParticles)
 								gameObject.transform.parent = _parentTransform;
-
-						if (DespawnPoolLocation) {
-								gameObject.transform.position = _parentTransform.position;
-						}
 
 						// Has our handler
 						if (_hasObjectPoolItem) {
@@ -269,8 +270,12 @@ namespace Hydrogen.Core
 
 						}
 
+						if (DespawnPoolLocation && _parentTransform != null) {
+								gameObject.transform.position = _parentTransform.position;
+						}
+
 						if (!onSpawn) {
-								if (TrackSpawnedObjects)
+								if (TrackObjects)
 										Array.Remove<GameObject> (ref _spawnedObjects, gameObject);
 								Array.Add<GameObject> (ref _pooledObjects, gameObject, false);
 						}
@@ -279,27 +284,84 @@ namespace Hydrogen.Core
 				public void DespawnImmediate (GameObject gameObject)
 				{
 						gameObject.transform.parent = _parentTransform;
-						if (TrackSpawnedObjects)
+						if (TrackObjects)
 								Array.Remove<GameObject> (ref _spawnedObjects, gameObject);
 						Array.Add<GameObject> (ref _pooledObjects, gameObject, false);	
 				}
 
-				public void CullUpdate ()
+				public bool RemoveFromPool (GameObject gameObject, bool destroyObject)
 				{
-						if (!TrackSpawnedObjects || !_hasObjectPoolItem)
-								return;
+						if (destroyObject) {
 
-						_cullTimer -= Time.deltaTime;
-
-						if (_cullTimer <= 0) {
-								for (int x = 0; x < SpawnedObjects.Length; x++) {
-										if (SpawnedObjects [x].GetComponent<ObjectPoolItemBase> ().IsInactive ()) {
-												Despawn (SpawnedObjects [x]);
-										}
-								}
-								// Establish Timer Again
-								_cullTimer = CullInterval;
+								Object.DestroyImmediate (gameObject);
+								return Array.Remove<GameObject> (ref _pooledObjects, gameObject);
 						}
+						return Array.Remove<GameObject> (ref _pooledObjects, gameObject);
+
+				}
+
+				/// <summary>
+				/// Spawn an object from the pool at origin.
+				/// </summary>
+				public GameObject Spawn ()
+				{
+						return Spawn (Vector3.zero, Quaternion.identity);
+				}
+
+				/// <summary>
+				/// Spawn an object from the pool at the specified world location and rotation.
+				/// </summary>
+				/// <param name="location">Spawn Location</param>
+				/// <param name="rotation">Spawn Rotation</param>
+				public GameObject Spawn (Vector3 location, Quaternion rotation)
+				{
+						if (_pooledObjects != null && _pooledObjects.Length > 0) {
+								GameObject spawnedObject = _pooledObjects [0];
+
+								if (spawnedObject == null) {
+										Debug.LogError (
+												"[h] A GameObject (" + Prefab.name + ") has been destroyed," +
+												"but is still referenced by the Object Pool. If you must destroy a GameObject manually," +
+												"please make sure to remove it from the pool as well:" +
+												"hObjectPool.Instance.Remove(GameObject);");
+
+										return null;
+								}
+
+								Array.RemoveAt<GameObject> (ref _pooledObjects, 0);
+
+								// Move and rotate before we call on spawned
+								spawnedObject.transform.position = location;
+								spawnedObject.transform.rotation = rotation;
+
+								if (ManageParticles) {
+										spawnedObject.GetComponent<ParticleAnimator> ().autodestruct &= !_hasLegacyParticleAnimator;
+										spawnedObject.GetComponent<ParticleEmitter> ().emit |= _hasLegacyParticleEmitter;
+								}
+
+								if (_hasObjectPoolItem) {
+										spawnedObject.GetComponent<ObjectPoolItemBase> ().OnSpawned ();
+								} else if (SendMessage) {
+										spawnedObject.SendMessage ("OnSpawned", SendMessageOptions.DontRequireReceiver);
+								} else {
+										spawnedObject.SetActive (true);
+								}
+
+								if (TrackObjects) {
+										// No already spawned objects
+										if (_spawnedObjects == null)
+												_spawnedObjects = new GameObject[0];
+
+										Array.Add<GameObject> (ref _spawnedObjects, spawnedObject, false);
+								}
+
+								return spawnedObject;
+						}
+						if (SpawnMore) {
+								AddToPool ();
+								return Spawn (location, rotation);
+						}
+						return null;
 				}
 		}
 }

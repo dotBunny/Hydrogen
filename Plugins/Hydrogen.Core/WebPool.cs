@@ -88,10 +88,12 @@ namespace Hydrogen.Core
 						newWebObject.AddComponent (typeof(WebPoolWorker));
 						newWebObject.name = "Web Call";
 
+						// Add the new object to the Object Pool
 						_poolID = hObjectPool.Instance.Add (newWebObject);
 
-						// Remove our little buddy
-						Object.DestroyImmediate (newWebObject);
+						// We need to keep this GameObject around as it is referenced for spawning.
+						newWebObject.transform.parent = hObjectPool.Instance.gameObject.transform;
+						newWebObject.gameObject.SetActive (false);
 				}
 		}
 }

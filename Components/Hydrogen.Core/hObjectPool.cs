@@ -40,10 +40,6 @@ public sealed class hObjectPool : Hydrogen.Core.ObjectPool
 		/// </summary>
 		public bool Presistant = true;
 		/// <summary>
-		/// Internal reference to the static instance of the object pool.
-		/// </summary>
-		static volatile hObjectPool _staticInstance;
-		/// <summary>
 		/// Internal fail safe to maintain instance across threads.
 		/// </summary>
 		/// <remarks>
@@ -53,6 +49,10 @@ public sealed class hObjectPool : Hydrogen.Core.ObjectPool
 		/// http://msdn.microsoft.com/en-us/library/ms998558.aspx
 		/// </description>
 		static readonly System.Object _syncRoot = new System.Object ();
+		/// <summary>
+		/// Internal reference to the static instance of the object pool.
+		/// </summary>
+		static volatile hObjectPool _staticInstance;
 
 		/// <summary>
 		/// Gets the object pool instance, creating one if none is found.

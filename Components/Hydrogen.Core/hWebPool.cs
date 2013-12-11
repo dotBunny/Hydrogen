@@ -40,10 +40,6 @@ public sealed class hWebPool : Hydrogen.Core.WebPool
 		/// </summary>
 		public bool Presistant = true;
 		/// <summary>
-		/// Internal reference to the static instance of the web pool.
-		/// </summary>
-		static volatile hWebPool _staticInstance;
-		/// <summary>
 		/// Internal fail safe to maintain instance across threads.
 		/// </summary>
 		/// <remarks>
@@ -53,6 +49,10 @@ public sealed class hWebPool : Hydrogen.Core.WebPool
 		/// http://msdn.microsoft.com/en-us/library/ms998558.aspx
 		/// </description>
 		static readonly System.Object _syncRoot = new System.Object ();
+		/// <summary>
+		/// Internal reference to the static instance of the web pool.
+		/// </summary>
+		static volatile hWebPool _staticInstance;
 
 		/// <summary>
 		/// Gets the web pool instance, creating one if none is found.
@@ -81,6 +81,14 @@ public sealed class hWebPool : Hydrogen.Core.WebPool
 		}
 
 		/// <summary>
+		/// Does a Web Pool already exist?
+		/// </summary>
+		public static bool Exists ()
+		{
+				return _staticInstance != null;
+		}
+
+		/// <summary>
 		/// Unity's Awake Event
 		/// </summary>
 		protected override void Awake ()
@@ -91,13 +99,5 @@ public sealed class hWebPool : Hydrogen.Core.WebPool
 				// Should this gameObject be kept around :) I think so.
 				if (Presistant)
 						DontDestroyOnLoad (gameObject);
-		}
-
-		/// <summary>
-		/// Does a Web Pool already exist?
-		/// </summary>
-		public static bool Exists ()
-		{
-				return _staticInstance != null;
 		}
 }

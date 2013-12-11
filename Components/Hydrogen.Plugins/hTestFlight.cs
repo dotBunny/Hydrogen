@@ -49,10 +49,6 @@ public sealed class hTestFlight : MonoBehaviour
 		/// </summary>
 		public string TokenIOS = "";
 		/// <summary>
-		/// Internal reference to the static instance of the TestFlight interface.
-		/// </summary>
-		static volatile hTestFlight _staticInstance;
-		/// <summary>
 		/// Internal fail safe to maintain instance across threads.
 		/// </summary>
 		/// <remarks>
@@ -62,6 +58,10 @@ public sealed class hTestFlight : MonoBehaviour
 		/// http://msdn.microsoft.com/en-us/library/ms998558.aspx
 		/// </description>
 		static readonly System.Object _syncRoot = new System.Object ();
+		/// <summary>
+		/// Internal reference to the static instance of the TestFlight interface.
+		/// </summary>
+		static volatile hTestFlight _staticInstance;
 
 		/// <summary>
 		/// Gets the TestFlight interface instance.
@@ -91,6 +91,14 @@ public sealed class hTestFlight : MonoBehaviour
 		}
 
 		/// <summary>
+		/// Does a TestFlight manager instance exist?
+		/// </summary>
+		public static bool Exists ()
+		{
+				return _staticInstance != null;
+		}
+
+		/// <summary>
 		/// Adds an entry into the Key-Value store for this TestFlight session.
 		/// </summary>
 		/// <param name="key">The Key.</param>
@@ -112,14 +120,6 @@ public sealed class hTestFlight : MonoBehaviour
 				// Notice that the data/key is swapped here. Not to sure why TestFlight decided on this format, 
 				// it really seems backwards.
 				Hydrogen.Plugins.TestFlight.AddCustomEnvironmentInformation (data, key);
-		}
-
-		/// <summary>
-		/// Does a TestFlight manager instance exist?
-		/// </summary>
-		public static bool Exists ()
-		{
-				return _staticInstance != null;
 		}
 
 		/// <summary>
@@ -217,26 +217,13 @@ public sealed class hTestFlight : MonoBehaviour
 		}
 
 		/// <summary>
-		/// Unity's Awake Event
-		/// </summary>
-		void Awake ()
-		{
-				// Should this gameObject be kept around :) I think so.
-				if (Presistant)
-						DontDestroyOnLoad (gameObject);
-
-				// Let's get this party started, but in a somewhat safe manner
-				StartCoroutine (Initialize ());
-		}
-
-		/// <summary>
 		/// Raised when your application is paused, as a more accurate depiction of Session times.
 		/// </summary>
 		/// <remarks>
 		/// This was meant originally as a fix for Android, but we've carried it over to iOS and 
 		/// switched everything to manual for better integration with Unity
 		/// </remarks>
-		void OnApplicationPause ()
+		static void OnApplicationPause ()
 		{
 				if (!Hydrogen.Plugins.TestFlight.Session)
 						Hydrogen.Plugins.TestFlight.StartSession ();
@@ -247,8 +234,21 @@ public sealed class hTestFlight : MonoBehaviour
 		/// <summary>
 		/// Raised when your application is quit, ending the session for you via code.
 		/// </summary>
-		void OnApplicationQuit ()
+		static void OnApplicationQuit ()
 		{
 				Hydrogen.Plugins.TestFlight.EndSession ();
+		}
+
+		/// <summary>
+		/// Unity's Awake Event
+		/// </summary>
+		void Awake ()
+		{
+				// Should this gameObject be kept around :) I think so.
+				if (Presistant)
+						DontDestroyOnLoad (gameObject);
+
+				// Let's get this party started, but in a somewhat safe manner
+				StartCoroutine (Initialize ());
 		}
 }

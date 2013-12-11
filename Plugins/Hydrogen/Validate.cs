@@ -39,6 +39,20 @@ namespace Hydrogen
 		public static class Validate
 		{
 				/// <summary>
+				/// Calculate the percentage of similarity between two colors.
+				/// </summary>
+				/// <returns>The percentage of similarity (0-1)</returns>
+				/// <param name="sourceColor">Left Side Color</param>
+				/// <param name="targetColor">Right Side Color</param>
+				public static float ColorPercentage (this Color sourceColor, Color targetColor)
+				{
+						return ((targetColor.r / sourceColor.r) +
+						(targetColor.g / sourceColor.g) +
+						(targetColor.b / sourceColor.b) +
+						(targetColor.a / sourceColor.a) / 4f);
+				}
+
+				/// <summary>
 				/// Are the colors approximately equal?
 				/// </summary>
 				/// <returns><c>true</c>, if colors are approximately equal, <c>false</c> otherwise.</returns>

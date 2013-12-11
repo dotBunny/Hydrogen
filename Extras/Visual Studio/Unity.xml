@@ -1952,7 +1952,7 @@
             <summary>ARMv7 only.</summary>
         </member>
         <member name="T:UnityEditor.AnimationClipCurveData">
-            <summary>An AnimationClipCurveData object contains all the information needed to identify a specific curve in an AnimationClip. The curve animates a specific property of a component / material attached to a game object / animated bone.</summary>
+            <summary>An AnimationClipCurveData object contains all the information needed to identify a specific curve in an AnimationClip. The curve animates a specific property of a component / material attached to a GameObject / animated bone.</summary>
             <remarks>See Also: AnimationUtility, ObjectNames.</remarks>
         </member>
         <member name="C:UnityEditor.AnimationClipCurveData">
@@ -1969,7 +1969,7 @@
             <remarks>To be added.</remarks>
         </member>
         <member name="F:UnityEditor.AnimationClipCurveData.path">
-            <summary>The path of the game object / bone being animated.</summary>
+            <summary>The path of the GameObject / bone being animated.</summary>
             <remarks>To be added.</remarks>
         </member>
         <member name="F:UnityEditor.AnimationClipCurveData.propertyName">
@@ -2207,7 +2207,7 @@
             <param name="root">To be added.</param>
             <param name="binding">To be added.</param>
             <param name="data">To be added.</param>
-            <summary>Retrieves the current float value by sampling a curve value on a specific game object.</summary>
+            <summary>Retrieves the current float value by sampling a curve value on a specific GameObject.</summary>
             <returns>To be added.</returns>
             <remarks>Useful for recording keyframes.</remarks>
         </member>
@@ -2217,7 +2217,7 @@
             <param name="type">To be added.</param>
             <param name="propertyName">To be added.</param>
             <param name="data">To be added.</param>
-            <summary>Retrieves the current float value by sampling a curve value on a specific game object.</summary>
+            <summary>Retrieves the current float value by sampling a curve value on a specific GameObject.</summary>
             <returns>To be added.</returns>
             <remarks>Useful for recording keyframes.</remarks>
         </member>
@@ -2688,7 +2688,7 @@
             <param name="assetObject">To be added.</param>
             <summary>Returns the path name relative to the project folder where the asset is stored.</summary>
             <returns>To be added.</returns>
-            <remarks>All paths are relative to the project folder, for example: "Assets MyTextures hello.png" When a game object is part of a scene, the scene path is returned.</remarks>
+            <remarks>All paths are relative to the project folder, for example: "Assets MyTextures hello.png" When a GameObject is part of a scene, the scene path is returned.</remarks>
         </member>
         <member name="M:UnityEditor.AssetDatabase.GetAssetPath(System.Int32)">
             <param name="instanceID">To be added.</param>
@@ -2754,13 +2754,13 @@
             <param name="instanceID">To be added.</param>
             <summary>Is asset a main asset in the project window?</summary>
             <returns>To be added.</returns>
-            <remarks>For example an imported model has a game object as its root and several Meshes and child game objects in expanded state. The root game object is the main asset in this case.</remarks>
+            <remarks>For example an imported model has a GameObject as its root and several Meshes and child GameObjects in expanded state. The root GameObject is the main asset in this case.</remarks>
         </member>
         <member name="M:UnityEditor.AssetDatabase.IsMainAsset(UnityEngine.Object)">
             <param name="obj">To be added.</param>
             <summary>Is asset a main asset in the project window?</summary>
             <returns>To be added.</returns>
-            <remarks>For example an imported model has a game object as its root and several Meshes and child game objects in expanded state. The root game object is the main asset in this case.</remarks>
+            <remarks>For example an imported model has a GameObject as its root and several Meshes and child GameObjects in expanded state. The root GameObject is the main asset in this case.</remarks>
         </member>
         <member name="M:UnityEditor.AssetDatabase.IsOpenForEdit(System.String)">
             <summary>Use IsOpenForEdit to determine if the asset is open for edit by the version control.</summary>
@@ -3417,11 +3417,11 @@
         </member>
         <member name="F:UnityEditor.BuildAssetBundleOptions.CollectDependencies">
             <summary>Includes all dependencies.</summary>
-            <remarks>This follows all references to any assets, game objects or components and includes them in the build. See Also: BuildPipeline.BuildAssetBundle.</remarks>
+            <remarks>This follows all references to any assets, GameObjects or components and includes them in the build. See Also: BuildPipeline.BuildAssetBundle.</remarks>
         </member>
         <member name="F:UnityEditor.BuildAssetBundleOptions.CompleteAssets">
             <summary>Forces inclusion of the entire asset.</summary>
-            <remarks>For example if you pass a Mesh into the BuildPipeline.BuildAssetBundle function and use CompleteAssets it would also include the game object and any animation clips in the same asset. See Also: BuildPipeline.BuildAssetBundle.</remarks>
+            <remarks>For example if you pass a Mesh into the BuildPipeline.BuildAssetBundle function and use CompleteAssets it would also include the GameObject and any animation clips in the same asset. See Also: BuildPipeline.BuildAssetBundle.</remarks>
         </member>
         <member name="F:UnityEditor.BuildAssetBundleOptions.DeterministicAssetBundle">
             <summary>Builds an asset bundle using a hash for the id of the object stored in the asset bundle.</summary>
@@ -4495,7 +4495,7 @@
             <summary>Make a field for selecting a Color.</summary>
             <returns>The color selected by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Change The color of the selected Game Objects   class EditorGUIColorField extends EditorWindow {    var matColor : Color = Color.white;  @MenuItem("Examples/Massive Color Change")  static function Init() {   var window = GetWindow(EditorGUIColorField);   window.position = Rect(0,0,170,60);   window.Show();  }  function OnGUI() {   matColor = EditorGUI.ColorField(Rect(3,3,position.width - 6, 15),    "New Color:",    matColor);   if(GUI.Button(Rect(3,25,position.width-6, 30),"Change!"))   ChangeColors();  }     function ChangeColors() {   if(Selection.activeGameObject)   for(var t in Selection.gameObjects)    if(t.renderer)    t.renderer.sharedMaterial.color = matColor;  }  }</example>
+            <example>// Change The color of the selected GameObjects   class EditorGUIColorField extends EditorWindow {    var matColor : Color = Color.white;  @MenuItem("Examples/Massive Color Change")  static function Init() {   var window = GetWindow(EditorGUIColorField);   window.position = Rect(0,0,170,60);   window.Show();  }  function OnGUI() {   matColor = EditorGUI.ColorField(Rect(3,3,position.width - 6, 15),    "New Color:",    matColor);   if(GUI.Button(Rect(3,25,position.width-6, 30),"Change!"))   ChangeColors();  }     function ChangeColors() {   if(Selection.activeGameObject)   for(var t in Selection.gameObjects)    if(t.renderer)    t.renderer.sharedMaterial.color = matColor;  }  }</example>
             <param name="position">Rectangle on the screen to use for the field.</param>
             <param name="value">The color to edit.</param>
         </member>
@@ -4503,7 +4503,7 @@
             <summary>Make a field for selecting a Color.</summary>
             <returns>The color selected by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Change The color of the selected Game Objects   class EditorGUIColorField extends EditorWindow {    var matColor : Color = Color.white;  @MenuItem("Examples/Massive Color Change")  static function Init() {   var window = GetWindow(EditorGUIColorField);   window.position = Rect(0,0,170,60);   window.Show();  }  function OnGUI() {   matColor = EditorGUI.ColorField(Rect(3,3,position.width - 6, 15),    "New Color:",    matColor);   if(GUI.Button(Rect(3,25,position.width-6, 30),"Change!"))   ChangeColors();  }     function ChangeColors() {   if(Selection.activeGameObject)   for(var t in Selection.gameObjects)    if(t.renderer)    t.renderer.sharedMaterial.color = matColor;  }  }</example>
+            <example>// Change The color of the selected GameObjects   class EditorGUIColorField extends EditorWindow {    var matColor : Color = Color.white;  @MenuItem("Examples/Massive Color Change")  static function Init() {   var window = GetWindow(EditorGUIColorField);   window.position = Rect(0,0,170,60);   window.Show();  }  function OnGUI() {   matColor = EditorGUI.ColorField(Rect(3,3,position.width - 6, 15),    "New Color:",    matColor);   if(GUI.Button(Rect(3,25,position.width-6, 30),"Change!"))   ChangeColors();  }     function ChangeColors() {   if(Selection.activeGameObject)   for(var t in Selection.gameObjects)    if(t.renderer)    t.renderer.sharedMaterial.color = matColor;  }  }</example>
             <param name="position">Rectangle on the screen to use for the field.</param>
             <param name="label">Optional label to display in front of the field.</param>
             <param name="value">The color to edit.</param>
@@ -4512,7 +4512,7 @@
             <summary>Make a field for selecting a Color.</summary>
             <returns>The color selected by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Change The color of the selected Game Objects   class EditorGUIColorField extends EditorWindow {    var matColor : Color = Color.white;  @MenuItem("Examples/Massive Color Change")  static function Init() {   var window = GetWindow(EditorGUIColorField);   window.position = Rect(0,0,170,60);   window.Show();  }  function OnGUI() {   matColor = EditorGUI.ColorField(Rect(3,3,position.width - 6, 15),    "New Color:",    matColor);   if(GUI.Button(Rect(3,25,position.width-6, 30),"Change!"))   ChangeColors();  }     function ChangeColors() {   if(Selection.activeGameObject)   for(var t in Selection.gameObjects)    if(t.renderer)    t.renderer.sharedMaterial.color = matColor;  }  }</example>
+            <example>// Change The color of the selected GameObjects   class EditorGUIColorField extends EditorWindow {    var matColor : Color = Color.white;  @MenuItem("Examples/Massive Color Change")  static function Init() {   var window = GetWindow(EditorGUIColorField);   window.position = Rect(0,0,170,60);   window.Show();  }  function OnGUI() {   matColor = EditorGUI.ColorField(Rect(3,3,position.width - 6, 15),    "New Color:",    matColor);   if(GUI.Button(Rect(3,25,position.width-6, 30),"Change!"))   ChangeColors();  }     function ChangeColors() {   if(Selection.activeGameObject)   for(var t in Selection.gameObjects)    if(t.renderer)    t.renderer.sharedMaterial.color = matColor;  }  }</example>
             <param name="position">Rectangle on the screen to use for the field.</param>
             <param name="label">Optional label to display in front of the field.</param>
             <param name="value">The color to edit.</param>
@@ -4521,7 +4521,7 @@
             <summary>Make a field for editing an AnimationCurve.Make a field for editing an AnimationCurve.</summary>
             <returns>The curve edited by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class EditorGUICurveField extends EditorWindow {    var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);    @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(EditorGUICurveField);   window.position = Rect(0,0,200,100);   window.Show();  }    function OnGUI() {   curveX = EditorGUI.CurveField(   Rect(3,3,position.width-6,15),   "Animation on X", curveX);   curveY = EditorGUI.CurveField(   Rect(3,20,position.width-6,15),   "Animation on Y", curveY);   curveZ = EditorGUI.CurveField(   Rect(3,45,position.width-6,15),   "Animation on Z", curveZ);     if(GUI.Button(Rect(3,60,position.width-6,30),"Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);    comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No Game Object selected for adding an animation curve");   }  }  }  // FollowAnimationCurve.js  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
+            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class EditorGUICurveField extends EditorWindow {    var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);    @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(EditorGUICurveField);   window.position = Rect(0,0,200,100);   window.Show();  }    function OnGUI() {   curveX = EditorGUI.CurveField(   Rect(3,3,position.width-6,15),   "Animation on X", curveX);   curveY = EditorGUI.CurveField(   Rect(3,20,position.width-6,15),   "Animation on Y", curveY);   curveZ = EditorGUI.CurveField(   Rect(3,45,position.width-6,15),   "Animation on Z", curveZ);     if(GUI.Button(Rect(3,60,position.width-6,30),"Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);    comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No GameObject selected for adding an animation curve");   }  }  }  // FollowAnimationCurve.js  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
             <param name="position">Rectangle on the screen to use for the field.</param>
             <param name="value">The curve to edit.</param>
         </member>
@@ -4529,7 +4529,7 @@
             <summary>Make a field for editing an AnimationCurve.Make a field for editing an AnimationCurve.</summary>
             <returns>The curve edited by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class EditorGUICurveField extends EditorWindow {    var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);    @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(EditorGUICurveField);   window.position = Rect(0,0,200,100);   window.Show();  }    function OnGUI() {   curveX = EditorGUI.CurveField(   Rect(3,3,position.width-6,15),   "Animation on X", curveX);   curveY = EditorGUI.CurveField(   Rect(3,20,position.width-6,15),   "Animation on Y", curveY);   curveZ = EditorGUI.CurveField(   Rect(3,45,position.width-6,15),   "Animation on Z", curveZ);     if(GUI.Button(Rect(3,60,position.width-6,30),"Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);    comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No Game Object selected for adding an animation curve");   }  }  }  // FollowAnimationCurve.js  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
+            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class EditorGUICurveField extends EditorWindow {    var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);    @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(EditorGUICurveField);   window.position = Rect(0,0,200,100);   window.Show();  }    function OnGUI() {   curveX = EditorGUI.CurveField(   Rect(3,3,position.width-6,15),   "Animation on X", curveX);   curveY = EditorGUI.CurveField(   Rect(3,20,position.width-6,15),   "Animation on Y", curveY);   curveZ = EditorGUI.CurveField(   Rect(3,45,position.width-6,15),   "Animation on Z", curveZ);     if(GUI.Button(Rect(3,60,position.width-6,30),"Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);    comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No GameObject selected for adding an animation curve");   }  }  }  // FollowAnimationCurve.js  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
             <param name="position">Rectangle on the screen to use for the field.</param>
             <param name="label">Optional label to display in front of the field.</param>
             <param name="value">The curve to edit.</param>
@@ -4538,7 +4538,7 @@
             <summary>Make a field for editing an AnimationCurve.Make a field for editing an AnimationCurve.</summary>
             <returns>The curve edited by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class EditorGUICurveField extends EditorWindow {    var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);    @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(EditorGUICurveField);   window.position = Rect(0,0,200,100);   window.Show();  }    function OnGUI() {   curveX = EditorGUI.CurveField(   Rect(3,3,position.width-6,15),   "Animation on X", curveX);   curveY = EditorGUI.CurveField(   Rect(3,20,position.width-6,15),   "Animation on Y", curveY);   curveZ = EditorGUI.CurveField(   Rect(3,45,position.width-6,15),   "Animation on Z", curveZ);     if(GUI.Button(Rect(3,60,position.width-6,30),"Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);    comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No Game Object selected for adding an animation curve");   }  }  }  // FollowAnimationCurve.js  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
+            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class EditorGUICurveField extends EditorWindow {    var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);    @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(EditorGUICurveField);   window.position = Rect(0,0,200,100);   window.Show();  }    function OnGUI() {   curveX = EditorGUI.CurveField(   Rect(3,3,position.width-6,15),   "Animation on X", curveX);   curveY = EditorGUI.CurveField(   Rect(3,20,position.width-6,15),   "Animation on Y", curveY);   curveZ = EditorGUI.CurveField(   Rect(3,45,position.width-6,15),   "Animation on Z", curveZ);     if(GUI.Button(Rect(3,60,position.width-6,30),"Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);    comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No GameObject selected for adding an animation curve");   }  }  }  // FollowAnimationCurve.js  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
             <param name="position">Rectangle on the screen to use for the field.</param>
             <param name="label">Optional label to display in front of the field.</param>
             <param name="value">The curve to edit.</param>
@@ -4547,7 +4547,7 @@
             <summary>Make a field for editing an AnimationCurve.Make a field for editing an AnimationCurve.</summary>
             <remarks>To be added.</remarks>
             <returns>The curve edited by the user.</returns>
-            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class EditorGUICurveField extends EditorWindow {    var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);    @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(EditorGUICurveField);   window.position = Rect(0,0,200,100);   window.Show();  }    function OnGUI() {   curveX = EditorGUI.CurveField(   Rect(3,3,position.width-6,15),   "Animation on X", curveX);   curveY = EditorGUI.CurveField(   Rect(3,20,position.width-6,15),   "Animation on Y", curveY);   curveZ = EditorGUI.CurveField(   Rect(3,45,position.width-6,15),   "Animation on Z", curveZ);     if(GUI.Button(Rect(3,60,position.width-6,30),"Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);    comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No Game Object selected for adding an animation curve");   }  }  }  // FollowAnimationCurve.js  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
+            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class EditorGUICurveField extends EditorWindow {    var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);    @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(EditorGUICurveField);   window.position = Rect(0,0,200,100);   window.Show();  }    function OnGUI() {   curveX = EditorGUI.CurveField(   Rect(3,3,position.width-6,15),   "Animation on X", curveX);   curveY = EditorGUI.CurveField(   Rect(3,20,position.width-6,15),   "Animation on Y", curveY);   curveZ = EditorGUI.CurveField(   Rect(3,45,position.width-6,15),   "Animation on Z", curveZ);     if(GUI.Button(Rect(3,60,position.width-6,30),"Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);    comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No GameObject selected for adding an animation curve");   }  }  }  // FollowAnimationCurve.js  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
             <param name="position">Rectangle on the screen to use for the field.</param>
             <param name="value">The curve to edit.</param>
             <param name="color">The color to show the curve with.</param>
@@ -4557,7 +4557,7 @@
             <summary>Make a field for editing an AnimationCurve.Make a field for editing an AnimationCurve.</summary>
             <returns>The curve edited by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class EditorGUICurveField extends EditorWindow {    var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);    @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(EditorGUICurveField);   window.position = Rect(0,0,200,100);   window.Show();  }    function OnGUI() {   curveX = EditorGUI.CurveField(   Rect(3,3,position.width-6,15),   "Animation on X", curveX);   curveY = EditorGUI.CurveField(   Rect(3,20,position.width-6,15),   "Animation on Y", curveY);   curveZ = EditorGUI.CurveField(   Rect(3,45,position.width-6,15),   "Animation on Z", curveZ);     if(GUI.Button(Rect(3,60,position.width-6,30),"Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);    comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No Game Object selected for adding an animation curve");   }  }  }  // FollowAnimationCurve.js  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
+            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class EditorGUICurveField extends EditorWindow {    var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);    @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(EditorGUICurveField);   window.position = Rect(0,0,200,100);   window.Show();  }    function OnGUI() {   curveX = EditorGUI.CurveField(   Rect(3,3,position.width-6,15),   "Animation on X", curveX);   curveY = EditorGUI.CurveField(   Rect(3,20,position.width-6,15),   "Animation on Y", curveY);   curveZ = EditorGUI.CurveField(   Rect(3,45,position.width-6,15),   "Animation on Z", curveZ);     if(GUI.Button(Rect(3,60,position.width-6,30),"Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);    comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No GameObject selected for adding an animation curve");   }  }  }  // FollowAnimationCurve.js  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
             <param name="position">Rectangle on the screen to use for the field.</param>
             <param name="value">The curve to edit.</param>
             <param name="color">The color to show the curve with.</param>
@@ -4567,7 +4567,7 @@
             <summary>Make a field for editing an AnimationCurve.Make a field for editing an AnimationCurve.</summary>
             <returns>The curve edited by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class EditorGUICurveField extends EditorWindow {    var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);    @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(EditorGUICurveField);   window.position = Rect(0,0,200,100);   window.Show();  }    function OnGUI() {   curveX = EditorGUI.CurveField(   Rect(3,3,position.width-6,15),   "Animation on X", curveX);   curveY = EditorGUI.CurveField(   Rect(3,20,position.width-6,15),   "Animation on Y", curveY);   curveZ = EditorGUI.CurveField(   Rect(3,45,position.width-6,15),   "Animation on Z", curveZ);     if(GUI.Button(Rect(3,60,position.width-6,30),"Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);    comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No Game Object selected for adding an animation curve");   }  }  }  // FollowAnimationCurve.js  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
+            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class EditorGUICurveField extends EditorWindow {    var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);    @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(EditorGUICurveField);   window.position = Rect(0,0,200,100);   window.Show();  }    function OnGUI() {   curveX = EditorGUI.CurveField(   Rect(3,3,position.width-6,15),   "Animation on X", curveX);   curveY = EditorGUI.CurveField(   Rect(3,20,position.width-6,15),   "Animation on Y", curveY);   curveZ = EditorGUI.CurveField(   Rect(3,45,position.width-6,15),   "Animation on Z", curveZ);     if(GUI.Button(Rect(3,60,position.width-6,30),"Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);    comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No GameObject selected for adding an animation curve");   }  }  }  // FollowAnimationCurve.js  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
             <param name="position">Rectangle on the screen to use for the field.</param>
             <param name="label">Optional label to display in front of the field.</param>
             <param name="value">The curve to edit.</param>
@@ -4578,7 +4578,7 @@
             <summary>Make a field for editing an AnimationCurve.Make a field for editing an AnimationCurve.</summary>
             <returns>The curve edited by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class EditorGUICurveField extends EditorWindow {    var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);    @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(EditorGUICurveField);   window.position = Rect(0,0,200,100);   window.Show();  }    function OnGUI() {   curveX = EditorGUI.CurveField(   Rect(3,3,position.width-6,15),   "Animation on X", curveX);   curveY = EditorGUI.CurveField(   Rect(3,20,position.width-6,15),   "Animation on Y", curveY);   curveZ = EditorGUI.CurveField(   Rect(3,45,position.width-6,15),   "Animation on Z", curveZ);     if(GUI.Button(Rect(3,60,position.width-6,30),"Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);    comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No Game Object selected for adding an animation curve");   }  }  }  // FollowAnimationCurve.js  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
+            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class EditorGUICurveField extends EditorWindow {    var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);    @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(EditorGUICurveField);   window.position = Rect(0,0,200,100);   window.Show();  }    function OnGUI() {   curveX = EditorGUI.CurveField(   Rect(3,3,position.width-6,15),   "Animation on X", curveX);   curveY = EditorGUI.CurveField(   Rect(3,20,position.width-6,15),   "Animation on Y", curveY);   curveZ = EditorGUI.CurveField(   Rect(3,45,position.width-6,15),   "Animation on Z", curveZ);     if(GUI.Button(Rect(3,60,position.width-6,30),"Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);    comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No GameObject selected for adding an animation curve");   }  }  }  // FollowAnimationCurve.js  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
             <param name="position">Rectangle on the screen to use for the field.</param>
             <param name="label">Optional label to display in front of the field.</param>
             <param name="value">The curve to edit.</param>
@@ -6230,7 +6230,7 @@
             <summary>Make a field for selecting a Color.</summary>
             <returns>The color selected by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Change The color of the selected Game Objects   class MassiveColorChange extends EditorWindow {    var matColor : Color = Color.white;    @MenuItem("Examples/Massive Color Change")  static function Init() {   var window = GetWindow(MassiveColorChange);   window.Show();  }  function OnGUI() {   matColor = EditorGUILayout.ColorField("New Color", matColor);     if(GUILayout.Button("Change!"))   ChangeColors();  }    function ChangeColors() {   if(Selection.activeGameObject)   for(var t in Selection.gameObjects)    if(t.renderer)    t.renderer.sharedMaterial.color = matColor;  }  }</example>
+            <example>// Change The color of the selected GameObjects   class MassiveColorChange extends EditorWindow {    var matColor : Color = Color.white;    @MenuItem("Examples/Massive Color Change")  static function Init() {   var window = GetWindow(MassiveColorChange);   window.Show();  }  function OnGUI() {   matColor = EditorGUILayout.ColorField("New Color", matColor);     if(GUILayout.Button("Change!"))   ChangeColors();  }    function ChangeColors() {   if(Selection.activeGameObject)   for(var t in Selection.gameObjects)    if(t.renderer)    t.renderer.sharedMaterial.color = matColor;  }  }</example>
             <param name="value">The color to edit.</param>
             <param name="options">An optional list of layout options that specify extra layouting properties. Any values passed in here will override settings defined by the style. See Also: GUILayout.Width, GUILayout.Height, GUILayout.MinWidth, GUILayout.MaxWidth, GUILayout.MinHeight,  GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
         </member>
@@ -6238,7 +6238,7 @@
             <summary>Make a field for selecting a Color.</summary>
             <returns>The color selected by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Change The color of the selected Game Objects   class MassiveColorChange extends EditorWindow {    var matColor : Color = Color.white;    @MenuItem("Examples/Massive Color Change")  static function Init() {   var window = GetWindow(MassiveColorChange);   window.Show();  }  function OnGUI() {   matColor = EditorGUILayout.ColorField("New Color", matColor);     if(GUILayout.Button("Change!"))   ChangeColors();  }    function ChangeColors() {   if(Selection.activeGameObject)   for(var t in Selection.gameObjects)    if(t.renderer)    t.renderer.sharedMaterial.color = matColor;  }  }</example>
+            <example>// Change The color of the selected GameObjects   class MassiveColorChange extends EditorWindow {    var matColor : Color = Color.white;    @MenuItem("Examples/Massive Color Change")  static function Init() {   var window = GetWindow(MassiveColorChange);   window.Show();  }  function OnGUI() {   matColor = EditorGUILayout.ColorField("New Color", matColor);     if(GUILayout.Button("Change!"))   ChangeColors();  }    function ChangeColors() {   if(Selection.activeGameObject)   for(var t in Selection.gameObjects)    if(t.renderer)    t.renderer.sharedMaterial.color = matColor;  }  }</example>
             <param name="label">Optional label to display in front of the field.</param>
             <param name="value">The color to edit.</param>
             <param name="options">An optional list of layout options that specify extra layouting properties. Any values passed in here will override settings defined by the style. See Also: GUILayout.Width, GUILayout.Height, GUILayout.MinWidth, GUILayout.MaxWidth, GUILayout.MinHeight,  GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
@@ -6247,7 +6247,7 @@
             <summary>Make a field for selecting a Color.</summary>
             <returns>The color selected by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Change The color of the selected Game Objects   class MassiveColorChange extends EditorWindow {    var matColor : Color = Color.white;    @MenuItem("Examples/Massive Color Change")  static function Init() {   var window = GetWindow(MassiveColorChange);   window.Show();  }  function OnGUI() {   matColor = EditorGUILayout.ColorField("New Color", matColor);     if(GUILayout.Button("Change!"))   ChangeColors();  }    function ChangeColors() {   if(Selection.activeGameObject)   for(var t in Selection.gameObjects)    if(t.renderer)    t.renderer.sharedMaterial.color = matColor;  }  }</example>
+            <example>// Change The color of the selected GameObjects   class MassiveColorChange extends EditorWindow {    var matColor : Color = Color.white;    @MenuItem("Examples/Massive Color Change")  static function Init() {   var window = GetWindow(MassiveColorChange);   window.Show();  }  function OnGUI() {   matColor = EditorGUILayout.ColorField("New Color", matColor);     if(GUILayout.Button("Change!"))   ChangeColors();  }    function ChangeColors() {   if(Selection.activeGameObject)   for(var t in Selection.gameObjects)    if(t.renderer)    t.renderer.sharedMaterial.color = matColor;  }  }</example>
             <param name="label">Optional label to display in front of the field.</param>
             <param name="value">The color to edit.</param>
             <param name="options">An optional list of layout options that specify extra layouting properties. Any values passed in here will override settings defined by the style. See Also: GUILayout.Width, GUILayout.Height, GUILayout.MinWidth, GUILayout.MaxWidth, GUILayout.MinHeight,  GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
@@ -6256,7 +6256,7 @@
             <summary>Make a field for editing an AnimationCurve.Make a field for editing an AnimationCurve.</summary>
             <returns>The curve edited by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class FollowCurve extends EditorWindow {     var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);      @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(FollowCurve);   window.Show();  }    function OnGUI() {   curveX = EditorGUILayout.CurveField("Animation on X", curveX);   curveY = EditorGUILayout.CurveField("Animation on Y", curveY);   curveZ = EditorGUILayout.CurveField("Animation on Z", curveZ);     if(GUILayout.Button("Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);   comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No Game Object selected for adding an animation curve");   }  }  }  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
+            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class FollowCurve extends EditorWindow {     var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);      @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(FollowCurve);   window.Show();  }    function OnGUI() {   curveX = EditorGUILayout.CurveField("Animation on X", curveX);   curveY = EditorGUILayout.CurveField("Animation on Y", curveY);   curveZ = EditorGUILayout.CurveField("Animation on Z", curveZ);     if(GUILayout.Button("Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);   comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No GameObject selected for adding an animation curve");   }  }  }  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
             <param name="value">The curve to edit.</param>
             <param name="options">An optional list of layout options that specify extra layouting properties. Any values passed in here will override settings defined by the style. See Also: GUILayout.Width, GUILayout.Height, GUILayout.MinWidth, GUILayout.MaxWidth, GUILayout.MinHeight,  GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
         </member>
@@ -6264,7 +6264,7 @@
             <summary>Make a field for editing an AnimationCurve.Make a field for editing an AnimationCurve.</summary>
             <returns>The curve edited by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class FollowCurve extends EditorWindow {     var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);      @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(FollowCurve);   window.Show();  }    function OnGUI() {   curveX = EditorGUILayout.CurveField("Animation on X", curveX);   curveY = EditorGUILayout.CurveField("Animation on Y", curveY);   curveZ = EditorGUILayout.CurveField("Animation on Z", curveZ);     if(GUILayout.Button("Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);   comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No Game Object selected for adding an animation curve");   }  }  }  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
+            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class FollowCurve extends EditorWindow {     var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);      @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(FollowCurve);   window.Show();  }    function OnGUI() {   curveX = EditorGUILayout.CurveField("Animation on X", curveX);   curveY = EditorGUILayout.CurveField("Animation on Y", curveY);   curveZ = EditorGUILayout.CurveField("Animation on Z", curveZ);     if(GUILayout.Button("Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);   comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No GameObject selected for adding an animation curve");   }  }  }  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
             <param name="label">Optional label to display in front of the field.</param>
             <param name="value">The curve to edit.</param>
             <param name="options">An optional list of layout options that specify extra layouting properties. Any values passed in here will override settings defined by the style. See Also: GUILayout.Width, GUILayout.Height, GUILayout.MinWidth, GUILayout.MaxWidth, GUILayout.MinHeight,  GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
@@ -6273,7 +6273,7 @@
             <summary>Make a field for editing an AnimationCurve.Make a field for editing an AnimationCurve.</summary>
             <returns>The curve edited by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class FollowCurve extends EditorWindow {     var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);      @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(FollowCurve);   window.Show();  }    function OnGUI() {   curveX = EditorGUILayout.CurveField("Animation on X", curveX);   curveY = EditorGUILayout.CurveField("Animation on Y", curveY);   curveZ = EditorGUILayout.CurveField("Animation on Z", curveZ);     if(GUILayout.Button("Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);   comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No Game Object selected for adding an animation curve");   }  }  }  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
+            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class FollowCurve extends EditorWindow {     var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);      @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(FollowCurve);   window.Show();  }    function OnGUI() {   curveX = EditorGUILayout.CurveField("Animation on X", curveX);   curveY = EditorGUILayout.CurveField("Animation on Y", curveY);   curveZ = EditorGUILayout.CurveField("Animation on Z", curveZ);     if(GUILayout.Button("Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);   comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No GameObject selected for adding an animation curve");   }  }  }  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
             <param name="label">Optional label to display in front of the field.</param>
             <param name="value">The curve to edit.</param>
             <param name="options">An optional list of layout options that specify extra layouting properties. Any values passed in here will override settings defined by the style. See Also: GUILayout.Width, GUILayout.Height, GUILayout.MinWidth, GUILayout.MaxWidth, GUILayout.MinHeight,  GUILayout.MaxHeight, GUILayout.ExpandWidth, GUILayout.ExpandHeight.</param>
@@ -6282,7 +6282,7 @@
             <summary>Make a field for editing an AnimationCurve.Make a field for editing an AnimationCurve.</summary>
             <returns>The curve edited by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class FollowCurve extends EditorWindow {     var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);      @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(FollowCurve);   window.Show();  }    function OnGUI() {   curveX = EditorGUILayout.CurveField("Animation on X", curveX);   curveY = EditorGUILayout.CurveField("Animation on Y", curveY);   curveZ = EditorGUILayout.CurveField("Animation on Z", curveZ);     if(GUILayout.Button("Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);   comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No Game Object selected for adding an animation curve");   }  }  }  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
+            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class FollowCurve extends EditorWindow {     var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);      @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(FollowCurve);   window.Show();  }    function OnGUI() {   curveX = EditorGUILayout.CurveField("Animation on X", curveX);   curveY = EditorGUILayout.CurveField("Animation on Y", curveY);   curveZ = EditorGUILayout.CurveField("Animation on Z", curveZ);     if(GUILayout.Button("Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);   comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No GameObject selected for adding an animation curve");   }  }  }  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
             <param name="value">The curve to edit.</param>
             <param name="color">The color to show the curve with.</param>
             <param name="ranges">Optional rectangle that the curve is restrained within.</param>
@@ -6292,7 +6292,7 @@
             <summary>Make a field for editing an AnimationCurve.Make a field for editing an AnimationCurve.</summary>
             <returns>The curve edited by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class FollowCurve extends EditorWindow {     var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);      @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(FollowCurve);   window.Show();  }    function OnGUI() {   curveX = EditorGUILayout.CurveField("Animation on X", curveX);   curveY = EditorGUILayout.CurveField("Animation on Y", curveY);   curveZ = EditorGUILayout.CurveField("Animation on Z", curveZ);     if(GUILayout.Button("Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);   comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No Game Object selected for adding an animation curve");   }  }  }  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
+            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class FollowCurve extends EditorWindow {     var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);      @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(FollowCurve);   window.Show();  }    function OnGUI() {   curveX = EditorGUILayout.CurveField("Animation on X", curveX);   curveY = EditorGUILayout.CurveField("Animation on Y", curveY);   curveZ = EditorGUILayout.CurveField("Animation on Z", curveZ);     if(GUILayout.Button("Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);   comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No GameObject selected for adding an animation curve");   }  }  }  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
             <param name="label">Optional label to display in front of the field.</param>
             <param name="value">The curve to edit.</param>
             <param name="color">The color to show the curve with.</param>
@@ -6303,7 +6303,7 @@
             <summary>Make a field for editing an AnimationCurve.Make a field for editing an AnimationCurve.</summary>
             <returns>The curve edited by the user.</returns>
             <remarks>To be added.</remarks>
-            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class FollowCurve extends EditorWindow {     var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);      @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(FollowCurve);   window.Show();  }    function OnGUI() {   curveX = EditorGUILayout.CurveField("Animation on X", curveX);   curveY = EditorGUILayout.CurveField("Animation on Y", curveY);   curveZ = EditorGUILayout.CurveField("Animation on Z", curveZ);     if(GUILayout.Button("Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);   comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No Game Object selected for adding an animation curve");   }  }  }  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
+            <example>// Makes the selected GameObject follow the animation curve.  //  // Usage: Generate the curves for X,Y and Z axis of your desired GameObject  // Select an Object and click Generate Curve.  // Press Play and see your object moving.     class FollowCurve extends EditorWindow {     var curveX : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveY : AnimationCurve = AnimationCurve.Linear(0,0,10,10);  var curveZ : AnimationCurve = AnimationCurve.Linear(0,0,10,10);      @MenuItem("Examples/Create Curve For Object")  static function Init() {   var window = GetWindow(FollowCurve);   window.Show();  }    function OnGUI() {   curveX = EditorGUILayout.CurveField("Animation on X", curveX);   curveY = EditorGUILayout.CurveField("Animation on Y", curveY);   curveZ = EditorGUILayout.CurveField("Animation on Z", curveZ);     if(GUILayout.Button("Generate Curve"))   AddCurveToSelectedGameObject();  }    function AddCurveToSelectedGameObject() {   if(Selection.activeGameObject) {   var comp : FollowAnimationCurve =    Selection.activeGameObject.AddComponent(FollowAnimationCurve);   comp.SetCurves(curveX, curveY, curveZ);   } else {   Debug.LogError("No GameObject selected for adding an animation curve");   }  }  }  // This script has to go outside of the Editor Folder.   var curveX : AnimationCurve;  var curveY : AnimationCurve;  var curveZ : AnimationCurve;   function SetCurves(xC : AnimationCurve, yC : AnimationCurve, zC : AnimationCurve) {  curveX = xC;  curveY = yC;  curveZ = zC;  }  function Update() {  transform.position = Vector3(curveX.Evaluate(Time.time),      curveY.Evaluate(Time.time),      curveZ.Evaluate(Time.time));  }</example>
             <param name="label">Optional label to display in front of the field.</param>
             <param name="value">The curve to edit.</param>
             <param name="color">The color to show the curve with.</param>
@@ -8552,7 +8552,7 @@
             <param name="name">To be added.</param>
             <param name="flags">To be added.</param>
             <param name="components">To be added.</param>
-            <summary>Creates a game object with HideFlags and specified components.</summary>
+            <summary>Creates a GameObject with HideFlags and specified components.</summary>
             <returns>To be added.</returns>
             <remarks>This is very similar to creating a GameObject the usual way, except it sets the specified HideFlags immediately.</remarks>
         </member>
@@ -8695,7 +8695,7 @@
             <param name="target">To be added.</param>
             <summary>Determines if an object is stored on disk.</summary>
             <returns>To be added.</returns>
-            <remarks>Typically assets like prefabs, textures, audio clips, animation clips, materials are stored on disk. Returns false if the object lives in the scene. Typically this is a game object or component but it could also be a material that was created from code and not stored in an asset but instead stored in the scene.</remarks>
+            <remarks>Typically assets like prefabs, textures, audio clips, animation clips, materials are stored on disk. Returns false if the object lives in the scene. Typically this is a GameObject or component but it could also be a material that was created from code and not stored in an asset but instead stored in the scene.</remarks>
         </member>
         <member name="M:UnityEditor.EditorUtility.LoadWindowLayout(System.String)">
             <param name="path">To be added.</param>
@@ -8811,7 +8811,7 @@
         </member>
         <member name="M:UnityEditor.EditorUtility.UnloadUnusedAssets">
             <summary>Unloads assets that are not used.</summary>
-            <remarks>An asset is deemed to be unused if it isn't reached after walking the whole game object hierarchy, including script components. Static variables are also examined. See Also: Resources.UnloadUnusedAssets.</remarks>
+            <remarks>An asset is deemed to be unused if it isn't reached after walking the whole GameObject hierarchy, including script components. Static variables are also examined. See Also: Resources.UnloadUnusedAssets.</remarks>
         </member>
         <member name="M:UnityEditor.EditorUtility.UnloadUnusedAssetsIgnoreManagedReferences">
             <summary>Unloads assets that are not used, including the ones that are referenced only from scripts.</summary>
@@ -9842,7 +9842,7 @@
             <summary>Make a Scene view radius handle.</summary>
             <returns>The modified radius Use HandleUtility.GetHandleSize where you might want to have constant screen-sized handles.</returns>
             <remarks>And the Script attached to this handle:</remarks>
-            <example>// Simple script that draws and controls a float var on any Game Object that has the  // ColliderRadius.js script attached.   @CustomEditor (ColliderRadius)  class RadiusHandleJS extends Editor {  function OnSceneGUI () {      target.areaOfEffect = Handles.RadiusHandle (Quaternion.identity,         target.transform.position,         target.areaOfEffect);      if (GUI.changed)        EditorUtility.SetDirty (target);    }  }  // Place this script where you want to see the RadiusHandler working on.   var areaOfEffect : float = 1;</example>
+            <example>// Simple script that draws and controls a float var on any GameObject that has the  // ColliderRadius.js script attached.   @CustomEditor (ColliderRadius)  class RadiusHandleJS extends Editor {  function OnSceneGUI () {      target.areaOfEffect = Handles.RadiusHandle (Quaternion.identity,         target.transform.position,         target.areaOfEffect);      if (GUI.changed)        EditorUtility.SetDirty (target);    }  }  // Place this script where you want to see the RadiusHandler working on.   var areaOfEffect : float = 1;</example>
             <param name="rotation">Orientation of the handle.</param>
             <param name="position">Center of the handle in 3D space.</param>
             <param name="radius">Radius to modify.</param>
@@ -9852,7 +9852,7 @@
             <summary>Make a Scene view radius handle.</summary>
             <returns>The modified radius Use HandleUtility.GetHandleSize where you might want to have constant screen-sized handles.</returns>
             <remarks>And the Script attached to this handle:</remarks>
-            <example>// Simple script that draws and controls a float var on any Game Object that has the  // ColliderRadius.js script attached.   @CustomEditor (ColliderRadius)  class RadiusHandleJS extends Editor {  function OnSceneGUI () {      target.areaOfEffect = Handles.RadiusHandle (Quaternion.identity,         target.transform.position,         target.areaOfEffect);      if (GUI.changed)        EditorUtility.SetDirty (target);    }  }  // Place this script where you want to see the RadiusHandler working on.   var areaOfEffect : float = 1;</example>
+            <example>// Simple script that draws and controls a float var on any GameObject that has the  // ColliderRadius.js script attached.   @CustomEditor (ColliderRadius)  class RadiusHandleJS extends Editor {  function OnSceneGUI () {      target.areaOfEffect = Handles.RadiusHandle (Quaternion.identity,         target.transform.position,         target.areaOfEffect);      if (GUI.changed)        EditorUtility.SetDirty (target);    }  }  // Place this script where you want to see the RadiusHandler working on.   var areaOfEffect : float = 1;</example>
             <param name="rotation">Orientation of the handle.</param>
             <param name="position">Center of the handle in 3D space.</param>
             <param name="radius">Radius to modify.</param>
@@ -9878,7 +9878,7 @@
             <summary>Make a Scene view scale handle.</summary>
             <returns>The new scale vector. Use HandleUtility.GetHandleSize where you might want to have constant screen-sized handles.</returns>
             <remarks>This will behave like the built-in scale toolAnd the script Attached to this Handle:</remarks>
-            <example>// Creates a "Big" (5 times size) Scale handle that will be present whenever  // you select the target Game Object   @CustomEditor (ScaleAtPoint)  class ScaleHandleJS extends Editor {  function OnSceneGUI () {      target.sc = Handles.ScaleHandle (target.sc,       target.transform.position,      target.transform.rotation,      5.0);      Debug.Log(target.sc);      if (GUI.changed)        EditorUtility.SetDirty (target);    }  }  // ScaleAtPoint.js  // Usage: Place this script on the Game Object you want to use the  // editor-created scale handle.   @script ExecuteInEditMode()   var sc : Vector3 = Vector3(1,1,1);   function Update () {  transform.localScale = sc;  }</example>
+            <example>// Creates a "Big" (5 times size) Scale handle that will be present whenever  // you select the target GameObject   @CustomEditor (ScaleAtPoint)  class ScaleHandleJS extends Editor {  function OnSceneGUI () {      target.sc = Handles.ScaleHandle (target.sc,       target.transform.position,      target.transform.rotation,      5.0);      Debug.Log(target.sc);      if (GUI.changed)        EditorUtility.SetDirty (target);    }  }  // ScaleAtPoint.js  // Usage: Place this script on the GameObject you want to use the  // editor-created scale handle.   @script ExecuteInEditMode()   var sc : Vector3 = Vector3(1,1,1);   function Update () {  transform.localScale = sc;  }</example>
             <param name="scale">Scale to modify.</param>
             <param name="position">The position of the handle.</param>
             <param name="rotation">The rotation of the handle.</param>
@@ -10252,7 +10252,7 @@
         <member name="M:UnityEditor.HandleUtility.PickGameObject(UnityEngine.Vector2,System.Boolean)">
             <param name="position">To be added.</param>
             <param name="selectPrefabRoot">To be added.</param>
-            <summary>Pick game object closest to specified position.</summary>
+            <summary>Pick GameObject closest to specified position.</summary>
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
         </member>
@@ -13641,7 +13641,7 @@
         <member name="M:UnityEditor.PrefabUtility.CreatePrefab(System.String,UnityEngine.GameObject)">
             <param name="path">To be added.</param>
             <param name="go">To be added.</param>
-            <summary>Creates a prefab from a game object hierarchy.</summary>
+            <summary>Creates a prefab from a GameObject hierarchy.</summary>
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
         </member>
@@ -13649,7 +13649,7 @@
             <param name="path">To be added.</param>
             <param name="go">To be added.</param>
             <param name="options">To be added.</param>
-            <summary>Creates a prefab from a game object hierarchy.</summary>
+            <summary>Creates a prefab from a GameObject hierarchy.</summary>
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
         </member>
@@ -13666,13 +13666,13 @@
         </member>
         <member name="M:UnityEditor.PrefabUtility.FindRootGameObjectWithSameParentPrefab(UnityEngine.GameObject)">
             <param name="target">To be added.</param>
-            <summary>Returns the topmost game object that has the same prefab parent as target.</summary>
+            <summary>Returns the topmost GameObject that has the same prefab parent as target.</summary>
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
         </member>
         <member name="M:UnityEditor.PrefabUtility.FindValidUploadPrefabInstanceRoot(UnityEngine.GameObject)">
             <param name="target">To be added.</param>
-            <summary>Returns root game object of the prefab instance if that root prefab instance is a parent of the prefab.</summary>
+            <summary>Returns root GameObject of the prefab instance if that root prefab instance is a parent of the prefab.</summary>
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
         </member>
@@ -13725,9 +13725,9 @@
         </member>
         <member name="M:UnityEditor.PrefabUtility.ReconnectToLastPrefab(UnityEngine.GameObject)">
             <param name="go">To be added.</param>
-            <summary>Connects the game object to the prefab that it was last connected to.</summary>
+            <summary>Connects the GameObject to the prefab that it was last connected to.</summary>
             <returns>To be added.</returns>
-            <remarks>Returns true if the game object has never been a prefab instance.</remarks>
+            <remarks>Returns true if the GameObject has never been a prefab instance.</remarks>
         </member>
         <member name="M:UnityEditor.PrefabUtility.RecordPrefabInstancePropertyModifications(UnityEngine.Object)">
             <param name="targetObject">To be added.</param>
@@ -13737,29 +13737,29 @@
         <member name="M:UnityEditor.PrefabUtility.ReplacePrefab(UnityEngine.GameObject,UnityEngine.Object)">
             <param name="go">To be added.</param>
             <param name="targetPrefab">To be added.</param>
-            <summary>Replaces the targetPrefab with a copy of the game object hierarchy go.</summary>
+            <summary>Replaces the targetPrefab with a copy of the GameObject hierarchy go.</summary>
             <returns>To be added.</returns>
-            <remarks>Returns the prefab game object after it has been created. If connectToPrefab is enabled go will be made an instance of the created prefab.</remarks>
+            <remarks>Returns the prefab GameObject after it has been created. If connectToPrefab is enabled go will be made an instance of the created prefab.</remarks>
         </member>
         <member name="M:UnityEditor.PrefabUtility.ReplacePrefab(UnityEngine.GameObject,UnityEngine.Object,UnityEditor.ReplacePrefabOptions)">
             <param name="go">To be added.</param>
             <param name="targetPrefab">To be added.</param>
             <param name="options">To be added.</param>
-            <summary>Replaces the targetPrefab with a copy of the game object hierarchy go.</summary>
+            <summary>Replaces the targetPrefab with a copy of the GameObject hierarchy go.</summary>
             <returns>To be added.</returns>
-            <remarks>Returns the prefab game object after it has been created. If connectToPrefab is enabled go will be made an instance of the created prefab.</remarks>
+            <remarks>Returns the prefab GameObject after it has been created. If connectToPrefab is enabled go will be made an instance of the created prefab.</remarks>
         </member>
         <member name="M:UnityEditor.PrefabUtility.ResetToPrefabState(UnityEngine.Object)">
             <param name="obj">To be added.</param>
-            <summary>Resets the properties of the component or game object to the parent prefab state.</summary>
+            <summary>Resets the properties of the component or GameObject to the parent prefab state.</summary>
             <returns>To be added.</returns>
-            <remarks>All overrides will be cleared. However the transform.position and rotation of a root game object in a prefab instance  will never be cleared.</remarks>
+            <remarks>All overrides will be cleared. However the transform.position and rotation of a root GameObject in a prefab instance  will never be cleared.</remarks>
         </member>
         <member name="M:UnityEditor.PrefabUtility.RevertPrefabInstance(UnityEngine.GameObject)">
             <param name="go">To be added.</param>
-            <summary>Resets the properties of all objects in the prefab, including child game objects and components that were added to the prefab instance.</summary>
+            <summary>Resets the properties of all objects in the prefab, including child GameObjects and components that were added to the prefab instance.</summary>
             <returns>To be added.</returns>
-            <remarks>All overrides will be cleared. However the transform.position and rotation of a root game object in a prefab instance  will never be cleared.</remarks>
+            <remarks>All overrides will be cleared. However the transform.position and rotation of a root GameObject in a prefab instance  will never be cleared.</remarks>
         </member>
         <member name="M:UnityEditor.PrefabUtility.SetPropertyModifications(UnityEngine.Object,UnityEditor.PropertyModification[])">
             <param name="targetPrefab">To be added.</param>
@@ -13993,11 +13993,11 @@
         </member>
         <member name="F:UnityEditor.ReplacePrefabOptions.Default">
             <summary>Replaces prefabs by matching pre-existing connections to the prefab.</summary>
-            <remarks>If the game object hierarchy was not connected to the prefab before all game objects / components will be new and thus overrides in prefab instances will be lost.</remarks>
+            <remarks>If the GameObject hierarchy was not connected to the prefab before all GameObjects / components will be new and thus overrides in prefab instances will be lost.</remarks>
         </member>
         <member name="F:UnityEditor.ReplacePrefabOptions.ReplaceNameBased">
             <summary>Replaces the prefab using name based lookup in the transform hierarchy.</summary>
-            <remarks>This is internally used by the model importer and is useful for relating game object hierarchy built  from scratch to an existing prefab without breaking connections.</remarks>
+            <remarks>This is internally used by the model importer and is useful for relating GameObject hierarchy built  from scratch to an existing prefab without breaking connections.</remarks>
         </member>
         <member name="T:UnityEditor.ResolutionDialogSetting">
             <summary>Resolution dialog setting.</summary>
@@ -14591,9 +14591,9 @@
             <remarks>To be added.</remarks>
         </member>
         <member name="P:UnityEditor.Selection.activeGameObject">
-            <summary>Returns the active game object. (The one shown in the inspector).</summary>
+            <summary>Returns the active GameObject. (The one shown in the inspector).</summary>
             <value>To be added.</value>
-            <remarks>It will also return game objects that might be prefabs or non-modifyable objects.</remarks>
+            <remarks>It will also return GameObjects that might be prefabs or non-modifyable objects.</remarks>
         </member>
         <member name="P:UnityEditor.Selection.activeInstanceID">
             <summary>Returns the instanceID of the actual object selection. Includes prefabs, non-modifyable objects.</summary>
@@ -14623,7 +14623,7 @@
             <remarks>To be added.</remarks>
         </member>
         <member name="P:UnityEditor.Selection.gameObjects">
-            <summary>Returns the actual game object selection. Includes prefabs, non-modifyable objects.</summary>
+            <summary>Returns the actual GameObject selection. Includes prefabs, non-modifyable objects.</summary>
             <value>To be added.</value>
             <remarks>When working with objects that are primarily in a scene, it is strongly recommended to use Selection.transforms instead.</remarks>
         </member>
@@ -16583,7 +16583,7 @@
         </member>
         <member name="T:UnityEditor.Undo">
             <summary>Lets you register undo operations on specific objects you are about to perform changes on.</summary>
-            <remarks>The Undo system stores delta changes in the undo stack. Undo operations are automatically combined together based on events Eg. mouse down events will split undo groups. Undo operations store either per property or per object state. This way they scale well with any scene size. The most important operations are outlined below. Modifying a single property:Adding a component :Creating a new game object:Destroying a game object or component:Changing transform parenting:</remarks>
+            <remarks>The Undo system stores delta changes in the undo stack. Undo operations are automatically combined together based on events Eg. mouse down events will split undo groups. Undo operations store either per property or per object state. This way they scale well with any scene size. The most important operations are outlined below. Modifying a single property:Adding a component :Creating a new GameObject:Destroying a GameObject or component:Changing transform parenting:</remarks>
         </member>
         <member name="C:UnityEditor.Undo">
             <summary>To be added.</summary>
@@ -22952,7 +22952,7 @@
         <member name="M:UnityEngine.AnimationClip.SetCurve(System.String,System.Type,System.String,UnityEngine.AnimationCurve)">
             <summary>Assigns the curve to animate a specific property.</summary>
             <remarks>If curve is null the curve will be removed. If a curve already exists for that property, it will be replaced. Common names are: "localPosition.x", "localPosition.y", "localPosition.z", "localRotation.x", "localRotation.y", "localRotation.z", "localRotation.w" "localScale.x", "localScale.y", "localScale.z" .Material properties can be animated using the property name exported in the shader. Common property names are: "_MainTex", "_BumpMap", "_Color", "_SpecColor", "_Emission". How to animate different material property types: Float properties: "PropertyName" __ Vector4 properties:__ "PropertyName.x", "PropertyName.y", "PropertyName.z", "PropertyName.w" __ Color properties:__ "PropertyName.r ", "PropertyName.g", "PropertyName.b", "PropertyName.a" UV Rotation properties: "PropertyName.rotation" UV Offset and scale: "PropertyName.offset.x", "PropertyName.offset.y", "PropertyName.scale.x", "PropertyName.scale.y" To index into multiple materials on the same renderer you can prefix the attribute like this: "[1]._MainTex.offset.y" See Also: ClearCurves function, AnimationCurve class.</remarks>
-            <param name="relativePath">Path to the game object this curve applies to. relativePath is formatted similar to a pathname, e.g. "rootspineleftArm". If relativePath is empty it refers to the game object the animation clip is attached to.</param>
+            <param name="relativePath">Path to the GameObject this curve applies to. relativePath is formatted similar to a pathname, e.g. "rootspineleftArm". If relativePath is empty it refers to the GameObject the animation clip is attached to.</param>
             <param name="type">The class type of the component that is animated.</param>
             <param name="propertyName">The name or path to the property being animated.</param>
             <param name="curve">The animation curve.</param>
@@ -22991,7 +22991,7 @@
         </member>
         <member name="F:UnityEngine.AnimationCullingType.BasedOnRenderers">
             <summary>Animation is disabled when renderers are not visible.</summary>
-            <remarks>This culling method is more suitable when you have renderers attached after import - it will take  renderers (like mesh renderers, particle renderers and so on) attached to this gameObject or children  of this game object.</remarks>
+            <remarks>This culling method is more suitable when you have renderers attached after import - it will take  renderers (like mesh renderers, particle renderers and so on) attached to this gameObject or children  of this GameObject.</remarks>
         </member>
         <member name="F:UnityEngine.AnimationCullingType.BasedOnUserBounds">
             <summary>Animation is disabled when Animation.localBounds are not visible.</summary>
@@ -23684,12 +23684,12 @@
             <remarks>To be added.</remarks>
         </member>
         <member name="P:UnityEngine.Animator.rootPosition">
-            <summary>The root position, the position of the game object.</summary>
+            <summary>The root position, the position of the GameObject.</summary>
             <value>To be added.</value>
             <remarks>To be added.</remarks>
         </member>
         <member name="P:UnityEngine.Animator.rootRotation">
-            <summary>The root rotation, the rotation of the game object.</summary>
+            <summary>The root rotation, the rotation of the GameObject.</summary>
             <value>To be added.</value>
             <remarks>To be added.</remarks>
         </member>
@@ -24197,12 +24197,12 @@
         </member>
         <member name="M:UnityEngine.Application.LoadLevel(System.Int32)">
             <summary>Loads the level by its name or index.</summary>
-            <remarks>Before you can load a level you have to add it to the list of levels used in the game. Use File-&gt;Build Settings... in Unity and add the levels you need to the level list there. MonoBehaviour.OnLevelWasLoaded is called on all active game objects after the level has been loaded.When loading a new level all game objects that have been loaded before are destroyed. If you want to let an object survive when loading a new level, use Object.DontDestroyOnLoad. Calling LoadLevel will update Application.loadedLevel and Application.loadedLevelName. See Also: Application.LoadLevelAsync, Application.LoadLevelAdditive, Application.LoadLevelAdditiveAsync.</remarks>
+            <remarks>Before you can load a level you have to add it to the list of levels used in the game. Use File-&gt;Build Settings... in Unity and add the levels you need to the level list there. MonoBehaviour.OnLevelWasLoaded is called on all active GameObjects after the level has been loaded.When loading a new level all GameObjects that have been loaded before are destroyed. If you want to let an object survive when loading a new level, use Object.DontDestroyOnLoad. Calling LoadLevel will update Application.loadedLevel and Application.loadedLevelName. See Also: Application.LoadLevelAsync, Application.LoadLevelAdditive, Application.LoadLevelAdditiveAsync.</remarks>
             <param name="index">The level to load.</param>
         </member>
         <member name="M:UnityEngine.Application.LoadLevel(System.String)">
             <summary>Loads the level by its name or index.</summary>
-            <remarks>Before you can load a level you have to add it to the list of levels used in the game. Use File-&gt;Build Settings... in Unity and add the levels you need to the level list there. MonoBehaviour.OnLevelWasLoaded is called on all active game objects after the level has been loaded.When loading a new level all game objects that have been loaded before are destroyed. If you want to let an object survive when loading a new level, use Object.DontDestroyOnLoad. Calling LoadLevel will update Application.loadedLevel and Application.loadedLevelName. See Also: Application.LoadLevelAsync, Application.LoadLevelAdditive, Application.LoadLevelAdditiveAsync.</remarks>
+            <remarks>Before you can load a level you have to add it to the list of levels used in the game. Use File-&gt;Build Settings... in Unity and add the levels you need to the level list there. MonoBehaviour.OnLevelWasLoaded is called on all active GameObjects after the level has been loaded.When loading a new level all GameObjects that have been loaded before are destroyed. If you want to let an object survive when loading a new level, use Object.DontDestroyOnLoad. Calling LoadLevel will update Application.loadedLevel and Application.loadedLevelName. See Also: Application.LoadLevelAsync, Application.LoadLevelAdditive, Application.LoadLevelAdditiveAsync.</remarks>
             <param name="name">The name of the level to load.</param>
         </member>
         <member name="M:UnityEngine.Application.LoadLevelAdditive(System.Int32)">
@@ -24396,7 +24396,7 @@
         <member name="M:UnityEngine.AssetBundle.Unload(System.Boolean)">
             <param name="unloadAllLoadedObjects">To be added.</param>
             <summary>Unloads all assets in the bundle.</summary>
-            <remarks>Unload frees all the memory associated with the objects inside the bundle. When unloadAllLoadedObjects is false, compressed file data for assets inside the bundle will be unloaded, but any actual objects already loaded from this bundle will be kept intact. Of course you won't be able to load any more objects from this bundle. When unloadAllLoadedObjects is true, all objects that were loaded from this bundle will be destroyed as well. If there are game objects in your scene referencing those assets, the references to them will become missing.</remarks>
+            <remarks>Unload frees all the memory associated with the objects inside the bundle. When unloadAllLoadedObjects is false, compressed file data for assets inside the bundle will be unloaded, but any actual objects already loaded from this bundle will be kept intact. Of course you won't be able to load any more objects from this bundle. When unloadAllLoadedObjects is true, all objects that were loaded from this bundle will be destroyed as well. If there are GameObjects in your scene referencing those assets, the references to them will become missing.</remarks>
         </member>
         <member name="T:UnityEngine.AssetBundleCreateRequest">
             <summary>Asynchronous create request for an AssetBundle.</summary>
@@ -25388,7 +25388,7 @@
         <member name="M:UnityEngine.AvatarBuilder.BuildGenericAvatar(UnityEngine.GameObject,System.String)">
             <summary>Create a new generic avatar.</summary>
             <returns>To be added.</returns>
-            <remarks>All transforms under the root game object will be part of this generic avatar.</remarks>
+            <remarks>All transforms under the root GameObject will be part of this generic avatar.</remarks>
             <param name="go">Root object of your transform hierarchy.</param>
             <param name="rootMotionTransformName">Transform name of the root motion transform. If empty no root motion is defined and you must take care of avatar movement yourself.</param>
         </member>
@@ -25435,7 +25435,7 @@
             <summary>The right hand.</summary>
         </member>
         <member name="F:UnityEngine.AvatarTarget.Root">
-            <summary>The root, the position of the game object.</summary>
+            <summary>The root, the position of the GameObject.</summary>
         </member>
         <member name="T:UnityEngine.Behaviour">
             <summary>Behaviours are Components that can be enabled or disabled.</summary>
@@ -26068,7 +26068,7 @@
         <member name="P:UnityEngine.Camera.cullingMask">
             <summary>This is used to render parts of the scene selectively.</summary>
             <value>To be added.</value>
-            <remarks>If the GameObject 's layerMask AND the camera's cullingMask is zero then the game object will be invisible from this camera. See Layers for more information. See Also: camera component.</remarks>
+            <remarks>If the GameObject 's layerMask AND the camera's cullingMask is zero then the GameObject will be invisible from this camera. See Layers for more information. See Also: camera component.</remarks>
         </member>
         <member name="P:UnityEngine.Camera.current">
             <summary>The camera we are currently rendering with, for low-level render control only (Read Only).</summary>
@@ -26677,12 +26677,12 @@
         <member name="P:UnityEngine.Collider.attachedRigidbody">
             <summary>The rigidbody the collider is attached to.</summary>
             <value>To be added.</value>
-            <remarks>Returns null if the collider is attached to no rigidbody. Colliders are automatically connected to the rigidbody attached  to the same game object or attached to any parent game object.</remarks>
+            <remarks>Returns null if the collider is attached to no rigidbody. Colliders are automatically connected to the rigidbody attached  to the same GameObject or attached to any parent GameObject.</remarks>
         </member>
         <member name="P:UnityEngine.Collider.bounds">
             <summary>The world space bounding volume of the collider.</summary>
             <value>To be added.</value>
-            <remarks>Note that this will be an empty bounding box if the collider is disabled or the game object  is inactive.</remarks>
+            <remarks>Note that this will be an empty bounding box if the collider is disabled or the GameObject  is inactive.</remarks>
         </member>
         <member name="M:UnityEngine.Collider.ClosestPointOnBounds(UnityEngine.Vector3)">
             <param name="position">To be added.</param>
@@ -27266,24 +27266,24 @@
             <remarks>To be added.</remarks>
         </member>
         <member name="M:UnityEngine.Component.BroadcastMessage(System.String)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object or any of its children.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject or any of its children.</summary>
             <remarks>The receiving method can choose to ignore parameter by having zero arguments. if options is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component.</remarks>
             <param name="methodName">Name of the method to call.</param>
         </member>
         <member name="M:UnityEngine.Component.BroadcastMessage(System.String,System.Object)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object or any of its children.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject or any of its children.</summary>
             <remarks>The receiving method can choose to ignore parameter by having zero arguments. if options is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component.</remarks>
             <param name="methodName">Name of the method to call.</param>
             <param name="parameter">Optional parameter to pass to the method (can be any value).</param>
         </member>
         <member name="M:UnityEngine.Component.BroadcastMessage(System.String,UnityEngine.SendMessageOptions)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object or any of its children.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject or any of its children.</summary>
             <remarks>The receiving method can choose to ignore parameter by having zero arguments. if options is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component.</remarks>
             <param name="methodName">Name of the method to call.</param>
             <param name="options">Should an error be raised if the method does not exist for a given target object?</param>
         </member>
         <member name="M:UnityEngine.Component.BroadcastMessage(System.String,System.Object,UnityEngine.SendMessageOptions)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object or any of its children.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject or any of its children.</summary>
             <remarks>The receiving method can choose to ignore parameter by having zero arguments. if options is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component.</remarks>
             <param name="methodName">Name of the method to call.</param>
             <param name="parameter">Optional parameter to pass to the method (can be any value).</param>
@@ -27305,7 +27305,7 @@
             <remarks>This returns null if no Collider2D is attached. See Also: Collider2D class.</remarks>
         </member>
         <member name="M:UnityEngine.Component.CompareTag(System.String)">
-            <summary>Is this game object tagged with tag?</summary>
+            <summary>Is this GameObject tagged with tag?</summary>
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
             <param name="tag">The tag to compare.</param>
@@ -27316,18 +27316,18 @@
             <remarks>To be added.</remarks>
         </member>
         <member name="P:UnityEngine.Component.gameObject">
-            <summary>The game object this component is attached to. A component is always attached to a game object.</summary>
+            <summary>The GameObject this component is attached to. A component is always attached to a GameObject.</summary>
             <value>To be added.</value>
             <remarks>To be added.</remarks>
         </member>
         <member name="M:UnityEngine.Component.GetComponent(System.String)">
-            <summary>Returns the component of Type type if the game object has one attached, null if it doesn't.Generic version. See the Generic Functions page for more details.Returns the component with name type if the game object has one attached, null if it doesn't.</summary>
+            <summary>Returns the component of Type type if the GameObject has one attached, null if it doesn't.Generic version. See the Generic Functions page for more details.Returns the component with name type if the GameObject has one attached, null if it doesn't.</summary>
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
             <param name="type">The type of Component to retrieve.</param>
         </member>
         <member name="M:UnityEngine.Component.GetComponent(System.Type)">
-            <summary>Returns the component of Type type if the game object has one attached, null if it doesn't.Generic version. See the Generic Functions page for more details.Returns the component with name type if the game object has one attached, null if it doesn't.</summary>
+            <summary>Returns the component of Type type if the GameObject has one attached, null if it doesn't.Generic version. See the Generic Functions page for more details.Returns the component with name type if the GameObject has one attached, null if it doesn't.</summary>
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
             <param name="type">The type of Component to retrieve.</param>
@@ -27444,57 +27444,57 @@
             <remarks>This property will be null if no Rigidbody2D::ref:: is attached. See Also: rigidbody.</remarks>
         </member>
         <member name="M:UnityEngine.Component.SendMessage(System.String)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject.</summary>
             <remarks>The receiving method can choose to ignore the argument by having zero arguments. if options is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component. Note that messages will not be sent to inactive objects (ie, those that have been deactivated in the editor or with the GameObject.SetActive function).</remarks>
             <param name="methodName">Name of the method to call.</param>
         </member>
         <member name="M:UnityEngine.Component.SendMessage(System.String,System.Object)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject.</summary>
             <remarks>The receiving method can choose to ignore the argument by having zero arguments. if options is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component. Note that messages will not be sent to inactive objects (ie, those that have been deactivated in the editor or with the GameObject.SetActive function).</remarks>
             <param name="methodName">Name of the method to call.</param>
             <param name="value">Optional parameter for the method.</param>
         </member>
         <member name="M:UnityEngine.Component.SendMessage(System.String,UnityEngine.SendMessageOptions)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject.</summary>
             <remarks>The receiving method can choose to ignore the argument by having zero arguments. if options is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component. Note that messages will not be sent to inactive objects (ie, those that have been deactivated in the editor or with the GameObject.SetActive function).</remarks>
             <param name="methodName">Name of the method to call.</param>
             <param name="options">Should an error be raised if the target object doesn't implement the method for the message?</param>
         </member>
         <member name="M:UnityEngine.Component.SendMessage(System.String,System.Object,UnityEngine.SendMessageOptions)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject.</summary>
             <remarks>The receiving method can choose to ignore the argument by having zero arguments. if options is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component. Note that messages will not be sent to inactive objects (ie, those that have been deactivated in the editor or with the GameObject.SetActive function).</remarks>
             <param name="methodName">Name of the method to call.</param>
             <param name="value">Optional parameter for the method.</param>
             <param name="options">Should an error be raised if the target object doesn't implement the method for the message?</param>
         </member>
         <member name="M:UnityEngine.Component.SendMessageUpwards(System.String)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object and on every ancestor of the behaviour.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject and on every ancestor of the behaviour.</summary>
             <remarks>The receiving method can choose to ignore the argument by having zero arguments. If the options parameter is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component. Note that messages will not be sent to inactive objects (ie, those that have been deactivated in the editor or with the GameObject.SetActive function).</remarks>
             <param name="methodName">Name of method to call.</param>
         </member>
         <member name="M:UnityEngine.Component.SendMessageUpwards(System.String,System.Object)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object and on every ancestor of the behaviour.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject and on every ancestor of the behaviour.</summary>
             <remarks>The receiving method can choose to ignore the argument by having zero arguments. If the options parameter is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component. Note that messages will not be sent to inactive objects (ie, those that have been deactivated in the editor or with the GameObject.SetActive function).</remarks>
             <param name="methodName">Name of method to call.</param>
             <param name="value">Optional parameter value for the method.</param>
         </member>
         <member name="M:UnityEngine.Component.SendMessageUpwards(System.String,UnityEngine.SendMessageOptions)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object and on every ancestor of the behaviour.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject and on every ancestor of the behaviour.</summary>
             <remarks>The receiving method can choose to ignore the argument by having zero arguments. If the options parameter is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component. Note that messages will not be sent to inactive objects (ie, those that have been deactivated in the editor or with the GameObject.SetActive function).</remarks>
             <param name="methodName">Name of method to call.</param>
             <param name="options">Should an error be raised if the method does not exist on the target object?</param>
         </member>
         <member name="M:UnityEngine.Component.SendMessageUpwards(System.String,System.Object,UnityEngine.SendMessageOptions)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object and on every ancestor of the behaviour.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject and on every ancestor of the behaviour.</summary>
             <remarks>The receiving method can choose to ignore the argument by having zero arguments. If the options parameter is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component. Note that messages will not be sent to inactive objects (ie, those that have been deactivated in the editor or with the GameObject.SetActive function).</remarks>
             <param name="methodName">Name of method to call.</param>
             <param name="value">Optional parameter value for the method.</param>
             <param name="options">Should an error be raised if the method does not exist on the target object?</param>
         </member>
         <member name="P:UnityEngine.Component.tag">
-            <summary>The tag of this game object.</summary>
+            <summary>The tag of this GameObject.</summary>
             <value>To be added.</value>
-            <remarks>A tag can be used to identify a game object. Tags must be declared in the tag manager before using them.</remarks>
+            <remarks>A tag can be used to identify a GameObject. Tags must be declared in the tag manager before using them.</remarks>
         </member>
         <member name="P:UnityEngine.Component.transform">
             <summary>The Transform attached to this GameObject (null if there is none attached).</summary>
@@ -27961,7 +27961,7 @@
             <remarks>To be added.</remarks>
         </member>
         <member name="P:UnityEngine.ControllerColliderHit.gameObject">
-            <summary>The game object that was hit by the controller.</summary>
+            <summary>The GameObject that was hit by the controller.</summary>
             <value>To be added.</value>
             <remarks>To be added.</remarks>
         </member>
@@ -29138,13 +29138,13 @@
         </member>
         <member name="M:UnityEngine.GameObject.AddComponent(System.String)">
             <param name="className">To be added.</param>
-            <summary>Adds a component class named className to the game object.Adds a component class of type componentType to the game object. C# Users can use a generic version.Generic version. See the Generic Functions page for more details.</summary>
+            <summary>Adds a component class named className to the GameObject.Adds a component class of type componentType to the GameObject. C# Users can use a generic version.Generic version. See the Generic Functions page for more details.</summary>
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
         </member>
         <member name="M:UnityEngine.GameObject.AddComponent(System.Type)">
             <param name="componentType">To be added.</param>
-            <summary>Adds a component class named className to the game object.Adds a component class of type componentType to the game object. C# Users can use a generic version.Generic version. See the Generic Functions page for more details.</summary>
+            <summary>Adds a component class named className to the GameObject.Adds a component class of type componentType to the GameObject. C# Users can use a generic version.Generic version. See the Generic Functions page for more details.</summary>
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
         </member>
@@ -29166,26 +29166,26 @@
         </member>
         <member name="M:UnityEngine.GameObject.BroadcastMessage(System.String)">
             <param name="methodName">To be added.</param>
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object or any of its children.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject or any of its children.</summary>
             <remarks>The receiving method can choose to ignore parameter by having zero parameters. If options is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component.</remarks>
         </member>
         <member name="M:UnityEngine.GameObject.BroadcastMessage(System.String,System.Object)">
             <param name="methodName">To be added.</param>
             <param name="parameter">To be added.</param>
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object or any of its children.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject or any of its children.</summary>
             <remarks>The receiving method can choose to ignore parameter by having zero parameters. If options is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component.</remarks>
         </member>
         <member name="M:UnityEngine.GameObject.BroadcastMessage(System.String,UnityEngine.SendMessageOptions)">
             <param name="methodName">To be added.</param>
             <param name="options">To be added.</param>
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object or any of its children.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject or any of its children.</summary>
             <remarks>The receiving method can choose to ignore parameter by having zero parameters. If options is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component.</remarks>
         </member>
         <member name="M:UnityEngine.GameObject.BroadcastMessage(System.String,System.Object,UnityEngine.SendMessageOptions)">
             <param name="methodName">To be added.</param>
             <param name="parameter">To be added.</param>
             <param name="options">To be added.</param>
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object or any of its children.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject or any of its children.</summary>
             <remarks>The receiving method can choose to ignore parameter by having zero parameters. If options is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component.</remarks>
         </member>
         <member name="P:UnityEngine.GameObject.camera">
@@ -29204,7 +29204,7 @@
             <remarks>This returns null if no Collider2D is attached. See Also: Collider2D class.</remarks>
         </member>
         <member name="M:UnityEngine.GameObject.CompareTag(System.String)">
-            <summary>Is this game object tagged with tag?</summary>
+            <summary>Is this GameObject tagged with tag?</summary>
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
             <param name="tag">The tag to compare.</param>
@@ -29215,16 +29215,16 @@
             <remarks>To be added.</remarks>
         </member>
         <member name="M:UnityEngine.GameObject.CreatePrimitive(UnityEngine.PrimitiveType)">
-            <summary>Creates a game object with a primitive mesh renderer and appropriate collider.</summary>
+            <summary>Creates a GameObject with a primitive mesh renderer and appropriate collider.</summary>
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
             <param name="type">The type of primitive object to create.</param>
         </member>
         <member name="M:UnityEngine.GameObject.Find(System.String)">
             <param name="name">To be added.</param>
-            <summary>Finds a game object by name and returns it.</summary>
+            <summary>Finds a GameObject by name and returns it.</summary>
             <returns>To be added.</returns>
-            <remarks>If no game object with name can be found, null is returned. If name contains a '/' character it will traverse the hierarchy like a path name. This function only returns active gameobjects. For performance reasons it is recommended to not use this function every frame Instead cache the result in a member variable at startup or use GameObject.FindWithTag.This function is most useful to automatically connect references to other objects at load time, eg. inside MonoBehaviour.Awake or MonoBehaviour.Start. You should avoid calling this function every frame eg. MonoBehaviour.Update for performance reasons. A common pattern is to assign a game object to a variable inside MonoBehaviour.Start. And use the variable in MonoBehaviour.Update.</remarks>
+            <remarks>If no GameObject with name can be found, null is returned. If name contains a '/' character it will traverse the hierarchy like a path name. This function only returns active gameobjects. For performance reasons it is recommended to not use this function every frame Instead cache the result in a member variable at startup or use GameObject.FindWithTag.This function is most useful to automatically connect references to other objects at load time, eg. inside MonoBehaviour.Awake or MonoBehaviour.Start. You should avoid calling this function every frame eg. MonoBehaviour.Update for performance reasons. A common pattern is to assign a GameObject to a variable inside MonoBehaviour.Start. And use the variable in MonoBehaviour.Update.</remarks>
         </member>
         <member name="M:UnityEngine.GameObject.FindGameObjectsWithTag(System.String)">
             <summary>Returns a list of active GameObjects tagged tag. Returns empty array if no GameObject was found.</summary>
@@ -29250,13 +29250,13 @@
             <remarks>To be added.</remarks>
         </member>
         <member name="M:UnityEngine.GameObject.GetComponent(System.String)">
-            <summary>Returns the component of Type type if the game object has one attached, null if it doesn't. You can access both builtin components or scripts with this function.Generic version. See the Generic Functions page for more details.Returns the component with name type if the game object has one attached, null if it doesn't.</summary>
+            <summary>Returns the component of Type type if the GameObject has one attached, null if it doesn't. You can access both builtin components or scripts with this function.Generic version. See the Generic Functions page for more details.Returns the component with name type if the GameObject has one attached, null if it doesn't.</summary>
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
             <param name="type">The type of Component to retrieve.</param>
         </member>
         <member name="M:UnityEngine.GameObject.GetComponent(System.Type)">
-            <summary>Returns the component of Type type if the game object has one attached, null if it doesn't. You can access both builtin components or scripts with this function.Generic version. See the Generic Functions page for more details.Returns the component with name type if the game object has one attached, null if it doesn't.</summary>
+            <summary>Returns the component of Type type if the GameObject has one attached, null if it doesn't. You can access both builtin components or scripts with this function.Generic version. See the Generic Functions page for more details.Returns the component with name type if the GameObject has one attached, null if it doesn't.</summary>
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
             <param name="type">The type of Component to retrieve.</param>
@@ -29338,12 +29338,12 @@
             <remarks>To be added.</remarks>
         </member>
         <member name="P:UnityEngine.GameObject.isStatic">
-            <summary>Editor only API that specifies if a game object is static.</summary>
+            <summary>Editor only API that specifies if a GameObject is static.</summary>
             <value>To be added.</value>
             <remarks>Returns true if any of the static flags are set (See Also: GameObjectUtility.SetStaticEditorFlags). setting this to true sets all the static flags (See Also: GameObjectUtility.SetStaticEditorFlags).</remarks>
         </member>
         <member name="P:UnityEngine.GameObject.layer">
-            <summary>The layer the game object is in. A layer is in the range [0...31].</summary>
+            <summary>The layer the GameObject is in. A layer is in the range [0...31].</summary>
             <value>To be added.</value>
             <remarks>Layers can be used for selective rendering from cameras or ignoring raycasts.</remarks>
         </member>
@@ -29394,48 +29394,48 @@
             <remarks>It is recommended to use the Animation interface instead for performance reasons. This will sample animation at the given time. Any component properties that are animated in the clip will be replaced with the sampled value. Most of the time you want to use Animation.Play instead. SampleAnimation is useful when you need to jump between frames in an unordered way or based on some special input. See Also: Animation.</remarks>
         </member>
         <member name="M:UnityEngine.GameObject.SendMessage(System.String)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject.</summary>
             <remarks>The receiving method can choose to ignore the argument by having zero parameters. If options is set to SendMessageOptions.RequireReceiver an error is printed if the message is not picked up by any component. Note that messages will not be sent to inactive objects (ie, those that have been deactivated in the editor or with the SetActive function).</remarks>
             <param name="methodName">The name of the method to call.</param>
         </member>
         <member name="M:UnityEngine.GameObject.SendMessage(System.String,System.Object)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject.</summary>
             <remarks>The receiving method can choose to ignore the argument by having zero parameters. If options is set to SendMessageOptions.RequireReceiver an error is printed if the message is not picked up by any component. Note that messages will not be sent to inactive objects (ie, those that have been deactivated in the editor or with the SetActive function).</remarks>
             <param name="methodName">The name of the method to call.</param>
             <param name="value">An optional parameter value to pass to the called method.</param>
         </member>
         <member name="M:UnityEngine.GameObject.SendMessage(System.String,UnityEngine.SendMessageOptions)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject.</summary>
             <remarks>The receiving method can choose to ignore the argument by having zero parameters. If options is set to SendMessageOptions.RequireReceiver an error is printed if the message is not picked up by any component. Note that messages will not be sent to inactive objects (ie, those that have been deactivated in the editor or with the SetActive function).</remarks>
             <param name="methodName">The name of the method to call.</param>
             <param name="options">Should an error be raised if the method doesn't exist on the target object?</param>
         </member>
         <member name="M:UnityEngine.GameObject.SendMessage(System.String,System.Object,UnityEngine.SendMessageOptions)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject.</summary>
             <remarks>The receiving method can choose to ignore the argument by having zero parameters. If options is set to SendMessageOptions.RequireReceiver an error is printed if the message is not picked up by any component. Note that messages will not be sent to inactive objects (ie, those that have been deactivated in the editor or with the SetActive function).</remarks>
             <param name="methodName">The name of the method to call.</param>
             <param name="value">An optional parameter value to pass to the called method.</param>
             <param name="options">Should an error be raised if the method doesn't exist on the target object?</param>
         </member>
         <member name="M:UnityEngine.GameObject.SendMessageUpwards(System.String)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object and on every ancestor of the behaviour.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject and on every ancestor of the behaviour.</summary>
             <remarks>The receiving method can choose to ignore the argument by having zero parameters. If options is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component. Note that messages will not be sent to inactive objects (ie, those that have been deactivated in the editor or with the SetActive function).</remarks>
             <param name="methodName">The name of the method to call.</param>
         </member>
         <member name="M:UnityEngine.GameObject.SendMessageUpwards(System.String,System.Object)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object and on every ancestor of the behaviour.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject and on every ancestor of the behaviour.</summary>
             <remarks>The receiving method can choose to ignore the argument by having zero parameters. If options is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component. Note that messages will not be sent to inactive objects (ie, those that have been deactivated in the editor or with the SetActive function).</remarks>
             <param name="methodName">The name of the method to call.</param>
             <param name="value">An optional parameter value to pass to the called method.</param>
         </member>
         <member name="M:UnityEngine.GameObject.SendMessageUpwards(System.String,UnityEngine.SendMessageOptions)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object and on every ancestor of the behaviour.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject and on every ancestor of the behaviour.</summary>
             <remarks>The receiving method can choose to ignore the argument by having zero parameters. If options is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component. Note that messages will not be sent to inactive objects (ie, those that have been deactivated in the editor or with the SetActive function).</remarks>
             <param name="methodName">The name of the method to call.</param>
             <param name="options">Should an error be raised if the method doesn't exist on the target object?</param>
         </member>
         <member name="M:UnityEngine.GameObject.SendMessageUpwards(System.String,System.Object,UnityEngine.SendMessageOptions)">
-            <summary>Calls the method named methodName on every MonoBehaviour in this game object and on every ancestor of the behaviour.</summary>
+            <summary>Calls the method named methodName on every MonoBehaviour in this GameObject and on every ancestor of the behaviour.</summary>
             <remarks>The receiving method can choose to ignore the argument by having zero parameters. If options is set to SendMessageOptions.RequireReceiver an error is printed when the message is not picked up by any component. Note that messages will not be sent to inactive objects (ie, those that have been deactivated in the editor or with the SetActive function).</remarks>
             <param name="methodName">The name of the method to call.</param>
             <param name="value">An optional parameter value to pass to the called method.</param>
@@ -29456,9 +29456,9 @@
             <remarks>To be added.</remarks>
         </member>
         <member name="P:UnityEngine.GameObject.tag">
-            <summary>The tag of this game object.</summary>
+            <summary>The tag of this GameObject.</summary>
             <value>To be added.</value>
-            <remarks>A tag can be used to identify a game object. Tags must be declared in the tag manager before using them.</remarks>
+            <remarks>A tag can be used to identify a GameObject. Tags must be declared in the tag manager before using them.</remarks>
         </member>
         <member name="P:UnityEngine.GameObject.transform">
             <summary>The Transform attached to this GameObject. (null if there is none attached).</summary>
@@ -29947,27 +29947,27 @@
         </member>
         <member name="M:UnityEngine.Graphics.DrawMesh(UnityEngine.Mesh,UnityEngine.Matrix4x4)">
             <summary>Draw a mesh.</summary>
-            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some game object. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing game objects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
+            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some GameObject. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing GameObjects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
             <param name="mesh">The Mesh to draw.</param>
             <param name="matrix">Transformation matrix of the mesh (combines position, rotation and other transformations).</param>
         </member>
         <member name="M:UnityEngine.Graphics.DrawMesh(UnityEngine.Mesh,UnityEngine.Matrix4x4,System.Int32)">
             <param name="materialIndex">To be added.</param>
             <summary>Draw a mesh.</summary>
-            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some game object. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing game objects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
+            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some GameObject. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing GameObjects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
             <param name="mesh">The Mesh to draw.</param>
             <param name="matrix">Transformation matrix of the mesh (combines position, rotation and other transformations).</param>
         </member>
         <member name="M:UnityEngine.Graphics.DrawMesh(UnityEngine.Mesh,UnityEngine.Vector3,UnityEngine.Quaternion)">
             <summary>Draw a mesh.</summary>
-            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some game object. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing game objects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
+            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some GameObject. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing GameObjects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
             <param name="mesh">The Mesh to draw.</param>
             <param name="position">Position of the mesh.</param>
             <param name="rotation">Rotation of the mesh.</param>
         </member>
         <member name="M:UnityEngine.Graphics.DrawMesh(UnityEngine.Mesh,UnityEngine.Matrix4x4,UnityEngine.Material,System.Int32)">
             <summary>Draw a mesh.</summary>
-            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some game object. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing game objects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
+            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some GameObject. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing GameObjects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
             <param name="mesh">The Mesh to draw.</param>
             <param name="matrix">Transformation matrix of the mesh (combines position, rotation and other transformations).</param>
             <param name="material">Material to use.</param>
@@ -29976,14 +29976,14 @@
         <member name="M:UnityEngine.Graphics.DrawMesh(UnityEngine.Mesh,UnityEngine.Vector3,UnityEngine.Quaternion,System.Int32)">
             <param name="materialIndex">To be added.</param>
             <summary>Draw a mesh.</summary>
-            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some game object. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing game objects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
+            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some GameObject. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing GameObjects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
             <param name="mesh">The Mesh to draw.</param>
             <param name="position">Position of the mesh.</param>
             <param name="rotation">Rotation of the mesh.</param>
         </member>
         <member name="M:UnityEngine.Graphics.DrawMesh(UnityEngine.Mesh,UnityEngine.Matrix4x4,UnityEngine.Material,System.Int32,UnityEngine.Camera)">
             <summary>Draw a mesh.</summary>
-            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some game object. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing game objects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
+            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some GameObject. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing GameObjects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
             <param name="mesh">The Mesh to draw.</param>
             <param name="matrix">Transformation matrix of the mesh (combines position, rotation and other transformations).</param>
             <param name="material">Material to use.</param>
@@ -29992,7 +29992,7 @@
         </member>
         <member name="M:UnityEngine.Graphics.DrawMesh(UnityEngine.Mesh,UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Material,System.Int32)">
             <summary>Draw a mesh.</summary>
-            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some game object. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing game objects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
+            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some GameObject. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing GameObjects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
             <param name="mesh">The Mesh to draw.</param>
             <param name="position">Position of the mesh.</param>
             <param name="rotation">Rotation of the mesh.</param>
@@ -30001,7 +30001,7 @@
         </member>
         <member name="M:UnityEngine.Graphics.DrawMesh(UnityEngine.Mesh,UnityEngine.Matrix4x4,UnityEngine.Material,System.Int32,UnityEngine.Camera,System.Int32)">
             <summary>Draw a mesh.</summary>
-            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some game object. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing game objects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
+            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some GameObject. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing GameObjects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
             <param name="mesh">The Mesh to draw.</param>
             <param name="matrix">Transformation matrix of the mesh (combines position, rotation and other transformations).</param>
             <param name="material">Material to use.</param>
@@ -30011,7 +30011,7 @@
         </member>
         <member name="M:UnityEngine.Graphics.DrawMesh(UnityEngine.Mesh,UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Material,System.Int32,UnityEngine.Camera)">
             <summary>Draw a mesh.</summary>
-            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some game object. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing game objects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
+            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some GameObject. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing GameObjects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
             <param name="mesh">The Mesh to draw.</param>
             <param name="position">Position of the mesh.</param>
             <param name="rotation">Rotation of the mesh.</param>
@@ -30021,7 +30021,7 @@
         </member>
         <member name="M:UnityEngine.Graphics.DrawMesh(UnityEngine.Mesh,UnityEngine.Matrix4x4,UnityEngine.Material,System.Int32,UnityEngine.Camera,System.Int32,UnityEngine.MaterialPropertyBlock)">
             <summary>Draw a mesh.</summary>
-            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some game object. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing game objects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
+            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some GameObject. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing GameObjects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
             <param name="mesh">The Mesh to draw.</param>
             <param name="matrix">Transformation matrix of the mesh (combines position, rotation and other transformations).</param>
             <param name="material">Material to use.</param>
@@ -30032,7 +30032,7 @@
         </member>
         <member name="M:UnityEngine.Graphics.DrawMesh(UnityEngine.Mesh,UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Material,System.Int32,UnityEngine.Camera,System.Int32)">
             <summary>Draw a mesh.</summary>
-            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some game object. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing game objects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
+            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some GameObject. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing GameObjects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
             <param name="mesh">The Mesh to draw.</param>
             <param name="position">Position of the mesh.</param>
             <param name="rotation">Rotation of the mesh.</param>
@@ -30043,7 +30043,7 @@
         </member>
         <member name="M:UnityEngine.Graphics.DrawMesh(UnityEngine.Mesh,UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Material,System.Int32,UnityEngine.Camera,System.Int32,UnityEngine.MaterialPropertyBlock)">
             <summary>Draw a mesh.</summary>
-            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some game object. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing game objects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
+            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some GameObject. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing GameObjects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
             <param name="mesh">The Mesh to draw.</param>
             <param name="position">Position of the mesh.</param>
             <param name="rotation">Rotation of the mesh.</param>
@@ -30057,7 +30057,7 @@
             <param name="castShadows">To be added.</param>
             <param name="receiveShadows">To be added.</param>
             <summary>Draw a mesh.</summary>
-            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some game object. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing game objects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
+            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some GameObject. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing GameObjects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
             <param name="mesh">The Mesh to draw.</param>
             <param name="matrix">Transformation matrix of the mesh (combines position, rotation and other transformations).</param>
             <param name="material">Material to use.</param>
@@ -30070,7 +30070,7 @@
             <param name="castShadows">To be added.</param>
             <param name="receiveShadows">To be added.</param>
             <summary>Draw a mesh.</summary>
-            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some game object. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing game objects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
+            <remarks>DrawMesh draws a mesh for one frame. The mesh will be affected by the lights, can cast and receive shadows and be affected by Projectors - just like it was part of some GameObject. It can be drawn for all cameras or just for some specific camera. Use DrawMesh in situations where you want to draw large amount of meshes, but don't want the overhead of creating and managing GameObjects. Note that DrawMesh does not draw the mesh immediately; it merely "submits" it for rendering. The mesh will be rendered as part of normal rendering process. If you want to draw a mesh immediately, use Graphics.DrawMeshNow. Because DrawMesh does not draw mesh immediately, modifying material properties between calls to this function won't make the meshes pick up them. If you want to draw series of meshes with the same material, but slightly different properties (e.g. change color of each mesh), use MaterialPropertyBlock parameter. See Also: MaterialPropertyBlock.</remarks>
             <param name="mesh">The Mesh to draw.</param>
             <param name="position">Position of the mesh.</param>
             <param name="rotation">Rotation of the mesh.</param>
@@ -31334,14 +31334,14 @@
             <param name="screenPosition">To be added.</param>
             <summary>Is a point on screen inside the element.</summary>
             <returns>To be added.</returns>
-            <remarks>Returns true if the screenPosition is contained in this GUIElement. screenPosition is specified in screen coordinates, like the values returned by Input.mousePosition property. If no camera is given a camera filling the entire game window will be assumed. Note that if the position is inside the element, true will be returned even if the game object belongs to Ignore Raycast layer (normally mouse events are not sent to Ignore Raycast objects). See Also: GUILayer.HitTest.</remarks>
+            <remarks>Returns true if the screenPosition is contained in this GUIElement. screenPosition is specified in screen coordinates, like the values returned by Input.mousePosition property. If no camera is given a camera filling the entire game window will be assumed. Note that if the position is inside the element, true will be returned even if the GameObject belongs to Ignore Raycast layer (normally mouse events are not sent to Ignore Raycast objects). See Also: GUILayer.HitTest.</remarks>
         </member>
         <member name="M:UnityEngine.GUIElement.HitTest(UnityEngine.Vector3,UnityEngine.Camera)">
             <param name="screenPosition">To be added.</param>
             <param name="camera">To be added.</param>
             <summary>Is a point on screen inside the element.</summary>
             <returns>To be added.</returns>
-            <remarks>Returns true if the screenPosition is contained in this GUIElement. screenPosition is specified in screen coordinates, like the values returned by Input.mousePosition property. If no camera is given a camera filling the entire game window will be assumed. Note that if the position is inside the element, true will be returned even if the game object belongs to Ignore Raycast layer (normally mouse events are not sent to Ignore Raycast objects). See Also: GUILayer.HitTest.</remarks>
+            <remarks>Returns true if the screenPosition is contained in this GUIElement. screenPosition is specified in screen coordinates, like the values returned by Input.mousePosition property. If no camera is given a camera filling the entire game window will be assumed. Note that if the position is inside the element, true will be returned even if the GameObject belongs to Ignore Raycast layer (normally mouse events are not sent to Ignore Raycast objects). See Also: GUILayer.HitTest.</remarks>
         </member>
         <member name="T:UnityEngine.GUILayer">
             <summary>Component added to a camera to make it render 2D GUI elements.</summary>
@@ -35781,7 +35781,7 @@
         </member>
         <member name="T:UnityEngine.LayerMask">
             <summary>LayerMask allow you to display the LayerMask popup menu in the inspector.</summary>
-            <remarks>Similar to those in the camera.cullingMask. Layer masks can be used selectively filter game objects for example when casting rays.</remarks>
+            <remarks>Similar to those in the camera.cullingMask. Layer masks can be used selectively filter GameObjects for example when casting rays.</remarks>
         </member>
         <member name="M:UnityEngine.LayerMask.LayerToName(System.Int32)">
             <param name="layer">To be added.</param>
@@ -39127,7 +39127,7 @@
         </member>
         <member name="T:UnityEngine.NetworkView">
             <summary>The network view is the binding material of multiplayer games.</summary>
-            <remarks>With this you can define exactly what is to be synchronized over the network and how it should be done. Game objects can have NetworkView components which can be configured to watch other components for the object.  For more information see the Network View manual page and the component reference page.</remarks>
+            <remarks>With this you can define exactly what is to be synchronized over the network and how it should be done. GameObjects can have NetworkView components which can be configured to watch other components for the object.  For more information see the Network View manual page and the component reference page.</remarks>
         </member>
         <member name="C:UnityEngine.NetworkView">
             <summary>To be added.</summary>
@@ -39417,7 +39417,7 @@
         <member name="M:UnityEngine.Object.DontDestroyOnLoad(UnityEngine.Object)">
             <param name="target">To be added.</param>
             <summary>Makes the object target not be destroyed automatically when loading a new scene.</summary>
-            <remarks>When loading a new level all objects in the scene are destroyed, then the objects in the new level are loaded. In order to preserve an object during level loading call DontDestroyOnLoad on it. If the object is a component or game object then its entire transform hierarchy will not be destroyed either.</remarks>
+            <remarks>When loading a new level all objects in the scene are destroyed, then the objects in the new level are loaded. In order to preserve an object during level loading call DontDestroyOnLoad on it. If the object is a component or GameObject then its entire transform hierarchy will not be destroyed either.</remarks>
         </member>
         <member name="M:UnityEngine.Object.Equals(System.Object)">
             <param name="o">To be added.</param>
@@ -39499,7 +39499,7 @@
         <member name="P:UnityEngine.Object.name">
             <summary>The name of the object.</summary>
             <value>To be added.</value>
-            <remarks>Components share the same name with the game object and all attached components.</remarks>
+            <remarks>Components share the same name with the GameObject and all attached components.</remarks>
         </member>
         <member name="M:UnityEngine.Object.op_Equality(UnityEngine.Object,UnityEngine.Object)">
             <param name="x">To be added.</param>
@@ -39522,7 +39522,7 @@
             <remarks>To be added.</remarks>
         </member>
         <member name="M:UnityEngine.Object.ToString">
-            <summary>Returns the name of the game object.</summary>
+            <summary>Returns the name of the GameObject.</summary>
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
         </member>
@@ -40634,14 +40634,14 @@
             <param name="collider1">To be added.</param>
             <param name="collider2">To be added.</param>
             <summary>Makes the collision detection system ignore all collisions between collider1 and collider2.</summary>
-            <remarks>This is most useful for making eg. projectiles not collide with the object shooting them. IgnoreCollision has a few limitations: 1) It is not persistent. This means ignore collision state will not be stored in the editor when saving a scene. 2) You can only apply the ignore collision to colliders in active game objects. When deactivating the collider or attached rigidbody the IgnoreCollision state will be lost and you have to call Physics.IgnoreCollision again. See Also: Physics.IgnoreLayerCollision.</remarks>
+            <remarks>This is most useful for making eg. projectiles not collide with the object shooting them. IgnoreCollision has a few limitations: 1) It is not persistent. This means ignore collision state will not be stored in the editor when saving a scene. 2) You can only apply the ignore collision to colliders in active GameObjects. When deactivating the collider or attached rigidbody the IgnoreCollision state will be lost and you have to call Physics.IgnoreCollision again. See Also: Physics.IgnoreLayerCollision.</remarks>
         </member>
         <member name="M:UnityEngine.Physics.IgnoreCollision(UnityEngine.Collider,UnityEngine.Collider,System.Boolean)">
             <param name="collider1">To be added.</param>
             <param name="collider2">To be added.</param>
             <param name="ignore">To be added.</param>
             <summary>Makes the collision detection system ignore all collisions between collider1 and collider2.</summary>
-            <remarks>This is most useful for making eg. projectiles not collide with the object shooting them. IgnoreCollision has a few limitations: 1) It is not persistent. This means ignore collision state will not be stored in the editor when saving a scene. 2) You can only apply the ignore collision to colliders in active game objects. When deactivating the collider or attached rigidbody the IgnoreCollision state will be lost and you have to call Physics.IgnoreCollision again. See Also: Physics.IgnoreLayerCollision.</remarks>
+            <remarks>This is most useful for making eg. projectiles not collide with the object shooting them. IgnoreCollision has a few limitations: 1) It is not persistent. This means ignore collision state will not be stored in the editor when saving a scene. 2) You can only apply the ignore collision to colliders in active GameObjects. When deactivating the collider or attached rigidbody the IgnoreCollision state will be lost and you have to call Physics.IgnoreCollision again. See Also: Physics.IgnoreLayerCollision.</remarks>
         </member>
         <member name="M:UnityEngine.Physics.IgnoreLayerCollision(System.Int32,System.Int32)">
             <param name="layer1">To be added.</param>
@@ -43589,7 +43589,7 @@
         </member>
         <member name="T:UnityEngine.Renderer">
             <summary>General functionality for all renderers.</summary>
-            <remarks>A renderer is what makes an object appear on the screen. For any game object or component its renderer can be accessed trough a renderer property:Use this class to access the renderer of any object, mesh or particle system. Renderers can be disabled to make objects invisible (see enabled ), and the materials can be accessed and modified through them (see material ). See Also: Renderer components for meshes, particles, lines and trails.</remarks>
+            <remarks>A renderer is what makes an object appear on the screen. For any GameObject or component its renderer can be accessed trough a renderer property:Use this class to access the renderer of any object, mesh or particle system. Renderers can be disabled to make objects invisible (see enabled ), and the materials can be accessed and modified through them (see material ). See Also: Renderer components for meshes, particles, lines and trails.</remarks>
         </member>
         <member name="C:UnityEngine.Renderer">
             <summary>To be added.</summary>
@@ -43648,12 +43648,12 @@
         <member name="P:UnityEngine.Renderer.material">
             <summary>The material of this object.</summary>
             <value>To be added.</value>
-            <remarks>Modifying material will change the material for this object only. If the material is used by any other renderers, this will clone the shared material and start using it from now on. Important note: This function automatically instantiates the materials and makes them unique to this renderer. It is your responsibility to destroy the materials when the game object is being destroyed. Resources.UnloadUnusedAssets also destroys the materials but it is usually only called when loading a new level.Another example:</remarks>
+            <remarks>Modifying material will change the material for this object only. If the material is used by any other renderers, this will clone the shared material and start using it from now on. Important note: This function automatically instantiates the materials and makes them unique to this renderer. It is your responsibility to destroy the materials when the GameObject is being destroyed. Resources.UnloadUnusedAssets also destroys the materials but it is usually only called when loading a new level.Another example:</remarks>
         </member>
         <member name="P:UnityEngine.Renderer.materials">
             <summary>All the materials of this object.</summary>
             <value>To be added.</value>
-            <remarks>This is an array of all materials used by the renderer. Unity supports a single object using multiple materials; in this case materials contains all the materials. sharedMaterial and material properties return the first used material if there is more than one. Modifying any material in materials will change the appearance of only that object. Note that like all arrays returned by Unity, this returns a copy of materials array. If you want to change some materials in it, get the value, change an entry and set materials back. Important note: This function automatically instantiates the materials and makes them unique to this renderer. It is your responsibility to destroy the materials when the game object is being destroyed. Resources.UnloadUnusedAssets also destroys the materials but it is usually only called when loading a new level.</remarks>
+            <remarks>This is an array of all materials used by the renderer. Unity supports a single object using multiple materials; in this case materials contains all the materials. sharedMaterial and material properties return the first used material if there is more than one. Modifying any material in materials will change the appearance of only that object. Note that like all arrays returned by Unity, this returns a copy of materials array. If you want to change some materials in it, get the value, change an entry and set materials back. Important note: This function automatically instantiates the materials and makes them unique to this renderer. It is your responsibility to destroy the materials when the GameObject is being destroyed. Resources.UnloadUnusedAssets also destroys the materials but it is usually only called when loading a new level.</remarks>
         </member>
         <member name="P:UnityEngine.Renderer.receiveShadows">
             <summary>Does this object receive shadows?</summary>
@@ -44086,7 +44086,7 @@
         </member>
         <member name="T:UnityEngine.RequireComponent">
             <summary>The RequireComponent attribute lets automatically add required component as a dependency.</summary>
-            <remarks>When you add a script which uses RequireComponent, the required component will automatically be added to the game object. This is useful to avoid setup errors. For example a script might require that a rigid body is always added to the same game object. Using RequireComponent this will be done automatically, thus you can never get the setup wrong.C# Example:</remarks>
+            <remarks>When you add a script which uses RequireComponent, the required component will automatically be added to the GameObject. This is useful to avoid setup errors. For example a script might require that a rigid body is always added to the same GameObject. Using RequireComponent this will be done automatically, thus you can never get the setup wrong.C# Example:</remarks>
         </member>
         <member name="C:UnityEngine.RequireComponent(System.Type)">
             <param name="requiredComponent">To be added.</param>
@@ -44139,7 +44139,7 @@
         </member>
         <member name="T:UnityEngine.Resources">
             <summary>The Resources class allows you to find and access Objects including assets.</summary>
-            <remarks>In the editor, Resources.FindObjectsOfTypeAll can be used to locate assets and scene objects. All assets that are in a folder named "Resources" anywhere in the Assets folder can be accessed via the Resources.Load functions. Multiple "Resources" folders may exist and when loading objects each will be examined. In Unity you usually don't use path names to access assets, instead you expose a reference to an asset by declaring a member-variable, and then assign it in the inspector. When using this technique Unity can automatically calculate which assets are used when building a player. This radically minimizes the size of your players to the assets that you actually use in the built game. When you place assets in "Resources" folders this can not be done, thus all assets in the "Resources" folders will be included in a build. Another disadvantage of using path names is that it leads to less reusable code since scripts will have specific hard coded requirements on where the used assets are placed. On the other hand using references that are exposed in the inspector are self-documenting and immediately obvious to the user of your script. However there are situations where it is more convenient to fetch an asset by its name instead of linking to it in the inspector. Essentially whenever it is inconvenient to assign the reference to the object in the inspector. For example you might want to create a game object procedurally from a script and for example assign a texture to a procedurally generated mesh. Some loaded assets, most notably textures, can use up memory even when no instance exists in the scene. To reclaim this memory when the asset is no longer needed, you can use Resources.UnloadUnusedAssets.</remarks>
+            <remarks>In the editor, Resources.FindObjectsOfTypeAll can be used to locate assets and scene objects. All assets that are in a folder named "Resources" anywhere in the Assets folder can be accessed via the Resources.Load functions. Multiple "Resources" folders may exist and when loading objects each will be examined. In Unity you usually don't use path names to access assets, instead you expose a reference to an asset by declaring a member-variable, and then assign it in the inspector. When using this technique Unity can automatically calculate which assets are used when building a player. This radically minimizes the size of your players to the assets that you actually use in the built game. When you place assets in "Resources" folders this can not be done, thus all assets in the "Resources" folders will be included in a build. Another disadvantage of using path names is that it leads to less reusable code since scripts will have specific hard coded requirements on where the used assets are placed. On the other hand using references that are exposed in the inspector are self-documenting and immediately obvious to the user of your script. However there are situations where it is more convenient to fetch an asset by its name instead of linking to it in the inspector. Essentially whenever it is inconvenient to assign the reference to the object in the inspector. For example you might want to create a GameObject procedurally from a script and for example assign a texture to a procedurally generated mesh. Some loaded assets, most notably textures, can use up memory even when no instance exists in the scene. To reclaim this memory when the asset is no longer needed, you can use Resources.UnloadUnusedAssets.</remarks>
         </member>
         <member name="C:UnityEngine.Resources">
             <summary>To be added.</summary>
@@ -44229,12 +44229,12 @@
         <member name="M:UnityEngine.Resources.UnloadAsset(UnityEngine.Object)">
             <param name="assetToUnload">To be added.</param>
             <summary>Unloads assetToUnload from memory.</summary>
-            <remarks>This function can only be called on Assets that are stored on disk. If there are any references from game objects in the scene to the asset and it is being used then Unity will reload the asset from disk as soon as it is accessed.</remarks>
+            <remarks>This function can only be called on Assets that are stored on disk. If there are any references from GameObjects in the scene to the asset and it is being used then Unity will reload the asset from disk as soon as it is accessed.</remarks>
         </member>
         <member name="M:UnityEngine.Resources.UnloadUnusedAssets">
             <summary>Unloads assets that are not used.</summary>
             <returns>Object on which you can yield to wait until the operation completes.</returns>
-            <remarks>An asset is deemed to be unused if it isn't reached after walking the whole game object hierarchy, including script components. Static variables are also examined. The script excecution stack, however, is not examined so an asset referenced only from within the script stack will be unloaded and, if necessary, loaded back in the next time one of its properties or methods is used. This requires extra care for assets which have been modified in memory. Make sure to call EditorUtility.SetDirty before an asset garbage collection is triggered.</remarks>
+            <remarks>An asset is deemed to be unused if it isn't reached after walking the whole GameObject hierarchy, including script components. Static variables are also examined. The script excecution stack, however, is not examined so an asset referenced only from within the script stack will be unloaded and, if necessary, loaded back in the next time one of its properties or methods is used. This requires extra care for assets which have been modified in memory. Make sure to call EditorUtility.SetDirty before an asset garbage collection is triggered.</remarks>
             <example />
         </member>
         <member name="T:UnityEngine.Rigidbody">
@@ -45022,7 +45022,7 @@
             <summary>To be added.</summary>
         </member>
         <member name="T:UnityEngine.ScriptableObject">
-            <summary>A class you can derive from if you want to create objects that don't need to be attached to game objects.</summary>
+            <summary>A class you can derive from if you want to create objects that don't need to be attached to GameObjects.</summary>
             <remarks>This is most useful for assets which are only meant to store data.</remarks>
         </member>
         <member name="C:UnityEngine.ScriptableObject">
@@ -48296,7 +48296,7 @@
             <remarks>Check the tree creator.</remarks>
         </member>
         <member name="T:UnityEngine.TreeInstance">
-            <summary>Contains information about a tree placed in the Terrain game object.</summary>
+            <summary>Contains information about a tree placed in the Terrain GameObject.</summary>
             <remarks>This struct can be accessed from the TerrainData Object.</remarks>
         </member>
         <member name="P:UnityEngine.TreeInstance.color">
