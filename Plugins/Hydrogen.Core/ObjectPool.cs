@@ -81,7 +81,7 @@ namespace Hydrogen.Core
 				/// <remarks>
 				/// The default value used when adding objects to the Object Pool. 
 				/// </remarks>
-				public bool SendMessage;
+				public bool SlowMessage;
 				/// <summary>
 				/// Should additional objects be spawned as needed?
 				/// </summary>
@@ -116,7 +116,7 @@ namespace Hydrogen.Core
 				/// <param name="prefab">The Prefab or GameObject.</param>
 				public int Add (GameObject prefab)
 				{
-						return Add (prefab, PreloadAmount, SpawnMore, SendMessage, HandleParticles, TrackObjects, 
+						return Add (prefab, PreloadAmount, SpawnMore, SlowMessage, HandleParticles, TrackObjects, 
 								CullExtras, CullInterval);
 				}
 
@@ -135,7 +135,7 @@ namespace Hydrogen.Core
 				/// <param name="preloadAmount">The number of objects that should be preloaded.</param>
 				public int Add (GameObject prefab, int preloadAmount)
 				{
-						return Add (prefab, preloadAmount, SpawnMore, SendMessage, HandleParticles, TrackObjects, 
+						return Add (prefab, preloadAmount, SpawnMore, SlowMessage, HandleParticles, TrackObjects, 
 								CullExtras, CullInterval);
 				}
 
@@ -193,7 +193,7 @@ namespace Hydrogen.Core
 				/// <param name="prefabs">An array of Prefabs or GameObjects.</param>
 				public int[] Add (GameObject[] prefabs)
 				{
-						return Add (prefabs, PreloadAmount, SpawnMore, SendMessage, HandleParticles, TrackObjects, 
+						return Add (prefabs, PreloadAmount, SpawnMore, SlowMessage, HandleParticles, TrackObjects, 
 								CullExtras, CullInterval);
 				}
 
@@ -212,7 +212,7 @@ namespace Hydrogen.Core
 				/// <param name="preloadAmount">The number of objects that should be preloaded.</param>
 				public int[] Add (GameObject[] prefabs, int preloadAmount)
 				{
-						return Add (prefabs, preloadAmount, SpawnMore, SendMessage, HandleParticles, TrackObjects, 
+						return Add (prefabs, preloadAmount, SpawnMore, SlowMessage, HandleParticles, TrackObjects, 
 								CullExtras, CullInterval);
 				}
 
