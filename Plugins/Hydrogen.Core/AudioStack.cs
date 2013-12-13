@@ -63,8 +63,17 @@ namespace Hydrogen.Core
 				/// The number of currently used AudioSources.
 				/// </summary>
 				/// <value>Used AudioSource Count.</value>
-				public int UsedSources {
+				public int SourcesCount {
 						get { return _loadedItems.Count; }
+				}
+
+				public Dictionary<string, AudioStackItem> LoadedItems {
+						get { return _loadedItems; }
+				}
+
+				public bool IsLoaded (AudioClip clip)
+				{
+						return _loadedItems.ContainsKey (clip.name);
 				}
 
 				/// <summary>
@@ -77,14 +86,24 @@ namespace Hydrogen.Core
 						return IsLoaded (item.Key);
 				}
 
-				public bool IsLoaded (string fullName)
+				public bool IsLoaded (string key)
 				{
-						return _loadedItems.ContainsKey (fullName);
+						return _loadedItems.ContainsKey (key);
 				}
 
-				public bool IsLoaded (AudioClip clip)
+				public bool IsPlaying (AudioClip clip)
 				{
-						return _loadedItems.ContainsKey (clip.name);
+						return IsLoaded (clip.name) && _loadedItems [clip.name].Source.isPlaying;
+				}
+
+				public bool IsPlaying (AudioStackItem item)
+				{
+						return item.Source != null && item.Source.isPlaying;
+				}
+
+				public bool IsPlaying (string key)
+				{
+						return IsLoaded (key) && _loadedItems [key].Source.isPlaying;
 				}
 
 				public string Add (AudioClip clip)
@@ -107,16 +126,16 @@ namespace Hydrogen.Core
 						if (IsLoaded (item.Key) && !createDuplicate) {
 
 								// Update any settings we need too
-								_loadedItems [item.Key].ShouldFade = item.ShouldFade;
-								_loadedItems [item.Key].ShouldLoop = item.ShouldLoop;
-								_loadedItems [item.Key].ShouldPlay = item.ShouldPlay;
+								_loadedItems [item.Key].Fade = item.Fade;
+								_loadedItems [item.Key].Loop = item.Loop;
+								_loadedItems [item.Key].PlayOnLoad = item.PlayOnLoad;
 
 								_loadedItems [item.Key].FadeInTime = item.FadeInTime;
 								_loadedItems [item.Key].FadeOutTime = item.FadeOutTime;
 								_loadedItems [item.Key].Persistant = item.Persistant;
 								_loadedItems [item.Key].TargetVolume = item.TargetVolume;
 								_loadedItems [item.Key].StartVolume = item.StartVolume;
-								_loadedItems [item.Key].removeOnFinish = item.removeOnFinish;
+								_loadedItems [item.Key].RemoveAfterFadeOut = item.RemoveAfterFadeOut;
 
 						} else {
 
@@ -150,10 +169,10 @@ namespace Hydrogen.Core
 								
 										item.Source.clip = item.Clip;
 										item.Source.volume = item.StartVolume;
-										item.Source.loop = item.ShouldLoop;
+										item.Source.loop = item.Loop;
 
 										// Auto Play Stuff
-										if (item.ShouldPlay) {
+										if (item.PlayOnLoad) {
 												item.Source.Play ();
 										}
 

@@ -26,10 +26,12 @@
 // THE SOFTWARE.
 #endregion
 using UnityEngine;
-using System.Collections;
 
 namespace Hydrogen.Core
 {
+		/// <summary>
+		/// A class represention of all information needed for an AudioClip to be played via the AudioStack.
+		/// </summary>
 		[System.Serializable]
 		public sealed class AudioStackItem
 		{
@@ -37,24 +39,67 @@ namespace Hydrogen.Core
 				/// The associated AudioClip
 				/// </summary>
 				public AudioClip Clip;
-				public string Key;
-				public float StartVolume;
-				public float TargetVolume = 1f;
-				public float FadeInTime = 4.5f;
-				public float FadeOutTime = 5.0f;
-				public bool ShouldFade;
-				public bool ShouldLoop;
-				public bool ShouldPlay = true;
-				public AudioSource Source;
-				public AudioStack Stack;
 				/// <summary>
-				///  does not get removed, useful for menu clicks etc
+				/// Key to be used by the AudioStack
+				/// </summary>
+				/// <remarks>
+				/// Should be unique to the AudioClip's file name.
+				/// </remarks>
+				public string Key;
+				/// <summary>
+				/// Duration of time to use when fading in an AudioClip.
+				/// </summary>
+				public float FadeInTime = 4.5f;
+				/// <summary>
+				/// Duration of time to use when fading out an AudioClip.
+				/// </summary>
+				public float FadeOutTime = 5.0f;
+				/// <summary>
+				/// Should the AudioSource fade between volume levels?
+				/// </summary>
+				public bool Fade;
+				/// <summary>
+				/// Should the AudioSource loop the clip?
+				/// </summary>
+				public bool Loop;
+				/// <summary>
+				/// The max volume for the item.
+				/// </summary>
+				public float MaxVolume = 1f;
+				/// <summary>
+				/// Should the Audio Clip be played automatically upon load?
+				/// </summary>
+				public bool PlayOnLoad = true;
+				/// <summary>
+				/// Do not remove when finished playing does not get removed, useful for menu clicks etc
 				/// </summary>
 				public bool Persistant;
 				/// <summary>
-				/// Should the AudioPoolItem be destroyed, freeing it's AudioSource when it's volume reaches 0
+				/// Should the AudioPoolItem be destroyed, freeing it's AudioSource when it's volume reaches 0 after fading
 				/// </summary>
-				public bool removeOnFinish;
+				public bool RemoveAfterFadeOut = true;
+				/// <summary>
+				/// The AudioSource associated to this AudioStackItem.
+				/// </summary>
+				[System.NonSerialized]
+				public AudioSource Source;
+				/// <summary>
+				/// Reference to the parent stack.
+				/// </summary>
+				[System.NonSerialized]
+				public AudioStack Stack;
+				/// <summary>
+				/// The volume to use when the sound is first played.
+				/// </summary>
+				public float StartVolume = 1f;
+				/// <summary>
+				/// The volume which the AudioSource should gravitate towards.
+				/// </summary>
+				public float TargetVolume = 1f;
+
+				public AudioStackItem ()
+				{
+				}
 
 				public AudioStackItem (AudioClip clip)
 				{
@@ -70,25 +115,29 @@ namespace Hydrogen.Core
 
 				public void Process ()
 				{
+						if (Source == null)
+								return;
+
+						if (TargetVolume > MaxVolume)
+								TargetVolume = MaxVolume;
+
 						if (Source.volume != TargetVolume) {
-								if (ShouldFade) {
+								if (Fade) {
 										if (Source.volume > TargetVolume) {
 												Source.volume = 
-												Mathf.Lerp (Source.volume, 
-														TargetVolume,
-														FadeOutTime * Time.deltaTime);
+														Mathf.Lerp (Source.volume, TargetVolume, FadeOutTime * Time.deltaTime);
 										} else {
 												Source.volume = 
-												Mathf.Lerp (Source.volume, 
-														TargetVolume,
-														FadeInTime * Time.deltaTime);
+														Mathf.Lerp (Source.volume, TargetVolume, FadeInTime * Time.deltaTime);
 										}
 								} else {
 										Source.volume = TargetVolume;
 								}
 						}
-						// Removing Finished Items
-						if (!Persistant && ((Source.volume == 0f && removeOnFinish) || Source.time == Clip.length)) {
+
+						// Automatically remove finished processes, but only if they are not marked persistant.
+						// Not checking for Loop as if someone sets it's TargetVolume to 0 its meant to go away.
+						if (!Persistant && ((Fade && RemoveAfterFadeOut && Source.volume < 0.0001f) || Source.time == Clip.length)) {
 
 								Stack.Remove (this);
 						}
