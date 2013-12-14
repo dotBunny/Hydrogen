@@ -42,7 +42,7 @@ namespace Hydrogen
 				public const string DefaultSingletonName = "Hydrogen";
 
 				/// <summary>
-				/// Adds a component to a GameObject, if that component is not already added.
+				/// Adds a component to a GameObject, if that component is not already present.
 				/// </summary>
 				/// <returns>The desired component.</returns>
 				/// <param name="targetObject">The root object to add the component to.</param>

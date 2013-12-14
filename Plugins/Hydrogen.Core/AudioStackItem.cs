@@ -71,7 +71,7 @@ namespace Hydrogen.Core
 				/// </summary>
 				public bool PlayOnLoad = true;
 				/// <summary>
-				/// Do not remove when finished playing does not get removed, useful for menu clicks etc
+				/// Do not remove the AudioItem when finished playing, useful for menu clicks etc
 				/// </summary>
 				public bool Persistant;
 				/// <summary>
@@ -115,7 +115,7 @@ namespace Hydrogen.Core
 
 				public void Process ()
 				{
-						if (Source == null)
+						if (Source == null || Clip == null)
 								return;
 
 						if (TargetVolume > MaxVolume)
@@ -141,6 +141,21 @@ namespace Hydrogen.Core
 
 								Stack.Remove (this);
 						}
+				}
+
+				public void Play ()
+				{
+						Source.Play ();
+				}
+
+				public void Pause ()
+				{
+						Source.Pause ();
+				}
+
+				public void Stop ()
+				{
+						Source.Stop ();
 				}
 		}
 }

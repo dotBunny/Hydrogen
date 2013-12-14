@@ -73,7 +73,8 @@ namespace Hydrogen.Core
 
 				public bool IsLoaded (AudioClip clip)
 				{
-						return _loadedItems.ContainsKey (clip.name);
+						return clip != null && _loadedItems.ContainsKey (clip.name);
+
 				}
 
 				/// <summary>
@@ -83,27 +84,27 @@ namespace Hydrogen.Core
 				/// <param name="item">Target AudioStackItem.</param>
 				public bool IsLoaded (AudioStackItem item)
 				{
-						return IsLoaded (item.Key);
+						return item != null && IsLoaded (item.Key);
 				}
 
 				public bool IsLoaded (string key)
 				{
-						return _loadedItems.ContainsKey (key);
+						return key != null && _loadedItems.ContainsKey (key);
 				}
 
 				public bool IsPlaying (AudioClip clip)
-				{
+				{	
 						return IsLoaded (clip.name) && _loadedItems [clip.name].Source.isPlaying;
 				}
 
 				public bool IsPlaying (AudioStackItem item)
 				{
-						return item.Source != null && item.Source.isPlaying;
+						return item != null && item.Source != null && item.Source.isPlaying;
 				}
 
 				public bool IsPlaying (string key)
 				{
-						return IsLoaded (key) && _loadedItems [key].Source.isPlaying;
+						return key != null && IsLoaded (key) && _loadedItems [key].Source.isPlaying;
 				}
 
 				public string Add (AudioClip clip)
