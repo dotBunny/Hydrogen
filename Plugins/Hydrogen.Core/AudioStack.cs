@@ -131,8 +131,8 @@ namespace Hydrogen.Core
 								_loadedItems [item.Key].Loop = item.Loop;
 								_loadedItems [item.Key].PlayOnLoad = item.PlayOnLoad;
 
-								_loadedItems [item.Key].FadeInTime = item.FadeInTime;
-								_loadedItems [item.Key].FadeOutTime = item.FadeOutTime;
+								_loadedItems [item.Key].FadeInSpeed = item.FadeInSpeed;
+								_loadedItems [item.Key].FadeOutSpeed = item.FadeOutSpeed;
 								_loadedItems [item.Key].Persistant = item.Persistant;
 								_loadedItems [item.Key].TargetVolume = item.TargetVolume;
 								_loadedItems [item.Key].StartVolume = item.StartVolume;

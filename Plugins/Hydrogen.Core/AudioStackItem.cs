@@ -47,13 +47,13 @@ namespace Hydrogen.Core
 				/// </remarks>
 				public string Key;
 				/// <summary>
-				/// Duration of time to use when fading in an AudioClip.
+				/// /// Fade In Speed, used in a Lerp.
 				/// </summary>
-				public float FadeInTime = 4.5f;
+				public float FadeInSpeed = 4.5f;
 				/// <summary>
-				/// Duration of time to use when fading out an AudioClip.
+				/// Fade Out Speed, used in a Lerp.
 				/// </summary>
-				public float FadeOutTime = 5.0f;
+				public float FadeOutSpeed = 5.0f;
 				/// <summary>
 				/// Should the AudioSource fade between volume levels?
 				/// </summary>
@@ -125,10 +125,10 @@ namespace Hydrogen.Core
 								if (Fade) {
 										if (Source.volume > TargetVolume) {
 												Source.volume = 
-														Mathf.Lerp (Source.volume, TargetVolume, FadeOutTime * Time.deltaTime);
+														Mathf.Lerp (Source.volume, TargetVolume, FadeOutSpeed * Time.deltaTime);
 										} else {
 												Source.volume = 
-														Mathf.Lerp (Source.volume, TargetVolume, FadeInTime * Time.deltaTime);
+														Mathf.Lerp (Source.volume, TargetVolume, FadeInSpeed * Time.deltaTime);
 										}
 								} else {
 										Source.volume = TargetVolume;
