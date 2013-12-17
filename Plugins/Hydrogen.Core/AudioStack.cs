@@ -47,6 +47,12 @@ namespace Hydrogen.Core
 				/// </summary>
 				public int MaximumSources = 20;
 				/// <summary>
+				/// Should the stack look at the priority of the existing Audio Stack Items playing, and if the stack is
+				/// full stop the lowest and use it's newly available source to play the new item.
+				/// </summary>
+				/// <remarks>This will ignore any playing sources that are set to loop.</remarks>
+				public bool UsePriorities = false;
+				/// <summary>
 				/// A Stack of Audio Sources
 				/// </summary>
 				Stack _audioSources;
@@ -137,6 +143,11 @@ namespace Hydrogen.Core
 								_loadedItems [item.Key].TargetVolume = item.TargetVolume;
 								_loadedItems [item.Key].StartVolume = item.StartVolume;
 								_loadedItems [item.Key].RemoveAfterFadeOut = item.RemoveAfterFadeOut;
+								_loadedItems [item.Key].Priority = item.Priority;
+
+								if (_loadedItems [item.Key].Source != null) {
+										_loadedItems [item.Key].Source.priority = item.Priority;
+								}
 
 						} else {
 
@@ -171,6 +182,7 @@ namespace Hydrogen.Core
 										item.Source.clip = item.Clip;
 										item.Source.volume = item.StartVolume;
 										item.Source.loop = item.Loop;
+										item.Source.priority = item.Priority;
 
 										// Auto Play Stuff
 										if (item.PlayOnLoad) {
@@ -179,8 +191,27 @@ namespace Hydrogen.Core
 
 										_loadedItems.Add (item.Key, item);
 
+								} else if (_audioSources.Count <= 0 && UsePriorities) {
+
+										// Find our sucker to replace.
+										//TODO: Maybe we can search for how long a track has already played
+										AudioStackItem replaceItem = item;
+										foreach (string s in _loadedItems.Keys.ToList()) {
+												if (_loadedItems [s].Priority < replaceItem.Priority &&
+												    !_loadedItems [s].Loop) {
+														replaceItem = _loadedItems [s];
+												}
+										}
+
+										// Did any thing qualify?
+										if (replaceItem != item) {
+												Remove (replaceItem);
+												Add (item);
+										} else {
+												Debug.Log ("[H] No available Audio Sources from the AudioStack to use, even when prioritized.");
+										}
 								} else {
-										Debug.Log ("[H] No available Audio Sources for AudioStack to use.");
+										Debug.Log ("[H] No available Audio Sources from the AudioStack to use.");
 								}
 						}
 
@@ -246,6 +277,9 @@ namespace Hydrogen.Core
 				/// <summary>
 				/// Unity's Update Event
 				/// </summary>
+				/// <remarks>>
+				/// This neeeds to be executed to handle processing the Audio Sources correctly.
+				/// </remarks>
 				protected virtual void Update ()
 				{
 						foreach (string s in _loadedItems.Keys.ToList()) {

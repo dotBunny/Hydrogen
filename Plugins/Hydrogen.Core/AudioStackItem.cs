@@ -67,13 +67,17 @@ namespace Hydrogen.Core
 				/// </summary>
 				public float MaxVolume = 1f;
 				/// <summary>
+				/// Do not remove the AudioItem when finished playing, useful for menu clicks etc
+				/// </summary>
+				public bool Persistant;
+				/// <summary>
 				/// Should the Audio Clip be played automatically upon load?
 				/// </summary>
 				public bool PlayOnLoad = true;
 				/// <summary>
-				/// Do not remove the AudioItem when finished playing, useful for menu clicks etc
+				/// The priority that this Audio Stack Item takes over all other sounds playing through the stack.
 				/// </summary>
-				public bool Persistant;
+				public int Priority = 128;
 				/// <summary>
 				/// Should the AudioPoolItem be destroyed, freeing it's AudioSource when it's volume reaches 0 after fading
 				/// </summary>
@@ -81,13 +85,16 @@ namespace Hydrogen.Core
 				/// <summary>
 				/// The AudioSource associated to this AudioStackItem.
 				/// </summary>
+				/// <remarks>
+				/// Shouldn't really be playing with this.
+				/// </remarks>
 				[System.NonSerialized]
-				public AudioSource Source;
+				internal AudioSource Source;
 				/// <summary>
 				/// Reference to the parent stack.
 				/// </summary>
 				[System.NonSerialized]
-				public AudioStack Stack;
+				internal AudioStack Stack;
 				/// <summary>
 				/// The volume to use when the sound is first played.
 				/// </summary>
@@ -107,10 +114,24 @@ namespace Hydrogen.Core
 						Key = clip.name;
 				}
 
+				public AudioStackItem (AudioClip clip, bool loop)
+				{
+						Clip = clip;
+						Key = clip.name;
+						Loop = loop;
+				}
+
 				public AudioStackItem (AudioClip clip, string key)
 				{
 						Clip = clip;
 						Key = key;
+				}
+
+				public AudioStackItem (AudioClip clip, string key, bool loop)
+				{
+						Clip = clip;
+						Key = key;
+						Loop = loop;
 				}
 
 				public void Process ()
