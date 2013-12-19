@@ -13,6 +13,7 @@ base_url: "../"
     <div class="page-header">
       <h1 id="plugins-testflight">TestFlight</h1>
     </div>
+    <div class="lead">An automatic installation paired with a robust implementation. What could be more awesome? OK fine, we will start to think about including a "Make Game" button.</div>
 	<ol class="breadcrumb">
 	  <li>Components</li>
 	  <li>Hydrogen.Plugins</li>
@@ -114,7 +115,7 @@ base_url: "../"
 								<img class="thumbnail" src="/assets/img/com-testflight-install-ios-apptoken.jpg" alt="TestFlight - iOS AppToken">
 							</div>
 							<div class="media-body">
-								<p>The next thing you need to do is make sure that TestFlight is ready to receive data from your application. This entails making sure you've created an App on their end and have put in the correct Bundle Identifier (found in the <a href="http://docs.unity3d.com/Documentation/Manual/class-PlayerSettings.html" target="_blank">Unity's Player Settings</a>).</p>
+								<p>The next thing you need to do is make sure that TestFlight is ready to receive data from your application. This entails making sure you've <a href="https://www.testflightapp.com/dashboard/applications/create/" target="_blank">created an App</a> on their end and have put in the correct Bundle Identifier (found in the <a href="http://docs.unity3d.com/Documentation/Manual/class-PlayerSettings.html" target="_blank">Unity's Player Settings</a>).</p>
 								<p>Once you have the App created with TestFlight you will be able to get access to the generated <em>App Token</em>. This is going to be used in the next step, so keep the window open and handy.</p>
 							</div>
 					</div>
@@ -216,7 +217,7 @@ base_url: "../"
 								<img class="thumbnail" src="/assets/img/com-testflight-install-android-apptoken.jpg" alt="TestFlight - Android AppToken">
 							</div>
 							<div class="media-body">
-								<p>The next thing you need to do is make sure that TestFlight is ready to receive data from your application. This entails making sure you've created an App on their end and have put in the correct Bundle Identifier (found in the <a href="http://docs.unity3d.com/Documentation/Manual/class-PlayerSettings.html" target="_blank">Unity's Player Settings</a>).</p>
+								<p>The next thing you need to do is make sure that TestFlight is ready to receive data from your application. This entails making sure you've <a href="https://www.testflightapp.com/dashboard/applications/create/" target="_blank">created an App</a> on their end and have put in the correct Bundle Identifier (found in the <a href="http://docs.unity3d.com/Documentation/Manual/class-PlayerSettings.html" target="_blank">Unity's Player Settings</a>).</p>
 								<p>Once you have the App created with TestFlight you will be able to get access to the generated <em>App Token</em>. This is going to be used in the next step, so keep the window open and handy.</p>
 							</div>
 					</div>
@@ -252,9 +253,36 @@ base_url: "../"
 		
 
     <h2 id="plugins-testflight-usage">Usage</h2>
-
+	<p>Now that you have gotten all the installation done, it's time to start rocking away with the actual component! For the sake of documentation it is assumed that you are using the provided hTestFlight component. If you have implemented your own version of the <code>Hydrogen.Plugins.TestFlight</code> class its safe to say that you may not really need to look over these next few sections.</p>
     <h3 id="plugins-testflight-usage-methods">Public Fields</h3>
-    <p>That is the question</p>
+    <div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Name</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+	          	<tr>
+	            	<td><a href="{{site.type_bool}}" target="_blank">bool</a></td>
+					<td>Presistant</td>
+					<td>Should the hTestFlight instance (and it's GameObject) survive scene switches by using <a href="http://docs.unity3d.com/Documentation/ScriptReference/Object.DontDestroyOnLoad.html" target="_blank">GameObject.DontDestroyOnLoad</a>. This will preserve all scripts on its GameObject as well, so please be aware of that behaviour.</td>
+				</tr>
+				<tr>
+	            	<td><a href="{{site.type_string}}" target="_blank">string</a></td>
+					<td>TokenIOS</td>
+					<td>The generated App Token for the iOS App registered with TestFlight. You can find this token mentioned in the above <a href="#plugins-testflight-install-ios">iOS Checklist Step 3</a>.</td>					
+				</tr>
+				<tr>
+	            	<td><a href="{{site.type_string}}" target="_blank">string</a></td>
+					<td>TokenAndroid</td>
+					<td>The generated App Token for the Android App registered with TestFlight. You can find this token mentioned in the above <a href="#plugins-testflight-install-android">Android Checklist Step 3</a>.</td>
+				</tr>
+			</tbody>
+		</table>
+  	</div>
     <h3 id="plugins-testflight-usage-methods">Methods</h3>
     <p>That is the question</p>
     <h2 id="plugins-testflight-faq">FAQ</h2>

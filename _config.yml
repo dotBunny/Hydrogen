@@ -39,3 +39,7 @@ blog:             http://dotbunny.com/blog
 cdn_css:          //netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css
 cdn_theme_css:    //netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css
 cdn_js:           //netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js
+
+
+type_string:		http://msdn.microsoft.com/en-us/library/362314fe.aspx
+type_bool:			http://msdn.microsoft.com/en-us/library/c8f5xwh7.aspx
