@@ -305,13 +305,22 @@ base_url: "../"
 		</table>
   	</div>
     <h3 id="plugins-testflight-usage-methods">Public Methods</h3>
-    <h4>static bool Exists ()</h4>
-    <h4>void AddCustomEnvironmentInformation (string key, string data)</h4>
-    <h4>IEnumerator Initialize ()</h4>
-    <h4>void Log (string message)</h4>
-	<h4>void LogAsync (string message)</h4>
-	<h4>void PassCheckpoint (string checkpointName)</h4>
-	<h4>void SubmitFeedback (string message)</h4>
+    <h4>static <a href="{{site.type_bool}}" target="_blank">bool</a> Exists ()</h4>
+    {% highlight csharp %}
+if ( hTestFlight.Exists () ) {
+	Debug.Log ("TestFlight Already Exists");
+}{% endhighlight %}
+    <h4>void AddCustomEnvironmentInformation (<a href="{{site.type_string}}" target="_blank">string</a> key, <a href="{{site.type_string}}" target="_blank">string</a> data)</h4>
+    {% highlight csharp %}hTestFlight.Instance.AddCustomEnvironmentInformation ("User", "Batman");{% endhighlight %}
+    <h4>void Log (<a href="{{site.type_string}}" target="_blank">string</a> message)</h4>
+    {% highlight csharp %}hTestFlight.Instance.Log ("Error! Batman Doesn't Have A Repellant For This!");{% endhighlight %}
+	<h4>void LogAsync (<a href="{{site.type_string}}" target="_blank">string</a> message)</h4>
+	{% highlight csharp %}hTestFlight.Instance.LogAsync ("Error! Too Much Asynchronous Awesomeness");{% endhighlight %}
+	<h4>void PassCheckpoint (<a href="{{site.type_string}}" target="_blank">string</a> checkpoint)</h4>
+	{% highlight csharp %}hTestFlight.Instance.PassCheckpoint ("Level 1 - Completed");{% endhighlight %}
+	<h4>void SubmitFeedback (<a href="{{site.type_string}}" target="_blank">string</a> message)</h4>
+	{% highlight csharp %}hTestFlight.Instance.SubmitFeedback ("I loved your app! It's AWESOME! SHUT UP AND TAKE MY MONEY!");{% endhighlight %}
+
     <h2 id="plugins-testflight-faq">FAQ</h2>
     <p>None yet!</p>    
     
