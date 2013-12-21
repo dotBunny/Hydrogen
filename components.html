@@ -21,7 +21,7 @@ base_url: "../"
 	</ol>
     <h2 id="plugins-testflight-overview">Overview</h2>
      <blockquote>
-    <p>TestFlight is a free platform used to distribute beta and internal iOS/Android applications to team members over-the-air. Developers can manage beta testing campaigns and receive feedback from their team with TestFlight's dashboard. With the TestFlight SDK implemented in an application, users can acquire more metrics on how and what testers are doing when testing an application on their device.</p>
+    <p>TestFlight is a free platform used to distribute beta and internal <strong>iOS/Android applications</strong> to team members over-the-air. Developers can manage beta testing campaigns and receive feedback from their team with TestFlight's dashboard. With the TestFlight SDK implemented in an application, users can acquire more metrics on how and what testers are doing when testing an application on their device.</p>
   	<small><a href="http://help.testflightapp.com/customer/portal/articles/821656-what-is-testflight-" target="_blank">TestFlight Documentation</a></small>
   </blockquote>
   <p>With that much awesomeness bundled into one package we felt the need to make sure that every Unity developer was able to easily integrate and deploy with TestFlight. Hydrogen's TestFlight component (and supporting scripts) work on the principle of handling as much of the grunt work as possible, allowing you to focus on more important tasks; like making an awesome game.</p>
@@ -307,7 +307,7 @@ base_url: "../"
     <h3 id="plugins-testflight-usage-methods">Public Methods</h3>
     
     <!-- hTestFlight.Exists -->
-    <h4>static {{site.type_bool}} Exists ()</h4>
+    <h4>{{site.type_static}} {{site.type_bool}} Exists ()</h4>
     Does a TestFlight manager instance exist?
 	<div class="bs-arguments text-muted">
      None
@@ -346,7 +346,7 @@ if ( hTestFlight.Exists () ) {
 	</div>  
     
     <!-- hTestFlight.Instance.AddCustomEnvironmentInformation -->
-    <h4>void AddCustomEnvironmentInformation ({{site.type_string}} key, {{site.type_string}} data) <span class="label label-primary">iOS ONLY</span></h4>
+    <h4>{{site.type_void}} AddCustomEnvironmentInformation ({{site.type_string}} key, {{site.type_string}} data) <span class="label label-primary">iOS ONLY</span></h4>
     Adds an entry into the Key-Value store for this TestFlight session.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -388,7 +388,7 @@ if ( userName == "Batman" ) {
 	</div>  	
 
 	<!-- hTestFlight.Instance.Log -->
-    <h4>void Log ({{site.type_string}} message)</h4>
+    <h4>{{site.type_void}} Log ({{site.type_string}} message)</h4>
    Send a message to TestFlight to appear in it's console.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -426,7 +426,7 @@ if ( batRepellent <= 0 ) {
     
     
 	<!-- hTestFlight.Instance.LogAsync -->
-	<h4>void LogAsync ({{site.type_string}} message) <span class="label label-primary">iOS ONLY</h4>
+	<h4>{{site.type_void}} LogAsync ({{site.type_string}} message) <span class="label label-primary">iOS ONLY</h4>
 	Send a message to TestFlight asynchronously to appear in it's console.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -462,7 +462,7 @@ if ( !moreBatRepellent ) {
 	</div>
 
 	<!-- hTestFlight.Instance.PassCheckpoint -->
-	<h4>void PassCheckpoint ({{site.type_string}} checkpoint)</h4>
+	<h4>{{site.type_void}} PassCheckpoint ({{site.type_string}} checkpoint)</h4>
 	Report to TestFlight that the session has passed a Checkpoint.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -510,7 +510,7 @@ hTestFlight.Instance.PassChcckpoint ("Batman Pressed The Button 100 Times");
 	</div>
 	
 	<!-- hTestFlight.Instance.SubmitFeedback -->
-	<h4>void SubmitFeedback ({{site.type_string}} message) <span class="label label-primary">iOS ONLY</h4>
+	<h4>{{site.type_void}} SubmitFeedback ({{site.type_string}} message) <span class="label label-primary">iOS ONLY</h4>
 	Submits a feedback message for the App to TestFlight.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -535,6 +535,7 @@ hTestFlight.Instance.PassChcckpoint ("Batman Pressed The Button 100 Times");
 // Example Data
 string userFeedback = "I loved your app! It's AWESOME! SHUT UP AND TAKE MY MONEY!";
 
+// Do we have any feedback?
 if ( !string.IsNullOrEmpty (userFeedback) ) {
 	hTestFlight.Instance.SubmitFeedback (userFeedback);
 }
