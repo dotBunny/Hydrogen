@@ -123,28 +123,6 @@ public sealed class hTestFlight : MonoBehaviour
 		}
 
 		/// <summary>
-		/// Initialize our TestFlight plugin with the appropriate settings.
-		/// </summary>
-		public IEnumerator Initialize ()
-		{
-				// Depending on the platform there are some things that need to be handled before we can 
-				// take off and start submitting data
-				Hydrogen.Plugins.TestFlight.Initialize ();
-		
-				// Issue the appropriate "takeoff" token
-#if (UNITY_IPHONE || UNITY_IOS) && !UNITY_EDITOR
-				Hydrogen.Plugins.TestFlight.TakeOff(TokenIOS);
-#elif UNITY_ANDROID && !UNITY_EDITOR
-				Hydrogen.Plugins.TestFlight.TakeOff(TokenAndroid);
-#endif
-				// Wait for the end of the frame for kicks
-				yield return new WaitForEndOfFrame ();
-
-				// Start up our session captain!
-				Hydrogen.Plugins.TestFlight.StartSession ();
-		}
-
-		/// <summary>
 		/// Send a message to TestFlight to appear in it's console.
 		/// </summary>
 		/// <param name="message">The Message.</param>
@@ -183,8 +161,8 @@ public sealed class hTestFlight : MonoBehaviour
 		/// <summary>
 		/// Report to TestFlight that the session has passed a Checkpoint.
 		/// </summary>
-		/// <param name="checkpointName">The Checkpoint name.</param>
-		public void PassCheckpoint (string checkpointName)
+		/// <param name="checkpoint">The Checkpoint name.</param>
+		public void PassCheckpoint (string checkpoint)
 		{
 				// Make sure that we are infact flying and there is a session present, if not we'll dump out a 
 				// message to console if on a platform where this should have worked.
@@ -195,11 +173,11 @@ public sealed class hTestFlight : MonoBehaviour
 						return;
 				}
 
-				Hydrogen.Plugins.TestFlight.PassCheckpoint (checkpointName);
+				Hydrogen.Plugins.TestFlight.PassCheckpoint (checkpoint);
 		}
 
 		/// <summary>
-		/// Submits the feedback.
+		/// Submits a feedback message for the App to TestFlight.
 		/// </summary>
 		/// <param name="message">The feedback message.</param>
 		public void SubmitFeedback (string message)
@@ -207,9 +185,9 @@ public sealed class hTestFlight : MonoBehaviour
 				// Make sure that we are infact flying and there is a session present, if not we'll dump out a 
 				// message to console if on a platform where this should have worked.
 				if (!Hydrogen.Plugins.TestFlight.Flying || !Hydrogen.Plugins.TestFlight.Session) {
-#if (UNITY_IPHONE || UNITY_IOS || UNITY_ANDROID) && !UNITY_EDITOR
+						#if (UNITY_IPHONE || UNITY_IOS || UNITY_ANDROID) && !UNITY_EDITOR
 						Debug.Log ("Unable to submit feedback, TestFlight is not in flight.");
-#endif
+						#endif
 						return;
 				}
 
@@ -250,5 +228,32 @@ public sealed class hTestFlight : MonoBehaviour
 
 				// Let's get this party started, but in a somewhat safe manner
 				StartCoroutine (Initialize ());
+		}
+
+		/// <summary>
+		/// Initialize our TestFlight plugin with the appropriate settings.
+		/// </summary>
+		IEnumerator Initialize ()
+		{
+				if (!Hydrogen.Plugins.TestFlight.Flying) {
+						// Depending on the platform there are some things that need to be handled before we can 
+						// take off and start submitting data
+						Hydrogen.Plugins.TestFlight.Initialize ();
+
+						// Issue the appropriate "takeoff" token
+						#if (UNITY_IPHONE || UNITY_IOS) && !UNITY_EDITOR
+						Hydrogen.Plugins.TestFlight.TakeOff(TokenIOS);
+						#elif UNITY_ANDROID && !UNITY_EDITOR
+						Hydrogen.Plugins.TestFlight.TakeOff(TokenAndroid);
+						#endif
+				}
+
+				// Wait for the end of the frame for kicks
+				yield return new WaitForEndOfFrame ();
+
+				if (!Hydrogen.Plugins.TestFlight.Session) {
+						// Start up our session captain!
+						Hydrogen.Plugins.TestFlight.StartSession ();
+				}
 		}
 }
