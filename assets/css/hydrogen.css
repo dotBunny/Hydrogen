@@ -1,0 +1,328 @@
+/*
+ * Arguments
+ *
+ * Isolated sections of example content for each component or feature. Usually
+ * followed by a code snippet.
+ */
+
+.bs-arguments {
+  position: relative;
+  padding: 45px 15px 15px;
+  margin: 15px -15px 15px -15px;
+  border-color: #e5e5e5 #eee #eee;
+  border-width: 1px 0;
+}
+/* Echo out a label for the example */
+.bs-arguments:after {
+  content: "Arguments";
+  position: absolute;
+  top:  15px;
+  left: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #bbb;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.method {
+box-shadow: none;
+
+}
+
+.return {
+  	box-shadow: none;
+  	position: relative;
+  	padding: 45px 15px 15px;
+  	margin: 15px 15px 15px 15px;
+  	border-color: #e5e5e5 #eee #eee;
+  	border-style: solid;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+}
+
+.return table {
+	margin-bottom: 0px;
+}
+
+/* Echo out a label for the example */
+.return:after {
+  content: "Return";
+  position: absolute;
+  top:  15px;
+  left: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #bbb;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Tweak display of the code snippets when following an example */
+.bs-arguments + .method {
+  margin: -15px -15px 15px;
+  border-radius: 0;
+  border-width: 0 0 1px;
+}
+
+.method + .return {
+  margin: -15px -15px 15px;
+  border-radius: 0;
+  border-width: 0 0 1px;
+}
+
+
+/* Make the examples and snippets not full-width */
+@media (min-width: 768px) {
+  .bs-arguments {
+    margin-left: 0;
+    margin-right: 0;
+    border-style: solid;
+    background-color: #fff;
+    border-width: 1px;
+    border-color: #ddd;
+    border-radius: 4px 4px 0 0;
+    box-shadow: none;
+  }
+  .bs-arguments + .method {
+    margin-top: -16px;
+    margin-left: 0;
+    margin-right: 0;
+    border-width: 1px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	  box-shadow: none;
+  }
+  
+  .method + .return {
+	margin-top: -16px;
+    margin-left: 0;
+    margin-right: 0;
+    border-width: 1px;
+    border-top-left-radius: 0px;
+	border-top-left-radius: 0px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+      box-shadow: none;
+  }
+}
+
+/* Undo width of container */
+.bs-arguments .container {
+  width: auto;
+}
+
+/* Tweak content of examples for optimum awesome */
+.bs-arguments > p:last-child,
+.bs-arguments > ul:last-child,
+.bs-arguments > ol:last-child,
+.bs-arguments > blockquote:last-child,
+.bs-arguments > .form-control:last-child,
+.bs-arguments > .table:last-child,
+.bs-arguments > .navbar:last-child,
+.bs-arguments > .jumbotron:last-child,
+.bs-arguments > .alert:last-child,
+.bs-arguments > .panel:last-child,
+.bs-arguments > .list-group:last-child,
+.bs-arguments > .well:last-child,
+.bs-arguments > .progress:last-child,
+.bs-arguments > .table-responsive:last-child > .table {
+  margin-bottom: 0;
+}
+.bs-arguments > p > .close {
+  float: none;
+}
+
+/* Typography */
+.bs-arguments-type .table .info {
+  color: #999;
+  vertical-align: middle;
+}
+.bs-arguments-type .table td {
+  padding: 15px 0;
+  border-color: #eee;
+}
+.bs-arguments-type .table tr:first-child td {
+  border-top: 0;
+}
+.bs-arguments-type h1,
+.bs-arguments-type h2,
+.bs-arguments-type h3,
+.bs-arguments-type h4,
+.bs-arguments-type h5,
+.bs-arguments-type h6 {
+  margin: 0;
+}
+
+/* Images */
+.bs-arguments > .img-circle,
+.bs-arguments > .img-rounded,
+.bs-arguments > .img-thumbnail {
+  margin: 5px;
+}
+
+/* Tables */
+.bs-arguments > .table-responsive > .table {
+  background-color: #fff;
+}
+
+/* Buttons */
+.bs-arguments > .btn,
+.bs-arguments > .btn-group {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.bs-arguments > .btn-toolbar + .btn-toolbar {
+  margin-top: 10px;
+}
+
+/* Forms */
+.bs-arguments-control-sizing select,
+.bs-arguments-control-sizing input[type="text"] + input[type="text"] {
+  margin-top: 10px;
+}
+.bs-arguments-form .input-group {
+  margin-bottom: 10px;
+}
+.bs-arguments > textarea.form-control {
+  resize: vertical;
+}
+
+/* List groups */
+.bs-arguments > .list-group {
+  max-width: 400px;
+}
+
+/* Navbars */
+.bs-arguments .navbar:last-child {
+  margin-bottom: 0;
+}
+.bs-navbar-top-example,
+.bs-navbar-bottom-example {
+  z-index: 1;
+  padding: 0;
+  overflow: hidden; /* cut the drop shadows off */
+}
+.bs-navbar-top-example .navbar-header,
+.bs-navbar-bottom-example .navbar-header {
+  margin-left: 0;
+}
+.bs-navbar-top-example .navbar-fixed-top,
+.bs-navbar-bottom-example .navbar-fixed-bottom {
+  position: relative;
+  margin-left: 0;
+  margin-right: 0;
+}
+.bs-navbar-top-example {
+  padding-bottom: 45px;
+}
+.bs-navbar-top-example:after {
+  top: auto;
+  bottom: 15px;
+}
+.bs-navbar-top-example .navbar-fixed-top {
+  top: -1px;
+}
+.bs-navbar-bottom-example {
+  padding-top: 45px;
+}
+.bs-navbar-bottom-example .navbar-fixed-bottom {
+  bottom: -1px;
+}
+.bs-navbar-bottom-example .navbar {
+  margin-bottom: 0;
+}
+@media (min-width: 768px) {
+  .bs-navbar-top-example .navbar-fixed-top,
+  .bs-navbar-bottom-example .navbar-fixed-bottom {
+    position: absolute;
+  }
+  .bs-navbar-top-example {
+    border-radius: 0 0 4px 4px;
+  }
+  .bs-navbar-bottom-example {
+    border-radius: 4px 4px 0 0;
+  }
+}
+
+/* Pagination */
+.bs-arguments .pagination {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Pager */
+.bs-arguments > .pager {
+  margin-top: 0;
+}
+
+/* Example modals */
+.bs-arguments-modal {
+  background-color: #f5f5f5;
+}
+.bs-arguments-modal .modal {
+  position: relative;
+  top: auto;
+  right: auto;
+  left: auto;
+  bottom: auto;
+  z-index: 1;
+  display: block;
+}
+.bs-arguments-modal .modal-dialog {
+  left: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Example dropdowns */
+.bs-arguments > .dropdown > .dropdown-menu {
+  position: static;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Example tabbable tabs */
+.bs-arguments-tabs .nav-tabs {
+  margin-bottom: 15px;
+}
+
+/* Tooltips */
+.bs-arguments-tooltips {
+  text-align: center;
+}
+.bs-arguments-tooltips > .btn {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* Popovers */
+.bs-arguments-popover {
+  padding-bottom: 24px;
+  background-color: #f9f9f9;
+}
+.bs-arguments-popover .popover {
+  position: relative;
+  display: block;
+  float: left;
+  width: 260px;
+  margin: 20px;
+}
+
+
+/*
+ * Code snippets
+ *
+ * Generated via Pygments and Jekyll, these are snippets of HTML, CSS, and JS.
+ */
+.method .highlight
+{
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+

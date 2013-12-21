@@ -266,17 +266,17 @@ base_url: "../"
 			</thead>
 			<tbody>
 	          	<tr>
-	            	<td><a href="{{site.type_bool}}" target="_blank">bool</a></td>
+	            	<td>{{site.type_bool}}</td>
 					<td>Presistant</td>
 					<td>Should the hTestFlight instance (and it's GameObject) survive scene switches by using <a href="http://docs.unity3d.com/Documentation/ScriptReference/Object.DontDestroyOnLoad.html" target="_blank">GameObject.DontDestroyOnLoad</a>. This will preserve all scripts on its GameObject as well, so please be aware of that behaviour.</td>
 				</tr>
 				<tr>
-	            	<td><a href="{{site.type_string}}" target="_blank">string</a></td>
+	            	<td>{{site.type_string}}</td>
 					<td>TokenIOS</td>
 					<td>The generated App Token for the iOS App registered with TestFlight. You can find this token mentioned in the above <a href="#plugins-testflight-install-ios">iOS Checklist Step 3</a>.</td>					
 				</tr>
 				<tr>
-	            	<td><a href="{{site.type_string}}" target="_blank">string</a></td>
+	            	<td>{{site.type_string}}</td>
 					<td>TokenAndroid</td>
 					<td>The generated App Token for the Android App registered with TestFlight. You can find this token mentioned in the above <a href="#plugins-testflight-install-android">Android Checklist Step 3</a>.</td>
 				</tr>
@@ -305,25 +305,242 @@ base_url: "../"
 		</table>
   	</div>
     <h3 id="plugins-testflight-usage-methods">Public Methods</h3>
-    <h4>static <a href="{{site.type_bool}}" target="_blank">bool</a> Exists ()</h4>
-    {% highlight csharp %}
-if ( hTestFlight.Exists () ) {
-	Debug.Log ("TestFlight Already Exists");
-}{% endhighlight %}
-    <h4>void AddCustomEnvironmentInformation (<a href="{{site.type_string}}" target="_blank">string</a> key, <a href="{{site.type_string}}" target="_blank">string</a> data)</h4>
-    {% highlight csharp %}hTestFlight.Instance.AddCustomEnvironmentInformation ("User", "Batman");{% endhighlight %}
-    <h4>void Log (<a href="{{site.type_string}}" target="_blank">string</a> message)</h4>
-    {% highlight csharp %}hTestFlight.Instance.Log ("Error! Batman Doesn't Have A Repellant For This!");{% endhighlight %}
-	<h4>void LogAsync (<a href="{{site.type_string}}" target="_blank">string</a> message)</h4>
-	{% highlight csharp %}hTestFlight.Instance.LogAsync ("Error! Too Much Asynchronous Awesomeness");{% endhighlight %}
-	<h4>void PassCheckpoint (<a href="{{site.type_string}}" target="_blank">string</a> checkpoint)</h4>
-	{% highlight csharp %}hTestFlight.Instance.PassCheckpoint ("Level 1 - Completed");{% endhighlight %}
-	<h4>void SubmitFeedback (<a href="{{site.type_string}}" target="_blank">string</a> message)</h4>
-	{% highlight csharp %}hTestFlight.Instance.SubmitFeedback ("I loved your app! It's AWESOME! SHUT UP AND TAKE MY MONEY!");{% endhighlight %}
-
-    <h2 id="plugins-testflight-faq">FAQ</h2>
-    <p>None yet!</p>    
     
+    <!-- hTestFlight.Exists -->
+    <h4>static {{site.type_bool}} Exists ()</h4>
+    Does a TestFlight manager instance exist?
+	<div class="bs-arguments text-muted">
+     None
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Let's see if we are using the hTestFlight component.
+if ( hTestFlight.Exists () ) {
+	// Yes - We are that awesome.
+	Debug.Log ("TestFlight Already Exists");
+}
+{% endhighlight %}
+	</div>  
+	<div class="return">
+		 <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_bool}}</td>
+            <td class="text-success">true</td>
+            <td>An instance of hTestFlight already exists. This can be handy to simply check from other classes if hTestFlight is being used, for piping debug output to TestFlight for example.</td>        
+          </tr>
+          <tr>
+            <td>{{site.type_bool}}</td>
+            <td class="text-danger">false</td>
+            <td>An instance of hTestFlight does not exist, and therefore must be created or instantiated via a prefab.</td>
+          </tr>
+        </tbody>
+      </table>
+	</div>  
+    
+    <!-- hTestFlight.Instance.AddCustomEnvironmentInformation -->
+    <h4>void AddCustomEnvironmentInformation ({{site.type_string}} key, {{site.type_string}} data) <span class="label label-primary">iOS ONLY</span></h4>
+    Adds an entry into the Key-Value store for this TestFlight session.
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>key</td>
+            <td>The Key</td>          
+          </tr>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>data</td>
+            <td>The Data</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Example Data
+string userName = "Batman";
+
+// Somehow we've managed to detected that Batman is our user.
+if ( userName == "Batman" ) {
+	// We need to report this ... RIGHT NOW!
+	hTestFlight.Instance.AddCustomEnvironmentInformation ("User", userName);
+}
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>  	
+
+	<!-- hTestFlight.Instance.Log -->
+    <h4>void Log ({{site.type_string}} message)</h4>
+   Send a message to TestFlight to appear in it's console.
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>message</td>
+            <td>The message to be sent to and logged by TestFlight. </td>          
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Example Data
+int batRepellent;
+
+// Does Batman have repellent?
+if ( batRepellent <= 0 ) {
+	hTestFlight.Instance.Log ("Error! Batman Doesn't Have A Repellent For This!");
+}
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>  
+    
+    
+    
+	<!-- hTestFlight.Instance.LogAsync -->
+	<h4>void LogAsync ({{site.type_string}} message) <span class="label label-primary">iOS ONLY</h4>
+	Send a message to TestFlight asynchronously to appear in it's console.
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>message</td>
+            <td>The message to be sent to and logged by TestFlight. </td>          
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Example Data
+bool moreBatRepellent;
+
+// Does Batman have more repellent?
+if ( !moreBatRepellent ) {
+	hTestFlight.Instance.LogAsync ("Error! Batman Doesn't Have More Repellent!");
+}
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>
+
+	<!-- hTestFlight.Instance.PassCheckpoint -->
+	<h4>void PassCheckpoint ({{site.type_string}} checkpoint)</h4>
+	Report to TestFlight that the session has passed a Checkpoint.
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>checkpoint</td>
+            <td>This is the checkpoint that should be reported to TestFlight. This can be any {{site.type_string}} that you want, but it is recommended that you stick to meaningful descriptive entries.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Example Data
+int buttonCount;
+bool buttonPressed;
+
+// Loop for no reason whatsoever
+while ( buttonCount < 100 ) 
+{
+	// Magic!
+	buttonPressed = true;
+	
+	// Did Batman press the button?
+	if ( buttonPressed) {
+		buttonCount++;
+		buttonPressed = false;
+	}
+}
+
+// Report that Batman has wasted time! and lots of it.
+hTestFlight.Instance.PassChcckpoint ("Batman Pressed The Button 100 Times");
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>
+	
+	<!-- hTestFlight.Instance.SubmitFeedback -->
+	<h4>void SubmitFeedback ({{site.type_string}} message) <span class="label label-primary">iOS ONLY</h4>
+	Submits a feedback message for the App to TestFlight.
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>message</td>
+            <td>User provided feedback on the current App, or your own if you want to have some fun.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Example Data
+string userFeedback = "I loved your app! It's AWESOME! SHUT UP AND TAKE MY MONEY!";
+
+if ( !string.IsNullOrEmpty (userFeedback) ) {
+	hTestFlight.Instance.SubmitFeedback (userFeedback);
+}
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>
   </div>
-  
-  

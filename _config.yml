@@ -41,5 +41,5 @@ cdn_theme_css:    //netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.
 cdn_js:           //netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js
 
 
-type_string:		http://msdn.microsoft.com/en-us/library/362314fe.aspx
-type_bool:			http://msdn.microsoft.com/en-us/library/c8f5xwh7.aspx
+type_string:	 <a href="http://msdn.microsoft.com/en-us/library/362314fe.aspx" target="_blank">string</a>
+type_bool:		<a href="http://msdn.microsoft.com/en-us/library/c8f5xwh7.aspx" target="_blank">bool</a>	
