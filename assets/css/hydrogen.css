@@ -325,3 +325,14 @@ box-shadow: none;
 	border-bottom-left-radius: 0px;
 	border-bottom-right-radius: 0px;
 }
+
+.bs-sidebar .nav .nav {
+	margin-bottom: 0px;
+}
+
+.bs-sidebar .nav .nav .nav > li > a {
+  padding-top:    3px;
+  padding-bottom: 3px;
+  padding-left: 40px;
+  font-size: 90%;
+}
