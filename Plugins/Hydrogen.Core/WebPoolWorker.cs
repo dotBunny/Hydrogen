@@ -95,11 +95,12 @@ namespace Hydrogen.Core
 								yield return new WaitForSeconds (0.01f);
 
 						// Callback! (Avoid Unity Bitching)
-						if (newCall.responseHeaders ["STATUS"].Contains (" 200 "))
-								callback (_hash, new Hashtable (newCall.responseHeaders), newCall.text);
-						else
-								callback (_hash, new Hashtable (newCall.responseHeaders), "");
-			
+						if (callback != null) {
+								if (newCall.responseHeaders ["STATUS"].Contains (" 200 "))
+										callback (_hash, new Hashtable (newCall.responseHeaders), newCall.text);
+								else
+										callback (_hash, new Hashtable (newCall.responseHeaders), "");
+						}
 						ParentPool.Despawn (gameObject);
 				}
 

@@ -28,10 +28,9 @@
 
 using UnityEngine;
 
-//#if (UNITY_IPHONE || UNITY_IOS) && !UNITY_EDITOR
+#if (UNITY_IPHONE || UNITY_IOS) && !UNITY_EDITOR
 using System.Runtime.InteropServices;
-
-//#endif
+#endif
 namespace Hydrogen.Plugins
 {
 		/// <summary>
@@ -125,6 +124,8 @@ namespace Hydrogen.Plugins
 
 
 
+
+
 #elif HYDROGEN_TESTFLIGHT && UNITY_ANDROID && !UNITY_EDITOR
 				static AndroidJavaClass _testFlight;
 				static AndroidJavaClass _unityPlayer;
@@ -181,6 +182,8 @@ namespace Hydrogen.Plugins
 						_testFlight.CallStatic ("startSession");
 						Session = true;
 				}
+
+
 
 
 

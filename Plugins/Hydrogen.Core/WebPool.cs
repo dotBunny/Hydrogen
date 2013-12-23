@@ -38,16 +38,25 @@ namespace Hydrogen.Core
 		[AddComponentMenu ("")]
 		public class WebPool : MonoBehaviour
 		{
+				/// <summary>
+				/// Has the WebPool initialized and is ready for use?
+				/// </summary>
 				bool _initialized;
+				/// <summary>
+				/// What is the ID of the ObjectPool being used for the WebPool
+				/// </summary>
 				int _poolID;
+				/// <summary>
+				/// Local reference to the ObjectPool in use.
+				/// </summary>
+				/// <remarks>>
+				/// System will detect the existence of another ObjectPool based system and use it.
+				/// </remarks>
 				ObjectPool _poolReference;
 
-				public struct FormBinaryData
+				public void GET (string URI)
 				{
-						public string FieldName;
-						public byte[] Data;
-						public string FileName;
-						public string MimeType;
+						GET (URI, null, null);
 				}
 
 				public void GET (string URI, System.Action<int, Hashtable, string> callback)
@@ -67,23 +76,6 @@ namespace Hydrogen.Core
 						go.GetComponent<WebPoolWorker> ().GET (URI, cookie, callback);
 				}
 
-				public void POST (string URI, string contentType, string payload)
-				{
-						POST (URI, contentType, payload, null, null);
-				}
-
-				public void POST (string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
-				{
-						if (!_initialized) {
-								Debug.LogError ("WebPool has not finished initializing ... " +
-								"Did you call this function without having either a WebPool or ObjectPool component " +
-								"already on a MonoBehaviour?");
-								return;
-						}
-						GameObject go = _poolReference.Spawn (_poolID);
-						go.GetComponent<WebPoolWorker> ().POST (URI, contentType, payload, cookie, callback);
-				}
-
 				public void Form (string URI, Dictionary<string, string> formStringData)
 				{
 						Form (URI, formStringData, null, null, null);
@@ -99,6 +91,23 @@ namespace Hydrogen.Core
 						}
 						GameObject go = _poolReference.Spawn (_poolID);
 						go.GetComponent<WebPoolWorker> ().Form (URI, formStringData, formBinaryData, cookie, callback);
+				}
+
+				public void POST (string URI, string contentType, string payload)
+				{
+						POST (URI, contentType, payload, null, null);
+				}
+
+				public void POST (string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
+				{
+						if (!_initialized) {
+								Debug.LogError ("WebPool has not finished initializing ... " +
+								"Did you call this function without having either a WebPool or ObjectPool component " +
+								"already on a MonoBehaviour?");
+								return;
+						}
+						GameObject go = _poolReference.Spawn (_poolID);
+						go.GetComponent<WebPoolWorker> ().POST (URI, contentType, payload, cookie, callback);
 				}
 
 				protected virtual void Awake ()
@@ -132,6 +141,17 @@ namespace Hydrogen.Core
 						newWebObject.transform.parent = hObjectPool.Instance.gameObject.transform;
 						newWebObject.gameObject.SetActive (false);
 						_initialized = true;
+				}
+
+				/// <summary>
+				/// Form Data Structure
+				/// </summary>
+				public struct FormBinaryData
+				{
+						public string FieldName;
+						public byte[] Data;
+						public string FileName;
+						public string MimeType;
 				}
 		}
 }
