@@ -39,7 +39,7 @@ public sealed class hTestFlight : MonoBehaviour
 		/// <summary>
 		/// Should this TestFlight manager survive scene switches.
 		/// </summary>
-		public bool Presistant = true;
+		public bool Persistent = true;
 		/// <summary>
 		/// The TestFlight token for Android.
 		/// </summary>
@@ -223,7 +223,7 @@ public sealed class hTestFlight : MonoBehaviour
 		void Awake ()
 		{
 				// Should this gameObject be kept around :) I think so.
-				if (Presistant)
+				if (Persistent)
 						DontDestroyOnLoad (gameObject);
 
 				// Let's get this party started, but in a somewhat safe manner

@@ -38,7 +38,7 @@ public sealed class hObjectPool : Hydrogen.Core.ObjectPool
 		/// <summary>
 		/// Should this object pool survive scene switches?
 		/// </summary>
-		public bool Presistant = true;
+		public bool Persistent = true;
 		/// <summary>
 		/// Internal fail safe to maintain instance across threads.
 		/// </summary>
@@ -97,7 +97,7 @@ public sealed class hObjectPool : Hydrogen.Core.ObjectPool
 				base.Awake ();
 
 				// Should this gameObject be kept around :) I think so.
-				if (Presistant)
+				if (Persistent)
 						DontDestroyOnLoad (gameObject);
 
 		}
