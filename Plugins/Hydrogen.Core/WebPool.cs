@@ -38,7 +38,9 @@ namespace Hydrogen.Core
 		[AddComponentMenu ("")]
 		public class WebPool : MonoBehaviour
 		{
+				bool _initialized;
 				int _poolID;
+				ObjectPool _poolReference;
 
 				public struct FormBinaryData
 				{
@@ -55,7 +57,12 @@ namespace Hydrogen.Core
 
 				public void GET (string URI, string cookie, System.Action<int, Hashtable, string> callback)
 				{
-						GameObject go = hObjectPool.Instance.Spawn (_poolID);
+						if (!_initialized) {
+								Debug.LogError ("WebPool has not finished initializing ... " +
+								"Did you call this function without having the component on a MonoBehaviour?");
+								return;
+						}
+						GameObject go = _poolReference.Spawn (_poolID);
 						go.GetComponent<WebPoolWorker> ().GET (URI, cookie, callback);
 				}
 
@@ -66,7 +73,12 @@ namespace Hydrogen.Core
 
 				public void POST (string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
 				{
-						GameObject go = hObjectPool.Instance.Spawn (_poolID);
+						if (!_initialized) {
+								Debug.LogError ("WebPool has not finished initializing ... " +
+								"Did you call this function without having the component on a MonoBehaviour?");
+								return;
+						}
+						GameObject go = _poolReference.Spawn (_poolID);
 						go.GetComponent<WebPoolWorker> ().POST (URI, contentType, payload, cookie, callback);
 				}
 
@@ -77,23 +89,46 @@ namespace Hydrogen.Core
 
 				public void Form (string URI, Dictionary<string, string> formStringData, FormBinaryData[] formBinaryData, string cookie, System.Action<int, Hashtable, string> callback)
 				{
-						GameObject go = hObjectPool.Instance.Spawn (_poolID);
+						if (!_initialized) {
+								Debug.LogError ("WebPool has not finished initializing ... " +
+								"Did you call this function without having the component on a MonoBehaviour?");
+								return;
+						}
+						GameObject go = _poolReference.Spawn (_poolID);
 						go.GetComponent<WebPoolWorker> ().Form (URI, formStringData, formBinaryData, cookie, callback);
 				}
 
 				protected virtual void Awake ()
+				{
+						StartCoroutine (Initialize ());
+				}
+
+				IEnumerator Initialize ()
 				{
 						// Create our buddy object
 						var newWebObject = new GameObject ();
 						newWebObject.AddComponent (typeof(WebPoolWorker));
 						newWebObject.name = "Web Call";
 
+						// Search out any existing ObjectPool
+						_poolReference = (ObjectPool)FindObjectOfType (typeof(ObjectPool));
+
+						// If we don't have an existing reference in the scene for an ObjectPool, we need to make one.
+						if (_poolReference == null) {
+								// Create a new ObjectPool using our default singleton.
+								_poolReference = hObjectPool.Instance;
+
+								// Wait for end of frame so that the new Object Pool can initialize.
+								yield return new WaitForEndOfFrame ();
+						}
+
 						// Add the new object to the Object Pool
-						_poolID = hObjectPool.Instance.Add (newWebObject);
+						_poolID = _poolReference.Add (newWebObject);
 
 						// We need to keep this GameObject around as it is referenced for spawning.
 						newWebObject.transform.parent = hObjectPool.Instance.gameObject.transform;
 						newWebObject.gameObject.SetActive (false);
+						_initialized = true;
 				}
 		}
 }

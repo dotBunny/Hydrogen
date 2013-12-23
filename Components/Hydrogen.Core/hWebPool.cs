@@ -38,7 +38,7 @@ public sealed class hWebPool : Hydrogen.Core.WebPool
 		/// <summary>
 		/// Should this web pool survive scene switches?
 		/// </summary>
-		public bool Presistant = true;
+		public bool Persistent = true;
 		/// <summary>
 		/// Internal fail safe to maintain instance across threads.
 		/// </summary>
@@ -71,7 +71,8 @@ public sealed class hWebPool : Hydrogen.Core.WebPool
 												var go = GameObject.Find (Hydrogen.Components.DefaultSingletonName) ??
 												         new GameObject (Hydrogen.Components.DefaultSingletonName);
 
-												go.AddComponent<hObjectPool> ();
+												// Add our WebPool
+												go.AddComponent<hWebPool> ();
 												_staticInstance = go.GetComponent<hWebPool> ();	
 										}
 								}
@@ -97,7 +98,7 @@ public sealed class hWebPool : Hydrogen.Core.WebPool
 				base.Awake ();
 
 				// Should this gameObject be kept around :) I think so.
-				if (Presistant)
+				if (Persistent)
 						DontDestroyOnLoad (gameObject);
 		}
 }
