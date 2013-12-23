@@ -101,7 +101,6 @@ namespace Hydrogen.Core
 								callback (_hash, new Hashtable (newCall.responseHeaders), "");
 			
 						ParentPool.Despawn (gameObject);
-						//hObjectPool.Instance.Despawn (gameObject, PoolID);
 				}
 
 				#endregion
@@ -143,7 +142,6 @@ namespace Hydrogen.Core
 								callback (_hash, new Hashtable (newCall.responseHeaders), "");
 			
 						ParentPool.Despawn (gameObject);
-						//hObjectPool.Instance.Despawn (gameObject, PoolID);
 				}
 
 				#endregion
@@ -192,8 +190,6 @@ namespace Hydrogen.Core
 								callback (_hash, new Hashtable (newCall.responseHeaders), "");
 
 						ParentPool.Despawn (gameObject);
-
-						//hObjectPool.Instance.Despawn (gameObject, PoolID);
 				}
 
 				#endregion
