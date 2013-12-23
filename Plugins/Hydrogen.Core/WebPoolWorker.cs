@@ -47,6 +47,7 @@ namespace Hydrogen.Core
 
 				public override void OnSpawned ()
 				{
+						gameObject.SetActive (true);
 						_hash = 0;
 				}
 
@@ -54,6 +55,7 @@ namespace Hydrogen.Core
 				{
 						StopAllCoroutines ();
 						_hash = 0;
+						gameObject.SetActive (false);
 				}
 
 				public override void DespawnSafely ()
@@ -98,7 +100,8 @@ namespace Hydrogen.Core
 						else
 								callback (_hash, new Hashtable (newCall.responseHeaders), "");
 			
-						hObjectPool.Instance.Despawn (gameObject, PoolID);
+						ParentPool.Despawn (gameObject);
+						//hObjectPool.Instance.Despawn (gameObject, PoolID);
 				}
 
 				#endregion
@@ -139,7 +142,8 @@ namespace Hydrogen.Core
 						else
 								callback (_hash, new Hashtable (newCall.responseHeaders), "");
 			
-						hObjectPool.Instance.Despawn (gameObject, PoolID);
+						ParentPool.Despawn (gameObject);
+						//hObjectPool.Instance.Despawn (gameObject, PoolID);
 				}
 
 				#endregion
@@ -187,7 +191,9 @@ namespace Hydrogen.Core
 						else
 								callback (_hash, new Hashtable (newCall.responseHeaders), "");
 
-						hObjectPool.Instance.Despawn (gameObject, PoolID);
+						ParentPool.Despawn (gameObject);
+
+						//hObjectPool.Instance.Despawn (gameObject, PoolID);
 				}
 
 				#endregion
