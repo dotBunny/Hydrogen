@@ -59,7 +59,8 @@ namespace Hydrogen.Core
 				{
 						if (!_initialized) {
 								Debug.LogError ("WebPool has not finished initializing ... " +
-								"Did you call this function without having the component on a MonoBehaviour?");
+								"Did you call this function without having either a WebPool or ObjectPool component " +
+								"already on a MonoBehaviour?");
 								return;
 						}
 						GameObject go = _poolReference.Spawn (_poolID);
@@ -75,7 +76,8 @@ namespace Hydrogen.Core
 				{
 						if (!_initialized) {
 								Debug.LogError ("WebPool has not finished initializing ... " +
-								"Did you call this function without having the component on a MonoBehaviour?");
+								"Did you call this function without having either a WebPool or ObjectPool component " +
+								"already on a MonoBehaviour?");
 								return;
 						}
 						GameObject go = _poolReference.Spawn (_poolID);
@@ -91,7 +93,8 @@ namespace Hydrogen.Core
 				{
 						if (!_initialized) {
 								Debug.LogError ("WebPool has not finished initializing ... " +
-								"Did you call this function without having the component on a MonoBehaviour?");
+								"Did you call this function without having either a WebPool or ObjectPool component " +
+								"already on a MonoBehaviour?");
 								return;
 						}
 						GameObject go = _poolReference.Spawn (_poolID);
