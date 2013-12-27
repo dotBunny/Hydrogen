@@ -4,8 +4,7 @@
  * Isolated sections of example content for each component or feature. Usually
  * followed by a code snippet.
  */
-
-
+    
 h2[id], h3[id], h4[id] 
 {
 	padding-top: 80px;
