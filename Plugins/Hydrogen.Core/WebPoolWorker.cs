@@ -43,33 +43,48 @@ namespace Hydrogen.Core
 		/// </summary>
 		public class WebPoolWorker : ObjectPoolItemBase
 		{
+				/// <summary>
+				/// A hash representation of the current call.
+				/// </summary>
 				int _hash;
+				/// <summary>
+				/// A simple reference if a coroutine is running or not.
+				/// </summary>
+				bool _busy;
 
-				public override void OnSpawned ()
-				{
-						gameObject.SetActive (true);
-						_hash = 0;
-				}
-
-				public override void OnDespawned ()
-				{
-						StopAllCoroutines ();
-						_hash = 0;
-						gameObject.SetActive (false);
-				}
-
+				/// <summary>
+				/// Fallback Despawn Function
+				/// </summary>
 				public override void DespawnSafely ()
 				{
-
+						OnDespawned ();
 				}
 
-				public override bool IsInactive ()
+				/// <summary>
+				/// Form the specified URI, formStringData, formBinaryData, cookie and callback.
+				/// </summary>
+				/// <returns>The Call Hash</returns>
+				/// <param name="URI">The Target URI</param>
+				/// <param name="formStringData">A Dictionary<string,string> of Form Data</param>
+				/// <param name="formBinaryData">A custom binary dataset. Useful for uploading pictures.</param>
+				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
+				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
+				public int Form (string URI, Dictionary<string,string> formStringData, WebPool.FormBinaryData[] formBinaryData, string cookie, System.Action<int, Hashtable, string> callback)
 				{
-						return false;
+						_hash = (Time.time + URI + formStringData.GetHashCode () + Random.Range (0, 100)).GetHashCode ();
+
+						StartCoroutine (FormReturnedText (URI, formStringData, formBinaryData, cookie, callback));
+
+						return _hash;
 				}
 
-				#region GET
-
+				/// <summary>
+				/// GE the specified URI, cookie and callback.
+				/// </summary>
+				/// <returns>The Call Hash</returns>
+				/// <param name="URI">The Target URI</param>
+				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
+				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
 				public int GET (string URI, string cookie, System.Action<int, Hashtable, string> callback)
 				{
 						_hash = (Time.time + URI + Random.Range (0, 100)).GetHashCode ();
@@ -79,18 +94,124 @@ namespace Hydrogen.Core
 						return _hash;
 				}
 
-				public IEnumerator GetReturnedText (string URI, string cookie, System.Action<int, Hashtable, string> callback)
+				/// <summary>
+				/// Is the GameObject idle, and therefore can be despawned organically?
+				/// </summary>
+				public override bool IsInactive ()
 				{
+						return !_busy;
+				}
+
+				/// <summary>
+				/// Raised when the GameObject is despawned back into it's Web Pool.
+				/// </summary>
+				public override void OnDespawned ()
+				{
+						StopAllCoroutines ();
+						_hash = 0;
+						gameObject.SetActive (false);
+				}
+
+				/// <summary>
+				/// Raised when the GameObject is spawned from it's Web Pool.
+				/// </summary>			
+				public override void OnSpawned ()
+				{
+						gameObject.SetActive (true);
+						_hash = 0;
+				}
+
+				/// <summary>
+				/// HTTP POST Form to URI.
+				/// </summary>
+				/// <returns>The Call Hash</returns>
+				/// <param name="URI">The Target URI.</param>
+				/// <param name="formStringData">A Dictionary<string,string> of Form Data</param>
+				/// <param name="formBinaryData">A custom binary dataset. Useful for uploading pictures.</param>
+				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
+				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
+				public int POST (string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
+				{
+						_hash = (Time.time + URI + payload + Random.Range (0, 100)).GetHashCode ();
+			
+						StartCoroutine (PostReturnedText (URI, contentType, payload, cookie, callback));
+			
+						return _hash;
+				}
+
+				/// <summary>
+				/// IEnumeratable HTTP POST Form to URI.
+				/// </summary>
+				/// <returns>IEnumeratable Function</returns>
+				/// <param name="URI">The Target URI.</param>
+				/// <param name="formStringData">A Dictionary<string,string> of Form Data</param>
+				/// <param name="formBinaryData">A custom binary dataset. Useful for uploading pictures.</param>
+				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
+				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
+				IEnumerator FormReturnedText (string URI, Dictionary<string, string> formStringData, WebPool.FormBinaryData[] formBinaryData, string cookie, System.Action<int, Hashtable, string> callback)
+				{
+						// Assign Busy Flag
+						_busy = true;
+
+						var newForm = new WWWForm ();
+
+						// Add string data
+						foreach (string s in formStringData.Keys) {
+								newForm.AddField (s, formStringData [s]);
+						}
+
+						// Add binary data
+						foreach (WebPool.FormBinaryData b in formBinaryData) {
+								newForm.AddBinaryData (b.FieldName, b.Data, b.FileName, b.MimeType);
+						}
+
+						var headers = newForm.headers;
+
+						if (cookie != null)
+								headers.Add ("Cookie", cookie);
+
+						var newCall = new WWW (URI, newForm.data, headers);
+
+						yield return newCall;
+
+						while (!newCall.isDone)
+								yield return new WaitForSeconds (0.01f);
+
+						// Callback!
+						if (callback != null) {
+								if (newCall.responseHeaders ["STATUS"].Contains (" 200 "))
+										callback (_hash, new Hashtable (newCall.responseHeaders), newCall.text);
+								else
+										callback (_hash, new Hashtable (newCall.responseHeaders), "");
+						}
+
+						_busy = false;
+
+						ParentPool.Despawn (gameObject);
+				}
+
+				/// <summary>
+				/// IEnumeratable HTTP GET Request to URI.
+				/// </summary>
+				/// <returns>Enumeratable Function</returns>
+				/// <param name="URI">The Target URI.</param>
+				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
+				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
+				IEnumerator GetReturnedText (string URI, string cookie, System.Action<int, Hashtable, string> callback)
+				{
+						// Assign Busy Flag
+						_busy = true;
+
 						// Process Headers
 						var headers = new Hashtable ();
 						if (cookie != null)
 								headers.Add ("Cookie", cookie);
-			
+
 						// Make the call
 						var newCall = new WWW (URI, null, headers);
-			
+
 						yield return newCall;
-			
+
 						while (!newCall.isDone)
 								yield return new WaitForSeconds (0.01f);
 
@@ -101,24 +222,26 @@ namespace Hydrogen.Core
 								else
 										callback (_hash, new Hashtable (newCall.responseHeaders), "");
 						}
+
+						_busy = false;
+
 						ParentPool.Despawn (gameObject);
 				}
 
-				#endregion
-
-				#region POST
-
-				public int POST (string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
+				/// <summary>
+				/// IEnumeratable HTTP POST to URI.
+				/// </summary>
+				/// <returns>Enumeratable Function</returns>
+				/// <param name="URI">The Target URI.</param>
+				/// <param name="contentType">The Content-Type Header</param>
+				/// <param name="payload">The data to be posted.</param>
+				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
+				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
+				IEnumerator PostReturnedText (string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
 				{
-						_hash = (Time.time + URI + payload + Random.Range (0, 100)).GetHashCode ();
-			
-						StartCoroutine (PostReturnedText (URI, contentType, payload, cookie, callback));
-			
-						return _hash;
-				}
+						// Assign Busy Flag
+						_busy = true;
 
-				public IEnumerator PostReturnedText (string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
-				{
 						// Message Data
 						byte[] postData = System.Text.Encoding.ASCII.GetBytes (payload.ToCharArray ());
 			
@@ -143,59 +266,10 @@ namespace Hydrogen.Core
 								else
 										callback (_hash, new Hashtable (newCall.responseHeaders), "");
 						}
+
+						_busy = false;
+
 						ParentPool.Despawn (gameObject);
 				}
-
-				#endregion
-
-				#region FORM
-
-				public int Form (string URI, Dictionary<string,string> formStringData, WebPool.FormBinaryData[] formBinaryData, string cookie, System.Action<int, Hashtable, string> callback)
-				{
-						_hash = (Time.time + URI + formStringData.GetHashCode () + Random.Range (0, 100)).GetHashCode ();
-			
-						StartCoroutine (FormReturnedText (URI, formStringData, formBinaryData, cookie, callback));
-			
-						return _hash;
-				}
-
-				public IEnumerator FormReturnedText (string URI, Dictionary<string, string> formStringData, WebPool.FormBinaryData[] formBinaryData, string cookie, System.Action<int, Hashtable, string> callback)
-				{
-						var newForm = new WWWForm ();
-
-						// Add string data
-						foreach (string s in formStringData.Keys) {
-								newForm.AddField (s, formStringData [s]);
-						}
-
-						// Add binary data
-						foreach (WebPool.FormBinaryData b in formBinaryData) {
-								newForm.AddBinaryData (b.FieldName, b.Data, b.FileName, b.MimeType);
-						}
-
-						var headers = newForm.headers;
-
-						if (cookie != null)
-								headers.Add ("Cookie", cookie);
-			
-						var newCall = new WWW (URI, newForm.data, headers);
-			
-						yield return newCall;
-			
-						while (!newCall.isDone)
-								yield return new WaitForSeconds (0.01f);
-			
-						// Callback!
-						if (callback != null) {
-								if (newCall.responseHeaders ["STATUS"].Contains (" 200 "))
-										callback (_hash, new Hashtable (newCall.responseHeaders), newCall.text);
-								else
-										callback (_hash, new Hashtable (newCall.responseHeaders), "");
-						}
-						ParentPool.Despawn (gameObject);
-				}
-
-				#endregion
-
 		}
 }
