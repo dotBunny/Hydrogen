@@ -15,7 +15,7 @@ base_url: "../"
     </div>
     <p class="lead">Hydrogen has a few easy ways to quickly get started, each one appealing to a different skill level and use case. Read through to see what suits your particular needs.</p>
 
-    <h3 id="download-unity">Unity Asset Store</h3>
+    <h2 id="download-unity">Unity Asset Store</h2>
     <p>The fastest way to get Hydrogen into your project is to download the packaged version from the Unity Asset Store. There are currently two Hydrogen packages available on the Unity Asset Store. The <a href="{{ site.asset_store }}">Hydrogen</a> package contains the framework in its entirety, but without any example content. The <a href="{{ site.examples_store }}">Hydrogen Examples</a> package contains all of the example content, plus some other demo content meant to demonstrate how the framework <em>may</em> be used.
     <p><a class="btn btn-lg btn-primary" href="{{ site.examples_store }}" onclick="_gaq.push(['_trackEvent', 'Getting Started', 'Download', 'Unity Asset Store - Examples']);" role="button">Get Hydrogen</a> <a class="btn btn-lg btn-default" href="{{ site.asset_store }}" onclick="_gaq.push(['_trackEvent', 'Getting Started', 'Download', 'Unity Asset Store']);" role="button">Get Examples</a></p>
      <div class="bs-callout bs-callout-danger">
@@ -23,7 +23,7 @@ base_url: "../"
       <p>The <a href="{{ site.examples_store }}">Hydrogen Examples</a> package will not function unless you have already included the <a href="{{ site.asset_store }}">Hydrogen</a> package in your project.</p>
     </div>
     
-    <h3 id="download-clone">GitHub</h3>
+    <h2 id="download-clone">GitHub</h2>
     <p>It's only natural that you would use GIT as it is our preferred way of getting access to Hydrogen.
     <div class="bs-docs-dl-options">
       <h4>
@@ -45,7 +45,7 @@ base_url: "../"
     </div>
     </div>
 
-    <h3 id="download-releases">Release Archive</h3>
+    <h2 id="download-releases">Release Archive</h2>
     <p>GIT allows us to tag points in the repository, and through a nice feature from the folks at GitHub, we can treat some of those tags as <a href="{{site.repo_releases}}" onclick="_gaq.push(['_trackEvent', 'Getting Started', 'Download', 'Releases']);">release points</a>, allowing you to access previous releases of Hydrogen. We are not sure why you would, but since it is available why not make it known about, right?
     <div class="bs-callout bs-callout-warning" id="callout-less-compilation">
       <h4>Old Versions Not Supported</h4>
@@ -62,7 +62,7 @@ base_url: "../"
     </div>
     <p class="lead">It doesn't matter what level of developer or artist you are; these features are going to make developing with Unity easier and more efficient.</p>
     
-    <h3 id="included-features">Features</h3>
+    <h2 id="included-features">Features</h2>
  <!-- START: Feature List -->
 	
 <table class="table table-striped">
@@ -79,7 +79,7 @@ base_url: "../"
           </tr>
           <tr>
             <td><span class="label label-primary">CORE</span></td>
-            <td>Web Pool</td>
+            <td><a href="{{ page.base_url }}components/#core-webpool">Web Pool</a></td>
             <td>No more building <a href="http://docs.unity3d.com/Documentation/Manual/Coroutines.html">coroutines</a> to handle your web postings, you give it a destination, payload, and a callback; it handles the rest.</td>
           </tr>
           <tr>
@@ -116,7 +116,7 @@ base_url: "../"
       </table>
 	
 <!-- END: Feature List -->    
-	<h3 id="included-folders">Folder Structure</h3>
+	<h2 id="included-folders">Folder Structure</h2>
 	<p>The framework is organized into numerous sub-folders to aid in keeping things easily found, and in order. At its root you will find the following folders:
 	
 	 <div class="row">
@@ -149,7 +149,7 @@ base_url: "../"
 	  </div>
 	</div>	
 	
-	<h3 id="included-third-party">Third Party</h3>	
+	<h2 id="included-third-party">Third Party</h2>	
 	<p>As developers we often recognize the excellence of our peers and their efforts in creating amazing products. Sometimes, it makes sense not to try and reinvent the wheel and to stand on the shoulders of others' work. We've included some libraries from other wonderful developers, and have created wrappers to allow for their use in Unity in an amazingly simple workflow.
 	
 	 <div class="row bs-examples">
@@ -205,7 +205,7 @@ base_url: "../"
       <p>Unfortunately, the currently bundled version of MonoDevelop with Unity has had it's MonoDoc add-in crippled. Without this functionality it is not possible to get the documentation to popup in editor. We've made Unity aware of this issue and can only hope that it will return in future releases.</p>
     </div>
     
-     <h3 id="cld-monodoc">MonoDoc Based</h3>
+     <h2 id="cld-monodoc">MonoDoc Based</h2>
 	<p>Both MonoDevelop and Xamarin Studio can use the MonoDoc source repository to provide documentation for classes inside of their IDEs. The general idea here is to put the three source files (Unity.zip, Unity.tree and Unity.source) from the Extras/MonoDevelop folder into the most recent Mono.framework's MonoDoc source folder.</p>
 	
 	 <p>On a Mac, the location should look something like this:</p>
@@ -215,7 +215,7 @@ base_url: "../"
 	<p>If you do this correctly the documentation should automatically appear the next time that you launch your IDE of choice and are working with a project where any of the Unity class libraries are referenced. Enjoy! You would not believe how incredibly handy this is to have, and how much you will miss it when you do not have it.</p>
 	
     
-    <h3 id="cld-visualstudio">Visual Studio</h3>
+    <h2 id="cld-visualstudio">Visual Studio</h2>
 	<p>Installing the xml based documentation is rather straight forward when it comes to Visual Studio, all you need to do is copy the Unity.xml file from the Extras/Visual Studio folder into where Unity keeps its referenced libraries, and after that Visual Studio takes care of the rest. You will need to move them to a folder similar, if not exactly the same as this:</p>
 	{% highlight text %}C:\Program Files (x86)\Unity\Editor\Data\Managed{% endhighlight %}
 	<p>Just like that, you will have access to the documentation while you type.</p>

@@ -44,3 +44,7 @@ type_static:	<a href="http://msdn.microsoft.com/en-us/library/98f28cdx.aspx" tar
 type_void: 		<a href="http://msdn.microsoft.com/en-us/library/yah0tteb.aspx" target="_blank">void</a>
 type_string:	 <a href="http://msdn.microsoft.com/en-us/library/362314fe.aspx" target="_blank">string</a>
 type_bool:		<a href="http://msdn.microsoft.com/en-us/library/c8f5xwh7.aspx" target="_blank">bool</a>	
+type_dictionary: <a href="http://msdn.microsoft.com/en-us/library/xfhwa508(v=vs.110).aspx" target="_blank">Dictionary</a>
+type_int: 		<a href="http://msdn.microsoft.com/en-us/library/5kzh1b5w.aspx" target="_blank">int</a>
+type_hashtable: <a href="http://msdn.microsoft.com/en-us/library/system.collections.hashtable.aspx" target="_blank">Hashtable</a>
+type_action:	<a href="http://msdn.microsoft.com/en-us/library/system.action(v=vs.110).aspx" target="_blank">Action</a>

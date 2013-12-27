@@ -6,8 +6,577 @@ lead: "We've created some nice drop in Components that highlight one way of impl
 base_url: "../"
 ---
 
+ <!-- Hydrogen.Core.WebPool / hWebPool
+ ================================================== -->
+ <div class="bs-docs-section">
+	<div class="page-header">
+		 <h1 id="core-webpool">Web Pool</h1>
+	</div>
+    <div class="lead">No more building coroutines to handle your web postings, you give it a destination, payload, and a callback; it handles the rest. Now if only making a game could be this easy.</div>
+	<ol class="breadcrumb">
+		<li>Components</li>
+		<li>Hydrogen.Core</li>
+		<li class="active">hWebPool.cs</li>
+	</ol>
+    <h2 id="core-webpool-overview">Overview</h2>
+	<p>Why does making a simple REST API (for example) call require more then a single line of code? No more we say! We have created a system that provides a "fire and forget" solution to Unity when it comes to web based interactions via GET, POST, and FORM data.</p>
+	<p>The hWebPool Singleton creates an instance of <code>Hydrogen.Plugins.WebPool</code> which can be globally accessed via <code>hWebPool.Instance</code>.</p>
+	<div class="bs-callout bs-callout-warning" id="callout-less-compilation">
+		<h4>ObjectPool Required</h4>
+		<p>The <code>Hydrogen.Core.WebPool</code> relies on the <code>Hydrogen.Core.ObjectPool</code> to enable the pooling side of things. It will automatically create one in the scene at runtime if there is not one present.</p>
+	</div>
+	
+	<h2 id="core-webpool-usage">Usage</h2>
+	<p>The guiding principle is that you can fire off as many web calls as you would like (limited by the the pool size), and the WebPool will manage and handle the rest for you. Eventually we would like to see this being done entirely on a separate thread, however that would require including System.Net, which has a rather hefty distribution size.</p>
+    <h3 id="core-webpool-public-fields">Public Fields</h3>
+    <div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Name</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+	          	<tr>
+	            	<td>{{site.type_bool}}</td>
+					<td>Persistent</td>
+					<td>Should the hWebPool instance (and it's GameObject) survive scene switches by using <a href="http://docs.unity3d.com/Documentation/ScriptReference/Object.DontDestroyOnLoad.html" target="_blank">GameObject.DontDestroyOnLoad</a>. This will preserve all scripts on its GameObject as well, so please be aware of that behaviour.</td>
+				</tr>
+				
+			</tbody>
+		</table>
+  	</div>
+  	<h3 id="core-webpool-properties">Properties</h3>
+    <div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Access</th>
+					<th>Name</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+	          	<tr>
+	            	<td><em>hWebPool</em></td>
+	            	<td>get</td>
+					<td>Instance</td>
+					<td>Returns the static hWebPool instance (<a href="http://msdn.microsoft.com/en-us/library/ms998558.aspx" target="_blank">Thread Safe Singleton</a>).</td>
+				</tr>
+			</tbody>
+		</table>
+  	</div>
+    <h3 id="core-webpool-public-methods">Public Methods</h3>
+    
+    <!-- hWebPool.Exists -->
+    <h4 id="hWebPool-Exists">{{site.type_static}} {{site.type_bool}} Exists ()</h4>
+    Does a hWebPool instance exist?
+	<div class="bs-arguments text-muted">
+     None
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Let's see if we are using the hWebPool component.
+if ( hWebPool.Exists () ) {
+	// Yes - We are that awesome.
+	Debug.Log ("A WebPool Already Exists");
+}
+{% endhighlight %}
+	</div>  
+	<div class="return">
+		 <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_bool}}</td>
+            <td class="text-success">true</td>
+            <td>An instance of hWebPool already exists. This can be handy to simply check from other classes if hWebPool is being used.</td>        
+          </tr>
+          <tr>
+            <td>{{site.type_bool}}</td>
+            <td class="text-danger">false</td>
+            <td>An instance of hWebPool does not exist, and therefore must be created or instantiated via a prefab.</td>
+          </tr>
+        </tbody>
+      </table>
+	</div>  
+    
+    <!-- hWebPool.Instance.Form -->
+    <h4 id="hWebPool-Instance-Form_URI_formStringData">{{site.type_void}} Form ({{site.type_string}} URI, {{site.type_dictionary}}<{{site.type_string}},{{site.type_string}}> formStringData)</h4>
+    HTTP POST Form to URI.
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>URI</td>
+            <td>The <a href="http://en.wikipedia.org/wiki/Uniform_resource_identifier" target="_blank">URI</a> (aka URL) to which the form and it's data should be posted to. </td>          
+          </tr>
+          <tr>
+            <td>{{site.type_dictionary}}<{{site.type_string}},{{site.type_string}}></td>
+            <td>formStringData</td>
+            <td>The form's data to be sent in the POST.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Example Data
+var formData = new Dictionary<string, string>();
+formData.Add ("username", "batman");
+formData.Add("password", "robin");
 
-  <!-- Glyphicons
+// Send it on it's way!
+hWebPool.Instance.Form("http://api.unityforge.net/", formData);
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>  
+    
+    <!-- hWebPool.Instance.Form -->
+    <h4 id="hWebPool-Instance-Form_URI_formStringData_formBinaryData_cookie_callback">{{site.type_void}} Form ({{site.type_string}} URI, {{site.type_dictionary}}<{{site.type_string}},{{site.type_string}}> formStringData, FormBinaryData[] formBinaryData, {{site.type_string}} cookie, {{site.type_action}}<{{site.type_int}}, {{site.type_hashtable}}, {{site.type_string}}> callback)</h4>
+    HTTP POST Form to URI.
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>URI</td>
+            <td>The <a href="http://en.wikipedia.org/wiki/Uniform_resource_identifier" target="_blank">URI</a> (aka URL) to which the form and it's data should be posted to. </td>          
+          </tr>
+          <tr>
+            <td>{{site.type_dictionary}}<{{site.type_string}},{{site.type_string}}></td>
+            <td>formStringData</td>
+            <td>The form's data to be sent in the POST.</td>
+          </tr>
+		  <tr>
+            <td>FormBinaryData[]</td>
+            <td>formBinaryData</td>
+            <td>A custom binary dataset. Useful for uploading pictures.</td>
+          </tr>
+		  <tr>
+            <td>{{site.type_string}}</td>
+            <td>cookie</td>
+            <td>Any previous cookie data to be used for authentication.</td>
+          </tr>
+          <tr>
+            <td>{{site.type_action}}<{{site.type_int}}, {{site.type_hashtable}}, {{site.type_string}}></td>
+            <td>callback</td>
+            <td>A callback function (int hash, Hashtable headers, string payload).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Example Data
+var _response;
+
+// Let's just Unity's own legacy GUI system to display these things quickly.
+public void OnGUI()
+{
+	if ( GUI.Button(new Rect(10,10, 100, 30), "GO!") )
+	{
+		// Local Example Data
+		var formData = new Dictionary<string, string>();
+		formData.Add ("username", "batman");
+		formData.Add("password", "robin");
+		
+		// Send it on it's way!
+		hWebPool.Instance.Form("http://api.unityforge.net/", formData, null, null, Finished);
+	}
+	
+	// Show the response, always.
+	GUI.Label (new Rect (25, 90, 500, 500), _response);
+}
+
+// Our fancy Action (delegate) function that is called when the worker is finished.
+// It is important that your Action function meet the same arguements as this one.
+public void Finished (int hash, Hashtable responseHeaders, string responseText)
+{
+	// Make sure that our hash is displayed for verification purposes.
+	_response = "CALL-HASH: " + hash + "\n\n";
+
+	// Let's also show the headers that came across in the response as they are very handy for 
+	// figuring out if something is wrong. Look at the response code; your hoping for a 200 OK.
+	var headers = "HEADERS\n========\n\n";
+	foreach (var s in responseHeaders.Keys) {
+			headers += s + ": " + responseHeaders [s] + "\n\r";
+	}
+
+	// Append that header text to our response text
+	_response += headers;
+
+	// Add the actual response payload (if there is one)
+	_response += "\n\rRESPONSE-TEXT: \n\r==============\n\r" + responseText;
+}
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>  
+    
+    <!-- hWebPool.Instance.GET -->
+    <h4 id="hWebPool-Instance-GET_URI">{{site.type_void}} GET ({{site.type_string}} URI)</h4>
+	HTTP GET Request to URI
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>URI</td>
+            <td>The <a href="http://en.wikipedia.org/wiki/Uniform_resource_identifier" target="_blank">URI</a> (aka URL) which should be accessed.</td>          
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Simply access the URI, handy for signalling an event via URL arguements
+hWebPool.Instance.Get("http://api.unityforge.net/?honey=imhome", );
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>  
+	
+	<!-- hWebPool.Instance.GET -->
+    <h4 id="hWebPool-Instance-GET_URI_callback">{{site.type_void}} GET ({{site.type_string}} URI, {{site.type_action}}<{{site.type_int}}, {{site.type_hashtable}}, {{site.type_string}}> callback)</h4>
+	HTTP GET Request to URI
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>URI</td>
+            <td>The <a href="http://en.wikipedia.org/wiki/Uniform_resource_identifier" target="_blank">URI</a> (aka URL) which should be accessed.</td>          
+          </tr>
+          <tr>
+            <td>{{site.type_action}}<{{site.type_int}}, {{site.type_hashtable}}, {{site.type_string}}></td>
+            <td>callback</td>
+            <td>A callback function (int hash, Hashtable headers, string payload).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Example Data
+var _response;
+
+// Let's just Unity's own legacy GUI system to display these things quickly.
+public void OnGUI()
+{
+	if ( GUI.Button(new Rect(10,10, 100, 30), "GO!") )
+	{
+		// Let's access that URI and grab the response!
+		hWebPool.Instance.GET("http://api.unityforge.net/?honey=imhome", Finished);
+	}
+	
+	// Show the response, always.
+	GUI.Label (new Rect (25, 90, 500, 500), _response);
+}
+
+// Our fancy Action (delegate) function that is called when the worker is finished.
+// It is important that your Action function meet the same arguements as this one.
+public void Finished (int hash, Hashtable responseHeaders, string responseText)
+{
+	// Make sure that our hash is displayed for verification purposes.
+	_response = "CALL-HASH: " + hash + "\n\n";
+
+	// Let's also show the headers that came across in the response as they are very handy for 
+	// figuring out if something is wrong. Look at the response code; your hoping for a 200 OK.
+	var headers = "HEADERS\n========\n\n";
+	foreach (var s in responseHeaders.Keys) {
+			headers += s + ": " + responseHeaders [s] + "\n\r";
+	}
+
+	// Append that header text to our response text
+	_response += headers;
+
+	// Add the actual response payload (if there is one)
+	_response += "\n\rRESPONSE-TEXT: \n\r==============\n\r" + responseText;
+}
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>  
+	
+	<!-- hWebPool.Instance.GET -->
+    <h4 id="hWebPool-Instance-GET_URI_cookie_callback">{{site.type_void}} GET ({{site.type_string}} URI, {{site.type_string}} cookie, {{site.type_action}}<{{site.type_int}}, {{site.type_hashtable}}, {{site.type_string}}> callback)</h4>
+	HTTP GET Request to URI
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>URI</td>
+            <td>The <a href="http://en.wikipedia.org/wiki/Uniform_resource_identifier" target="_blank">URI</a> (aka URL) which should be accessed.</td>          
+          </tr>
+		  <tr>
+            <td>{{site.type_string}}</td>
+            <td>cookie</td>
+            <td>Any previous cookie data to be used for authentication.</td>
+          </tr>          
+          <tr>
+            <td>{{site.type_action}}<{{site.type_int}}, {{site.type_hashtable}}, {{site.type_string}}></td>
+            <td>callback</td>
+            <td>A callback function (int hash, Hashtable headers, string payload).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Example Data
+var _response;
+var _cookie = "name=value; name2=value2";
+
+// Let's just Unity's own legacy GUI system to display these things quickly.
+public void OnGUI()
+{
+	if ( GUI.Button(new Rect(10,10, 100, 30), "GO!") )
+	{
+		// Let's access that URI and grab the response!
+		hWebPool.Instance.GET("http://api.unityforge.net/?honey=imhome", _cookie, Finished);
+	}
+	
+	// Show the response, always.
+	GUI.Label (new Rect (25, 90, 500, 500), _response);
+}
+
+// Our fancy Action (delegate) function that is called when the worker is finished.
+// It is important that your Action function meet the same arguements as this one.
+public void Finished (int hash, Hashtable responseHeaders, string responseText)
+{
+	// Make sure that our hash is displayed for verification purposes.
+	_response = "CALL-HASH: " + hash + "\n\n";
+
+	// Let's also show the headers that came across in the response as they are very handy for 
+	// figuring out if something is wrong. Look at the response code; your hoping for a 200 OK.
+	var headers = "HEADERS\n========\n\n";
+	foreach (var s in responseHeaders.Keys) {
+			headers += s + ": " + responseHeaders [s] + "\n\r";
+	}
+
+	// Append that header text to our response text
+	_response += headers;
+
+	// Add the actual response payload (if there is one)
+	_response += "\n\rRESPONSE-TEXT: \n\r==============\n\r" + responseText;
+}
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>  
+	
+	<!-- hWebPool.Instance.POST -->
+    <h4 id="hWebPool-Instance-POST_URI_contentType_payload">{{site.type_void}} POST ({{site.type_string}} URI, {{site.type_string}} contentType, {{site.type_string}} payload)</h4>
+	HTTP POST Request to URI.
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>URI</td>
+            <td>The <a href="http://en.wikipedia.org/wiki/Uniform_resource_identifier" target="_blank">URI</a> (aka URL) which data should be posted too.</td>          
+          </tr>
+		  <tr>
+            <td>{{site.type_string}}</td>
+            <td>contentType</td>
+            <td>The classification of the content (Example: "application/json").</td>
+          </tr>          
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>payload</td>
+            <td>The data to be posted to the target URI.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Create new JSONObject for our payload
+var jsonPayload = new Hydrogen.Serialization.JSONObject ();
+
+// Initial setup of payload
+jsonPayload.Fields.Add ("apikey", "398c1161326cef46dad0e0a340a38e6b-us7");
+jsonPayload.Fields.Add ("id", "c0eaf9ec60");
+
+// Lazy example for a sub JSONObject; you can create JSON objects from JSON.
+jsonPayload.Fields.Add ("email", new Hydrogen.Serialization.JSONObject (
+		"{\"email\":\"" + "test@test.com" + "\"}"));
+
+// Send POST to the WebPool
+hWebPool.Instance.POST (
+	"https://us7.api.mailchimp.com/2.0/lists/subscribe.json",
+	"application/json",
+	jsonPayload.Serialized);
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>  
+
+	<!-- hWebPool.Instance.POST -->
+    <h4 id="hWebPool-Instance-POST_URI_contentType_payload_cookie_callback">{{site.type_void}} POST ({{site.type_string}} URI, {{site.type_string}} contentType, {{site.type_string}} payload, {{site.type_string}} cookie, {{site.type_action}}<{{site.type_int}}, {{site.type_hashtable}}, {{site.type_string}}> callback)</h4>
+	HTTP POST Request to URI.
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>URI</td>
+            <td>The <a href="http://en.wikipedia.org/wiki/Uniform_resource_identifier" target="_blank">URI</a> (aka URL) which data should be posted too.</td>          
+          </tr>
+		  <tr>
+            <td>{{site.type_string}}</td>
+            <td>contentType</td>
+            <td>The classification of the content (Example: "application/json").</td>
+          </tr>          
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>payload</td>
+            <td>The data to be posted to the target URI.</td>
+          </tr>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>cookie</td>
+            <td>Any previous cookie data to be used for authentication.</td>
+          </tr>          
+          <tr>
+            <td>{{site.type_action}}<{{site.type_int}}, {{site.type_hashtable}}, {{site.type_string}}></td>
+            <td>callback</td>
+            <td>A callback function (int hash, Hashtable headers, string payload).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Example Data
+var _response;
+var _cookie = "name=value; name2=value2";
+
+// Let's just Unity's own legacy GUI system to display these things quickly.
+void OnGUI ()
+{
+	if (GUI.Button (new Rect (25, 60, 90, 20), "Subscribe")) {
+
+		// Create new JSONObject
+		var jsonPayload = new Hydrogen.Serialization.JSONObject ();
+
+		// Initial setup of payload
+		jsonPayload.Fields.Add ("apikey", "398c1161326cef46dad0e0a340a38e6b-us7");
+		jsonPayload.Fields.Add ("id", "c0eaf9ec60");
+
+		// Lazy example for a sub JSONObject; you can create JSON objects from JSON.
+		jsonPayload.Fields.Add ("email", new Hydrogen.Serialization.JSONObject (
+			"{\"email\":\"" + "test@test.com" + "\"}"));
+
+		// Send POST to the WebPool
+		hWebPool.Instance.POST (
+			"https://us7.api.mailchimp.com/2.0/lists/subscribe.json",
+			"application/json",
+			jsonPayload.Serialized,
+			_cookie,
+			MailChimpCallback);
+	}
+
+	// Show Response
+	GUI.Label (new Rect (25, 90, 500, 500), _response);
+}
+
+// Our fancy Action (delegate) function that is called when the worker is finished.
+// It is important that your Action function meet the same arguements as this one.
+public void MailChimpCallback (int hash, Hashtable responseHeaders, string responseText)
+{
+	// Make sure that our hash is displayed for verification purposes.
+	_response = "CALL-HASH: " + hash + "\n\n";
+	
+	// Let's also show the headers that came across in the response as they are very handy for 
+	// figuring out if something is wrong. Look at the response code; your hoping for a 200 OK.
+	var headers = "HEADERS\n========\n\n";
+	foreach (var s in responseHeaders.Keys) {
+		headers += s + ": " + responseHeaders [s] + "\n\r";
+	}
+	
+	// Append that header text to our response text
+	_response += headers;
+	
+	// Add the actual response payload (if there is one)
+	_response += "\n\rRESPONSE-TEXT: \n\r==============\n\r" + responseText;
+}
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>  
+  </div>
+
+  <!-- Hydrogen.Plugins.TestFlight / hTestFlight
   ================================================== -->
   <div class="bs-docs-section">
     <div class="page-header">
@@ -307,7 +876,7 @@ base_url: "../"
     <h3 id="plugins-testflight-public-methods">Public Methods</h3>
     
     <!-- hTestFlight.Exists -->
-    <h4>{{site.type_static}} {{site.type_bool}} Exists ()</h4>
+    <h4 id="hTestFlight-Exists">{{site.type_static}} {{site.type_bool}} Exists ()</h4>
     Does a TestFlight manager instance exist?
 	<div class="bs-arguments text-muted">
      None
@@ -346,7 +915,7 @@ if ( hTestFlight.Exists () ) {
 	</div>  
     
     <!-- hTestFlight.Instance.AddCustomEnvironmentInformation -->
-    <h4>{{site.type_void}} AddCustomEnvironmentInformation ({{site.type_string}} key, {{site.type_string}} data) <span class="label label-primary">iOS ONLY</span></h4>
+    <h4 id="hTestFlight-Instance-AddCustomEnvironmentInformation_key_data">{{site.type_void}} AddCustomEnvironmentInformation ({{site.type_string}} key, {{site.type_string}} data) <span class="label label-primary">iOS ONLY</span></h4>
     Adds an entry into the Key-Value store for this TestFlight session.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -388,7 +957,7 @@ if ( userName == "Batman" ) {
 	</div>  	
 
 	<!-- hTestFlight.Instance.Log -->
-    <h4>{{site.type_void}} Log ({{site.type_string}} message)</h4>
+    <h4 id="hTestFlight-Instance-Log_message">{{site.type_void}} Log ({{site.type_string}} message)</h4>
    Send a message to TestFlight to appear in it's console.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -426,7 +995,7 @@ if ( batRepellent <= 0 ) {
     
     
 	<!-- hTestFlight.Instance.LogAsync -->
-	<h4>{{site.type_void}} LogAsync ({{site.type_string}} message) <span class="label label-primary">iOS ONLY</h4>
+	<h4 id="hTestFlight-Instance-LogAsync_message">{{site.type_void}} LogAsync ({{site.type_string}} message) <span class="label label-primary">iOS ONLY</h4>
 	Send a message to TestFlight asynchronously to appear in it's console.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -462,7 +1031,7 @@ if ( !moreBatRepellent ) {
 	</div>
 
 	<!-- hTestFlight.Instance.PassCheckpoint -->
-	<h4>{{site.type_void}} PassCheckpoint ({{site.type_string}} checkpoint)</h4>
+	<h4 id="hTestFlight-Instance-PassCheckpoint_checkpoint">{{site.type_void}} PassCheckpoint ({{site.type_string}} checkpoint)</h4>
 	Report to TestFlight that the session has passed a Checkpoint.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -510,7 +1079,7 @@ hTestFlight.Instance.PassChcckpoint ("Batman Pressed The Button 100 Times");
 	</div>
 	
 	<!-- hTestFlight.Instance.SubmitFeedback -->
-	<h4>{{site.type_void}} SubmitFeedback ({{site.type_string}} message) <span class="label label-primary">iOS ONLY</h4>
+	<h4 id="hTestFlight-Instance-SubmitFeedback_message">{{site.type_void}} SubmitFeedback ({{site.type_string}} message) <span class="label label-primary">iOS ONLY</h4>
 	Submits a feedback message for the App to TestFlight.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
