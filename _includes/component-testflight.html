@@ -1,13 +1,541 @@
-
-			<ul class="dropdown-menu scrollable-menu">
-				<li role="presentation" class="dropdown-header">Static Public Methods</li>
-				<li><a href="{{ page.base_url }}components/#hTestFlight-Exists"><em>bool</em> <strong>Exists</strong> ()</a></li>
-				<li role="presentation" class="divider"></li>
-				<li role="presentation" class="dropdown-header">Public Methods</li>
-				<li><a href="{{ page.base_url }}components/#hTestFlight-Instance-AddCustomEnvironmentInformation_key_data"><em>void</em> <strong>AddCustomEnvironmentInformation</strong> (key, data)</a>
-				<li><a href="{{ page.base_url }}components/#hTestFlight-Instance-Log_message"><em>void</em> <strong>Log</strong> (message)</a></li>
-				<li><a href="{{ page.base_url }}components/#hTestFlight-Instance-LogAsync_message"><em>void</em> <strong>LogAsync</strong> (message)</a></li>
-				<li><a href="{{ page.base_url }}components/#hTestFlight-Instance-PassCheckpoint_checkpoint"><em>void</em> <strong>PassCheckpoint</strong> (checkpoint)</a></li>
-				<li><a href="{{ page.base_url }}components/#hTestFlight-Instance-SubmitFeedback_message"><em>void</em> <strong>SubmitFeedback</strong> (message)</a></li>
-			</ul>
+<!-- Hydrogen.Plugins.TestFlight / hTestFlight
+  ================================================== -->
+  <div class="bs-docs-section">
+    <div class="page-header">
+      <h1 id="plugins-testflight">TestFlight</h1>
+    </div>
+    <div class="lead">An automatic installation paired with a robust implementation. What could be more awesome? OK fine, we will start to think about including a "Make Game" button.</div>
+	<ol class="breadcrumb">
+	  <li>Components</li>
+		<li class="dropdown">
+        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Hydrogen.Plugins <b class="caret"></b></a>
+			{% include bc-component-root.html %}
+		</li>
+	  <li class="dropdown">
+        	<a href="#" class="dropdown-toggle" data-toggle="dropdown">hTestFlight.cs <b class="caret"></b></a>
+			{% include bc-component-testflight.html %}
+	  </li>
+	</ol>
+    <h2 id="plugins-testflight-overview">Overview</h2>
+     <blockquote>
+    <p>TestFlight is a free platform used to distribute beta and internal <strong>iOS/Android applications</strong> to team members over-the-air. Developers can manage beta testing campaigns and receive feedback from their team with TestFlight's dashboard. With the TestFlight SDK implemented in an application, users can acquire more metrics on how and what testers are doing when testing an application on their device.</p>
+  	<small><a href="http://help.testflightapp.com/customer/portal/articles/821656-what-is-testflight-" target="_blank">TestFlight Documentation</a></small>
+  </blockquote>
+  <p>With that much awesomeness bundled into one package we felt the need to make sure that every Unity developer was able to easily integrate and deploy with TestFlight. Hydrogen's TestFlight component (and supporting scripts) work on the principle of handling as much of the grunt work as possible, allowing you to focus on more important tasks; like making an awesome game.</p>
+  <p>The <code>hTestFlight</code> Singleton creates an instance of <a href="#plugins-testflight">Hydrogen.Plugins.TestFlight</a> which can be globally accessed via <code>hTestFlight.Instance</code>. As always, this is merely one way of extending on the <a href="#plugins-testflight">Hydrogen.Plugins.TestFlight</a> class, as it is designed to be decoupled from everything, you can create your own implementation if you would like (and have the time!).</p>
+    <h2 id="plugins-testflight-install">Installation</h2>
+    <div class="media">
+        <div class="pull-right">
+			<img class="thumbnail" src="/assets/img/com-testflight-install-ios.jpg" alt="TestFlight - iOS Install">
+		</div>
+		<div class="media-body">
+			<p>Inside of the <strong>Assets</strong> menu (on Unity's menu bar!), we have added a <strong>TestFlight</strong> sub-menu; under that we have placed two magical items to automatically complete the install process for both iOS and Android. By selecting either of these options a nice automated installer will popup (with a fancy progress bar) and handle the below processes for you.</p>
+			<p>These automated processes rely on the folder structure of Hydrogen not being altered in any way; while you can move the Hydrogen folder wherever you like, its contents need to stay as they are, if you would like the automated installation script to function correctly. If you are eager to install and use a newer version of TestFlight (it takes a little while for the Asset Store to approve a package), you most certainly can replace the library files (iOS v{{site.testflight_ios_version}} / Android v{{site.testflight_android_version}}) found in <strong>Vendors/TestFlight</strong> folder under the packages root.
+			
+			You can however replace the TestFlight library files found in the <strong>Vendors/TestFlight</strong> folder with newer versions of the library if you do not wish to use the provided versions.   </p>
+			<p>We have done our best to try and accommodate for all sorts of scenarios; however we are only human and sometimes things come up that could potentially break the install script. Therefore, we have included the following as a checklist to make sure that the installation has been completed properly.</p>
+		</div>
+	</div>
+	<div class="bs-callout bs-callout-warning" id="callout-preprocessor-directive">
+      <h4>Preprocessor Directive</h4>
+      <p>One of the great features about the implementation of TestFlight in Hydrogen is that even with platforms that TestFlight does not support, your code will still work unchanged and it won't include or reference anything that isn't going to be used. This nice treat requires that a <a href="http://msdn.microsoft.com/en-us/library/ed8yd1ha.aspx" target="_blank">preprocessor directive</a> (<code>HYDROGEN_TESTFLIGHT</code>) is used. The installation script automatically adds the directive to the <em>Scripting Define Symbols</em> found in <a href="http://docs.unity3d.com/Documentation/Manual/class-PlayerSettings.html" target="_blank">Unity's Player Settings</a> corresponding platform. If you are having problems with getting TestFlight to work, please make sure to double check that your desired platform has the directive added to it's <em>Scripting Define Symbols</em>.</p>
+    </div>
+    <h3 id="plugins-testflight-install-ios">iOS Checklist</h3>
+	<div class="panel-group" id="checklist-ios">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<span class="glyphicon glyphicon-check"></span>
+					<a data-toggle="collapse" data-parent="#checklist-ios" href="#collapse-ios-1">
+						Step 1 - Files Copied
+					</a>
+				</h4>
+			</div>
+			<div id="collapse-ios-1" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="media">
+						<div class="pull-right">
+							<img class="thumbnail" src="/assets/img/com-testflight-install-ios-plugins.jpg" alt="TestFlight - iOS Plugins Folder">
+						</div>
+						<div class="media-body">
+							The following files should be copied into the <strong>Plugins/iOS</strong> folder, preferably at the root of your projects <strong>Assets</strong> folder. These files are specific to TestFlights iOS implementation, including our additional set of helper functions that help our Unity implementation.
+							<ul>
+								<li>HydrogenTestFlight.mm</li>
+								<li>libTestFlight.a</li>
+								<li>TestFlight.h</li>
+								<li>TestFlight+AsyncLogging.h</li>
+								<li>TestFlight+ManualSessions.h</li>
+							</ul>
+							If any of these files are missing from the <strong>Plugins/iOS</strong> folder after you have used the install menu item, you will more then likely need to copy them there yourself manually. They are available in the <strong>Vendors/TestFlight/iOS</strong> and <strong>Extras/TestFlight/Android</strong> folders in the Hydrogen Framework root.
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<span class="glyphicon glyphicon-check"></span>
+					<a data-toggle="collapse" data-parent="#checklist-ios" href="#collapse-ios-2">
+						Step 2 - Scripting Define Symbol
+					</a>
+				</h4>
+			</div>
+			<div id="collapse-ios-2" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="media">
+							<div class="pull-right">
+								<img class="thumbnail" src="/assets/img/com-testflight-install-preprocessor.jpg" alt="TestFlight - Scripting Define Symbols">
+							</div>
+							<div class="media-body">
+								This is an important part of the <em>verification</em> process, as it seems to be the highest point of issue. When the installer runs for a specific platform, it adds the <code>HYDROGEN_TESTFLIGHT</code> symbol to the  <em>Scripting Define Symbols</em> found in the <a href="http://docs.unity3d.com/Documentation/Manual/class-PlayerSettings.html" target="_blank">Unity's Player Settings</a>. This tells our scripts to include the necessary portions of code for that platform and makes everything work nicely (Vague Statements <a href="http://www.urbandictionary.com/define.php?term=ftw" target="_blank">FTW</a>). However, there are times where the Player Settings might get overwritten by another user's commit to a project which accidentally removes this symbol. It is always a good idea to verify the symbol is present for your desired platform if things are not working for you.
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<span class="glyphicon glyphicon-check"></span>
+					<a data-toggle="collapse" data-parent="#checklist-ios" href="#collapse-ios-3">
+						Step 3 - TestFlight's End
+					</a>
+				</h4>
+			</div>
+			<div id="collapse-ios-3" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="media">
+							<div class="pull-right">
+								<img class="thumbnail" src="/assets/img/com-testflight-install-ios-apptoken.jpg" alt="TestFlight - iOS AppToken">
+							</div>
+							<div class="media-body">
+								<p>The next thing you need to do is make sure that TestFlight is ready to receive data from your application. This entails making sure you've <a href="https://www.testflightapp.com/dashboard/applications/create/" target="_blank">created an App</a> on their end and have put in the correct Bundle Identifier (found in the <a href="http://docs.unity3d.com/Documentation/Manual/class-PlayerSettings.html" target="_blank">Unity's Player Settings</a>).</p>
+								<p>Once you have the App created with TestFlight you will be able to get access to the generated <em>App Token</em>. This is going to be used in the next step, so keep the window open and handy.</p>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  
+  		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<span class="glyphicon glyphicon-check"></span>
+					<a data-toggle="collapse" data-parent="#checklist-ios" href="#collapse-ios-4">
+						Step 4 - hTestFlight Or Your Own!
+					</a>
+				</h4>
+			</div>
+			<div id="collapse-ios-4" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="media">
+						<div class="pull-right">
+							<img class="thumbnail" src="/assets/img/com-testflight-install-ios-com.jpg" alt="TestFlight - Component">
+						</div>
+						<div class="media-body">
+							<p>Last but not least, you need to add either the lovely drop in Component ({{site.unity_monobehaviour}}) for TestFlight (<code>hTestFlight</code>) to a {{site.unity_gameobject}} or you can implement your own based on <a href="#plugins-testflight">Hydrogen.Plugins.TestFlight</a>.</p>
+							<p>No matter what, your going to need that App Token from TestFlight, and will either put it in the Token iOS field of the <code>hTestFlight</code> component or however your implementation takes it. </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<h3 id="plugins-testflight-install-android">Android Checklist</h3>
+	<div class="panel-group" id="checklist-android">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<span class="glyphicon glyphicon-check"></span>
+					<a data-toggle="collapse" data-parent="#checklist-android" href="#collapse-android-1">
+						Step 1 - Files Copied &amp; Modified
+					</a>
+				</h4>
+			</div>
+			<div id="collapse-android-1" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="media">
+						<div class="pull-right">
+							<img class="thumbnail" src="/assets/img/com-testflight-install-android-plugins.jpg" alt="TestFlight - Android Plugins Folder">
+						</div>
+						<div class="media-body">
+							The following files should be copied into the <strong>Plugins/Android</strong> folder, preferably at the root of your projects <strong>Assets</strong> folder. Something to make a note of is that the AndroidManifest.xml is created for you automatically if you do not already have one present in the folder. If one exists, the install script will add the necessary permissions to it for you.
+							<ul>
+								<li>AndroidManifest.xml</li>
+								<li>res/raw/tf.properties</li>
+								<li>TestFlightLib.jar</li>
+							</ul>
+							If any of these files are missing from the <strong>Plugins/Android</strong> folder after you have used the install menu item, you will more then likely need to copy them there yourself manually. They are available in the <strong>Vendors/TestFlight/Android</strong> and <strong>Extras/TestFlight/Android</strong> folders in the Hydrogen Framework root.
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<span class="glyphicon glyphicon-check"></span>
+					<a data-toggle="collapse" data-parent="#checklist-android" href="#collapse-android-2">
+						Step 2 - Scripting Define Symbol
+					</a>
+				</h4>
+			</div>
+			<div id="collapse-android-2" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="media">
+							<div class="pull-right">
+								<img class="thumbnail" src="/assets/img/com-testflight-install-preprocessor.jpg" alt="TestFlight - Scripting Define Symbols">
+							</div>
+							<div class="media-body">
+								This is an important part of the <em>verification</em> process, as it seems to be the highest point of issue. When the installer runs for a specific platform, it adds the <code>HYDROGEN_TESTFLIGHT</code> symbol to the  <em>Scripting Define Symbols</em> found in the <a href="http://docs.unity3d.com/Documentation/Manual/class-PlayerSettings.html" target="_blank">Unity's Player Settings</a>. This tells our scripts to include the necessary portions of code for that platform and makes everything work nicely (Vague Statements <a href="http://www.urbandictionary.com/define.php?term=ftw" target="_blank">FTW</a>). However, there are times where the Player Settings might get overwritten by another user's commit to a project which accidentally removes this symbol. It is always a good idea to verify the symbol is present for your desired platform if things are not working for you.
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<span class="glyphicon glyphicon-check"></span>
+					<a data-toggle="collapse" data-parent="#checklist-android" href="#collapse-android-3">
+						Step 3 - TestFlight's End
+					</a>
+				</h4>
+			</div>
+			<div id="collapse-android-3" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="media">
+							<div class="pull-right">
+								<img class="thumbnail" src="/assets/img/com-testflight-install-android-apptoken.jpg" alt="TestFlight - Android AppToken">
+							</div>
+							<div class="media-body">
+								<p>The next thing you need to do is make sure that TestFlight is ready to receive data from your application. This entails making sure you've <a href="https://www.testflightapp.com/dashboard/applications/create/" target="_blank">created an App</a> on their end and have put in the correct Bundle Identifier (found in the <a href="http://docs.unity3d.com/Documentation/Manual/class-PlayerSettings.html" target="_blank">Unity's Player Settings</a>).</p>
+								<p>Once you have the App created with TestFlight you will be able to get access to the generated <em>App Token</em>. This is going to be used in the next step, so keep the window open and handy.</p>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  
+  		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">
+					<span class="glyphicon glyphicon-check"></span>
+					<a data-toggle="collapse" data-parent="#checklist-android" href="#collapse-android-4">
+						Step 4 - hTestFlight Or Your Own!
+					</a>
+				</h4>
+			</div>
+			<div id="collapse-android-4" class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="media">
+						<div class="pull-right">
+							<img class="thumbnail" src="/assets/img/com-testflight-install-android-com.jpg" alt="TestFlight - Component">
+						</div>
+						<div class="media-body">
+							<p>Last but not least, you need to add either the lovely drop in Component ({{site.unity_monobehaviour}}) for TestFlight (<code>hTestFlight</code>) to a {{site.unity_gameobject}} or you can implement your own based on <a href="#plugins-testflight">Hydrogen.Plugins.TestFlight</a>.</p>
+							<p>No matter what, your going to need that App Token from TestFlight, and will either put it in the Token Android field of the <code>hTestFlight</code> component or however your implementation takes it. </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+		
+
+    <h2 id="plugins-testflight-usage">Usage</h2>
+	<p>Now that you have gotten all the installation done, it's time to start rocking away with the actual component! For the sake of documentation it is assumed that you are using the provided hTestFlight component. If you have implemented your own version of the <a href="#plugins-testflight">Hydrogen.Plugins.TestFlight</a> class its safe to say that you may not really need to look over these next few sections.</p>
+    <h3 id="plugins-testflight-public-fields">Public Fields</h3>
+    <div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Name</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+	          	<tr>
+	            	<td>{{site.type_bool}}</td>
+					<td>Persistent</td>
+					<td>Should the <code>hTestFlight</code> instance (and it's {{site.unity_gameobject}}) survive scene switches by using <a href="http://docs.unity3d.com/Documentation/ScriptReference/Object.DontDestroyOnLoad.html" target="_blank">GameObject.DontDestroyOnLoad</a>. This will preserve all scripts on its {{site.unity_gameobject}} as well, so please be aware of that behaviour.</td>
+				</tr>
+				<tr>
+	            	<td>{{site.type_string}}</td>
+					<td>TokenIOS</td>
+					<td>The generated App Token for the iOS App registered with TestFlight. You can find this token mentioned in the above <a href="#plugins-testflight-install-ios">iOS Checklist Step 3</a>.</td>					
+				</tr>
+				<tr>
+	            	<td>{{site.type_string}}</td>
+					<td>TokenAndroid</td>
+					<td>The generated App Token for the Android App registered with TestFlight. You can find this token mentioned in the above <a href="#plugins-testflight-install-android">Android Checklist Step 3</a>.</td>
+				</tr>
+			</tbody>
+		</table>
+  	</div>
+  	<h3 id="plugins-testflight-properties">Properties</h3>
+    <div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Access</th>
+					<th>Name</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+	          	<tr>
+	            	<td><em>hTestFlight</em></td>
+	            	<td>get</td>
+					<td>Instance</td>
+					<td>Returns the static <code>hTestFlight</code> instance (<a href="http://msdn.microsoft.com/en-us/library/ms998558.aspx" target="_blank">Thread Safe Singleton</a>).</td>
+				</tr>
+			</tbody>
+		</table>
+  	</div>
+    <h3 id="plugins-testflight-public-methods">Public Methods</h3>
+    
+    <!-- hTestFlight.Exists -->
+    <h4 id="hTestFlight-Exists">{{site.type_static}} {{site.type_bool}} Exists ()</h4>
+    Does a <code>hTestFlight</code> instance exist?
+	<div class="bs-arguments text-muted">
+     None
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Let's see if we are using the hTestFlight component.
+if (hTestFlight.Exists ()) {
+	// Yes - We are that awesome.
+	Debug.Log ("hTestFlight Already Exists");
+}
+{% endhighlight %}
+	</div>  
+	<div class="return">
+		 <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Value</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_bool}}</td>
+            <td class="text-success">true</td>
+            <td>An instance of <code>hTestFlight</code> already exists. This can be handy to simply check from other classes if <code>hTestFlight</code> is being used, for piping debug output to TestFlight for example.</td>        
+          </tr>
+          <tr>
+            <td>{{site.type_bool}}</td>
+            <td class="text-danger">false</td>
+            <td>An instance of <code>hTestFlight</code> does not exist, and therefore must be created or instantiated via a prefab.</td>
+          </tr>
+        </tbody>
+      </table>
+	</div>  
+    
+    <!-- hTestFlight.Instance.AddCustomEnvironmentInformation -->
+    <h4 id="hTestFlight-Instance-AddCustomEnvironmentInformation_key_data">{{site.type_void}} AddCustomEnvironmentInformation ({{site.type_string}} key, {{site.type_string}} data) <span class="label label-primary">iOS ONLY</span></h4>
+    Adds an entry into the Key-Value store for this TestFlight session.
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>key</td>
+            <td>The Key</td>          
+          </tr>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>data</td>
+            <td>The Data</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Example Data
+string userName = "Batman";
+
+// Somehow we've managed to detected that Batman is our user.
+if (userName == "Batman") {
+	// We need to report this ... RIGHT NOW!
+	hTestFlight.Instance.AddCustomEnvironmentInformation ("User", userName);
+}
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>  	
+
+	<!-- hTestFlight.Instance.Log -->
+    <h4 id="hTestFlight-Instance-Log_message">{{site.type_void}} Log ({{site.type_string}} message)</h4>
+   Send a message to TestFlight to appear in it's console.
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>message</td>
+            <td>The message to be sent to and logged by TestFlight. </td>          
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Example Data
+int batRepellent;
+
+// Does Batman have repellent?
+if (batRepellent <= 0) {
+	hTestFlight.Instance.Log ("Error! Batman Doesn't Have A Repellent For This!");
+}
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>     
+    
+	<!-- hTestFlight.Instance.LogAsync -->
+	<h4 id="hTestFlight-Instance-LogAsync_message">{{site.type_void}} LogAsync ({{site.type_string}} message) <span class="label label-primary">iOS ONLY</h4>
+	Send a message to TestFlight asynchronously to appear in it's console.
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>message</td>
+            <td>The message to be sent to and logged by TestFlight. </td>          
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Example Data
+bool moreBatRepellent;
+
+// Does Batman have more repellent?
+if (!moreBatRepellent) {
+	hTestFlight.Instance.LogAsync ("Error! Batman Doesn't Have More Repellent!");
+}
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>
+
+	<!-- hTestFlight.Instance.PassCheckpoint -->
+	<h4 id="hTestFlight-Instance-PassCheckpoint_checkpoint">{{site.type_void}} PassCheckpoint ({{site.type_string}} checkpoint)</h4>
+	Report to TestFlight that the session has passed a Checkpoint.
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>checkpoint</td>
+            <td>This is the checkpoint that should be reported to TestFlight. This can be any {{site.type_string}} that you want, but it is recommended that you stick to meaningful descriptive entries.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Example Data
+int buttonCount;
+bool buttonPressed;
+
+// Loop for no reason whatsoever
+while (buttonCount < 100) {
+	// Magic!
+	buttonPressed = true;
+	
+	// Did Batman press the button?
+	if (buttonPressed) {
+		buttonCount++;
+		buttonPressed = false;
+	}
+}
+
+// Report that Batman has wasted time! and lots of it.
+hTestFlight.Instance.PassChcckpoint ("Batman Pressed The Button 100 Times");
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>
+	
+	<!-- hTestFlight.Instance.SubmitFeedback -->
+	<h4 id="hTestFlight-Instance-SubmitFeedback_message">{{site.type_void}} SubmitFeedback ({{site.type_string}} message) <span class="label label-primary">iOS ONLY</h4>
+	Submits a feedback message for the App to TestFlight.
+	<div class="bs-arguments">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{site.type_string}}</td>
+            <td>message</td>
+            <td>User provided feedback on the current App, or your own if you want to have some fun.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>    	
+	<div class="method">
+{% highlight csharp %}
+// Example Data
+string userFeedback = "I loved your app! It's AWESOME! SHUT UP AND TAKE MY MONEY!";
+
+// Do we have any feedback?
+if (!string.IsNullOrEmpty (userFeedback)) {
+	hTestFlight.Instance.SubmitFeedback (userFeedback);
+}
+{% endhighlight %}
+	</div>  
+	<div class="return text-muted">
+		Nothing
+	</div>
+  </div>

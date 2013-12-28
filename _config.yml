@@ -40,6 +40,19 @@ cdn_css:          //netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.cs
 cdn_theme_css:    //netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css
 cdn_js:           //netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js
 
+hydrogen_audiostack:		<a href="#core-audiostack">Hydrogen.Core.AudioStack</a>
+hydrogen_audiostackitem:	<a href="#core-audiostack-audiostackitem">Hydrogen.Core.AudioStackItem</a>
+
+
+unity_audioclip: 		<a href="http://docs.unity3d.com/Documentation/ScriptReference/AudioClip.html" target="_blank">AudioClip</a>
+unity_audioclips: 		<a href="http://docs.unity3d.com/Documentation/ScriptReference/AudioClip.html" target="_blank">AudioClips</a>
+unity_audiosource: 		<a href="http://docs.unity3d.com/Documentation/ScriptReference/AudioSource.html" target="_blank">AudioSource</a>
+unity_gameobject:		<a href="http://docs.unity3d.com/Documentation/ScriptReference/GameObject.html" target="_blank">GameObject</a>
+unity_gameobjects: 		<a href="http://docs.unity3d.com/Documentation/ScriptReference/GameObject.html" target="_blank">GameObjects</a>
+unity_monobehaviour:	<a href="http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html" target="_blank">MonoBehaviour</a>
+unity_monobehaviours:	<a href="http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html" target="_blank">MonoBehaviours</a>
+
+
 type_static:	<a href="http://msdn.microsoft.com/en-us/library/98f28cdx.aspx" target="_blank">static</a>
 type_void: 		<a href="http://msdn.microsoft.com/en-us/library/yah0tteb.aspx" target="_blank">void</a>
 type_string:	 <a href="http://msdn.microsoft.com/en-us/library/362314fe.aspx" target="_blank">string</a>
