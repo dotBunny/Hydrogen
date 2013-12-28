@@ -104,16 +104,28 @@ namespace Hydrogen.Core
 				/// </summary>
 				public float TargetVolume = 1f;
 
+				/// <summary>
+				/// Initializes a new instance of the <see cref="Hydrogen.Core.AudioStackItem"/> class.
+				/// </summary>
 				public AudioStackItem ()
 				{
 				}
 
+				/// <summary>
+				/// Initializes a new instance of the <see cref="Hydrogen.Core.AudioStackItem"/> class.
+				/// </summary>
+				/// <param name="clip">An AudioClip</param>
 				public AudioStackItem (AudioClip clip)
 				{
 						Clip = clip;
 						Key = clip.name;
 				}
 
+				/// <summary>
+				/// Initializes a new instance of the <see cref="Hydrogen.Core.AudioStackItem"/> class.
+				/// </summary>
+				/// <param name="clip">An AudioClip.</param>
+				/// <param name="loop">Should the AudioSource loop?</param>
 				public AudioStackItem (AudioClip clip, bool loop)
 				{
 						Clip = clip;
@@ -121,12 +133,23 @@ namespace Hydrogen.Core
 						Loop = loop;
 				}
 
+				/// <summary>
+				/// Initializes a new instance of the <see cref="Hydrogen.Core.AudioStackItem"/> class.
+				/// </summary>
+				/// <param name="clip">An AudioClip.</param>
+				/// <param name="key">Designate Reference Key.</param>
 				public AudioStackItem (AudioClip clip, string key)
 				{
 						Clip = clip;
 						Key = key;
 				}
 
+				/// <summary>
+				/// Initializes a new instance of the <see cref="Hydrogen.Core.AudioStackItem"/> class.
+				/// </summary>
+				/// <param name="clip">An AudioClip.</param>
+				/// <param name="key">Designate Reference Key.</param>
+				/// <param name="loop">Should the AudioSource loop?</param>
 				public AudioStackItem (AudioClip clip, string key, bool loop)
 				{
 						Clip = clip;
@@ -134,6 +157,25 @@ namespace Hydrogen.Core
 						Loop = loop;
 				}
 
+				/// <summary>
+				/// Instruct the AudioSource to Pause playback.
+				/// </summary>
+				public void Pause ()
+				{
+						Source.Pause ();
+				}
+
+				/// <summary>
+				/// Instruct the AudioSource to play the currently loaded clip from its currently set position.
+				/// </summary>
+				public void Play ()
+				{
+						Source.Play ();
+				}
+
+				/// <summary>
+				/// Process / Update our AudioStackItem
+				/// </summary>
 				public void Process ()
 				{
 						if (Source == null || Clip == null)
@@ -164,16 +206,9 @@ namespace Hydrogen.Core
 						}
 				}
 
-				public void Play ()
-				{
-						Source.Play ();
-				}
-
-				public void Pause ()
-				{
-						Source.Pause ();
-				}
-
+				/// <summary>
+				/// Instruct the AudioSource to Stop playback, reseting the position in the clip.
+				/// </summary>
 				public void Stop ()
 				{
 						Source.Stop ();

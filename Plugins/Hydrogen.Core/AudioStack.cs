@@ -39,19 +39,19 @@ namespace Hydrogen.Core
 		public class AudioStack : MonoBehaviour
 		{
 				/// <summary>
-				/// Minimum number of sources to have in total (Stack + Playing).
-				/// </summary>
-				public int MinimumSources = 10;
-				/// <summary>
 				/// Maximum number of sources to have in total (Stack + Playing).
 				/// </summary>
 				public int MaximumSources = 20;
+				/// <summary>
+				/// Minimum number of sources to have in total (Stack + Playing).
+				/// </summary>
+				public int MinimumSources = 10;
 				/// <summary>
 				/// Should the stack look at the priority of the existing Audio Stack Items playing, and if the stack is
 				/// full stop the lowest and use it's newly available source to play the new item.
 				/// </summary>
 				/// <remarks>This will ignore any playing sources that are set to loop.</remarks>
-				public bool UsePriorities = false;
+				public bool UsePriorities;
 				/// <summary>
 				/// A Stack of Audio Sources
 				/// </summary>
@@ -66,6 +66,14 @@ namespace Hydrogen.Core
 				GameObject _poolObject;
 
 				/// <summary>
+				/// Gets all currently loaded AudioStackItems.
+				/// </summary>
+				/// <value>The loaded AudioStackItems with their associated keys.</value>
+				public Dictionary<string, AudioStackItem> LoadedItems {
+						get { return _loadedItems; }
+				}
+
+				/// <summary>
 				/// The number of currently used AudioSources.
 				/// </summary>
 				/// <value>Used AudioSource Count.</value>
@@ -73,61 +81,39 @@ namespace Hydrogen.Core
 						get { return _loadedItems.Count; }
 				}
 
-				public Dictionary<string, AudioStackItem> LoadedItems {
-						get { return _loadedItems; }
-				}
-
-				public bool IsLoaded (AudioClip clip)
-				{
-						return clip != null && _loadedItems.ContainsKey (clip.name);
-
-				}
-
 				/// <summary>
-				/// Is the AudioStackItem currently loaded?
+				/// Add/Load an AudioStackItem
 				/// </summary>
-				/// <returns><c>true</c> if the AudioStackItem is loaded; otherwise, <c>false</c>.</returns>
-				/// <param name="item">Target AudioStackItem.</param>
-				public bool IsLoaded (AudioStackItem item)
-				{
-						return item != null && IsLoaded (item.Key);
-				}
-
-				public bool IsLoaded (string key)
-				{
-						return key != null && _loadedItems.ContainsKey (key);
-				}
-
-				public bool IsPlaying (AudioClip clip)
-				{	
-						return IsLoaded (clip.name) && _loadedItems [clip.name].Source.isPlaying;
-				}
-
-				public bool IsPlaying (AudioStackItem item)
-				{
-						return item != null && item.Source != null && item.Source.isPlaying;
-				}
-
-				public bool IsPlaying (string key)
-				{
-						return key != null && IsLoaded (key) && _loadedItems [key].Source.isPlaying;
-				}
-
+				/// <param name="clip">An AudioClip to be used to create a new AudioStackItem from.</param>
 				public string Add (AudioClip clip)
 				{
 						return Add (new AudioStackItem (clip), false);
 				}
 
-				public string Add (AudioClip clip, bool forceDuplicate)
+				/// <summary>
+				/// Add/Load an AudioStackItem
+				/// </summary>
+				/// <param name="clip">An AudioClip to be used to create a new AudioStackItem from.</param>
+				/// <param name="createDuplicate">Create a duplicate entry if need be.</param>
+				public string Add (AudioClip clip, bool createDuplicate)
 				{
-						return Add (new AudioStackItem (clip), forceDuplicate);
+						return Add (new AudioStackItem (clip), createDuplicate);
 				}
 
+				/// <summary>
+				/// Add/Load an AudioStackItem
+				/// </summary>
+				/// <param name="item">An AudioStackItem.</param>
 				public string Add (AudioStackItem item)
 				{
 						return Add (item, false);
 				}
 
+				/// <summary>
+				/// Add/Load an AudioStackItem
+				/// </summary>
+				/// <param name="item">An AudioStackItem.</param>
+				/// <param name="createDuplicate">Create a duplicate entry if need be.</param>
 				public string Add (AudioStackItem item, bool createDuplicate)
 				{
 						if (IsLoaded (item.Key) && !createDuplicate) {
@@ -176,9 +162,7 @@ namespace Hydrogen.Core
 										item.Stack = this;
 
 										item.Source = _audioSources.Pop () as AudioSource;
-
-// Update Our Source
-								
+										// Update Our Source
 										item.Source.clip = item.Clip;
 										item.Source.volume = item.StartVolume;
 										item.Source.loop = item.Loop;
@@ -218,6 +202,71 @@ namespace Hydrogen.Core
 						return item.Key;
 				}
 
+				/// <summary>
+				/// Determines whether an AudioClip is currently loaded and managed by the AudioStack.
+				/// </summary>
+				/// <returns>Is the AudioClip present in the AudioStack?</returns>
+				/// <param name="clip">An AudioClip.</param>
+				public bool IsLoaded (AudioClip clip)
+				{
+						return clip != null && _loadedItems.ContainsKey (clip.name);
+				}
+
+				/// <summary>
+				/// Determines whether an AudioStackItem is currently loaded and managed by the AudioStack.
+				/// </summary>
+				/// <returns>Is the AudioStackItem present in the AudioStack?</returns>
+				/// <param name="item">An AudioStackItem.</param>
+				public bool IsLoaded (AudioStackItem item)
+				{
+						return item != null && IsLoaded (item.Key);
+				}
+
+				/// <summary>
+				/// Determines whether there is something loaded in the AudioStack based on the reference key.
+				/// </summary>
+				/// <returns>Is something loaded and associate to the target key.</returns>
+				/// <param name="key">Target Key.</param>
+				public bool IsLoaded (string key)
+				{
+						return key != null && _loadedItems.ContainsKey (key);
+				}
+
+				/// <summary>
+				/// Determines whether an AudioClip is playing.
+				/// </summary>
+				/// <returns>Is the AudioClip playing?</returns>
+				/// <remarks>Must be playing through a managed AudioSource.</remarks>
+				/// <param name="clip">An AudioClip.</param>
+				public bool IsPlaying (AudioClip clip)
+				{	
+						return IsLoaded (clip.name) && _loadedItems [clip.name].Source.isPlaying;
+				}
+
+				/// <summary>
+				/// Determines whether an AudioStackItem is playing.
+				/// </summary>
+				/// <returns>Is the AudioStackItem playing?</returns>
+				/// <param name="item">An AudioStackItem.</param>
+				public bool IsPlaying (AudioStackItem item)
+				{
+						return item != null && item.Source != null && item.Source.isPlaying;
+				}
+
+				/// <summary>
+				/// Determines whether an AudioStackItem is playing by reference to the specified key.
+				/// </summary>
+				/// <returns>Is the AudioStackItem referenced by the specified key?</returns>
+				/// <param name="key">Target Key.</param>
+				public bool IsPlaying (string key)
+				{
+						return key != null && IsLoaded (key) && _loadedItems [key].Source.isPlaying;
+				}
+
+				/// <summary>
+				/// Removes the specified AudioClip and its associated AudioStackItem from the AudioStack.
+				/// </summary>
+				/// <param name="clip">An AudioClip.</param>
 				public void Remove (AudioClip clip)
 				{
 						if (IsLoaded (clip)) {
@@ -225,6 +274,10 @@ namespace Hydrogen.Core
 						}
 				}
 
+				/// <summary>
+				/// Removes the specified AudioStackItem from the AudioStack.
+				/// </summary>
+				/// <param name="item">An AudioStackItem.</param>
 				public void Remove (AudioStackItem item)
 				{
 						if (!IsLoaded (item))
@@ -244,6 +297,17 @@ namespace Hydrogen.Core
 
 						// Free Item
 						item = null;
+				}
+
+				/// <summary>
+				/// Remove the AudioStackItem associated to the specified key in the AudioStack.
+				/// </summary>
+				/// <param name="key">Target Key.</param>
+				public void Remove (string key)
+				{
+						if (IsLoaded (key)) {
+								Remove (_loadedItems [key]);
+						}
 				}
 
 				/// <summary>
