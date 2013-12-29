@@ -1,50 +1,63 @@
 # Settings
-safe: true
-lsi: false
+safe: 						true
+lsi: 						false
 
 # Dependencies
-markdown:         rdiscount
-pygments:         true
+markdown:         			rdiscount
+pygments:         			true
 
 # Permalinks
-permalink:        pretty
+permalink:        			pretty
 
 # Server
-destination:      ./_gh_pages
-exclude:          [".editorconfig", ".gitignore", "bower.json", "composer.json", "CONTRIBUTING.md", "CNAME", "LICENSE", "Gruntfile.js", "package.json", "node_modules", "README.md", "less"]
-port:             9001
+destination:				./_gh_pages
+exclude:          			[".editorconfig", ".gitignore", "bower.json", "composer.json", "CONTRIBUTING.md", "CNAME", "LICENSE", "Gruntfile.js", "package.json", "node_modules", "README.md", "less"]
+port:             			9001
 
-# Custom vars
-current_version:  			1.2.5
-repo:            			https://github.com/dotBunny/Hydrogen
-repo_releases:	  			https://github.com/dotBunny/Hydrogen/releases
-repo_package:	  			https://github.com/dotBunny/Hydrogen-Package
-repo_fork:		  			https://github.com/dotBunny/Hydrogen/fork
 
-testflight_ios_version:	 	2.2.0
-testflight_android_version:	1.3
+# ===============================
+# ===== CUSTOM REPLACEMENTS =====
+# ===============================
 
-asset_store:	  			https://www.assetstore.unity3d.com/#/content/10311
-examples_store:	  			https://www.assetstore.unity3d.com/#/content/10311
-examples_repo:				https://github.com/dotBunny/Hydrogen-Examples
+# Versions
+version_hydrogen:  			1.2.5
+version_testflight_ios:	 	2.2.0
+version_testflight_android:	1.3
 
-download_source:  			https://github.com/dotBunny/Hydrogen/archive/master.zip
-download_dist:    			https://github.com/dotBunny/Hydrogen-Package/archive/v1.1.0.zip
-
+# Website Links
 dotbunny:	      			http://dotbunny.com
 blog:             			http://dotbunny.com/blog
 unityforge:		  			http://unityforge.net
 
+# Hydrogen Repository Links
+github_hydrogen:            https://github.com/dotBunny/Hydrogen
+github_hydrogen_releases:	https://github.com/dotBunny/Hydrogen/releases
+github_hydrogen_fork:		https://github.com/dotBunny/Hydrogen/fork
+github_hydrogen_source:  	https://github.com/dotBunny/Hydrogen/archive/master.zip
+
+# Hydrogen Examples Repository Links
+github_hydrogen_examples:	https://github.com/dotBunny/Hydrogen-Examples
+
+# Hydrogen 'Master' Package Repository Links
+github_hydrogen_package:	https://github.com/dotBunny/Hydrogen-Package
+
+# Asset Store Links
+as_hydrogen:	  			https://www.assetstore.unity3d.com/#/content/10311
+as_hydrogen_examples:		https://www.assetstore.unity3d.com/#/content/10311
+
+# CDN Links
 cdn_css:          			//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css
 cdn_theme_css:    			//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css
 cdn_js:           			//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js
 
-hydrogen_audiostack:		<a href="#core-audiostack">Hydrogen.Core.AudioStack</a>
-hydrogen_audiostackitem:	<a href="#core-audiostack-audiostackitem">Hydrogen.Core.AudioStackItem</a>
-hydrogen_webpool:			<a href="#core-webpool">Hydrogen.Core.WebPool</a>
-hydrogen_objectpool:		<a href="#core-objectpool">Hydrogen.Core.ObjectPool</a>
-hydrogen_formbinarydata:	<a href="#hWebPool-FormBinaryData">Hydrogen.Core.WebPool.FormBinaryData</a>
+# Component Internal Links
+component_audiostack:		<a href="#core-audiostack">Hydrogen.Core.AudioStack</a>
+component_audiostackitem:	<a href="#core-audiostack-audiostackitem">Hydrogen.Core.AudioStackItem</a>
+component_webpool:			<a href="#core-webpool">Hydrogen.Core.WebPool</a>
+component_objectpool:		<a href="#core-objectpool">Hydrogen.Core.ObjectPool</a>
+component_formbinarydata:	<a href="#hWebPool-FormBinaryData">Hydrogen.Core.WebPool.FormBinaryData</a>
 
+# Unity Links
 unity_audioclip: 			<a href="http://docs.unity3d.com/Documentation/ScriptReference/AudioClip.html" target="_blank">AudioClip</a>
 unity_audioclips: 			<a href="http://docs.unity3d.com/Documentation/ScriptReference/AudioClip.html" target="_blank">AudioClips</a>
 unity_audiosource: 			<a href="http://docs.unity3d.com/Documentation/ScriptReference/AudioSource.html" target="_blank">AudioSource</a>
@@ -53,6 +66,7 @@ unity_gameobjects: 			<a href="http://docs.unity3d.com/Documentation/ScriptRefer
 unity_monobehaviour:		<a href="http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html" target="_blank">MonoBehaviour</a>
 unity_monobehaviours:		<a href="http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html" target="_blank">MonoBehaviours</a>
 
+# MSDN Links
 msdn_byte:					<a href="http://msdn.microsoft.com/en-us/library/5bdb6693.aspx" target="_blank">byte</a>
 msdn_struct:				<a href="http://msdn.microsoft.com/en-us/library/ah19swz4.aspx" target="_blank">struct</a>
 msdn_static:				<a href="http://msdn.microsoft.com/en-us/library/98f28cdx.aspx" target="_blank">static</a>
