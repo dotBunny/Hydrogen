@@ -21,7 +21,7 @@
 	<p>From as simple as handling UI sound effects to the managing of a complex ambient soundscape, the {{site.hydrogen_audiostack}} can do it all at the same time! This system allows for anyone to easily play 2D {{site.unity_audioclips}} on demand or cached in the most optimal way possible. When an {{site.hydrogen_audiostackitem}} is told to be played, the system intelligently picks an available {{site.unity_audiosource}} to play the {{site.hydrogen_audiostackitem}}, and when completed returns the {{site.unity_audiosource}} back to the stack for future use.</p>
 	<p>The <code>hAudioStack</code> Singleton creates an instance of {{site.hydrogen_audiostack}} which can be globally accessed via <code>hAudioStack.Instance</code>.</p>
 	
-	<h2 id="core-audiostack-audiostackitem">AudioStackItem</h2>
+	<h3 id="core-audiostack-audiostackitem">AudioStackItem</h3>
 	<p>The {{site.hydrogen_audiostackitem}} class is a representation of all information related to a particular {{site.unity_audioclip}} playing, both in and outside of the <code>hAudioStack</code>.</p>
 	<p>When you use <a href="#hAudioStack-Instance-Add-clip"><code>hAudioStack.Instance.Add</code></a> and pass it an {{site.unity_audioclip}}, a new instance of a {{site.hydrogen_audiostackitem}} will be created on the fly for you related to the information passed through arguments to it and subsequently use it appropriately. The class has numerous fields and methods publicly accessible, however it should not often be managed directly as the <code>hAudioStack</code> handles all of it automatically in most cases.</p>
 	

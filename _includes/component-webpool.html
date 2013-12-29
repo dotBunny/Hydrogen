@@ -23,18 +23,6 @@
 		<h4>ObjectPool Required</h4>
 		<p>The {{site.hydrogen_webpool}} relies on the {{site.hydrogen_objectpool}} to enable the pooling side of things. It will automatically create one in the scene at runtime if there is not one present.</p>
 	</div>
-	<h2 id="core-webpool-formbinarydata">FormBinaryData</h2>
-	<p>When dealing with binary data on a FORM, Hydrogen utilizes a handy {{site.type_struct}} to facilitate packaging of the corresponding data.</p> 
-{% highlight csharp %}
-public struct FormBinaryData
-{
-	public string FieldName;
-	public byte[] Data;
-	public string FileName;
-	public string MimeType;
-}
-{% endhighlight %}	
-	<p>This {{site.type_struct}} is available in {{site.hydrogen_webpool}}.</p>
 	<h2 id="core-webpool-usage">Usage</h2>
 	<p>The guiding principle is that you can fire off as many web calls as you would like (limited by the the pool size), and the {{site.hydrogen_webpool}} will manage and handle the rest for you. Eventually we would like to see this being done entirely on a separate thread, however that would require including System.Net, which has a rather hefty distribution size.</p>
     <h3 id="core-webpool-public-fields">Public Fields</h3>
@@ -161,7 +149,7 @@ hWebPool.Instance.Form("http://api.unityforge.net/", formData);
 	</div>  
     
     <!-- hWebPool.Instance.Form -->
-    <h4 id="hWebPool-Instance-Form_URI_formStringData_formBinaryData_cookie_callback">{{site.type_void}} Form ({{site.type_string}} URI, {{site.type_dictionary}}&#60;{{site.type_string}},{{site.type_string}}&#62; formStringData, FormBinaryData[] formBinaryData, {{site.type_string}} cookie, {{site.type_action}}&#60;{{site.type_int}}, {{site.type_hashtable}}, {{site.type_string}}&#62; callback)</h4>
+    <h4 id="hWebPool-Instance-Form_URI_formStringData_formBinaryData_cookie_callback">{{site.type_void}} Form ({{site.type_string}} URI, {{site.type_dictionary}}&#60;{{site.type_string}},{{site.type_string}}&#62; formStringData, <a href="#hWebPool-FormBinaryData">FormBinaryData</a>[] formBinaryData, {{site.type_string}} cookie, {{site.type_action}}&#60;{{site.type_int}}, {{site.type_hashtable}}, {{site.type_string}}&#62; callback)</h4>
     HTTP POST Form to URI.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -583,4 +571,46 @@ public void MailChimpCallback (int hash, Hashtable responseHeaders, string respo
 	<div class="return text-muted">
 		Nothing
 	</div>  
+	
+	<h3 id="core-webpool-public-structs">Public Structs</h3>
+	<h4 id="hWebPool-FormBinaryData">FormBinaryData</h3>
+	<p>When dealing with binary data on a FORM, {{site.hydrogen_webpool}} utilizes a handy {{site.type_struct}} to facilitate packaging of the corresponding data.</p> 
+	 <div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Name</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+	          	<tr>
+	            	<td>{{site.type_string}}</td>
+					<td>FieldName</td>
+					<td>The name of the form field.</td>
+				</tr>
+				<tr>
+	            	<td>{{site.type_byte}}[]</td>
+					<td>Data</td>
+					<td>The {{site.type_byte}} data to populate that field with.</td>
+				</tr>
+				<tr>
+	            	<td>{{site.type_string}}</td>
+					<td>FileName</td>
+					<td>The file name of the data that has been populated.</td>
+				</tr>
+				<tr>
+	            	<td>{{site.type_string}}</td>
+					<td>MimeType</td>
+					<td>The <a href="http://en.wikipedia.org/wiki/Internet_media_type" target="_blank">internet media type</a> of the data.</td>
+				</tr>
+			</tbody>
+		</table>
+  	</div>
   </div>
+  
+  
+  
+  
+  

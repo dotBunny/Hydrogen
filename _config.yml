@@ -26,6 +26,7 @@ testflight_android_version:		1.3
 
 asset_store:	  https://www.assetstore.unity3d.com/#/content/10311
 examples_store:	  https://www.assetstore.unity3d.com/#/content/10311
+examples_repo:		https://github.com/dotBunny/Hydrogen-Examples
 
 download_source:  https://github.com/dotBunny/Hydrogen/archive/master.zip
 download_dist:    https://github.com/dotBunny/Hydrogen-Package/archive/v1.1.0.zip
@@ -54,6 +55,7 @@ unity_gameobjects: 		<a href="http://docs.unity3d.com/Documentation/ScriptRefere
 unity_monobehaviour:	<a href="http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html" target="_blank">MonoBehaviour</a>
 unity_monobehaviours:	<a href="http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html" target="_blank">MonoBehaviours</a>
 
+type_byte:		<a href="http://msdn.microsoft.com/en-us/library/5bdb6693.aspx" target="_blank">byte</a>
 type_struct:	<a href="http://msdn.microsoft.com/en-us/library/ah19swz4.aspx" target="_blank">struct</a>
 type_static:	<a href="http://msdn.microsoft.com/en-us/library/98f28cdx.aspx" target="_blank">static</a>
 type_void: 		<a href="http://msdn.microsoft.com/en-us/library/yah0tteb.aspx" target="_blank">void</a>
