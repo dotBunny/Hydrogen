@@ -52,7 +52,8 @@ namespace Hydrogen.Plugins
 						Session = false;
 						Flying = false;
 
-						TestFlight_Initialize (SystemInfo.deviceUniqueIdentifier);
+				//TestFlight_Initialize (SystemInfo.deviceUniqueIdentifier);
+				TestFlight_Initialize ();
 				}
 
 				[DllImport ("__Internal")]
@@ -126,6 +127,7 @@ namespace Hydrogen.Plugins
 
 
 
+
 #elif HYDROGEN_TESTFLIGHT && UNITY_ANDROID && !UNITY_EDITOR
 				static AndroidJavaClass _testFlight;
 				static AndroidJavaClass _unityPlayer;
@@ -182,6 +184,7 @@ namespace Hydrogen.Plugins
 						_testFlight.CallStatic ("startSession");
 						Session = true;
 				}
+
 
 
 

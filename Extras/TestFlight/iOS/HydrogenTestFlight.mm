@@ -3,15 +3,15 @@
 #include "TestFlight+ManualSessions.h"
 
 
-extern "C" void TestFlight_Initialize(char* deviceUniqueIdentifier)
+extern "C" void TestFlight_Initialize() //char* deviceUniqueIdentifier)
 {
     // Manual Session Control
     [TestFlight setOptions:@{ TFOptionManualSessions : @YES }];
     
     // Lets use Unity's device identifier for kicks
-     NSString *stringFromChar = [NSString stringWithCString:deviceUniqueIdentifier encoding:NSASCIIStringEncoding];
+    //NSString *stringFromChar = [NSString stringWithCString:deviceUniqueIdentifier encoding:NSASCIIStringEncoding];
     
-    [TestFlight setDeviceIdentifier:stringFromChar];
+    //[TestFlight setDeviceIdentifier:stringFromChar];
 }
 extern "C" void TestFlight_TakeOff(char* token)
 {

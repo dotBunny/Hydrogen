@@ -1,3 +1,8 @@
+##1.3 - November 18, 2013
+
+* Fixed bug that prevented takeOff from outside Application class.
+* Removed redundant requests on session start.
+
 ##1.2 - October 1, 2013
 
 * Fixed bug where offline session events might be associated with the wrong build version.

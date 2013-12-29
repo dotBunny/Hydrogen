@@ -1,3 +1,26 @@
+## 2.2
+
+- Restore In App Updates
+- Automatic identification of beta testers
+
+## 2.1.3
+
+- Fix bug in 2.1.2-noadid which caused adid to be collected
+
+## 2.1.2
+
+- Fix for bug that caused events to not get sent properly when using the `TFOptionSessionKeepAliveTimeout` option
+- Fix for bug that caused logs that were sent immediately after start session to sometimes not be sent to server
+
+## 2.1.1
+
+- Create sdk version that removes all access to `ASIdentifierManager`
+- Add UIDevice's `identifierForVendor`
+
+## 2.1
+
+- Full support for the iPhone 5s’ ARM64 processor while still supporting down to iOS 4.3
+
 ## 2.0.2
 
 - Fixed a bug where the sdk would cause an app's CPU usage to rise significantly if the device had no internet connection when the app started
