@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../hydrogen-logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Hydrogen Framework
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.5</span>
    </div>
   </td>
  </tr>
@@ -141,21 +141,21 @@ $(document).ready(function(){initNavTree('de/d26/h_input_8cs_source.html','../..
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">        /// Should this input manager survive scene switches?</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="../../d6/d4c/classh_input.html#af1816458aca7fcab5d4978e3039421de">   42</a></span>&#160;<span class="comment"></span>        <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="../../d6/d4c/classh_input.html#af1816458aca7fcab5d4978e3039421de">Presistant</a> = <span class="keyword">true</span>;<span class="comment"></span></div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="../../d6/d4c/classh_input.html#ae7cc1050a6ea18a9963a70a80f8f80ab">   42</a></span>&#160;<span class="comment"></span>        <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="../../d6/d4c/classh_input.html#ae7cc1050a6ea18a9963a70a80f8f80ab">Persistent</a> = <span class="keyword">true</span>;<span class="comment"></span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">        /// Internal reference to the static instance of the input manager.</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">        /// Internal fail safe to maintain instance across threads.</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"></span>        <span class="keyword">static</span> <span class="keyword">volatile</span> <a class="code" href="../../d6/d4c/classh_input.html">hInput</a> _staticInstance;<span class="comment"></span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">        /// Internal fail safe to maintain instance across threads.</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">        /// &lt;remarks&gt;</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">        /// Multithreaded Safe Singleton Pattern.</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">        /// &lt;/remarks&gt;</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">        /// &lt;description&gt;</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">        /// http://msdn.microsoft.com/en-us/library/ms998558.aspx</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">        /// &lt;/description&gt;</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span>        <span class="keyword">static</span> readonly System.Object _syncRoot = <span class="keyword">new</span> System.Object ();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">        /// &lt;remarks&gt;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">        /// Multithreaded Safe Singleton Pattern.</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">        /// &lt;/remarks&gt;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">        /// &lt;description&gt;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">        /// http://msdn.microsoft.com/en-us/library/ms998558.aspx</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">        /// &lt;/description&gt;</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"></span>        <span class="keyword">static</span> readonly System.Object _syncRoot = <span class="keyword">new</span> System.Object ();<span class="comment"></span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">        /// Internal reference to the static instance of the input manager.</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span>        <span class="keyword">static</span> <span class="keyword">volatile</span> <a class="code" href="../../d6/d4c/classh_input.html">hInput</a> _staticInstance;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">        /// Gets the input manager instance, creating one if none is found.</span></div>
@@ -184,38 +184,38 @@ $(document).ready(function(){initNavTree('de/d26/h_input_8cs_source.html','../..
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        }</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">        /// Unity&#39;s Awake Event</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">        /// Does an Input Manager already exist?</span></div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="../../d6/d4c/classh_input.html#a0c8bde50ae6adb371c30f43d3ab96837">   87</a></span>&#160;<span class="comment"></span>        <span class="keyword">protected</span> <span class="keyword">override</span> <span class="keywordtype">void</span> <a class="code" href="../../d6/d4c/classh_input.html#a0c8bde50ae6adb371c30f43d3ab96837">Awake</a> ()</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="../../d6/d4c/classh_input.html#ac8165c424b23599b44059a86c872f8e7">   87</a></span>&#160;<span class="comment"></span>        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="../../d6/d4c/classh_input.html#ac8165c424b23599b44059a86c872f8e7">Exists</a> ()</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                <span class="comment">// Make sure to do the object pools normal initialization</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                base.Awake ();</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                <span class="comment">// Should this gameObject be kept around :) I think so.</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="../../d6/d4c/classh_input.html#af1816458aca7fcab5d4978e3039421de">Presistant</a>)</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                        DontDestroyOnLoad (gameObject);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        }</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">        /// Does an Input Manager already exist?</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="../../d6/d4c/classh_input.html#ac8165c424b23599b44059a86c872f8e7">  100</a></span>&#160;<span class="comment"></span>        <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="../../d6/d4c/classh_input.html#ac8165c424b23599b44059a86c872f8e7">Exists</a> ()</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                <span class="keywordflow">return</span> _staticInstance != null;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                <span class="keywordflow">return</span> _staticInstance != null;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        }</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">        /// Unity&#39;s Awake Event</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="line" href="../../d6/d4c/classh_input.html#a0c8bde50ae6adb371c30f43d3ab96837">   95</a></span>&#160;<span class="comment"></span>        <span class="keyword">protected</span> <span class="keyword">override</span> <span class="keywordtype">void</span> <a class="code" href="../../d6/d4c/classh_input.html#a0c8bde50ae6adb371c30f43d3ab96837">Awake</a> ()</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="comment">// Make sure to do the object pools normal initialization</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                base.Awake ();</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                <span class="comment">// Should this gameObject be kept around :) I think so.</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="../../d6/d4c/classh_input.html#ae7cc1050a6ea18a9963a70a80f8f80ab">Persistent</a>)</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                        DontDestroyOnLoad (gameObject);</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        }</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
-<div class="ttc" id="classh_input_html_ac8165c424b23599b44059a86c872f8e7"><div class="ttname"><a href="../../d6/d4c/classh_input.html#ac8165c424b23599b44059a86c872f8e7">hInput.Exists</a></div><div class="ttdeci">static bool Exists()</div><div class="ttdoc">Does an Input Manager already exist? </div><div class="ttdef"><b>Definition:</b> <a href="../../de/d26/h_input_8cs_source.html#l00100">hInput.cs:100</a></div></div>
-<div class="ttc" id="classh_input_html_a0c8bde50ae6adb371c30f43d3ab96837"><div class="ttname"><a href="../../d6/d4c/classh_input.html#a0c8bde50ae6adb371c30f43d3ab96837">hInput.Awake</a></div><div class="ttdeci">override void Awake()</div><div class="ttdoc">Unity&amp;#39;s Awake Event </div><div class="ttdef"><b>Definition:</b> <a href="../../de/d26/h_input_8cs_source.html#l00087">hInput.cs:87</a></div></div>
+<div class="ttc" id="classh_input_html_ac8165c424b23599b44059a86c872f8e7"><div class="ttname"><a href="../../d6/d4c/classh_input.html#ac8165c424b23599b44059a86c872f8e7">hInput.Exists</a></div><div class="ttdeci">static bool Exists()</div><div class="ttdoc">Does an Input Manager already exist? </div><div class="ttdef"><b>Definition:</b> <a href="../../de/d26/h_input_8cs_source.html#l00087">hInput.cs:87</a></div></div>
+<div class="ttc" id="classh_input_html_a0c8bde50ae6adb371c30f43d3ab96837"><div class="ttname"><a href="../../d6/d4c/classh_input.html#a0c8bde50ae6adb371c30f43d3ab96837">hInput.Awake</a></div><div class="ttdeci">override void Awake()</div><div class="ttdoc">Unity&amp;#39;s Awake Event </div><div class="ttdef"><b>Definition:</b> <a href="../../de/d26/h_input_8cs_source.html#l00095">hInput.cs:95</a></div></div>
 <div class="ttc" id="classh_input_html"><div class="ttname"><a href="../../d6/d4c/classh_input.html">hInput</a></div><div class="ttdoc">A drop in implementation of the Hydrogen.Peripherals.Input manager. This simply makes the class an ac...</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d26/h_input_8cs_source.html#l00037">hInput.cs:37</a></div></div>
 <div class="ttc" id="classh_input_html_a61fa6963077bf42da7970078750cba52"><div class="ttname"><a href="../../d6/d4c/classh_input.html#a61fa6963077bf42da7970078750cba52">hInput.Instance</a></div><div class="ttdeci">static hInput Instance</div><div class="ttdoc">Gets the input manager instance, creating one if none is found. </div><div class="ttdef"><b>Definition:</b> <a href="../../de/d26/h_input_8cs_source.html#l00064">hInput.cs:64</a></div></div>
-<div class="ttc" id="classh_input_html_af1816458aca7fcab5d4978e3039421de"><div class="ttname"><a href="../../d6/d4c/classh_input.html#af1816458aca7fcab5d4978e3039421de">hInput.Presistant</a></div><div class="ttdeci">bool Presistant</div><div class="ttdoc">Should this input manager survive scene switches? </div><div class="ttdef"><b>Definition:</b> <a href="../../de/d26/h_input_8cs_source.html#l00042">hInput.cs:42</a></div></div>
+<div class="ttc" id="classh_input_html_ae7cc1050a6ea18a9963a70a80f8f80ab"><div class="ttname"><a href="../../d6/d4c/classh_input.html#ae7cc1050a6ea18a9963a70a80f8f80ab">hInput.Persistent</a></div><div class="ttdeci">bool Persistent</div><div class="ttdoc">Should this input manager survive scene switches? </div><div class="ttdef"><b>Definition:</b> <a href="../../de/d26/h_input_8cs_source.html#l00042">hInput.cs:42</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_84bbf7b3c7f28a5a18725745e1505219.html">Assets</a></li><li class="navelem"><a class="el" href="../../dir_b28097260afe8574b8406ba7dfbb81e6.html">Hydrogen Framework</a></li><li class="navelem"><a class="el" href="../../dir_27bfb49e10942b2337de158651d24362.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../dir_1e2f3b5c4cee9ad835ae412ed9f36005.html">Components</a></li><li class="navelem"><a class="el" href="../../dir_0eb54b2cf6b06665411fe74d87430885.html">Hydrogen.Peripherals</a></li><li class="navelem"><b>hInput.cs</b></li>
-    <li class="footer">Generated on Mon Dec 9 2013 00:53:08 for Hydrogen Framework by
+    <li class="footer">Generated on Sat Dec 28 2013 20:32:46 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

@@ -4,6 +4,7 @@ var searchData=
   ['clampangle',['ClampAngle',['../d3/d69/class_hydrogen_1_1_math.html#af21749151a9f683113d63050962fa723',1,'Hydrogen::Math']]],
   ['clearcontrols',['ClearControls',['../d9/d31/class_hydrogen_1_1_peripherals_1_1_input.html#a06d8436c8d898f8faaa7d053fdeadac1',1,'Hydrogen::Peripherals::Input']]],
   ['clone_3c_20t_20_3e',['Clone&lt; T &gt;',['../d0/d2b/class_hydrogen_1_1_memory.html#ad80a2567ac857c22a776ccdb79629d7f',1,'Hydrogen::Memory']]],
+  ['colorpercentage',['ColorPercentage',['../d0/da0/class_hydrogen_1_1_validate.html#acef0153bdbe7f73b99c50695063838e6',1,'Hydrogen::Validate']]],
   ['contains_3c_20t_20_3e',['Contains&lt; T &gt;',['../d9/d04/class_hydrogen_1_1_array.html#adbd5d4e6c63963c1f1a61f32f8896bec',1,'Hydrogen::Array']]],
   ['containslayer',['ContainsLayer',['../de/db6/class_hydrogen_1_1_layers.html#a42ec9bc36a93c83f2d87da855997cde8',1,'Hydrogen::Layers']]],
   ['createcontrol',['CreateControl',['../d3/d0a/class_hydrogen_1_1_peripherals_1_1_input_control_base.html#a3c30bbcae8cae76b94d592c54812c09d',1,'Hydrogen::Peripherals::InputControlBase']]],

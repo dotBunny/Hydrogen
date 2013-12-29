@@ -18,14 +18,25 @@
 	</ol>
     <h2 id="core-webpool-overview">Overview</h2>
 	<p>Why does making a simple REST API (for example) call require more then a single line of code? No more we say! We have created a system that provides a "fire and forget" solution to Unity when it comes to web based interactions via GET, POST, and FORM data.</p>
-	<p>The <a href="#core-webpool">hWebPool</a> Singleton creates an instance of <a href="#core-webpool">Hydrogen.Plugins.WebPool</a> which can be globally accessed via <code>hWebPool.Instance</code>.</p>
+	<p>The <a href="#core-webpool">hWebPool</a> Singleton creates an instance of {{site.hydrogen_webpool}} which can be globally accessed via <code>hWebPool.Instance</code>.</p>
 	<div class="bs-callout bs-callout-warning" id="callout-less-compilation">
 		<h4>ObjectPool Required</h4>
-		<p>The <a href="#core-webpool">Hydrogen.Core.WebPool</a> relies on the <a href="#core-objectpool">Hydrogen.Core.ObjectPool</a> to enable the pooling side of things. It will automatically create one in the scene at runtime if there is not one present.</p>
+		<p>The {{site.hydrogen_webpool}} relies on the {{site.hydrogen_objectpool}} to enable the pooling side of things. It will automatically create one in the scene at runtime if there is not one present.</p>
 	</div>
-	
+	<h2 id="core-webpool-formbinarydata">FormBinaryData</h2>
+	<p>When dealing with binary data on a FORM, Hydrogen utilizes a handy {{site.type_struct}} to facilitate packaging of the corresponding data.</p> 
+{% highlight csharp %}
+public struct FormBinaryData
+{
+	public string FieldName;
+	public byte[] Data;
+	public string FileName;
+	public string MimeType;
+}
+{% endhighlight %}	
+	<p>This {{site.type_struct}} is available in {{site.hydrogen_webpool}}.</p>
 	<h2 id="core-webpool-usage">Usage</h2>
-	<p>The guiding principle is that you can fire off as many web calls as you would like (limited by the the pool size), and the <a href="#core-webpool">Hydrogen.Core.WebPool</a> will manage and handle the rest for you. Eventually we would like to see this being done entirely on a separate thread, however that would require including System.Net, which has a rather hefty distribution size.</p>
+	<p>The guiding principle is that you can fire off as many web calls as you would like (limited by the the pool size), and the {{site.hydrogen_webpool}} will manage and handle the rest for you. Eventually we would like to see this being done entirely on a separate thread, however that would require including System.Net, which has a rather hefty distribution size.</p>
     <h3 id="core-webpool-public-fields">Public Fields</h3>
     <div class="table-responsive">
 		<table class="table table-striped">

@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../hydrogen-logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Hydrogen Framework
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.5</span>
    </div>
   </td>
  </tr>
@@ -138,30 +138,30 @@ $(document).ready(function(){initNavTree('d1/d82/_x_m_l_8cs_source.html','../../
 <div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="../../d3/d67/class_hydrogen_1_1_x_m_l.html">   36</a></span>&#160;<span class="comment"></span>        <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="../../d3/d67/class_hydrogen_1_1_x_m_l.html">XML</a></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        {<span class="comment"></span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">                /// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">                /// To convert a Byte Array of Unicode values (UTF-8 encoded) to a complete String.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">                /// Converts the String to UTF8 Byte array and is used in Deserialization.</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">                /// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">                /// &lt;returns&gt;String converted from Unicode Byte Array&lt;/returns&gt;</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">                /// &lt;param name=&quot;characters&quot;&gt;Unicode Byte Array to be converted to String&lt;/param&gt;</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="../../d3/d67/class_hydrogen_1_1_x_m_l.html#a567c0ecfa624ded3316366141306d853">   43</a></span>&#160;<span class="comment"></span>                <span class="keyword">public</span> <span class="keyword">static</span> String <a class="code" href="../../d3/d67/class_hydrogen_1_1_x_m_l.html#a567c0ecfa624ded3316366141306d853">UTF8ByteArrayToString</a> (Byte[] characters)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">                /// &lt;returns&gt;A byte array.&lt;/returns&gt;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">                /// &lt;param name=&quot;pXmlString&quot;&gt;The source string.&lt;/param&gt;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="../../d3/d67/class_hydrogen_1_1_x_m_l.html#a7e20cdf499cda2c08beeb61a0b60b6c7">   43</a></span>&#160;<span class="comment"></span>                <span class="keyword">public</span> <span class="keyword">static</span> Byte[] <a class="code" href="../../d3/d67/class_hydrogen_1_1_x_m_l.html#a7e20cdf499cda2c08beeb61a0b60b6c7">StringToUTF8ByteArray</a> (String pXmlString)</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                {</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                        var encoding = <span class="keyword">new</span> System.Text.UTF8Encoding ();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                        <span class="keywordflow">return</span> encoding.GetString (characters);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                        <span class="keywordflow">return</span> encoding.GetBytes (pXmlString);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                }</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">                /// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">                /// Converts the String to UTF8 Byte array and is used in Deserialization</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">                /// To convert a Byte Array of Unicode values (UTF-8 encoded) to a complete String.</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">                /// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">                /// &lt;returns&gt;A byte array&lt;/returns&gt;</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">                /// &lt;param name=&quot;pXmlString&quot;&gt;The source string&lt;/param&gt;</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="../../d3/d67/class_hydrogen_1_1_x_m_l.html#a7e20cdf499cda2c08beeb61a0b60b6c7">   54</a></span>&#160;<span class="comment"></span>                <span class="keyword">public</span> <span class="keyword">static</span> Byte[] <a class="code" href="../../d3/d67/class_hydrogen_1_1_x_m_l.html#a7e20cdf499cda2c08beeb61a0b60b6c7">StringToUTF8ByteArray</a> (String pXmlString)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">                /// &lt;returns&gt;String converted from Unicode Byte Array.&lt;/returns&gt;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">                /// &lt;param name=&quot;characters&quot;&gt;Unicode Byte Array to be converted to String.&lt;/param&gt;</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="../../d3/d67/class_hydrogen_1_1_x_m_l.html#a567c0ecfa624ded3316366141306d853">   54</a></span>&#160;<span class="comment"></span>                <span class="keyword">public</span> <span class="keyword">static</span> String <a class="code" href="../../d3/d67/class_hydrogen_1_1_x_m_l.html#a567c0ecfa624ded3316366141306d853">UTF8ByteArrayToString</a> (Byte[] characters)</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                {</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                        var encoding = <span class="keyword">new</span> System.Text.UTF8Encoding ();</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                        <span class="keywordflow">return</span> encoding.GetBytes (pXmlString);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                        <span class="keywordflow">return</span> encoding.GetString (characters);</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                }</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
-<div class="ttc" id="class_hydrogen_1_1_x_m_l_html_a567c0ecfa624ded3316366141306d853"><div class="ttname"><a href="../../d3/d67/class_hydrogen_1_1_x_m_l.html#a567c0ecfa624ded3316366141306d853">Hydrogen.XML.UTF8ByteArrayToString</a></div><div class="ttdeci">static String UTF8ByteArrayToString(Byte[] characters)</div><div class="ttdoc">To convert a Byte Array of Unicode values (UTF-8 encoded) to a complete String. </div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d82/_x_m_l_8cs_source.html#l00043">XML.cs:43</a></div></div>
-<div class="ttc" id="class_hydrogen_1_1_x_m_l_html_a7e20cdf499cda2c08beeb61a0b60b6c7"><div class="ttname"><a href="../../d3/d67/class_hydrogen_1_1_x_m_l.html#a7e20cdf499cda2c08beeb61a0b60b6c7">Hydrogen.XML.StringToUTF8ByteArray</a></div><div class="ttdeci">static Byte[] StringToUTF8ByteArray(String pXmlString)</div><div class="ttdoc">Converts the String to UTF8 Byte array and is used in Deserialization </div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d82/_x_m_l_8cs_source.html#l00054">XML.cs:54</a></div></div>
+<div class="ttc" id="class_hydrogen_1_1_x_m_l_html_a567c0ecfa624ded3316366141306d853"><div class="ttname"><a href="../../d3/d67/class_hydrogen_1_1_x_m_l.html#a567c0ecfa624ded3316366141306d853">Hydrogen.XML.UTF8ByteArrayToString</a></div><div class="ttdeci">static String UTF8ByteArrayToString(Byte[] characters)</div><div class="ttdoc">To convert a Byte Array of Unicode values (UTF-8 encoded) to a complete String. </div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d82/_x_m_l_8cs_source.html#l00054">XML.cs:54</a></div></div>
+<div class="ttc" id="class_hydrogen_1_1_x_m_l_html_a7e20cdf499cda2c08beeb61a0b60b6c7"><div class="ttname"><a href="../../d3/d67/class_hydrogen_1_1_x_m_l.html#a7e20cdf499cda2c08beeb61a0b60b6c7">Hydrogen.XML.StringToUTF8ByteArray</a></div><div class="ttdeci">static Byte[] StringToUTF8ByteArray(String pXmlString)</div><div class="ttdoc">Converts the String to UTF8 Byte array and is used in Deserialization. </div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d82/_x_m_l_8cs_source.html#l00043">XML.cs:43</a></div></div>
 <div class="ttc" id="class_hydrogen_1_1_x_m_l_html"><div class="ttname"><a href="../../d3/d67/class_hydrogen_1_1_x_m_l.html">Hydrogen.XML</a></div><div class="ttdoc">Additional static functions used to extend existing XML support inside of Unity. </div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d82/_x_m_l_8cs_source.html#l00036">XML.cs:36</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -169,7 +169,7 @@ $(document).ready(function(){initNavTree('d1/d82/_x_m_l_8cs_source.html','../../
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_84bbf7b3c7f28a5a18725745e1505219.html">Assets</a></li><li class="navelem"><a class="el" href="../../dir_b28097260afe8574b8406ba7dfbb81e6.html">Hydrogen Framework</a></li><li class="navelem"><a class="el" href="../../dir_27bfb49e10942b2337de158651d24362.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../dir_f456ffc0c0cbfbbdb67b3854d7def5c9.html">Plugins</a></li><li class="navelem"><a class="el" href="../../dir_29d6c47995713fa156ad9d8c4212e447.html">Hydrogen</a></li><li class="navelem"><b>XML.cs</b></li>
-    <li class="footer">Generated on Mon Dec 9 2013 00:53:09 for Hydrogen Framework by
+    <li class="footer">Generated on Sat Dec 28 2013 20:32:46 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

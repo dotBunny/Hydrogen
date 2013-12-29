@@ -1,6 +1,7 @@
 var hierarchy =
 [
     [ "Hydrogen.Array", "d9/d04/class_hydrogen_1_1_array.html", null ],
+    [ "Hydrogen.Core.AudioStackItem", "dd/d0e/class_hydrogen_1_1_core_1_1_audio_stack_item.html", null ],
     [ "Hydrogen.Components", "d5/da1/class_hydrogen_1_1_components.html", null ],
     [ "Hydrogen.Core.WebPool.FormBinaryData", "df/d8b/struct_hydrogen_1_1_core_1_1_web_pool_1_1_form_binary_data.html", null ],
     [ "Hydrogen.Serialization.INI", "d3/da4/class_hydrogen_1_1_serialization_1_1_i_n_i.html", null ],
@@ -18,6 +19,9 @@ var hierarchy =
     [ "Hydrogen.Mesh", "d7/de6/class_hydrogen_1_1_mesh.html", null ],
     [ "MonoBehaviour", null, [
       [ "hTestFlight", "d3/dcb/classh_test_flight.html", null ],
+      [ "Hydrogen.Core.AudioStack", "da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html", [
+        [ "hAudioStack", "db/d29/classh_audio_stack.html", null ]
+      ] ],
       [ "Hydrogen.Core.ObjectPool", "d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html", [
         [ "hObjectPool", "de/d7c/classh_object_pool.html", null ]
       ] ],

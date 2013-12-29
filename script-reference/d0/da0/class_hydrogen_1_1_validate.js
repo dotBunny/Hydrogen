@@ -1,5 +1,6 @@
 var class_hydrogen_1_1_validate =
 [
+    [ "ColorPercentage", "d0/da0/class_hydrogen_1_1_validate.html#acef0153bdbe7f73b99c50695063838e6", null ],
     [ "IsColorApproximatelySame", "d0/da0/class_hydrogen_1_1_validate.html#a3d9ec8a4eeb9d17d9d3ba0f050f4e2b6", null ],
     [ "IsDictionaryEqual< TKey, TValue >", "d0/da0/class_hydrogen_1_1_validate.html#ae7418fc45199cd2a6e887cc9bbf91f8b", null ],
     [ "IsNumericType", "d0/da0/class_hydrogen_1_1_validate.html#a470ebf36ee6e4336d078d4a3c62649e0", null ],

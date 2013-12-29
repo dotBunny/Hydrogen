@@ -21,8 +21,8 @@ repo_releases:	  https://github.com/dotBunny/Hydrogen/releases
 repo_package:	  https://github.com/dotBunny/Hydrogen-Package
 repo_fork:		  https://github.com/dotBunny/Hydrogen/fork
 
-testflight_ios_version:	 		2.0.2
-testflight_android_version:		1.2
+testflight_ios_version:	 		2.2.0
+testflight_android_version:		1.3
 
 asset_store:	  https://www.assetstore.unity3d.com/#/content/10311
 examples_store:	  https://www.assetstore.unity3d.com/#/content/10311
@@ -42,6 +42,8 @@ cdn_js:           //netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js
 
 hydrogen_audiostack:		<a href="#core-audiostack">Hydrogen.Core.AudioStack</a>
 hydrogen_audiostackitem:	<a href="#core-audiostack-audiostackitem">Hydrogen.Core.AudioStackItem</a>
+hydrogen_webpool:			<a href="#core-webpool">Hydrogen.Core.WebPool</a>
+hydrogen_objectpool:		<a href="#core-objectpool">Hydrogen.Core.ObjectPool</a>
 
 
 unity_audioclip: 		<a href="http://docs.unity3d.com/Documentation/ScriptReference/AudioClip.html" target="_blank">AudioClip</a>
@@ -52,7 +54,7 @@ unity_gameobjects: 		<a href="http://docs.unity3d.com/Documentation/ScriptRefere
 unity_monobehaviour:	<a href="http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html" target="_blank">MonoBehaviour</a>
 unity_monobehaviours:	<a href="http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html" target="_blank">MonoBehaviours</a>
 
-
+type_struct:	<a href="http://msdn.microsoft.com/en-us/library/ah19swz4.aspx" target="_blank">struct</a>
 type_static:	<a href="http://msdn.microsoft.com/en-us/library/98f28cdx.aspx" target="_blank">static</a>
 type_void: 		<a href="http://msdn.microsoft.com/en-us/library/yah0tteb.aspx" target="_blank">void</a>
 type_string:	 <a href="http://msdn.microsoft.com/en-us/library/362314fe.aspx" target="_blank">string</a>

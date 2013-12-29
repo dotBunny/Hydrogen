@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../hydrogen-logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Hydrogen Framework
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.2.5</span>
    </div>
   </td>
  </tr>
@@ -140,21 +140,21 @@ $(document).ready(function(){initNavTree('d8/d7c/h_object_pool_8cs_source.html',
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">        /// Should this object pool survive scene switches?</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="../../de/d7c/classh_object_pool.html#a0b2979b66c21784efa995dc5a275453b">   41</a></span>&#160;<span class="comment"></span>        <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="../../de/d7c/classh_object_pool.html#a0b2979b66c21784efa995dc5a275453b">Presistant</a> = <span class="keyword">true</span>;<span class="comment"></span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="../../de/d7c/classh_object_pool.html#ae64034edd63ec29fd75b05e932fc805e">   41</a></span>&#160;<span class="comment"></span>        <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="../../de/d7c/classh_object_pool.html#ae64034edd63ec29fd75b05e932fc805e">Persistent</a> = <span class="keyword">true</span>;<span class="comment"></span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">        /// Internal reference to the static instance of the object pool.</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">        /// Internal fail safe to maintain instance across threads.</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span>        <span class="keyword">static</span> <span class="keyword">volatile</span> <a class="code" href="../../de/d7c/classh_object_pool.html">hObjectPool</a> _staticInstance;<span class="comment"></span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">        /// Internal fail safe to maintain instance across threads.</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">        /// &lt;remarks&gt;</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">        /// Multithreaded Safe Singleton Pattern.</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">        /// &lt;/remarks&gt;</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">        /// &lt;description&gt;</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">        /// http://msdn.microsoft.com/en-us/library/ms998558.aspx</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">        /// &lt;/description&gt;</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span>        <span class="keyword">static</span> readonly System.Object _syncRoot = <span class="keyword">new</span> System.Object ();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">        /// &lt;remarks&gt;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">        /// Multithreaded Safe Singleton Pattern.</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">        /// &lt;/remarks&gt;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">        /// &lt;description&gt;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">        /// http://msdn.microsoft.com/en-us/library/ms998558.aspx</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">        /// &lt;/description&gt;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"></span>        <span class="keyword">static</span> readonly System.Object _syncRoot = <span class="keyword">new</span> System.Object ();<span class="comment"></span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">        /// Internal reference to the static instance of the object pool.</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span>        <span class="keyword">static</span> <span class="keyword">volatile</span> <a class="code" href="../../de/d7c/classh_object_pool.html">hObjectPool</a> _staticInstance;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">        /// Gets the object pool instance, creating one if none is found.</span></div>
@@ -199,15 +199,15 @@ $(document).ready(function(){initNavTree('d8/d7c/h_object_pool_8cs_source.html',
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                base.Awake ();</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                <span class="comment">// Should this gameObject be kept around :) I think so.</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="../../de/d7c/classh_object_pool.html#a0b2979b66c21784efa995dc5a275453b">Presistant</a>)</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="../../de/d7c/classh_object_pool.html#ae64034edd63ec29fd75b05e932fc805e">Persistent</a>)</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                        DontDestroyOnLoad (gameObject);</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        }</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
 <div class="ttc" id="classh_object_pool_html_a6be34edd90497857846b88957dc16779"><div class="ttname"><a href="../../de/d7c/classh_object_pool.html#a6be34edd90497857846b88957dc16779">hObjectPool.Exists</a></div><div class="ttdeci">static bool Exists()</div><div class="ttdoc">Does an Object Pool already exist? </div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d7c/h_object_pool_8cs_source.html#l00086">hObjectPool.cs:86</a></div></div>
-<div class="ttc" id="classh_object_pool_html_a0b2979b66c21784efa995dc5a275453b"><div class="ttname"><a href="../../de/d7c/classh_object_pool.html#a0b2979b66c21784efa995dc5a275453b">hObjectPool.Presistant</a></div><div class="ttdeci">bool Presistant</div><div class="ttdoc">Should this object pool survive scene switches? </div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d7c/h_object_pool_8cs_source.html#l00041">hObjectPool.cs:41</a></div></div>
 <div class="ttc" id="classh_object_pool_html_a8aec7baa35624f9771fcc483b333b7de"><div class="ttname"><a href="../../de/d7c/classh_object_pool.html#a8aec7baa35624f9771fcc483b333b7de">hObjectPool.Instance</a></div><div class="ttdeci">static hObjectPool Instance</div><div class="ttdoc">Gets the object pool instance, creating one if none is found. </div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d7c/h_object_pool_8cs_source.html#l00063">hObjectPool.cs:63</a></div></div>
 <div class="ttc" id="classh_object_pool_html_a8070f85ec6a66e5f52b14eb5205110f1"><div class="ttname"><a href="../../de/d7c/classh_object_pool.html#a8070f85ec6a66e5f52b14eb5205110f1">hObjectPool.Awake</a></div><div class="ttdeci">override void Awake()</div><div class="ttdoc">Unity&amp;#39;s Awake Event </div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d7c/h_object_pool_8cs_source.html#l00094">hObjectPool.cs:94</a></div></div>
+<div class="ttc" id="classh_object_pool_html_ae64034edd63ec29fd75b05e932fc805e"><div class="ttname"><a href="../../de/d7c/classh_object_pool.html#ae64034edd63ec29fd75b05e932fc805e">hObjectPool.Persistent</a></div><div class="ttdeci">bool Persistent</div><div class="ttdoc">Should this object pool survive scene switches? </div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d7c/h_object_pool_8cs_source.html#l00041">hObjectPool.cs:41</a></div></div>
 <div class="ttc" id="classh_object_pool_html"><div class="ttname"><a href="../../de/d7c/classh_object_pool.html">hObjectPool</a></div><div class="ttdoc">A drop in implementation of the Hydrogen.Core.ObjectPool. This simply makes the class an accessible s...</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d7c/h_object_pool_8cs_source.html#l00036">hObjectPool.cs:36</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
@@ -215,7 +215,7 @@ $(document).ready(function(){initNavTree('d8/d7c/h_object_pool_8cs_source.html',
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../dir_84bbf7b3c7f28a5a18725745e1505219.html">Assets</a></li><li class="navelem"><a class="el" href="../../dir_b28097260afe8574b8406ba7dfbb81e6.html">Hydrogen Framework</a></li><li class="navelem"><a class="el" href="../../dir_27bfb49e10942b2337de158651d24362.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../dir_1e2f3b5c4cee9ad835ae412ed9f36005.html">Components</a></li><li class="navelem"><a class="el" href="../../dir_a8b36307de1c986159b60476a75e2185.html">Hydrogen.Core</a></li><li class="navelem"><b>hObjectPool.cs</b></li>
-    <li class="footer">Generated on Mon Dec 9 2013 00:53:08 for Hydrogen Framework by
+    <li class="footer">Generated on Sat Dec 28 2013 20:32:46 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>
