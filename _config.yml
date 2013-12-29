@@ -15,7 +15,7 @@ exclude:          [".editorconfig", ".gitignore", "bower.json", "composer.json",
 port:             9001
 
 # Custom vars
-current_version:  1.1.1
+current_version:  1.2.5
 repo:             https://github.com/dotBunny/Hydrogen
 repo_releases:	  https://github.com/dotBunny/Hydrogen/releases
 repo_package:	  https://github.com/dotBunny/Hydrogen-Package
