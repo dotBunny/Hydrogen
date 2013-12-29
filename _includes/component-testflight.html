@@ -263,17 +263,17 @@
 			</thead>
 			<tbody>
 	          	<tr>
-	            	<td>{{site.type_bool}}</td>
+	            	<td>{{site.msdn_bool}}</td>
 					<td>Persistent</td>
 					<td>Should the <code>hTestFlight</code> instance (and it's {{site.unity_gameobject}}) survive scene switches by using <a href="http://docs.unity3d.com/Documentation/ScriptReference/Object.DontDestroyOnLoad.html" target="_blank">GameObject.DontDestroyOnLoad</a>. This will preserve all scripts on its {{site.unity_gameobject}} as well, so please be aware of that behaviour.</td>
 				</tr>
 				<tr>
-	            	<td>{{site.type_string}}</td>
+	            	<td>{{site.msdn_string}}</td>
 					<td>TokenIOS</td>
 					<td>The generated App Token for the iOS App registered with TestFlight. You can find this token mentioned in the above <a href="#plugins-testflight-install-ios">iOS Checklist Step 3</a>.</td>					
 				</tr>
 				<tr>
-	            	<td>{{site.type_string}}</td>
+	            	<td>{{site.msdn_string}}</td>
 					<td>TokenAndroid</td>
 					<td>The generated App Token for the Android App registered with TestFlight. You can find this token mentioned in the above <a href="#plugins-testflight-install-android">Android Checklist Step 3</a>.</td>
 				</tr>
@@ -304,7 +304,7 @@
     <h3 id="plugins-testflight-public-methods">Public Methods</h3>
     
     <!-- hTestFlight.Exists -->
-    <h4 id="hTestFlight-Exists">{{site.type_static}} {{site.type_bool}} Exists ()</h4>
+    <h4 id="hTestFlight-Exists">{{site.msdn_static}} {{site.msdn_bool}} Exists ()</h4>
     Does a <code>hTestFlight</code> instance exist?
 	<div class="bs-arguments text-muted">
      None
@@ -329,12 +329,12 @@ if (hTestFlight.Exists ()) {
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td class="text-success">true</td>
             <td>An instance of <code>hTestFlight</code> already exists. This can be handy to simply check from other classes if <code>hTestFlight</code> is being used, for piping debug output to TestFlight for example.</td>        
           </tr>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td class="text-danger">false</td>
             <td>An instance of <code>hTestFlight</code> does not exist, and therefore must be created or instantiated via a prefab.</td>
           </tr>
@@ -343,7 +343,7 @@ if (hTestFlight.Exists ()) {
 	</div>  
     
     <!-- hTestFlight.Instance.AddCustomEnvironmentInformation -->
-    <h4 id="hTestFlight-Instance-AddCustomEnvironmentInformation_key_data">{{site.type_void}} AddCustomEnvironmentInformation ({{site.type_string}} key, {{site.type_string}} data) <span class="label label-primary">iOS ONLY</span></h4>
+    <h4 id="hTestFlight-Instance-AddCustomEnvironmentInformation_key_data">{{site.msdn_void}} AddCustomEnvironmentInformation ({{site.msdn_string}} key, {{site.msdn_string}} data) <span class="label label-primary">iOS ONLY</span></h4>
     Adds an entry into the Key-Value store for this TestFlight session.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -356,12 +356,12 @@ if (hTestFlight.Exists ()) {
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_string}}</td>
+            <td>{{site.msdn_string}}</td>
             <td>key</td>
             <td>The Key</td>          
           </tr>
           <tr>
-            <td>{{site.type_string}}</td>
+            <td>{{site.msdn_string}}</td>
             <td>data</td>
             <td>The Data</td>
           </tr>
@@ -385,7 +385,7 @@ if (userName == "Batman") {
 	</div>  	
 
 	<!-- hTestFlight.Instance.Log -->
-    <h4 id="hTestFlight-Instance-Log_message">{{site.type_void}} Log ({{site.type_string}} message)</h4>
+    <h4 id="hTestFlight-Instance-Log_message">{{site.msdn_void}} Log ({{site.msdn_string}} message)</h4>
    Send a message to TestFlight to appear in it's console.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -398,7 +398,7 @@ if (userName == "Batman") {
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_string}}</td>
+            <td>{{site.msdn_string}}</td>
             <td>message</td>
             <td>The message to be sent to and logged by TestFlight. </td>          
           </tr>
@@ -421,7 +421,7 @@ if (batRepellent <= 0) {
 	</div>     
     
 	<!-- hTestFlight.Instance.LogAsync -->
-	<h4 id="hTestFlight-Instance-LogAsync_message">{{site.type_void}} LogAsync ({{site.type_string}} message) <span class="label label-primary">iOS ONLY</h4>
+	<h4 id="hTestFlight-Instance-LogAsync_message">{{site.msdn_void}} LogAsync ({{site.msdn_string}} message) <span class="label label-primary">iOS ONLY</h4>
 	Send a message to TestFlight asynchronously to appear in it's console.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -434,7 +434,7 @@ if (batRepellent <= 0) {
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_string}}</td>
+            <td>{{site.msdn_string}}</td>
             <td>message</td>
             <td>The message to be sent to and logged by TestFlight. </td>          
           </tr>
@@ -457,7 +457,7 @@ if (!moreBatRepellent) {
 	</div>
 
 	<!-- hTestFlight.Instance.PassCheckpoint -->
-	<h4 id="hTestFlight-Instance-PassCheckpoint_checkpoint">{{site.type_void}} PassCheckpoint ({{site.type_string}} checkpoint)</h4>
+	<h4 id="hTestFlight-Instance-PassCheckpoint_checkpoint">{{site.msdn_void}} PassCheckpoint ({{site.msdn_string}} checkpoint)</h4>
 	Report to TestFlight that the session has passed a Checkpoint.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -470,9 +470,9 @@ if (!moreBatRepellent) {
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_string}}</td>
+            <td>{{site.msdn_string}}</td>
             <td>checkpoint</td>
-            <td>This is the checkpoint that should be reported to TestFlight. This can be any {{site.type_string}} that you want, but it is recommended that you stick to meaningful descriptive entries.</td>
+            <td>This is the checkpoint that should be reported to TestFlight. This can be any {{site.msdn_string}} that you want, but it is recommended that you stick to meaningful descriptive entries.</td>
           </tr>
         </tbody>
       </table>
@@ -504,7 +504,7 @@ hTestFlight.Instance.PassChcckpoint ("Batman Pressed The Button 100 Times");
 	</div>
 	
 	<!-- hTestFlight.Instance.SubmitFeedback -->
-	<h4 id="hTestFlight-Instance-SubmitFeedback_message">{{site.type_void}} SubmitFeedback ({{site.type_string}} message) <span class="label label-primary">iOS ONLY</h4>
+	<h4 id="hTestFlight-Instance-SubmitFeedback_message">{{site.msdn_void}} SubmitFeedback ({{site.msdn_string}} message) <span class="label label-primary">iOS ONLY</h4>
 	Submits a feedback message for the App to TestFlight.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -517,7 +517,7 @@ hTestFlight.Instance.PassChcckpoint ("Batman Pressed The Button 100 Times");
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_string}}</td>
+            <td>{{site.msdn_string}}</td>
             <td>message</td>
             <td>User provided feedback on the current App, or your own if you want to have some fun.</td>
           </tr>

@@ -44,22 +44,22 @@
 			</thead>
 			<tbody>
 	          	<tr>
-	            	<td>{{site.type_int}}</td>
+	            	<td>{{site.msdn_int}}</td>
 					<td>MaximumSources</td>
 					<td>Maximum number of sources to have in total (Stack + Playing).</td>
 				</tr>
 	          	<tr>
-	            	<td>{{site.type_int}}</td>
+	            	<td>{{site.msdn_int}}</td>
 					<td>MinimumSources</td>
 					<td>Minimum number of sources to have in total (Stack + Playing).</td>
 				</tr>							
 	          	<tr>
-	            	<td>{{site.type_bool}}</td>
+	            	<td>{{site.msdn_bool}}</td>
 					<td>Persistent</td>
 					<td>Should the <code>hAudioStack</code> instance (and it's {{site.unity_gameobject}}) survive scene switches by using <a href="http://docs.unity3d.com/Documentation/ScriptReference/Object.DontDestroyOnLoad.html" target="_blank">GameObject.DontDestroyOnLoad</a>. This will preserve all scripts on its {{site.unity_gameobject}} as well, so please be aware of that behaviour.</td>
 				</tr>
 	          	<tr>
-	            	<td>{{site.type_bool}}</td>
+	            	<td>{{site.msdn_bool}}</td>
 					<td>UsePriorities</td>
 					<td>Should the stack look at the priority of the existing <a href="#core-audiostack-audiostackitem">AudioStackItems</a> playing, and if the stack is full stop the lowest and use it's newly available source to play the new item. It should be noted that this will ignore any playing sources that are set to loop.</td>
 				</tr>
@@ -85,13 +85,13 @@
 					<td>Returns the static <code>hAudioStack</code> instance (<a href="http://msdn.microsoft.com/en-us/library/ms998558.aspx" target="_blank">Thread Safe Singleton</a>).</td>
 				</tr>
 				<tr>
-	            	<td><em>{{site.type_dictionary}} &#60;{{site.type_string}}, {{site.hydrogen_audiostackitem}}&#62;</em></td>
+	            	<td><em>{{site.msdn_dictionary}} &#60;{{site.msdn_string}}, {{site.hydrogen_audiostackitem}}&#62;</em></td>
 	            	<td>get</td>
 					<td>LoadedItems</td>
 					<td>Gets all currently loaded <a href="#core-audiostack-audiostackitem">AudioStackItems</a>.</td>
 				</tr>
 	          	<tr>
-	            	<td><em>{{site.type_int}}</em></td>
+	            	<td><em>{{site.msdn_int}}</em></td>
 	            	<td>get</td>
 					<td>SourcesCount</td>
 					<td>Returns the number of {{site.unity_audiosources}} currently being used, based on the number of loaded <a href="#core-audiostack-audiostackitem">AudioStackItems</a>.</td>
@@ -102,7 +102,7 @@
     <h3 id="core-audiostack-public-methods">Public Methods</h3>
     
     <!-- hAudioStack.Exists -->
-    <h4 id="hAudioStack-Exists">{{site.type_static}} {{site.type_bool}} Exists ()</h4>
+    <h4 id="hAudioStack-Exists">{{site.msdn_static}} {{site.msdn_bool}} Exists ()</h4>
     Does a <code>hAudioStack</code> instance exist?
 	<div class="bs-arguments text-muted">
      None
@@ -127,12 +127,12 @@ if (hAudioStack.Exists ()) {
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td class="text-success">true</td>
             <td>An instance of <code>hAudioStack</code> already exists. This can be handy to simply check from other classes if <code>hAudioStack</code> is being used.</td>        
           </tr>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td class="text-danger">false</td>
             <td>An instance of <code>hAudioStack</code> does not exist, and therefore must be created or instantiated via a prefab.</td>
           </tr>
@@ -141,7 +141,7 @@ if (hAudioStack.Exists ()) {
 	</div>  
 	
 	<!-- hAudioStack.Instance.Add -->
-    <h4 id="hAudioStack-Instance-Add_clip">{{site.type_string}} Add ({{site.unity_audioclip}} clip)</h4>
+    <h4 id="hAudioStack-Instance-Add_clip">{{site.msdn_string}} Add ({{site.unity_audioclip}} clip)</h4>
     Add/Load an {{site.hydrogen_audiostackitem}} which is created dynamically from the passed {{site.unity_audioclip}}.
 	<div class="bs-arguments">
 	  <table class="table table-bordered table-striped">
@@ -188,15 +188,15 @@ void Awake ()
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_string}}</td>
-            <td>The {{site.type_dictionary}}'s key for future use and reference of the added {{site.hydrogen_audiostackitem}}.</td>        
+            <td>{{site.msdn_string}}</td>
+            <td>The {{site.msdn_dictionary}}'s key for future use and reference of the added {{site.hydrogen_audiostackitem}}.</td>        
           </tr>
         </tbody>
       </table>
 	</div>  
 	
 	<!-- hAudioStack.Instance.Add -->
-    <h4 id="hAudioStack-Instance-Add_clip_createDuplicate">{{site.type_string}} Add ({{site.unity_audioclip}} clip, {{site.type_bool}} createDuplicate)</h4>
+    <h4 id="hAudioStack-Instance-Add_clip_createDuplicate">{{site.msdn_string}} Add ({{site.unity_audioclip}} clip, {{site.msdn_bool}} createDuplicate)</h4>
     Add/Load an {{site.hydrogen_audiostackitem}} which is created dynamically from the passed {{site.unity_audioclip}}.
 	<div class="bs-arguments">
 	  <table class="table table-bordered table-striped">
@@ -214,7 +214,7 @@ void Awake ()
             <td>An {{site.unity_audioclip}} to be used to create a new {{site.hydrogen_audiostackitem}} from.</td>          
           </tr>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td>createDuplicate</td>
             <td>Should a duplicate entry be made, even if an existing {{site.hydrogen_audiostackitem}} is found in the AudioStack? Duplicates will have a custom key generated for them at runtime.</td>          
           </tr>
@@ -248,15 +248,15 @@ void Awake ()
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_string}}</td>
-            <td>The {{site.type_dictionary}}'s key for future use and reference of the added {{site.hydrogen_audiostackitem}}.</td>        
+            <td>{{site.msdn_string}}</td>
+            <td>The {{site.msdn_dictionary}}'s key for future use and reference of the added {{site.hydrogen_audiostackitem}}.</td>        
           </tr>
         </tbody>
       </table>
 	</div>  
 	
 	<!-- hAudioStack.Instance.Add -->
-    <h4 id="hAudioStack-Instance-Add_item">{{site.type_string}} Add ({{site.hydrogen_audiostackitem}} item)</h4>
+    <h4 id="hAudioStack-Instance-Add_item">{{site.msdn_string}} Add ({{site.hydrogen_audiostackitem}} item)</h4>
     Add/Load an {{site.hydrogen_audiostackitem}}.
 	<div class="bs-arguments">
 	  <table class="table table-bordered table-striped">
@@ -307,15 +307,15 @@ void Awake ()
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_string}}</td>
-            <td>The {{site.type_dictionary}}'s key for future use and reference of the added {{site.hydrogen_audiostackitem}}.</td>        
+            <td>{{site.msdn_string}}</td>
+            <td>The {{site.msdn_dictionary}}'s key for future use and reference of the added {{site.hydrogen_audiostackitem}}.</td>        
           </tr>
         </tbody>
       </table>
 	</div>  
 	
 	<!-- hAudioStack.Instance.Add -->
-    <h4 id="hAudioStack-Instance-Add_item_createDuplicate">{{site.type_string}} Add ({{site.hydrogen_audiostackitem}} item, {{site.type_bool}} createDuplicate)</h4>
+    <h4 id="hAudioStack-Instance-Add_item_createDuplicate">{{site.msdn_string}} Add ({{site.hydrogen_audiostackitem}} item, {{site.msdn_bool}} createDuplicate)</h4>
     Add/Load an {{site.hydrogen_audiostackitem}}.
 	<div class="bs-arguments">
 	  <table class="table table-bordered table-striped">
@@ -333,7 +333,7 @@ void Awake ()
             <td>An {{site.hydrogen_audiostackitem}} to be added.</td>          
           </tr>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td>createDuplicate</td>
             <td>Should a duplicate entry be made, even if an existing {{site.hydrogen_audiostackitem}} is found in the AudioStack? Duplicates will have a custom key generated for them at runtime.</td>          
           </tr>          
@@ -371,15 +371,15 @@ void Awake()
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_string}}</td>
-            <td>The {{site.type_dictionary}}'s key for future use and reference of the added {{site.hydrogen_audiostackitem}}.</td>        
+            <td>{{site.msdn_string}}</td>
+            <td>The {{site.msdn_dictionary}}'s key for future use and reference of the added {{site.hydrogen_audiostackitem}}.</td>        
           </tr>
         </tbody>
       </table>
 	</div>  
 	
 	<!-- hAudioStack.Instance.IsLoaded -->
-    <h4 id="hAudioStack-Instance-IsLoaded_clip">{{site.type_bool}} IsLoaded ({{site.unity_audioclip}} clip)</h4>
+    <h4 id="hAudioStack-Instance-IsLoaded_clip">{{site.msdn_bool}} IsLoaded ({{site.unity_audioclip}} clip)</h4>
     Determines whether the {{site.unity_audioclip}} is loaded via a {{site.hydrogen_audiostackitem}} in the {{site.hydrogen_audiostack}}.
 	<div class="bs-arguments">
 	  <table class="table table-bordered table-striped">
@@ -423,12 +423,12 @@ if (hAudioStack.Instance.IsLoaded (ourTarget))
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td class="text-success">true</td>
             <td>The {{site.unity_audioclip}} was found in the {{site.hydrogen_audiostack}}.</td>        
           </tr>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td class="text-danger">false</td>
             <td>The {{site.unity_audioclip}} does not exist in the {{site.hydrogen_audiostack}}.</td>
           </tr>
@@ -437,7 +437,7 @@ if (hAudioStack.Instance.IsLoaded (ourTarget))
 	</div>  
 	
 		<!-- hAudioStack.Instance.IsLoaded -->
-    <h4 id="hAudioStack-Instance-IsLoaded_item">{{site.type_bool}} IsLoaded ({{site.hydrogen_audiostackitem}} item)</h4>
+    <h4 id="hAudioStack-Instance-IsLoaded_item">{{site.msdn_bool}} IsLoaded ({{site.hydrogen_audiostackitem}} item)</h4>
     Determines whether the {{site.hydrogen_audiostackitem}} is in the {{site.hydrogen_audiostack}}.
 	<div class="bs-arguments">
 	  <table class="table table-bordered table-striped">
@@ -481,12 +481,12 @@ if (hAudioStack.Instance.IsLoaded (ourTarget))
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td class="text-success">true</td>
             <td>The {{site.hydrogen_audiostackitem}} was found in the {{site.hydrogen_audiostack}}.</td>        
           </tr>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td class="text-danger">false</td>
             <td>The {{site.hydrogen_audiostackitem}} does not exist in the {{site.hydrogen_audiostack}}.</td>
           </tr>
@@ -495,7 +495,7 @@ if (hAudioStack.Instance.IsLoaded (ourTarget))
 	</div>  
 	
 	<!-- hAudioStack.Instance.IsLoaded -->
-    <h4 id="hAudioStack-Instance-IsLoaded_key">{{site.type_bool}} IsLoaded ({{site.type_string}} key)</h4>
+    <h4 id="hAudioStack-Instance-IsLoaded_key">{{site.msdn_bool}} IsLoaded ({{site.msdn_string}} key)</h4>
     Determines whether something is loaded in the {{site.hydrogen_audiostack}} by reference to it's key.
 	<div class="bs-arguments">
 	  <table class="table table-bordered table-striped">
@@ -508,7 +508,7 @@ if (hAudioStack.Instance.IsLoaded (ourTarget))
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_string}}</td>
+            <td>{{site.msdn_string}}</td>
             <td>key</td>
             <td>The reference key to check against in the {{site.hydrogen_audiostack}}.</td>          
           </tr>   
@@ -536,12 +536,12 @@ if (hAudioStack.Instance.IsLoaded ("myKey"))
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td class="text-success">true</td>
             <td>Something was found in the {{site.hydrogen_audiostack}} using the specified key.</td>        
           </tr>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td class="text-danger">false</td>
             <td>Nothing was found in the {{site.hydrogen_audiostack}} using the specified key.</td>
           </tr>
@@ -550,7 +550,7 @@ if (hAudioStack.Instance.IsLoaded ("myKey"))
 	</div> 
 
 	<!-- hAudioStack.Instance.IsPlaying -->
-    <h4 id="hAudioStack-Instance-IsPlaying_clip">{{site.type_bool}} IsPlaying ({{site.unity_audioclip}} clip)</h4>
+    <h4 id="hAudioStack-Instance-IsPlaying_clip">{{site.msdn_bool}} IsPlaying ({{site.unity_audioclip}} clip)</h4>
     Determines whether the {{site.unity_audioclip}} is playing via a {{site.hydrogen_audiostackitem}} in the {{site.hydrogen_audiostack}}.
 	<div class="bs-arguments">
 	  <table class="table table-bordered table-striped">
@@ -594,12 +594,12 @@ if (hAudioStack.Instance.IsPlaying (ourTarget))
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td class="text-success">true</td>
             <td>The {{site.unity_audioclip}} was playing in the {{site.hydrogen_audiostack}}.</td>        
           </tr>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td class="text-danger">false</td>
             <td>The {{site.unity_audioclip}} was not playing in the {{site.hydrogen_audiostack}}.</td>
           </tr>
@@ -608,7 +608,7 @@ if (hAudioStack.Instance.IsPlaying (ourTarget))
 	</div>  
 	
 	<!-- hAudioStack.Instance.IsPlaying -->
-    <h4 id="hAudioStack-Instance-IsPlaying_item">{{site.type_bool}} IsPlaying ({{site.hydrogen_audiostackitem}} item)</h4>
+    <h4 id="hAudioStack-Instance-IsPlaying_item">{{site.msdn_bool}} IsPlaying ({{site.hydrogen_audiostackitem}} item)</h4>
     Determines whether the {{site.hydrogen_audiostackitem}} is playing in the {{site.hydrogen_audiostack}}.
 	<div class="bs-arguments">
 	  <table class="table table-bordered table-striped">
@@ -652,12 +652,12 @@ if (hAudioStack.Instance.IsPlaying (ourTarget))
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td class="text-success">true</td>
             <td>The {{site.hydrogen_audiostackitem}} was playing in the {{site.hydrogen_audiostack}}.</td>        
           </tr>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td class="text-danger">false</td>
             <td>The {{site.hydrogen_audiostackitem}} was not playing in the {{site.hydrogen_audiostack}}.</td>
           </tr>
@@ -666,7 +666,7 @@ if (hAudioStack.Instance.IsPlaying (ourTarget))
 	</div>  
 	
 	<!-- hAudioStack.Instance.IsPlaying -->
-    <h4 id="hAudioStack-Instance-IsPlaying_key">{{site.type_bool}} IsPlaying ({{site.type_string}} key)</h4>
+    <h4 id="hAudioStack-Instance-IsPlaying_key">{{site.msdn_bool}} IsPlaying ({{site.msdn_string}} key)</h4>
     Determines whether something is playing in the {{site.hydrogen_audiostack}} by reference to it's key.
 	<div class="bs-arguments">
 	  <table class="table table-bordered table-striped">
@@ -679,7 +679,7 @@ if (hAudioStack.Instance.IsPlaying (ourTarget))
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_string}}</td>
+            <td>{{site.msdn_string}}</td>
             <td>key</td>
             <td>The reference key to check against in the {{site.hydrogen_audiostack}}.</td>          
           </tr>   
@@ -707,12 +707,12 @@ if (hAudioStack.Instance.IsPlaying ("myKey"))
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td class="text-success">true</td>
             <td>Something was playing in the {{site.hydrogen_audiostack}} using the specified key.</td>        
           </tr>
           <tr>
-            <td>{{site.type_bool}}</td>
+            <td>{{site.msdn_bool}}</td>
             <td class="text-danger">false</td>
             <td>Nothing was playing in the {{site.hydrogen_audiostack}} using the specified key.</td>
           </tr>
@@ -721,7 +721,7 @@ if (hAudioStack.Instance.IsPlaying ("myKey"))
 	</div>
 		
 	<!-- hAudioStack.Instance.Remove -->
-    <h4 id="hAudioStack-Instance-Remove_clip">{{site.type_void}} Remove ({{site.unity_audioclip}} clip)</h4>
+    <h4 id="hAudioStack-Instance-Remove_clip">{{site.msdn_void}} Remove ({{site.unity_audioclip}} clip)</h4>
 	Removes the specified {{site.unity_audioclip}} and it's associated {{site.hydrogen_audiostackitem}} from the {{site.hydrogen_audiostack}}.
 	<div class="bs-arguments">
 	  <table class="table table-bordered table-striped">
@@ -755,7 +755,7 @@ hAudioStack.Instance.Remove (targetClip);
 	</div>
 	
 	<!-- hAudioStack.Instance.Remove -->
-    <h4 id="hAudioStack-Instance-Remove_item">{{site.type_void}} Remove ({{site.hydrogen_audiostackitem}} item)</h4>
+    <h4 id="hAudioStack-Instance-Remove_item">{{site.msdn_void}} Remove ({{site.hydrogen_audiostackitem}} item)</h4>
 	Removes the {{site.hydrogen_audiostackitem}} from the {{site.hydrogen_audiostack}}.
 	<div class="bs-arguments">
 	  <table class="table table-bordered table-striped">
@@ -793,7 +793,7 @@ hAudioStack.Instance.Remove (targetItem);
 	
 	
 	<!-- hAudioStack.Instance.Remove -->
-    <h4 id="hAudioStack-Instance-Remove_key">{{site.type_void}} Remove ({{site.type_string}} key)</h4>
+    <h4 id="hAudioStack-Instance-Remove_key">{{site.msdn_void}} Remove ({{site.msdn_string}} key)</h4>
     Remove the {{site.hydrogen_audiostackitem}} associated to the specified key in the {{site.hydrogen_audiostack}}.
 	<div class="bs-arguments">
 	  <table class="table table-bordered table-striped">
@@ -806,7 +806,7 @@ hAudioStack.Instance.Remove (targetItem);
         </thead>
         <tbody>
           <tr>
-            <td>{{site.type_string}}</td>
+            <td>{{site.msdn_string}}</td>
             <td>key</td>
             <td>The reference key to check against in the {{site.hydrogen_audiostack}}.</td>          
           </tr>   

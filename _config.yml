@@ -15,53 +15,51 @@ exclude:          [".editorconfig", ".gitignore", "bower.json", "composer.json",
 port:             9001
 
 # Custom vars
-current_version:  1.2.5
-repo:             https://github.com/dotBunny/Hydrogen
-repo_releases:	  https://github.com/dotBunny/Hydrogen/releases
-repo_package:	  https://github.com/dotBunny/Hydrogen-Package
-repo_fork:		  https://github.com/dotBunny/Hydrogen/fork
+current_version:  			1.2.5
+repo:            			https://github.com/dotBunny/Hydrogen
+repo_releases:	  			https://github.com/dotBunny/Hydrogen/releases
+repo_package:	  			https://github.com/dotBunny/Hydrogen-Package
+repo_fork:		  			https://github.com/dotBunny/Hydrogen/fork
 
-testflight_ios_version:	 		2.2.0
-testflight_android_version:		1.3
+testflight_ios_version:	 	2.2.0
+testflight_android_version:	1.3
 
-asset_store:	  https://www.assetstore.unity3d.com/#/content/10311
-examples_store:	  https://www.assetstore.unity3d.com/#/content/10311
-examples_repo:		https://github.com/dotBunny/Hydrogen-Examples
+asset_store:	  			https://www.assetstore.unity3d.com/#/content/10311
+examples_store:	  			https://www.assetstore.unity3d.com/#/content/10311
+examples_repo:				https://github.com/dotBunny/Hydrogen-Examples
 
-download_source:  https://github.com/dotBunny/Hydrogen/archive/master.zip
-download_dist:    https://github.com/dotBunny/Hydrogen-Package/archive/v1.1.0.zip
+download_source:  			https://github.com/dotBunny/Hydrogen/archive/master.zip
+download_dist:    			https://github.com/dotBunny/Hydrogen-Package/archive/v1.1.0.zip
 
+dotbunny:	      			http://dotbunny.com
+blog:             			http://dotbunny.com/blog
+unityforge:		  			http://unityforge.net
 
-dotbunny:	      http://dotbunny.com
-unityforge:		  http://unityforge.net
-
-blog:             http://dotbunny.com/blog
-
-cdn_css:          //netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css
-cdn_theme_css:    //netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css
-cdn_js:           //netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js
+cdn_css:          			//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css
+cdn_theme_css:    			//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css
+cdn_js:           			//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js
 
 hydrogen_audiostack:		<a href="#core-audiostack">Hydrogen.Core.AudioStack</a>
 hydrogen_audiostackitem:	<a href="#core-audiostack-audiostackitem">Hydrogen.Core.AudioStackItem</a>
 hydrogen_webpool:			<a href="#core-webpool">Hydrogen.Core.WebPool</a>
 hydrogen_objectpool:		<a href="#core-objectpool">Hydrogen.Core.ObjectPool</a>
+hydrogen_formbinarydata:	<a href="#hWebPool-FormBinaryData">Hydrogen.Core.WebPool.FormBinaryData</a>
 
+unity_audioclip: 			<a href="http://docs.unity3d.com/Documentation/ScriptReference/AudioClip.html" target="_blank">AudioClip</a>
+unity_audioclips: 			<a href="http://docs.unity3d.com/Documentation/ScriptReference/AudioClip.html" target="_blank">AudioClips</a>
+unity_audiosource: 			<a href="http://docs.unity3d.com/Documentation/ScriptReference/AudioSource.html" target="_blank">AudioSource</a>
+unity_gameobject:			<a href="http://docs.unity3d.com/Documentation/ScriptReference/GameObject.html" target="_blank">GameObject</a>
+unity_gameobjects: 			<a href="http://docs.unity3d.com/Documentation/ScriptReference/GameObject.html" target="_blank">GameObjects</a>
+unity_monobehaviour:		<a href="http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html" target="_blank">MonoBehaviour</a>
+unity_monobehaviours:		<a href="http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html" target="_blank">MonoBehaviours</a>
 
-unity_audioclip: 		<a href="http://docs.unity3d.com/Documentation/ScriptReference/AudioClip.html" target="_blank">AudioClip</a>
-unity_audioclips: 		<a href="http://docs.unity3d.com/Documentation/ScriptReference/AudioClip.html" target="_blank">AudioClips</a>
-unity_audiosource: 		<a href="http://docs.unity3d.com/Documentation/ScriptReference/AudioSource.html" target="_blank">AudioSource</a>
-unity_gameobject:		<a href="http://docs.unity3d.com/Documentation/ScriptReference/GameObject.html" target="_blank">GameObject</a>
-unity_gameobjects: 		<a href="http://docs.unity3d.com/Documentation/ScriptReference/GameObject.html" target="_blank">GameObjects</a>
-unity_monobehaviour:	<a href="http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html" target="_blank">MonoBehaviour</a>
-unity_monobehaviours:	<a href="http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html" target="_blank">MonoBehaviours</a>
-
-type_byte:		<a href="http://msdn.microsoft.com/en-us/library/5bdb6693.aspx" target="_blank">byte</a>
-type_struct:	<a href="http://msdn.microsoft.com/en-us/library/ah19swz4.aspx" target="_blank">struct</a>
-type_static:	<a href="http://msdn.microsoft.com/en-us/library/98f28cdx.aspx" target="_blank">static</a>
-type_void: 		<a href="http://msdn.microsoft.com/en-us/library/yah0tteb.aspx" target="_blank">void</a>
-type_string:	 <a href="http://msdn.microsoft.com/en-us/library/362314fe.aspx" target="_blank">string</a>
-type_bool:		<a href="http://msdn.microsoft.com/en-us/library/c8f5xwh7.aspx" target="_blank">bool</a>	
-type_dictionary: <a href="http://msdn.microsoft.com/en-us/library/xfhwa508(v=vs.110).aspx" target="_blank">Dictionary</a>
-type_int: 		<a href="http://msdn.microsoft.com/en-us/library/5kzh1b5w.aspx" target="_blank">int</a>
-type_hashtable: <a href="http://msdn.microsoft.com/en-us/library/system.collections.hashtable.aspx" target="_blank">Hashtable</a>
-type_action:	<a href="http://msdn.microsoft.com/en-us/library/system.action(v=vs.110).aspx" target="_blank">Action</a>
+msdn_byte:					<a href="http://msdn.microsoft.com/en-us/library/5bdb6693.aspx" target="_blank">byte</a>
+msdn_struct:				<a href="http://msdn.microsoft.com/en-us/library/ah19swz4.aspx" target="_blank">struct</a>
+msdn_static:				<a href="http://msdn.microsoft.com/en-us/library/98f28cdx.aspx" target="_blank">static</a>
+msdn_void: 					<a href="http://msdn.microsoft.com/en-us/library/yah0tteb.aspx" target="_blank">void</a>
+msdn_string:	 			<a href="http://msdn.microsoft.com/en-us/library/362314fe.aspx" target="_blank">string</a>
+msdn_bool:					<a href="http://msdn.microsoft.com/en-us/library/c8f5xwh7.aspx" target="_blank">bool</a>	
+msdn_dictionary: 			<a href="http://msdn.microsoft.com/en-us/library/xfhwa508(v=vs.110).aspx" target="_blank">Dictionary</a>
+msdn_int: 					<a href="http://msdn.microsoft.com/en-us/library/5kzh1b5w.aspx" target="_blank">int</a>
+msdn_hashtable: 			<a href="http://msdn.microsoft.com/en-us/library/system.collections.hashtable.aspx" target="_blank">Hashtable</a>
+msdn_action:				<a href="http://msdn.microsoft.com/en-us/library/system.action(v=vs.110).aspx" target="_blank">Action</a>
