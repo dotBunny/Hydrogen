@@ -18,13 +18,13 @@
 	</ol>
     <h2 id="core-webpool-overview">Overview</h2>
 	<p>Why does making a simple REST API (for example) call require more then a single line of code? No more we say! We have created a system that provides a "fire and forget" solution to Unity when it comes to web based interactions via GET, POST, and FORM data.</p>
-	<p>The <a href="#core-webpool">hWebPool</a> Singleton creates an instance of {{ site.component_webpool}} which can be globally accessed via <code>hWebPool.Instance</code>.</p>
+	<p>The <a href="#core-webpool">hWebPool</a> Singleton creates an instance of {{ site.component_webpool }} which can be globally accessed via <code>hWebPool.Instance</code>.</p>
 	<div class="bs-callout bs-callout-warning" id="callout-less-compilation">
 		<h4>ObjectPool Required</h4>
-		<p>The {{ site.component_webpool}} relies on the {{ site.component_objectpool}} to enable the pooling side of things. It will automatically create one in the scene at runtime if there is not one present.</p>
+		<p>The {{ site.component_webpool }} relies on the {{ site.component_objectpool }} to enable the pooling side of things. It will automatically create one in the scene at runtime if there is not one present.</p>
 	</div>
 	<h2 id="core-webpool-usage">Usage</h2>
-	<p>The guiding principle is that you can fire off as many web calls as you would like (limited by the the pool size), and the {{ site.component_webpool}} will manage and handle the rest for you. Eventually we would like to see this being done entirely on a separate thread, however that would require including System.Net, which has a rather hefty distribution size.</p>
+	<p>The guiding principle is that you can fire off as many web calls as you would like (limited by the the pool size), and the {{ site.component_webpool }} will manage and handle the rest for you. Eventually we would like to see this being done entirely on a separate thread, however that would require including System.Net, which has a rather hefty distribution size.</p>
     <h3 id="core-webpool-public-fields">Public Fields</h3>
     <div class="table-responsive">
 		<table class="table table-striped">
@@ -37,9 +37,9 @@
 			</thead>
 			<tbody>
 	          	<tr>
-	            	<td>{{ site.msdn_bool}}</td>
+	            	<td>{{ site.msdn_bool }}</td>
 					<td>Persistent</td>
-					<td>Should the <code>hWebPool</code> instance (and it's {{ site.unity_gameobject}}) survive scene switches by using <a href="http://docs.unity3d.com/Documentation/ScriptReference/Object.DontDestroyOnLoad.html" target="_blank">GameObject.DontDestroyOnLoad</a>. This will preserve all scripts on its {{ site.unity_gameobject}} as well, so please be aware of that behaviour.</td>
+					<td>Should the <code>hWebPool</code> instance (and it's {{ site.unity_gameobject }}) survive scene switches by using <a href="http://docs.unity3d.com/Documentation/ScriptReference/Object.DontDestroyOnLoad.html" target="_blank">GameObject.DontDestroyOnLoad</a>. This will preserve all scripts on its {{ site.unity_gameobject }} as well, so please be aware of that behaviour.</td>
 				</tr>
 				
 			</tbody>
@@ -69,7 +69,7 @@
     <h3 id="core-webpool-public-methods">Public Methods</h3>
     
     <!-- hWebPool.Exists -->
-    <h4 id="hWebPool-Exists">{{ site.msdn_static}} {{ site.msdn_bool}} Exists ()</h4>
+    <h4 id="hWebPool-Exists">{{ site.msdn_static }} {{ site.msdn_bool }} Exists ()</h4>
     Does a <code>hWebPool</code> instance exist?
 	<div class="bs-arguments text-muted">
      None
@@ -94,12 +94,12 @@ if (hWebPool.Exists ()) {
         </thead>
         <tbody>
           <tr>
-            <td>{{ site.msdn_bool}}</td>
+            <td>{{ site.msdn_bool }}</td>
             <td class="text-success">true</td>
             <td>An instance of <code>hWebPool</code> already exists. This can be handy to simply check from other classes if <code>hWebPool</code> is being used.</td>        
           </tr>
           <tr>
-            <td>{{ site.msdn_bool}}</td>
+            <td>{{ site.msdn_bool }}</td>
             <td class="text-danger">false</td>
             <td>An instance of <code>hWebPool</code> does not exist, and therefore must be created or instantiated via a prefab.</td>
           </tr>
@@ -108,7 +108,7 @@ if (hWebPool.Exists ()) {
 	</div>  
     
     <!-- hWebPool.Instance.Form -->
-    <h4 id="hWebPool-Instance-Form_URI_formStringData">{{ site.msdn_void}} Form ({{ site.msdn_string}} URI, {{ site.msdn_dictionary}}&#60;{{ site.msdn_string}},{{ site.msdn_string}}&#62; formStringData)</h4>
+    <h4 id="hWebPool-Instance-Form_URI_formStringData">{{ site.msdn_void }} Form ({{ site.msdn_string }} URI, {{ site.msdn_dictionary }}&#60;{{ site.msdn_string }},{{ site.msdn_string }}&#62; formStringData)</h4>
     HTTP POST Form to URI.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -121,12 +121,12 @@ if (hWebPool.Exists ()) {
         </thead>
         <tbody>
           <tr>
-            <td>{{ site.msdn_string}}</td>
+            <td>{{ site.msdn_string }}</td>
             <td>URI</td>
             <td>The <a href="http://en.wikipedia.org/wiki/Uniform_resource_identifier" target="_blank">URI</a> (aka URL) to which the form and it's data should be posted to. </td>          
           </tr>
           <tr>
-            <td>{{ site.msdn_dictionary}}&#60;{{ site.msdn_string}},{{ site.msdn_string}}&#62;</td>
+            <td>{{ site.msdn_dictionary }}&#60;{{ site.msdn_string }},{{ site.msdn_string }}&#62;</td>
             <td>formStringData</td>
             <td>The form's data to be sent in the POST.</td>
           </tr>
@@ -149,7 +149,7 @@ hWebPool.Instance.Form("http://api.unityforge.net/", formData);
 	</div>  
     
     <!-- hWebPool.Instance.Form -->
-    <h4 id="hWebPool-Instance-Form_URI_formStringData_formBinaryData_cookie_callback">{{ site.msdn_void}} Form ({{ site.msdn_string}} URI, {{ site.msdn_dictionary}}&#60;{{ site.msdn_string}},{{ site.msdn_string}}&#62; formStringData, {{ site.component_formbinarydata}}[] formBinaryData, {{ site.msdn_string}} cookie, {{ site.msdn_action}}&#60;{{ site.msdn_int}}, {{ site.msdn_hashtable}}, {{ site.msdn_string}}&#62; callback)</h4>
+    <h4 id="hWebPool-Instance-Form_URI_formStringData_formBinaryData_cookie_callback">{{ site.msdn_void }} Form ({{ site.msdn_string }} URI, {{ site.msdn_dictionary }}&#60;{{ site.msdn_string }},{{ site.msdn_string }}&#62; formStringData, {{ site.component_formbinarydata }}[] formBinaryData, {{ site.msdn_string }} cookie, {{ site.msdn_action }}&#60;{{ site.msdn_int }}, {{ site.msdn_hashtable }}, {{ site.msdn_string }}&#62; callback)</h4>
     HTTP POST Form to URI.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -162,29 +162,29 @@ hWebPool.Instance.Form("http://api.unityforge.net/", formData);
         </thead>
         <tbody>
           <tr>
-            <td>{{ site.msdn_string}}</td>
+            <td>{{ site.msdn_string }}</td>
             <td>URI</td>
             <td>The <a href="http://en.wikipedia.org/wiki/Uniform_resource_identifier" target="_blank">URI</a> (aka URL) to which the form and it's data should be posted to. </td>          
           </tr>
           <tr>
-            <td>{{ site.msdn_dictionary}}&#60;{{ site.msdn_string}},{{ site.msdn_string}}&#62;</td>
+            <td>{{ site.msdn_dictionary }}&#60;{{ site.msdn_string }},{{ site.msdn_string }}&#62;</td>
             <td>formStringData</td>
             <td>The form's data to be sent in the POST.</td>
           </tr>
 		  <tr>
-            <td>{{ site.component_formbinarydata}}[]</td>
+            <td>{{ site.component_formbinarydata }}[]</td>
             <td>formBinaryData</td>
-            <td>A custom {{ site.msdn_struct}} used to store binary data. Useful for uploading pictures.</td>
+            <td>A custom {{ site.msdn_struct }} used to store binary data. Useful for uploading pictures.</td>
           </tr>
 		  <tr>
-            <td>{{ site.msdn_string}}</td>
+            <td>{{ site.msdn_string }}</td>
             <td>cookie</td>
             <td>Any previous cookie data to be used for authentication.</td>
           </tr>
           <tr>
-            <td>{{ site.msdn_action}}<{{ site.msdn_int}}, {{ site.msdn_hashtable}}, {{ site.msdn_string}}></td>
+            <td>{{ site.msdn_action }}<{{ site.msdn_int }}, {{ site.msdn_hashtable }}, {{ site.msdn_string }}></td>
             <td>callback</td>
-            <td>A callback function ({{ site.msdn_int}} hash, {{ site.msdn_hashtable}} headers, {{ site.msdn_string}} payload).</td>
+            <td>A callback function ({{ site.msdn_int }} hash, {{ site.msdn_hashtable }} headers, {{ site.msdn_string }} payload).</td>
           </tr>
         </tbody>
       </table>
@@ -239,7 +239,7 @@ public void Finished (int hash, Hashtable responseHeaders, string responseText)
 	</div>  
     
     <!-- hWebPool.Instance.GET -->
-    <h4 id="hWebPool-Instance-GET_URI">{{ site.msdn_void}} GET ({{ site.msdn_string}} URI)</h4>
+    <h4 id="hWebPool-Instance-GET_URI">{{ site.msdn_void }} GET ({{ site.msdn_string }} URI)</h4>
 	HTTP GET Request to URI
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -252,7 +252,7 @@ public void Finished (int hash, Hashtable responseHeaders, string responseText)
         </thead>
         <tbody>
           <tr>
-            <td>{{ site.msdn_string}}</td>
+            <td>{{ site.msdn_string }}</td>
             <td>URI</td>
             <td>The <a href="http://en.wikipedia.org/wiki/Uniform_resource_identifier" target="_blank">URI</a> (aka URL) which should be accessed.</td>          
           </tr>
@@ -270,7 +270,7 @@ hWebPool.Instance.Get("http://api.unityforge.net/?honey=imhome", );
 	</div>  
 	
 	<!-- hWebPool.Instance.GET -->
-    <h4 id="hWebPool-Instance-GET_URI_callback">{{ site.msdn_void}} GET ({{ site.msdn_string}} URI, {{ site.msdn_action}}<{{ site.msdn_int}}, {{ site.msdn_hashtable}}, {{ site.msdn_string}}> callback)</h4>
+    <h4 id="hWebPool-Instance-GET_URI_callback">{{ site.msdn_void }} GET ({{ site.msdn_string }} URI, {{ site.msdn_action }}<{{ site.msdn_int }}, {{ site.msdn_hashtable }}, {{ site.msdn_string }}> callback)</h4>
 	HTTP GET Request to URI
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -283,14 +283,14 @@ hWebPool.Instance.Get("http://api.unityforge.net/?honey=imhome", );
         </thead>
         <tbody>
           <tr>
-            <td>{{ site.msdn_string}}</td>
+            <td>{{ site.msdn_string }}</td>
             <td>URI</td>
             <td>The <a href="http://en.wikipedia.org/wiki/Uniform_resource_identifier" target="_blank">URI</a> (aka URL) which should be accessed.</td>          
           </tr>
           <tr>
-            <td>{{ site.msdn_action}}<{{ site.msdn_int}}, {{ site.msdn_hashtable}}, {{ site.msdn_string}}></td>
+            <td>{{ site.msdn_action }}<{{ site.msdn_int }}, {{ site.msdn_hashtable }}, {{ site.msdn_string }}></td>
             <td>callback</td>
-            <td>A callback function ({{ site.msdn_int}} hash, {{ site.msdn_hashtable}} headers, {{ site.msdn_string}} payload).</td>
+            <td>A callback function ({{ site.msdn_int }} hash, {{ site.msdn_hashtable }} headers, {{ site.msdn_string }} payload).</td>
           </tr>
         </tbody>
       </table>
@@ -340,7 +340,7 @@ public void Finished (int hash, Hashtable responseHeaders, string responseText)
 	</div>  
 	
 	<!-- hWebPool.Instance.GET -->
-    <h4 id="hWebPool-Instance-GET_URI_cookie_callback">{{ site.msdn_void}} GET ({{ site.msdn_string}} URI, {{ site.msdn_string}} cookie, {{ site.msdn_action}}<{{ site.msdn_int}}, {{ site.msdn_hashtable}}, {{ site.msdn_string}}> callback)</h4>
+    <h4 id="hWebPool-Instance-GET_URI_cookie_callback">{{ site.msdn_void }} GET ({{ site.msdn_string }} URI, {{ site.msdn_string }} cookie, {{ site.msdn_action }}<{{ site.msdn_int }}, {{ site.msdn_hashtable }}, {{ site.msdn_string }}> callback)</h4>
 	HTTP GET Request to URI
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -353,19 +353,19 @@ public void Finished (int hash, Hashtable responseHeaders, string responseText)
         </thead>
         <tbody>
           <tr>
-            <td>{{ site.msdn_string}}</td>
+            <td>{{ site.msdn_string }}</td>
             <td>URI</td>
             <td>The <a href="http://en.wikipedia.org/wiki/Uniform_resource_identifier" target="_blank">URI</a> (aka URL) which should be accessed.</td>          
           </tr>
 		  <tr>
-            <td>{{ site.msdn_string}}</td>
+            <td>{{ site.msdn_string }}</td>
             <td>cookie</td>
             <td>Any previous cookie data to be used for authentication.</td>
           </tr>          
           <tr>
-            <td>{{ site.msdn_action}}<{{ site.msdn_int}}, {{ site.msdn_hashtable}}, {{ site.msdn_string}}></td>
+            <td>{{ site.msdn_action }}<{{ site.msdn_int }}, {{ site.msdn_hashtable }}, {{ site.msdn_string }}></td>
             <td>callback</td>
-            <td>A callback function ({{ site.msdn_int}} hash, {{ site.msdn_hashtable}} headers, {{ site.msdn_string}} payload).</td>
+            <td>A callback function ({{ site.msdn_int }} hash, {{ site.msdn_hashtable }} headers, {{ site.msdn_string }} payload).</td>
           </tr>
         </tbody>
       </table>
@@ -416,7 +416,7 @@ public void Finished (int hash, Hashtable responseHeaders, string responseText)
 	</div>  
 	
 	<!-- hWebPool.Instance.POST -->
-    <h4 id="hWebPool-Instance-POST_URI_contentType_payload">{{ site.msdn_void}} POST ({{ site.msdn_string}} URI, {{ site.msdn_string}} contentType, {{ site.msdn_string}} payload)</h4>
+    <h4 id="hWebPool-Instance-POST_URI_contentType_payload">{{ site.msdn_void }} POST ({{ site.msdn_string }} URI, {{ site.msdn_string }} contentType, {{ site.msdn_string }} payload)</h4>
 	HTTP POST Request to URI.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -429,17 +429,17 @@ public void Finished (int hash, Hashtable responseHeaders, string responseText)
         </thead>
         <tbody>
           <tr>
-            <td>{{ site.msdn_string}}</td>
+            <td>{{ site.msdn_string }}</td>
             <td>URI</td>
             <td>The <a href="http://en.wikipedia.org/wiki/Uniform_resource_identifier" target="_blank">URI</a> (aka URL) which data should be posted too.</td>          
           </tr>
 		  <tr>
-            <td>{{ site.msdn_string}}</td>
+            <td>{{ site.msdn_string }}</td>
             <td>contentType</td>
             <td>The classification of the content (Example: "application/json").</td>
           </tr>          
           <tr>
-            <td>{{ site.msdn_string}}</td>
+            <td>{{ site.msdn_string }}</td>
             <td>payload</td>
             <td>The data to be posted to the target URI.</td>
           </tr>
@@ -471,7 +471,7 @@ hWebPool.Instance.POST (
 	</div>  
 
 	<!-- hWebPool.Instance.POST -->
-    <h4 id="hWebPool-Instance-POST_URI_contentType_payload_cookie_callback">{{ site.msdn_void}} POST ({{ site.msdn_string}} URI, {{ site.msdn_string}} contentType, {{ site.msdn_string}} payload, {{ site.msdn_string}} cookie, {{ site.msdn_action}}<{{ site.msdn_int}}, {{ site.msdn_hashtable}}, {{ site.msdn_string}}> callback)</h4>
+    <h4 id="hWebPool-Instance-POST_URI_contentType_payload_cookie_callback">{{ site.msdn_void }} POST ({{ site.msdn_string }} URI, {{ site.msdn_string }} contentType, {{ site.msdn_string }} payload, {{ site.msdn_string }} cookie, {{ site.msdn_action }}<{{ site.msdn_int }}, {{ site.msdn_hashtable }}, {{ site.msdn_string }}> callback)</h4>
 	HTTP POST Request to URI.
 	<div class="bs-arguments">
       <table class="table table-bordered table-striped">
@@ -484,29 +484,29 @@ hWebPool.Instance.POST (
         </thead>
         <tbody>
           <tr>
-            <td>{{ site.msdn_string}}</td>
+            <td>{{ site.msdn_string }}</td>
             <td>URI</td>
             <td>The <a href="http://en.wikipedia.org/wiki/Uniform_resource_identifier" target="_blank">URI</a> (aka URL) which data should be posted too.</td>          
           </tr>
 		  <tr>
-            <td>{{ site.msdn_string}}</td>
+            <td>{{ site.msdn_string }}</td>
             <td>contentType</td>
             <td>The classification of the content (Example: "application/json").</td>
           </tr>          
           <tr>
-            <td>{{ site.msdn_string}}</td>
+            <td>{{ site.msdn_string }}</td>
             <td>payload</td>
             <td>The data to be posted to the target URI.</td>
           </tr>
           <tr>
-            <td>{{ site.msdn_string}}</td>
+            <td>{{ site.msdn_string }}</td>
             <td>cookie</td>
             <td>Any previous cookie data to be used for authentication.</td>
           </tr>          
           <tr>
-            <td>{{ site.msdn_action}}<{{ site.msdn_int}}, {{ site.msdn_hashtable}}, {{ site.msdn_string}}></td>
+            <td>{{ site.msdn_action }}<{{ site.msdn_int }}, {{ site.msdn_hashtable }}, {{ site.msdn_string }}></td>
             <td>callback</td>
-            <td>A callback function ({{ site.msdn_int}} hash, {{ site.msdn_hashtable}} headers, {{ site.msdn_string}} payload).</td>
+            <td>A callback function ({{ site.msdn_int }} hash, {{ site.msdn_hashtable }} headers, {{ site.msdn_string }} payload).</td>
           </tr>
         </tbody>
       </table>
@@ -574,7 +574,7 @@ public void MailChimpCallback (int hash, Hashtable responseHeaders, string respo
 	
 	<h3 id="core-webpool-public-structs">Public Structs</h3>
 	<h4 id="hWebPool-FormBinaryData">FormBinaryData</h3>
-	<p>When dealing with binary data on a FORM submission, {{ site.component_webpool}} utilizes a handy {{ site.msdn_struct}} to facilitate packaging of the corresponding data.</p> 
+	<p>When dealing with binary data on a FORM submission, {{ site.component_webpool }} utilizes a handy {{ site.msdn_struct }} to facilitate packaging of the corresponding data.</p> 
 	 <div class="table-responsive">
 		<table class="table table-striped">
 			<thead>
@@ -586,22 +586,22 @@ public void MailChimpCallback (int hash, Hashtable responseHeaders, string respo
 			</thead>
 			<tbody>
 	          	<tr>
-	            	<td>{{ site.msdn_string}}</td>
+	            	<td>{{ site.msdn_string }}</td>
 					<td>FieldName</td>
 					<td>The name of the form field.</td>
 				</tr>
 				<tr>
-	            	<td>{{ site.msdn_byte}}[]</td>
+	            	<td>{{ site.msdn_byte }}[]</td>
 					<td>Data</td>
-					<td>The {{ site.msdn_byte}} data to populate that field with.</td>
+					<td>The {{ site.msdn_byte }} data to populate that field with.</td>
 				</tr>
 				<tr>
-	            	<td>{{ site.msdn_string}}</td>
+	            	<td>{{ site.msdn_string }}</td>
 					<td>FileName</td>
 					<td>The file name of the data that has been populated.</td>
 				</tr>
 				<tr>
-	            	<td>{{ site.msdn_string}}</td>
+	            	<td>{{ site.msdn_string }}</td>
 					<td>MimeType</td>
 					<td>The <a href="http://en.wikipedia.org/wiki/Internet_media_type" target="_blank">internet media type</a> of the data.</td>
 				</tr>
