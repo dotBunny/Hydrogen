@@ -207,7 +207,16 @@ namespace Hydrogen.Core
 				}
 
 				/// <summary>
-				/// Instruct the AudioSource to Stop playback, reseting the position in the clip.
+				/// Instruct the AudioSource to Restart playback, resetting the position to the start of the clip, and playing it.
+				/// </summary>
+				public void Restart ()
+				{
+						Source.Stop ();
+						Source.Play ();
+				}
+
+				/// <summary>
+				/// Instruct the AudioSource to Stop playback, resetting the position in the clip.
 				/// </summary>
 				public void Stop ()
 				{

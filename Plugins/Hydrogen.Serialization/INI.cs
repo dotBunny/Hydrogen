@@ -33,7 +33,7 @@ using System.Text;
 
 namespace Hydrogen.Serialization
 {
-		public class INI
+		public static class INI
 		{
 				/// <summary>
 				/// Deserialize the specified iniString and seperatorCharacter.
