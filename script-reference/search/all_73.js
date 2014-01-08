@@ -13,6 +13,7 @@ var searchData=
   ['spawnedobjects',['SpawnedObjects',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a1f3455614acaea12f6dd1f45bf5ebc79',1,'Hydrogen::Core::ObjectPoolCollection']]],
   ['spawnmore',['SpawnMore',['../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#aa006d4741300ce327a64f6147115ed8c',1,'Hydrogen.Core.ObjectPool.SpawnMore()'],['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#af2e1372aaddbe529af3f13f1eba89e4f',1,'Hydrogen.Core.ObjectPoolCollection.SpawnMore()']]],
   ['sprintf',['Sprintf',['../dd/d91/class_hydrogen_1_1_regex.html#a0e1def31b3cc17722e95d0b398751914',1,'Hydrogen::Regex']]],
+  ['start',['Start',['../dd/dea/class_threaded_job.html#a003ae062db64942ce655c156b40ded2d',1,'ThreadedJob.Start()'],['../d9/dfc/class_thread_pool_job.html#a6930553263f04b20d1672c7f79b805fa',1,'ThreadPoolJob.Start()']]],
   ['startsession',['StartSession',['../d3/d8d/class_hydrogen_1_1_plugins_1_1_test_flight.html#aa6d842adbf91598ce077fe51b011c577',1,'Hydrogen::Plugins::TestFlight']]],
   ['startvolume',['StartVolume',['../dd/d0e/class_hydrogen_1_1_core_1_1_audio_stack_item.html#a073e8b9c20c32e1757a768d1d25d42e8',1,'Hydrogen::Core::AudioStackItem']]],
   ['stop',['Stop',['../dd/d0e/class_hydrogen_1_1_core_1_1_audio_stack_item.html#a4f218c2bb81a1d3ae58358d552823ec6',1,'Hydrogen::Core::AudioStackItem']]],

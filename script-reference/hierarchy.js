@@ -1,9 +1,11 @@
 var hierarchy =
 [
     [ "Hydrogen.Array", "d9/d04/class_hydrogen_1_1_array.html", null ],
-    [ "Hydrogen.Core.AudioStackItem", "dd/d0e/class_hydrogen_1_1_core_1_1_audio_stack_item.html", null ],
     [ "Hydrogen.Components", "d5/da1/class_hydrogen_1_1_components.html", null ],
     [ "Hydrogen.Core.WebPool.FormBinaryData", "df/d8b/struct_hydrogen_1_1_core_1_1_web_pool_1_1_form_binary_data.html", null ],
+    [ "IDisposable", null, [
+      [ "Hydrogen.Core.AudioStackItem", "dd/d0e/class_hydrogen_1_1_core_1_1_audio_stack_item.html", null ]
+    ] ],
     [ "Hydrogen.Serialization.INI", "d3/da4/class_hydrogen_1_1_serialization_1_1_i_n_i.html", null ],
     [ "Hydrogen.Peripherals.InputControlBase", "d3/d0a/class_hydrogen_1_1_peripherals_1_1_input_control_base.html", [
       [ "Hydrogen.Peripherals.InputAxisControl", "d7/d18/class_hydrogen_1_1_peripherals_1_1_input_axis_control.html", null ],
@@ -42,6 +44,8 @@ var hierarchy =
     [ "Hydrogen.Resources", "dc/d7b/class_hydrogen_1_1_resources.html", null ],
     [ "Hydrogen.Plugins.TestFlight", "d3/d8d/class_hydrogen_1_1_plugins_1_1_test_flight.html", null ],
     [ "Hydrogen.Texture", "d0/d85/class_hydrogen_1_1_texture.html", null ],
+    [ "ThreadedJob", "dd/dea/class_threaded_job.html", null ],
+    [ "ThreadPoolJob", "d9/dfc/class_thread_pool_job.html", null ],
     [ "Hydrogen.Validate", "d0/da0/class_hydrogen_1_1_validate.html", null ],
     [ "Hydrogen.XML", "d3/d67/class_hydrogen_1_1_x_m_l.html", null ]
 ];

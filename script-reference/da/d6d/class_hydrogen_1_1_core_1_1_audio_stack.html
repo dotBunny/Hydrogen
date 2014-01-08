@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../hydrogen-logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Hydrogen Framework
-   &#160;<span id="projectnumber">1.2.5</span>
+   &#160;<span id="projectnumber">1.2.4</span>
    </div>
   </td>
  </tr>
@@ -462,30 +462,30 @@ Properties</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="../../db/d29/classh_audio_stack.html#a40298197c96daf0aa58beff9ebfcc66b">hAudioStack</a>.</p>
 
-<p>Definition at line <a class="el" href="../../d3/d42/_audio_stack_8cs_source.html#l00316">316</a> of file <a class="el" href="../../d3/d42/_audio_stack_8cs_source.html">AudioStack.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;                {</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;                        <span class="comment">// Create our stack</span></div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                        _audioSources = <span class="keyword">new</span> Stack (<a class="code" href="../../da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#adc0cac897135b77148978ae9ad5e8b09">MinimumSources</a>);</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                        <span class="comment">// Create our holder GameObject</span></div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;                        _poolObject = <span class="keyword">new</span> GameObject ();</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;                        <span class="comment">// Create our lookup</span></div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;                        _loadedItems = <span class="keyword">new</span> Dictionary&lt;string, AudioStackItem&gt; ();</div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;                        <span class="comment">// Assign our new friend as our child</span></div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                        _poolObject.transform.parent = gameObject.transform;</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                        _poolObject.name = <span class="stringliteral">&quot;Audio Pool&quot;</span>;</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                        <span class="comment">// Create the AudioSources and associate them to their respective arrays.</span></div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> x = 0; x &lt; <a class="code" href="../../da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#adc0cac897135b77148978ae9ad5e8b09">MinimumSources</a>; x++) {</div>
+<p>Definition at line <a class="el" href="../../d3/d42/_audio_stack_8cs_source.html#l00319">319</a> of file <a class="el" href="../../d3/d42/_audio_stack_8cs_source.html">AudioStack.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                {</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;                        <span class="comment">// Create our stack</span></div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;                        _audioSources = <span class="keyword">new</span> Stack (<a class="code" href="../../da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#adc0cac897135b77148978ae9ad5e8b09">MinimumSources</a>);</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;                        <span class="comment">// Create our holder GameObject</span></div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;                        _poolObject = <span class="keyword">new</span> GameObject ();</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;                        <span class="comment">// Create our lookup</span></div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                        _loadedItems = <span class="keyword">new</span> Dictionary&lt;string, AudioStackItem&gt; ();</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                        <span class="comment">// Assign our new friend as our child</span></div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                        _poolObject.transform.parent = gameObject.transform;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                        _poolObject.name = <span class="stringliteral">&quot;Audio Pool&quot;</span>;</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                                var source = _poolObject.AddComponent&lt;AudioSource&gt; ();</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                                <span class="comment">// Make sure we dont have any fun little hickups</span></div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                                source.playOnAwake = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                        <span class="comment">// Create the AudioSources and associate them to their respective arrays.</span></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> x = 0; x &lt; <a class="code" href="../../da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#adc0cac897135b77148978ae9ad5e8b09">MinimumSources</a>; x++) {</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                                var source = _poolObject.AddComponent&lt;AudioSource&gt; ();</div>
 <div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                                _audioSources.Push (source);</div>
-<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                        }</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                }</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                                <span class="comment">// Make sure we dont have any fun little hickups</span></div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                                source.playOnAwake = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                                _audioSources.Push (source);</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;                        }</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                }</div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_audio_stack_html_adc0cac897135b77148978ae9ad5e8b09"><div class="ttname"><a href="../../da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#adc0cac897135b77148978ae9ad5e8b09">Hydrogen.Core.AudioStack.MinimumSources</a></div><div class="ttdeci">int MinimumSources</div><div class="ttdoc">Minimum number of sources to have in total (Stack + Playing). </div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d42/_audio_stack_8cs_source.html#l00048">AudioStack.cs:48</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -746,9 +746,12 @@ Properties</h2></td></tr>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;                        <span class="comment">// Remove our item definition</span></div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                        _loadedItems.Remove (item.Key);</div>
 <div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                        <span class="comment">// Free Item</span></div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                        item = null;</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                }</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                        <span class="comment">// Get rid of references (just for easy of GC)</span></div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                        item.Dispose ();</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                        <span class="comment">// Remove reference</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                        item = null;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                }</div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_audio_stack_html_aef086530ef46d6db39f9ed07739d2bac"><div class="ttname"><a href="../../da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#aef086530ef46d6db39f9ed07739d2bac">Hydrogen.Core.AudioStack.IsLoaded</a></div><div class="ttdeci">bool IsLoaded(AudioClip clip)</div><div class="ttdoc">Determines whether an AudioClip is currently loaded and managed by the AudioStack. </div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d42/_audio_stack_8cs_source.html#l00210">AudioStack.cs:210</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -775,12 +778,12 @@ Properties</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../d3/d42/_audio_stack_8cs_source.html#l00306">306</a> of file <a class="el" href="../../d3/d42/_audio_stack_8cs_source.html">AudioStack.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                {</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                        <span class="keywordflow">if</span> (<a class="code" href="../../da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#aef086530ef46d6db39f9ed07739d2bac">IsLoaded</a> (key)) {</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;                                <a class="code" href="../../da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#af0d79927a37f6799bf67ecbc44d6ef1e">Remove</a> (_loadedItems [key]);</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                        }</div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                }</div>
+<p>Definition at line <a class="el" href="../../d3/d42/_audio_stack_8cs_source.html#l00309">309</a> of file <a class="el" href="../../d3/d42/_audio_stack_8cs_source.html">AudioStack.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                {</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;                        <span class="keywordflow">if</span> (<a class="code" href="../../da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#aef086530ef46d6db39f9ed07739d2bac">IsLoaded</a> (key)) {</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;                                <a class="code" href="../../da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#af0d79927a37f6799bf67ecbc44d6ef1e">Remove</a> (_loadedItems [key]);</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;                        }</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                }</div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_audio_stack_html_af0d79927a37f6799bf67ecbc44d6ef1e"><div class="ttname"><a href="../../da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#af0d79927a37f6799bf67ecbc44d6ef1e">Hydrogen.Core.AudioStack.Remove</a></div><div class="ttdeci">void Remove(AudioClip clip)</div><div class="ttdoc">Removes the specified AudioClip and its associated AudioStackItem from the AudioStack. </div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d42/_audio_stack_8cs_source.html#l00270">AudioStack.cs:270</a></div></div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_audio_stack_html_aef086530ef46d6db39f9ed07739d2bac"><div class="ttname"><a href="../../da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#aef086530ef46d6db39f9ed07739d2bac">Hydrogen.Core.AudioStack.IsLoaded</a></div><div class="ttdeci">bool IsLoaded(AudioClip clip)</div><div class="ttdoc">Determines whether an AudioClip is currently loaded and managed by the AudioStack. </div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d42/_audio_stack_8cs_source.html#l00210">AudioStack.cs:210</a></div></div>
 </div><!-- fragment -->
@@ -810,12 +813,12 @@ Properties</h2></td></tr>
 <p>Unity's Update Event </p>
 <p>&gt; This neeeds to be executed to handle processing the Audio Sources correctly. </p>
 
-<p>Definition at line <a class="el" href="../../d3/d42/_audio_stack_8cs_source.html#l00347">347</a> of file <a class="el" href="../../d3/d42/_audio_stack_8cs_source.html">AudioStack.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                {</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                        <span class="keywordflow">foreach</span> (<span class="keywordtype">string</span> s <span class="keywordflow">in</span> _loadedItems.Keys.ToList()) {</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                                _loadedItems [s].Process ();</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                        }</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                }</div>
+<p>Definition at line <a class="el" href="../../d3/d42/_audio_stack_8cs_source.html#l00350">350</a> of file <a class="el" href="../../d3/d42/_audio_stack_8cs_source.html">AudioStack.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                {</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                        <span class="keywordflow">foreach</span> (<span class="keywordtype">string</span> s <span class="keywordflow">in</span> _loadedItems.Keys.ToList()) {</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                                _loadedItems [s].Process ();</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                        }</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -926,7 +929,7 @@ Properties</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d0/dff/namespace_hydrogen.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../d1/d8f/namespace_hydrogen_1_1_core.html">Core</a></li><li class="navelem"><a class="el" href="../../da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html">AudioStack</a></li>
-    <li class="footer">Generated on Sat Dec 28 2013 20:32:46 for Hydrogen Framework by
+    <li class="footer">Generated on Wed Jan 8 2014 14:53:10 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

@@ -9,5 +9,6 @@ var searchData=
   ['despawnimmediate',['DespawnImmediate',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#aef752d0eedbc133735b4f2da8d3d8375',1,'Hydrogen::Core::ObjectPoolCollection']]],
   ['despawnpoollocation',['DespawnPoolLocation',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a7905c4d7efeec318cc34a35be8f47cef',1,'Hydrogen::Core::ObjectPoolCollection']]],
   ['despawnsafely',['DespawnSafely',['../d5/d59/classh_object_pool_item.html#ac40722e1826d20e98499b9dab392cfbe',1,'hObjectPoolItem.DespawnSafely()'],['../db/d5e/class_hydrogen_1_1_core_1_1_object_pool_item_base.html#a48449a63cf3fd321916be9f6e99264aa',1,'Hydrogen.Core.ObjectPoolItemBase.DespawnSafely()'],['../d7/da3/class_hydrogen_1_1_core_1_1_web_pool_worker.html#ac612528f8891fdf53ceb2151d8bbd273',1,'Hydrogen.Core.WebPoolWorker.DespawnSafely()']]],
+  ['dispose',['Dispose',['../dd/d0e/class_hydrogen_1_1_core_1_1_audio_stack_item.html#a9713925079bcaa81bd3234387ff9b6d0',1,'Hydrogen::Core::AudioStackItem']]],
   ['down',['Down',['../d2/daf/namespace_hydrogen_1_1_peripherals.html#a3876c8102da79cc57ded581352c8bd9ea08a38277b0309070706f6652eeae9a53',1,'Hydrogen::Peripherals']]]
 ];

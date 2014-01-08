@@ -236,6 +236,12 @@ var NAVTREEINDEX0 =
 "d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#aef752d0eedbc133735b4f2da8d3d8375":[1,0,0,0,3,5],
 "d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#af2e1372aaddbe529af3f13f1eba89e4f":[1,0,0,0,3,17],
 "d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#afa582ccb57debd311a01ff0d161561c8":[1,0,0,0,3,8],
+"d9/dfc/class_thread_pool_job.html":[1,0,8],
+"d9/dfc/class_thread_pool_job.html#a3c9b1a40b15c19b112791ae54f1a4012":[1,0,8,3],
+"d9/dfc/class_thread_pool_job.html#a4587c9a0106ede9ed71e250409391fb8":[1,0,8,0],
+"d9/dfc/class_thread_pool_job.html#a6930553263f04b20d1672c7f79b805fa":[1,0,8,2],
+"d9/dfc/class_thread_pool_job.html#a7f0bd57eee1291d71e408710077d27c2":[1,0,8,1],
+"d9/dfc/class_thread_pool_job.html#a851d909eac3da670a400dbb69402b343":[1,0,8,4],
 "da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html":[1,0,0,0,0],
 "da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#a1157f256503e7f4a553965a99302e362":[1,0,0,0,0,6],
 "da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#a22f04e1e1296c42ed29bb040d1076786":[1,0,0,0,0,13],
@@ -243,11 +249,5 @@ var NAVTREEINDEX0 =
 "da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#a564f81fc72f19da7d1fdc79613619cca":[1,0,0,0,0,15],
 "da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#a66cf5b6e25e9d357b7b50eea72c3b121":[1,0,0,0,0,17],
 "da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#a7372b2f2f1eab76b988a2660b7fa7f5b":[1,0,0,0,0,1],
-"da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#a80c4e6ee537dfad8514c42ba482c4670":[1,0,0,0,0,12],
-"da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#a820495c7c53b843d127e03633e0b73d6":[1,0,0,0,0,7],
-"da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#a9d39b7652b80b13295c792f470ea69a2":[1,0,0,0,0,4],
-"da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#aac8ec00312a1a3e8a5e3eb788226fc38":[1,0,0,0,0,19],
-"da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#abc55344dfcba6fcf3ca21781b2e18d4f":[1,0,0,0,0,2],
-"da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#acca07bce5b0bd08f63635f357e26e061":[1,0,0,0,0,10],
-"da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#ad545d2ee7d678182dd84735b8677171a":[1,0,0,0,0,18]
+"da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#a80c4e6ee537dfad8514c42ba482c4670":[1,0,0,0,0,12]
 };

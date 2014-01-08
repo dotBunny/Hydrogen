@@ -16,7 +16,7 @@ var NAVTREE =
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
-        [ "Functions", "functions_func.html", null ],
+        [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
         [ "Enumerator", "functions_eval.html", null ],
@@ -29,7 +29,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#ad6b732cdcebfdc23163d5a1bcbd8fb74"
+"da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#a820495c7c53b843d127e03633e0b73d6"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -20,7 +20,7 @@ port:             			9001
 # ===============================
 
 # Versions
-version_hydrogen:  			1.2.5
+version_hydrogen:  			1.2.4
 version_testflight_ios:	 	2.2.0
 version_testflight_android:	1.3
 
