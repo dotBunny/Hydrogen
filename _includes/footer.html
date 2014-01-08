@@ -8,3 +8,9 @@
 <script src="{{ page.base_url }}assets/js/holder.js"></script>
 
 <script src="{{ page.base_url }}assets/js/application.js"></script>
+
+{% if page.slug == "about" %}
+<script src="{{ page.base_url }}assets/js/chart.js"></script>
+<script src="{{ page.base_url }}assets/js/chart-uas.js"></script>
+<script src="{{ page.base_url }}assets/js/chart-loc.js"></script>
+{% endif %}

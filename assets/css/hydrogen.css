@@ -4,7 +4,14 @@
  * Isolated sections of example content for each component or feature. Usually
  * followed by a code snippet.
  */
-    
+ 
+
+canvas{
+	width: 100% !important;
+	max-width: 800px;
+	height: auto !important;	 
+}
+
 h2[id], h3[id], h4[id] 
 {
 	padding-top: 80px;
