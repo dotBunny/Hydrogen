@@ -28,13 +28,51 @@
 
 namespace Hydrogen.Threading
 {
+		// <summary>
+		/// The base for all classes which want to extend the behaviour of a Job.
+		/// </summary>
 		public abstract class JobBase
 		{
+				/// <summary>
+				/// Is the Job busy working?
+				/// </summary>
 				internal bool _isBusy;
+				/// <summary>
+				/// Is the Job done?
+				/// </summary>
 				internal bool _isDone;
+				/// <summary>
+				/// Has the OnFinished been called?
+				/// </summary>
 				internal bool _firedOnFinished;
+				/// <summary>
+				/// Internal fail safe to maintain lock.
+				/// </summary>
 				internal object _syncRoot = new object ();
 
+				/// <summary>
+				/// Is the Job busy working?
+				/// </summary>
+				/// <value><c>true</c> if is; otherwise, <c>false</c>.</value>
+				public bool IsBusy {
+						get {
+								bool tmp;
+								lock (_syncRoot) {
+										tmp = _isBusy;
+								}
+								return tmp;
+						}
+						protected set {
+								lock (_syncRoot) {
+										_isBusy = value;
+								}
+						}
+				}
+
+				/// <summary>
+				/// Is the Job done?
+				/// </summary>
+				/// <value><c>true</c> if is; otherwise, <c>false</c>.</value>
 				public bool IsDone {
 						get {
 								bool tmp;
@@ -50,6 +88,10 @@ namespace Hydrogen.Threading
 						}
 				}
 
+				/// <summary>
+				/// Has the OnFinished been called yet?
+				/// </summary>
+				/// <value><c>true</c> if it has; otherwise, <c>false</c>.</value>
 				public bool FiredOnFinished {
 						get {
 								bool tmp;
@@ -61,21 +103,6 @@ namespace Hydrogen.Threading
 						protected set {
 								lock (_syncRoot) {
 										_firedOnFinished = value;
-								}
-						}
-				}
-
-				public bool IsBusy {
-						get {
-								bool tmp;
-								lock (_syncRoot) {
-										tmp = _isBusy;
-								}
-								return tmp;
-						}
-						protected set {
-								lock (_syncRoot) {
-										_isBusy = value;
 								}
 						}
 				}
@@ -98,8 +125,24 @@ namespace Hydrogen.Threading
 						return false;
 				}
 
-				public abstract void Start (bool backgroundThread, System.Threading.ThreadPriority priority);
+				/// <summary>
+				/// Abort the Job (as best we can).
+				/// </summary>
+				protected virtual void Abort ()
+				{
+						IsBusy = false;
+						IsDone = false;
+						FiredOnFinished = true;
+				}
 
+				protected virtual void OnFinished ()
+				{
+				}
+
+				/// <summary>
+				/// The launcher of the ThreadedFunction, used to handle the state as well.
+				/// </summary>
+				/// <param name="state">Irrelevent / Not Used. Required for the ThreadPool to be used.</param>
 				protected virtual void Run (object state)
 				{
 						IsBusy = true;
@@ -112,26 +155,31 @@ namespace Hydrogen.Threading
 						// Execute our threaded function
 						ThreadedFunction ();
 
-						IsBusy = true;
+						// Not busy anymore
+						IsBusy = false;
 
 						// Yup we are now done.
 						IsDone = true;
 				}
 
+				/// <summary>
+				/// Start the work process, should probably send the Run function to the thread 
+				/// </summary>
+				/// <param name="backgroundThread">If set to <c>true</c> the thread will be set to background.</param>
+				/// <param name="priority">The thread priority.</param>
+				public abstract void Start (bool backgroundThread, System.Threading.ThreadPriority priority);
+
+				/// <summary>
+				/// The work horse function that MUST BE THREAD SAFE. Do not touch the Unity API! 
+				/// It will cause an exception if you do, and things will act like a 4 year old having a tantrum.
+				/// Debugging should be handled via System.Console and you should be aware that exceptions will not 
+				/// show up in Unity if they happen on the thread; therefore you will never know if its broken so test 
+				/// your code outside of the threading first, or have copius amounts of debugging implemented.
+				/// </summary>
+				/// <remarks>Threading: Because when it works, its awesome.</remarks>
 				protected virtual void ThreadedFunction ()
 				{
 
-				}
-
-				protected virtual void OnFinished ()
-				{
-
-				}
-
-				protected virtual void Abort ()
-				{
-						IsBusy = false;
-						IsDone = false;
 				}
 		}
 }
