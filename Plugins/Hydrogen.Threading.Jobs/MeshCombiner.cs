@@ -43,10 +43,6 @@ namespace Hydrogen.Threading.Jobs
 						if (onFinished != null) {
 								_callback = onFinished;
 						}
-
-						if (_combinedMeshes != null) {
-								_combinedMeshes = null;
-						}
 								
 						Start (true, System.Threading.ThreadPriority.Normal);
 
@@ -59,8 +55,6 @@ namespace Hydrogen.Threading.Jobs
 						_combinedMeshes = new UnityEngine.Mesh[_meshData.Length];
 
 						for (int x = 0; x <= _meshIndex; x++) {
-
-
 
 								_combinedMeshes [x] = new UnityEngine.Mesh ();
 								_combinedMeshes [x].name = "H_Combined_" + _hash + "_" + x;
@@ -136,16 +130,41 @@ namespace Hydrogen.Threading.Jobs
 										continue;
 								}
 
+
+
+
 // Create quick local reference 
 								mesh = _meshes [x];
+
+
+
+/*
+ * _vertices.AddRange(instance.mesh.vertices.Select(instance.transform.MultiplyPoint));
+ * _normals.AddRange(instance.mesh.normals.Select(n => instance.transform.inverse.transpose.MultiplyVector(n).normalized));
+ * _tangents.AddRange(instance.mesh.tangents.Select(t =>
+                                                             {
+                                                                 var p = new Vector3(t.x, t.y, t.z);
+                                                                 p =
+                                                                     instance.transform.inverse.transpose.
+                                                                         MultiplyVector(p).normalized;
+                                                                 return new Vector4(p.x, p.y, p.z, t.w);
+                                                             }));
+*/
+
 
 								for (int y = 0; y < mesh.Vertices.Length; y++) {
 
 										// Add check here for vert limit ?
-
+										// TODO: Add increase to _meshIndex if it detects over limit (increase _meshData array too); 
+										// TODO: will prolly need indices to be reset or linked to the actual meshdata
 
 										// Add Em All In! (if not empty! THREAD CRASH!)
+
+
+
+
 										if (mesh.Vertices.Length > 0) {
+
 												_meshData [_meshIndex].Vertices.Add (mesh.Vertices [y]);
 										}
 										if (mesh.Normals.Length > 0) {
@@ -167,7 +186,6 @@ namespace Hydrogen.Threading.Jobs
 												_meshData [_meshIndex].UV2.Add (mesh.UV2 [y]);
 										}
 								}
-
 
 
 								for (int a = 0; a < mesh.SubMeshCount; a++) {
