@@ -31,6 +31,12 @@ using UnityEditor;
 
 public static class LibraryDocumentation
 {
+		[MenuItem ("Help/Hydrogen Documentation", false, 200)]
+		static void HelpForHydrogenComponents ()
+		{
+				UnityEngine.Application.OpenURL ("http://hydrogen.dotbunny.com/getting-started/");
+
+		}
 		//[MenuItem ("Help/Library Documentation/Install for MonoDevelop", true)]
 		public static bool InstallLibraryDocumentationMonoDevelopCheck ()
 		{

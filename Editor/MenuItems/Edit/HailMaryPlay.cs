@@ -30,7 +30,7 @@ public static class HailMaryPlay
 {
 		public static string Injection = "UnityEngine.Debug.Log(\".:Hail Mary:.\");";
 
-		[MenuItem ("Assets/The \"Hail Mary\" Play/Enable Project Wide")]
+		[MenuItem ("Edit/The \"Hail Mary\" Play/Enable Project Wide")]
 		public static void EnableHailMary ()
 		{
 				string[] files = System.IO.Directory.GetFiles (".", "*.cs", System.IO.SearchOption.AllDirectories);
@@ -40,7 +40,7 @@ public static class HailMaryPlay
 				AssetDatabase.Refresh ();
 		}
 
-		[MenuItem ("Assets/The \"Hail Mary\" Play/Disable Project Wide")]
+		[MenuItem ("Edit/The \"Hail Mary\" Play/Disable Project Wide")]
 		public static void DisableHailMary ()
 		{
 				string[] files = System.IO.Directory.GetFiles (".", "*.cs", System.IO.SearchOption.AllDirectories);
@@ -50,13 +50,13 @@ public static class HailMaryPlay
 				AssetDatabase.Refresh ();
 		}
 
-		[MenuItem ("Assets/The \"Hail Mary\" Play/Enable On Selected", true)]
+		[MenuItem ("Edit/The \"Hail Mary\" Play/Enable On Selected", true)]
 		public static bool EnableHailMaryOnSelectedCheck ()
 		{
 				return Selection.instanceIDs.Length != 0;
 		}
 
-		[MenuItem ("Assets/The \"Hail Mary\" Play/Enable On Selected")]
+		[MenuItem ("Edit/The \"Hail Mary\" Play/Enable On Selected")]
 		public static void EnableHailMaryOnSelected ()
 		{
 				foreach (int id in Selection.instanceIDs) {
@@ -68,13 +68,13 @@ public static class HailMaryPlay
 				AssetDatabase.Refresh ();
 		}
 
-		[MenuItem ("Assets/The \"Hail Mary\" Play/Disable On Selected", true)]
+		[MenuItem ("Edit/The \"Hail Mary\" Play/Disable On Selected", true)]
 		public static bool DisableHailMaryOnSelectedCheck ()
 		{
 				return Selection.instanceIDs.Length != 0;
 		}
 
-		[MenuItem ("Assets/The \"Hail Mary\" Play/Disable On Selected")]
+		[MenuItem ("Edit/The \"Hail Mary\" Play/Disable On Selected")]
 		public static void DisableHailMaryOnSelected ()
 		{
 				foreach (int id in Selection.instanceIDs) {
