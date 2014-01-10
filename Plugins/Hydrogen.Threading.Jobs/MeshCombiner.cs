@@ -73,6 +73,12 @@ namespace Hydrogen.Threading.Jobs
 								Debug.Log ("[" + _combinedMeshes [x].name + "] " + "Vertices: " + _meshData [x].VerticesArray.Length + " || Normals: " + _meshData [x].NormalsArray.Length +
 								" || Tangents: " + _meshData [x].TangentsArray.Length + " || Colors: " + _meshData [x].ColorsArray.Length + " || UV: " + _meshData [x].UVArray.Length +
 								" || UV1: " + _meshData [x].UV1Array.Length + " || UV2: " + _meshData [x].UV2Array.Length + " || Indices: " + _meshData [x].IndicesArray.Length);
+
+								string verts = "";
+								foreach (var v3 in _combinedMeshes[x].vertices) {
+										verts += "[" + v3.ToString () + "] ";
+								}
+								Debug.Log ("VERTICES: " + verts);
 						}
 				}
 
@@ -165,6 +171,7 @@ namespace Hydrogen.Threading.Jobs
 
 										if (mesh.Vertices.Length > 0) {
 
+												// TODO : Need to map this to handle is position in the real world?
 												_meshData [_meshIndex].Vertices.Add (mesh.Vertices [y]);
 										}
 										if (mesh.Normals.Length > 0) {
