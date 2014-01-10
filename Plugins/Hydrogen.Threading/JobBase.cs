@@ -32,6 +32,7 @@ namespace Hydrogen.Threading
 		{
 				internal bool _isBusy;
 				internal bool _isDone;
+				internal bool _firedOnFinished;
 				internal object _syncRoot = new object ();
 
 				public bool IsDone {
@@ -42,9 +43,24 @@ namespace Hydrogen.Threading
 								}
 								return tmp;
 						}
-						set {
+						protected set {
 								lock (_syncRoot) {
 										_isDone = value;
+								}
+						}
+				}
+
+				public bool FiredOnFinished {
+						get {
+								bool tmp;
+								lock (_syncRoot) {
+										tmp = _firedOnFinished;
+								}
+								return tmp;
+						}
+						protected set {
+								lock (_syncRoot) {
+										_firedOnFinished = value;
 								}
 						}
 				}
@@ -57,7 +73,7 @@ namespace Hydrogen.Threading
 								}
 								return tmp;
 						}
-						set {
+						protected set {
 								lock (_syncRoot) {
 										_isBusy = value;
 								}
@@ -67,7 +83,16 @@ namespace Hydrogen.Threading
 				public virtual bool Check ()
 				{
 						if (IsDone) {
-								OnFinished ();
+
+								// Only fire off our OnFinished if we haven't before.
+								if (!FiredOnFinished) {
+
+										// Fireoff our Finish Code
+										OnFinished ();
+
+										// Stop From Firing Again
+										FiredOnFinished = true;
+								}
 								return true;
 						}
 						return false;
@@ -82,10 +107,12 @@ namespace Hydrogen.Threading
 						// I guess we can't be done now can we?
 						IsDone = false;
 
+						FiredOnFinished = false;
+
 						// Execute our threaded function
 						ThreadedFunction ();
 
-						IsBusy = false;
+						IsBusy = true;
 
 						// Yup we are now done.
 						IsDone = true;

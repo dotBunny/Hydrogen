@@ -13,31 +13,17 @@ namespace Hydrogen.Threading.Jobs
 				/// <summary>
 				/// The combined mesh.
 				/// </summary>
-				UnityEngine.Mesh _combinedMesh;
+				UnityEngine.Mesh[] _combinedMeshes;
 				int _hash;
 				/// <summary>
 				/// The _callback.
 				/// </summary>
-				Action<int, UnityEngine.Mesh> _callback;
-				List<Vector3> _vertices;
-				List<Vector3> _normals;
-				List<Vector4> _tangents;
-				List<Color> _colors;
-				List<Vector2> _uv;
-				List<Vector2> _uv1;
-				List<Vector2> _uv2;
-				List<int> _indices;
-				Vector3[] _verticesArray;
-				Vector3[] _normalsArray;
-				Vector4[] _tangentsArray;
-				Color[] _colorsArray;
-				Vector2[] _uvArray;
-				Vector2[] _uv1Array;
-				Vector2[] _uv2Array;
-				int[] _indicesArray;
+				Action<int, UnityEngine.Mesh[]> _callback;
+				MeshData[] _meshData;
+				int _meshIndex;
 
-				public UnityEngine.Mesh CombinedMesh {
-						get { return _combinedMesh; }
+				public UnityEngine.Mesh[] CombinedMeshes {
+						get { return _combinedMeshes; }
 				}
 
 				public int CombineMeshes (MeshCombiner.Mesh[] meshes)
@@ -45,7 +31,7 @@ namespace Hydrogen.Threading.Jobs
 						return CombineMeshes (meshes, null);
 				}
 
-				public int CombineMeshes (MeshCombiner.Mesh[] meshes, Action<int, UnityEngine.Mesh> onFinished)
+				public int CombineMeshes (MeshCombiner.Mesh[] meshes, Action<int, UnityEngine.Mesh[]> onFinished)
 				{
 						// Assign Mesh Data
 						_meshes = meshes;
@@ -58,31 +44,42 @@ namespace Hydrogen.Threading.Jobs
 								_callback = onFinished;
 						}
 
-						if (_combinedMesh != null) {
-								_combinedMesh.Clear ();
+						if (_combinedMeshes != null) {
+								_combinedMeshes = null;
 						}
-
-						IsDone = false;
-						IsBusy = false;
-			
+								
 						Start (true, System.Threading.ThreadPriority.Normal);
+
 						return _hash;
 				}
 
-				public void ProcessMesh ()
+				public void ProcessMeshes ()
 				{
-						_combinedMesh = new UnityEngine.Mesh ();
-						_combinedMesh.name = "H_Combined_Mesh";
+						Debug.Log ("Processing " + _meshData.Length + " Items");
+						_combinedMeshes = new UnityEngine.Mesh[_meshData.Length];
 
-						_combinedMesh.vertices = _verticesArray;
-						_combinedMesh.normals = _normalsArray;
-						_combinedMesh.tangents = _tangentsArray;
-						_combinedMesh.colors = _colorsArray;
-						_combinedMesh.uv = _uvArray;
-						_combinedMesh.uv1 = _uv1Array;
-						_combinedMesh.uv2 = _uv2Array;
+						for (int x = 0; x <= _meshIndex; x++) {
 
-						_combinedMesh.triangles = _indicesArray;
+
+
+								_combinedMeshes [x] = new UnityEngine.Mesh ();
+								_combinedMeshes [x].name = "H_Combined_" + _hash + "_" + x;
+
+								_combinedMeshes [x].vertices = _meshData [x].VerticesArray;
+								_combinedMeshes [x].normals = _meshData [x].NormalsArray;
+								_combinedMeshes [x].tangents = _meshData [x].TangentsArray;
+								_combinedMeshes [x].colors = _meshData [x].ColorsArray;
+
+								_combinedMeshes [x].uv = _meshData [x].UVArray;
+								_combinedMeshes [x].uv1 = _meshData [x].UV1Array;
+								_combinedMeshes [x].uv2 = _meshData [x].UV2Array;
+
+								_combinedMeshes [x].SetIndices (_meshData [x].IndicesArray, MeshTopology.Triangles, 0);
+
+								Debug.Log ("[" + _combinedMeshes [x].name + "] " + "Vertices: " + _meshData [x].VerticesArray.Length + " || Normals: " + _meshData [x].NormalsArray.Length +
+								" || Tangents: " + _meshData [x].TangentsArray.Length + " || Colors: " + _meshData [x].ColorsArray.Length + " || UV: " + _meshData [x].UVArray.Length +
+								" || UV1: " + _meshData [x].UV1Array.Length + " || UV2: " + _meshData [x].UV2Array.Length + " || Indices: " + _meshData [x].IndicesArray.Length);
+						}
 				}
 
 				public static MeshCombiner.Mesh MeshFilterToMesh (MeshFilter meshFilter)
@@ -116,48 +113,58 @@ namespace Hydrogen.Threading.Jobs
 
 				protected sealed override void ThreadedFunction ()
 				{
-						IsBusy = true;
+						_meshIndex = 0;
+						_meshData = new MeshData[1];
 
-						_vertices = new List<Vector3> (Hydrogen.Mesh.VerticesLimit);
-						_normals = new List<Vector3> ();
-						_tangents = new List<Vector4> ();
-						_colors = new List<Color> ();
-						_uv = new List<Vector2> ();
-						_uv1 = new List<Vector2> ();
-						_uv2 = new List<Vector2> ();
-						_indices = new List<int> ();
+						// Initialize our first mesh
+						_meshData [0].Vertices = new List<Vector3> (Hydrogen.Mesh.VerticesLimit);
+						_meshData [0].Normals = new List<Vector3> ();
+						_meshData [0].Tangents = new List<Vector4> ();
+						_meshData [0].Colors = new List<Color> ();
+						_meshData [0].UV = new List<Vector2> ();
+						_meshData [0].UV1 = new List<Vector2> ();
+						_meshData [0].UV2 = new List<Vector2> ();
+						_meshData [0].Indices = new List<int> ();
 
 						int baseIndex = 0;
 						MeshCombiner.Mesh mesh;
 
 						// Loop through all of those meshes (yay for threading!)
 						for (int x = 0; x < _meshes.Length; x++) {
-								// Create quick local reference 
+								// If there are no vertices what are we doing here?
+								if (_meshes [x].Vertices.Length == 0) {
+										continue;
+								}
+
+// Create quick local reference 
 								mesh = _meshes [x];
 
 								for (int y = 0; y < mesh.Vertices.Length; y++) {
 
+										// Add check here for vert limit ?
+
+
 										// Add Em All In! (if not empty! THREAD CRASH!)
 										if (mesh.Vertices.Length > 0) {
-												_vertices.Add (mesh.Vertices [y]);
+												_meshData [_meshIndex].Vertices.Add (mesh.Vertices [y]);
 										}
 										if (mesh.Normals.Length > 0) {
-												_normals.Add (mesh.Normals [y]);
+												_meshData [_meshIndex].Normals.Add (mesh.Normals [y]);
 										}
 										if (mesh.Tangents.Length > 0) {
-												_tangents.Add (mesh.Tangents [y]);
+												_meshData [_meshIndex].Tangents.Add (mesh.Tangents [y]);
 										}
 										if (mesh.Colors.Length > 0) {
-												_colors.Add (mesh.Colors [y]);
+												_meshData [_meshIndex].Colors.Add (mesh.Colors [y]);
 										}
 										if (mesh.UV.Length > 0) {
-												_uv.Add (mesh.UV [y]);
+												_meshData [_meshIndex].UV.Add (mesh.UV [y]);
 										}
 										if (mesh.UV1.Length > 0) {
-												_uv1.Add (mesh.UV1 [y]);
+												_meshData [_meshIndex].UV1.Add (mesh.UV1 [y]);
 										}
 										if (mesh.UV2.Length > 0) {
-												_uv2.Add (mesh.UV2 [y]);
+												_meshData [_meshIndex].UV2.Add (mesh.UV2 [y]);
 										}
 								}
 
@@ -168,7 +175,7 @@ namespace Hydrogen.Threading.Jobs
 										var test = mesh.SubMeshes [a].Indices;
 										for (int b = 0; b < test.Length; b++) {
 								
-												_indices.Add (test [b] + baseIndex);
+												_meshData [_meshIndex].Indices.Add (test [b] + baseIndex);
 
 										}
 										baseIndex += test.Length;
@@ -176,30 +183,50 @@ namespace Hydrogen.Threading.Jobs
 						}
 
 						// Do as much data manipulation in the thread as possible (sadly).
-						// This seems kinda dumb eh?
-						_verticesArray = _vertices.ToArray ();
-						_normalsArray = _normals.ToArray ();
-						_tangentsArray = _tangents.ToArray ();
-						_colorsArray = _colors.ToArray ();
-						_uvArray = _uv.ToArray ();
-						_uv1Array = _uv1.ToArray ();
-						_uv2Array = _uv2.ToArray ();
-						_indicesArray = _indices.ToArray ();
-						IsBusy = false;
-						IsDone = true;
+						// This seems kinda dumb eh? But it is just another thing that saves on time later.
+						// It isn't great on memory tho ;(
+						for (int z = 0; z < _meshData.Length; z++) {
+								_meshData [z].VerticesArray = _meshData [z].Vertices.ToArray ();
+								_meshData [z].NormalsArray = _meshData [z].Normals.ToArray ();
+								_meshData [z].TangentsArray = _meshData [z].Tangents.ToArray ();
+								_meshData [z].ColorsArray = _meshData [z].Colors.ToArray ();
+								_meshData [z].UVArray = _meshData [z].UV.ToArray ();
+								_meshData [z].UV1Array = _meshData [z].UV1.ToArray ();
+								_meshData [z].UV2Array = _meshData [z].UV2.ToArray ();
+								_meshData [z].IndicesArray = _meshData [z].Indices.ToArray ();
+						}
 				}
 
 				protected sealed override void OnFinished ()
 				{
 						// Create our mesh
-						ProcessMesh ();
+						ProcessMeshes ();
 			
 						// Callback
 						if (_callback != null) {
-								_callback (_hash, _combinedMesh);
-
+								_callback (_hash, _combinedMeshes);
 						}
 
+				}
+
+				public struct MeshData
+				{
+						public List<Vector3> Vertices;
+						public List<Vector3> Normals;
+						public List<Vector4> Tangents;
+						public List<Color> Colors;
+						public List<Vector2> UV;
+						public List<Vector2> UV1;
+						public List<Vector2> UV2;
+						public List<int> Indices;
+						public Vector3[] VerticesArray;
+						public Vector3[] NormalsArray;
+						public Vector4[] TangentsArray;
+						public Color[] ColorsArray;
+						public Vector2[] UVArray;
+						public Vector2[] UV1Array;
+						public Vector2[] UV2Array;
+						public int[] IndicesArray;
 				}
 
 				public struct Mesh
