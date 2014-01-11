@@ -30,8 +30,25 @@ namespace Hydrogen.Threading
 {
 		public class ThreadedJob : JobBase
 		{
+				/// <summary>
+				/// The job's thread.
+				/// </summary>
 				System.Threading.Thread _thread;
 
+				/// <summary>
+				/// System assigned thread.
+				/// </summary>
+				/// <value>The job.</value>
+				public System.Threading.Thread Thread {
+						get { return _thread; }
+				}
+
+				/// <summary>
+				/// Start the work process.
+				/// This should initialize the Thread with the Run function.
+				/// </summary>
+				/// <param name="backgroundThread">If set to <c>true</c> background thread.</param>
+				/// <param name="priority">Priority.</param>
 				public override void Start (bool backgroundThread, System.Threading.ThreadPriority priority)
 				{
 						// Create our new thread.
@@ -47,6 +64,9 @@ namespace Hydrogen.Threading
 						_thread.Start ();
 				}
 
+				/// <summary>
+				/// Abort the Job (as best we can).
+				/// </summary>
 				protected override void Abort ()
 				{
 						_thread.Abort ();

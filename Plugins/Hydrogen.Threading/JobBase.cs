@@ -1,6 +1,6 @@
 ﻿#region Copyright Notice & License Information
 //
-// Job.cs
+// JobBase.cs
 //
 // Author:
 //       Matthew Davey <matthew.davey@dotbunny.com>
@@ -107,6 +107,9 @@ namespace Hydrogen.Threading
 						}
 				}
 
+				/// <summary>
+				/// Checks if the Job is done, and facilitates calling OnFinished when completed.
+				/// </summary>
 				public virtual bool Check ()
 				{
 						if (IsDone) {
@@ -135,6 +138,10 @@ namespace Hydrogen.Threading
 						FiredOnFinished = true;
 				}
 
+				/// <summary>
+				/// Called once by Check when the Job has finished.
+				/// </summary>
+				/// <remarks>Can use Unity API.</remarks>
 				protected virtual void OnFinished ()
 				{
 				}
@@ -163,7 +170,7 @@ namespace Hydrogen.Threading
 				}
 
 				/// <summary>
-				/// Start the work process, should probably send the Run function to the thread 
+				/// Start the work process, should probably send the Run function to the thread!
 				/// </summary>
 				/// <param name="backgroundThread">If set to <c>true</c> the thread will be set to background.</param>
 				/// <param name="priority">The thread priority.</param>

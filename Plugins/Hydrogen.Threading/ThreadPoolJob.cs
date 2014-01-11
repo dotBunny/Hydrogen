@@ -32,6 +32,12 @@ namespace Hydrogen.Threading
 		{
 				System.Threading.WaitCallback _callback;
 
+				/// <summary>
+				/// Sends the work process to the ThreadPool for starting when resources are available, 
+				/// This needs to initialize the WaitCallback with the Run function.
+				/// </summary>
+				/// <param name="backgroundThread">Not Used.</param>
+				/// <param name="priority">Not Used.</param>
 				public override void Start (bool backgroundThread, System.Threading.ThreadPriority priority)
 				{
 						_callback = new System.Threading.WaitCallback (Run);
