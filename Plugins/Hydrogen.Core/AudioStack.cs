@@ -5,7 +5,7 @@
 // Author:
 //       Matthew Davey <matthew.davey@dotbunny.com>
 //
-// Copyright (c) 2013 dotBunny Inc. (http://www.dotbunny.com)
+// Copyright (c) 2014 dotBunny Inc. (http://www.dotbunny.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -295,7 +295,10 @@ namespace Hydrogen.Core
 						// Remove our item definition
 						_loadedItems.Remove (item.Key);
 
-						// Free Item
+						// Get rid of references (just for easy of GC)
+						item.Dispose ();
+
+						// Remove reference
 						item = null;
 				}
 

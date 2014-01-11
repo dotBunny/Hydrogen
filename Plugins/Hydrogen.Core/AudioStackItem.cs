@@ -5,7 +5,7 @@
 // Author:
 //       Matthew Davey <matthew.davey@dotbunny.com>
 //
-// Copyright (c) 2013 dotBunny Inc. (http://www.dotbunny.com)
+// Copyright (c) 2014 dotBunny Inc. (http://www.dotbunny.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,6 +25,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 #endregion
+using System;
 using UnityEngine;
 
 namespace Hydrogen.Core
@@ -33,7 +34,7 @@ namespace Hydrogen.Core
 		/// A class represention of all information needed for an AudioClip to be played via the AudioStack.
 		/// </summary>
 		[System.Serializable]
-		public sealed class AudioStackItem
+		public sealed class AudioStackItem : IDisposable
 		{
 				/// <summary>
 				/// The associated AudioClip
@@ -103,6 +104,10 @@ namespace Hydrogen.Core
 				/// The volume which the AudioSource should gravitate towards.
 				/// </summary>
 				public float TargetVolume = 1f;
+				/// <summary>
+				/// Has the item been disposed of?
+				/// </summary>
+				bool _disposed;
 
 				/// <summary>
 				/// Initializes a new instance of the <see cref="Hydrogen.Core.AudioStackItem"/> class.
@@ -155,6 +160,15 @@ namespace Hydrogen.Core
 						Clip = clip;
 						Key = key;
 						Loop = loop;
+				}
+
+				public void Dispose ()
+				{
+
+						Destroy (true); //I am calling you from Dispose, it's safe
+
+						// Indicate that this has already been cleaned up.
+						GC.SuppressFinalize (this);
 				}
 
 				/// <summary>
@@ -221,6 +235,39 @@ namespace Hydrogen.Core
 				public void Stop ()
 				{
 						Source.Stop ();
+				}
+
+				/// <summary>
+				/// Cleanup Operation
+				/// </summary>
+				/// <param name="disposing">If set to <c>true</c> disposing will occur.</param>
+				void Destroy (bool disposing)
+				{
+						// Check to see if Dispose has already been called. 
+						if (!_disposed) {
+								// If disposing equals true, dispose all managed and unmanaged resources. 
+								if (disposing) {
+
+										// Null References
+										Clip = null;
+										Source = null;
+										Stack = null;
+								}
+
+								_disposed = true;
+						}
+				}
+
+				/// <summary>
+				/// Releases unmanaged resources and performs other cleanup operations before the
+				/// <see cref="Hydrogen.Core.AudioStackItem"/> is reclaimed by garbage collection.
+				/// </summary>
+				~AudioStackItem ()
+				{
+						// Do not re-create Dispose clean-up code here. 
+						// Calling Destroy(false) is optimal in terms of 
+						// readability and maintainability.
+						Destroy (false);
 				}
 		}
 }

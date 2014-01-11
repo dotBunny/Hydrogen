@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
 
 namespace Hydrogen.Threading.Jobs
 {
@@ -272,6 +273,147 @@ namespace Hydrogen.Threading.Jobs
 				public struct SubMesh
 				{
 						public int[] Indices;
+				}
+				// START
+				class IndexArrayDescription
+				{
+						readonly int[] values;
+
+						public int size { get; private set; }
+
+						public IndexArrayDescription (int nbIndexes)
+						{
+								size = nbIndexes;
+								if (size % 3 != 0) {
+										Debug.Log ("Bad index array, count is not a multiple of 3!");
+										return;
+								}
+								values = new int[size];
+						}
+
+						public int this [int i] {
+								get { return values [i]; }
+								set { values [i] = value; }
+						}
+
+						internal void CopyFrom (int[] other)
+						{
+								for (var i = 0; i < size; i++) {
+										values [i] = other [i];
+								}
+						}
+				}
+
+				class MeshDescription
+				{
+						public readonly VertexObjectDescription vertexObject;
+						public readonly List<SubMeshDescription> subMeshes;
+
+						public MeshDescription (int nbVertices)
+						{
+								vertexObject = new VertexObjectDescription (nbVertices);
+								subMeshes = new List<SubMeshDescription> ();
+						}
+
+						public SubMeshDescription AddSubMesh (Material sharedMaterial, int nbIndexes)
+						{
+								var smd = new SubMeshDescription (nbIndexes, vertexObject, sharedMaterial);
+								subMeshes.Add (smd);
+								return smd;
+						}
+
+						internal void DebugPrint (StringBuilder sb)
+						{
+								sb.AppendFormat ("Mesh#{0:X8}\n", GetHashCode ());
+								sb.AppendFormat ("Vertices.Size={0}\n", vertexObject.size);
+								sb.AppendFormat ("Vertices.Vertices =[{0},{1},{2}], [{3},{4},{5}], [{6},{7},{8}]...\n", vertexObject.vertices [0].x, vertexObject.vertices [1].y, vertexObject.vertices [2].z, vertexObject.vertices [3].x, vertexObject.vertices [4].y, vertexObject.vertices [5].z, vertexObject.vertices [6].x, vertexObject.vertices [7].y, vertexObject.vertices [8].z);
+								sb.AppendFormat ("Vertices.Normals={0}\n", vertexObject.normals.hasValues);
+								sb.AppendFormat ("Vertices.Tangents={0}\n", vertexObject.tangents.hasValues);
+								sb.AppendFormat ("Vertices.Colours={0}\n", vertexObject.colours.hasValues);
+								sb.AppendFormat ("Vertices.UV={0}\n", vertexObject.uv.hasValues);
+								sb.AppendFormat ("Vertices.UV1={0}\n", vertexObject.uv1.hasValues);
+								sb.AppendFormat ("Vertices.UV2={0}\n", vertexObject.uv2.hasValues);
+								sb.AppendFormat ("Vertices.WorldTransform={0}\n", vertexObject.worldTransform.ToString ().Replace ('\n', ' '));
+								sb.AppendFormat ("SubMesh.Count={0}\n", subMeshes.Count);
+								for (int i = 0; i < subMeshes.Count; i++) {
+										var sm = subMeshes [i];
+										sb.AppendFormat ("SubMesh[{0}].Indexes={1}\n", i, sm.indices.size);
+								}
+						}
+				}
+
+				class SubMeshDescription
+				{
+						public readonly Material sharedMaterial;
+						public readonly IndexArrayDescription indices;
+						public readonly VertexObjectDescription vertexObject;
+
+						public SubMeshDescription (int nbIndexes, VertexObjectDescription vertices, Material material)
+						{
+								this.sharedMaterial = material;
+								this.vertexObject = vertices;
+								this.indices = new IndexArrayDescription (nbIndexes);
+						}
+				}
+
+				class VertexArrayDescription<T>
+				{
+						readonly T[] values;
+						readonly int size;
+
+						public bool hasValues { get; private set; }
+
+						public VertexArrayDescription (int nbVertices)
+						{
+								size = nbVertices;
+								values = new T[size];
+								hasValues = false;
+						}
+
+						public T this [int i] {
+								get { return values [i]; }
+								set {
+										values [i] = value;
+										hasValues = true;
+								}
+						}
+
+						public void CopyFrom (T[] other)
+						{
+								if (other != null && other.Length > 0) {
+										// TODO Exception/Assert here when size != values.length
+										for (var i = 0; i < size; i++) {
+												values [i] = other [i];
+										}
+										hasValues = true;
+								}
+						}
+				}
+
+				class VertexObjectDescription
+				{
+						public readonly int size;
+						public readonly VertexArrayDescription<Vector3> vertices;
+						public readonly VertexArrayDescription<Vector3> normals;
+						public readonly VertexArrayDescription<Vector4> tangents;
+						public readonly VertexArrayDescription<Color> colours;
+						public readonly VertexArrayDescription<Vector2> uv;
+						public readonly VertexArrayDescription<Vector2> uv1;
+						public readonly VertexArrayDescription<Vector2> uv2;
+						public Matrix4x4 worldTransform;
+
+						public VertexObjectDescription (int nbVertices)
+						{
+								size = nbVertices;
+								vertices = new VertexArrayDescription<Vector3> (size);
+								normals = new VertexArrayDescription<Vector3> (size);
+								tangents = new VertexArrayDescription<Vector4> (size);
+								colours = new VertexArrayDescription<Color> (size);
+								uv = new VertexArrayDescription<Vector2> (size);
+								uv1 = new VertexArrayDescription<Vector2> (size);
+								uv2 = new VertexArrayDescription<Vector2> (size);
+								worldTransform = Matrix4x4.identity;
+						}
 				}
 		}
 }
