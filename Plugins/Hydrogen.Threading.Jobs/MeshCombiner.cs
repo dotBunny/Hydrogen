@@ -196,33 +196,44 @@ namespace Hydrogen.Threading.Jobs
 						_combinedMaterials = seen.ToArray ();
 
 						// Create a temporary set of meshes based on the number of materials that are being used.
-						var mmds = new MultiMeshDescription[_combinedMaterials.Length];
+						var multiMeshDescriptions = new MultiMeshDescription[_combinedMaterials.Length];
 
 
 						// Initialize each new mesh with their respective material
 						for (int i = 0; i < _combinedMaterials.Length; i++) {
-								mmds [i] = new MultiMeshDescription (_combinedMaterials [i]);
+								multiMeshDescriptions [i] = new MultiMeshDescription (_combinedMaterials [i]);
 						}
 
-						// Assign the submeshes accordingly.
-						foreach (var d in _meshDescriptions) {
-								foreach (var sm in d.SubMeshes) {
-										foreach (var mmd in mmds) {
-												if (mmd.SharedMaterial == sm.SharedMaterial) {
-														mmd.AddSubMesh (sm);
+
+						// Itterate through all of the MeshDescriptions present to be combined.
+						foreach (var meshDescription in _meshDescriptions) {
+						
+								// Itterate through all SubMeshes in the MeshDescription
+								foreach (var subMesh in meshDescription.SubMeshes) {
+								
+										// Itterate through all of our MultiMeshDescriptions adding meshes that
+										// have the same material as its own.
+										foreach (var multiMesh in multiMeshDescriptions) {
+
+												if (multiMesh.SharedMaterial == subMesh.SharedMaterial) {
+														multiMesh.AddSubMesh (subMesh);
 														break;
 												}
 										}
 								}
 						}
 
-						var fmds = new List<MeshDescription> (_combinedMaterials.Length);
+						// Create our finalized MeshDescription holder, at the size of the materials
+						var finalMeshDescriptions = new List<MeshDescription> (_combinedMaterials.Length);
 
-						foreach (var mmd in mmds) {
-								fmds.AddRange (mmd.Combine ());
+						// Itterate over our MultiMeshDescriptions again and have them execute their 
+						// Combine method forcing them down into MeshDescriptions
+						foreach (var multiMesh in multiMeshDescriptions) {
+								finalMeshDescriptions.AddRange (multiMesh.Combine ());
 						}
 
-						_combinedDescriptions = fmds.ToArray ();
+						// Assign the finalized MeshDescriptions to our internal storage.
+						_combinedDescriptions = finalMeshDescriptions.ToArray ();
 				}
 
 				protected sealed override void OnFinished ()
@@ -231,9 +242,8 @@ namespace Hydrogen.Threading.Jobs
 						CreateMeshes ();
 
 						// Callback
-						if (_callback != null) {
+						if (_callback != null)
 								_callback (_hash, _combinedMeshes);
-						}
 
 				}
 
@@ -363,15 +373,16 @@ namespace Hydrogen.Threading.Jobs
 						{
 								var mds = new List<MeshDescription> ();
 
-								int totalNbVertices = 0;
-								foreach (var sm in SubMeshes) {
-										totalNbVertices += sm.CountUsedVertices ();
+								// Determine the total number of vertices accross submeshes
+								int TotalVerticesCount = 0;
+								foreach (var subMesh in SubMeshes) {
+										TotalVerticesCount += subMesh.CountUsedVertices ();
 								}
 
 								// Divide up meshes equally with a maxium vertex limit
 								var nbVerticesPerMesh = new List<int> ();
 								int vertexCount = 0;
-								while (vertexCount != totalNbVertices) {
+								while (vertexCount != TotalVerticesCount) {
 										int used = vertexCount;
 										if (used > (Hydrogen.Mesh.VerticesLimit - 6))
 												used = Hydrogen.Mesh.VerticesLimit - 6;
