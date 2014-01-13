@@ -93,14 +93,14 @@ namespace Hydrogen.Threading.Jobs
 						var vertexCount = mesh.vertexCount;
 						var md = new MeshDescription (vertexCount);
 
-						md.vertexObject.vertices.CopyFrom (mesh.vertices);
-						md.vertexObject.normals.CopyFrom (mesh.normals);
-						md.vertexObject.tangents.CopyFrom (mesh.tangents);
-						md.vertexObject.colours.CopyFrom (mesh.colors);
-						md.vertexObject.uv.CopyFrom (mesh.uv);
-						md.vertexObject.uv1.CopyFrom (mesh.uv1);
-						md.vertexObject.uv2.CopyFrom (mesh.uv2);
-						md.vertexObject.worldTransform = transform.localToWorldMatrix;
+						md.VertexObject.Vertices.CopyFrom (mesh.vertices);
+						md.VertexObject.Normals.CopyFrom (mesh.normals);
+						md.VertexObject.Tangents.CopyFrom (mesh.tangents);
+						md.VertexObject.Colors.CopyFrom (mesh.colors);
+						md.VertexObject.UV.CopyFrom (mesh.uv);
+						md.VertexObject.UV1.CopyFrom (mesh.uv1);
+						md.VertexObject.UV2.CopyFrom (mesh.uv2);
+						md.VertexObject.WorldTransform = transform.localToWorldMatrix;
 
 						var nbSubMeshes = mesh.subMeshCount;
 
@@ -108,7 +108,7 @@ namespace Hydrogen.Threading.Jobs
 								Material mat = null;
 								var indices = mesh.GetIndices (j);
 								var sm = md.AddSubMesh (mat, indices.Length);
-								sm.indices.CopyFrom (indices);
+								sm.Indices.CopyFrom (indices);
 						} 
 
 						return md;
@@ -212,9 +212,9 @@ namespace Hydrogen.Threading.Jobs
 						var mds = new MeshDescription[materials.Length];
 
 						foreach (var d in descriptions) {
-								foreach (var sm in d.subMeshes) {
+								foreach (var sm in d.SubMeshes) {
 										foreach (var mmd in mmds) {
-												if (mmd.sharedMaterial == sm.sharedMaterial) {
+												if (mmd.SharedMaterial == sm.SharedMaterial) {
 														mmd.AddSubMesh (sm);
 														break;
 												}
@@ -249,16 +249,16 @@ namespace Hydrogen.Threading.Jobs
 				{
 						var seen = new List<Material> (desc.Length);
 						foreach (var m in desc) {
-								foreach (var sm in m.subMeshes) {
-										if (seen.Contains (sm.sharedMaterial) == false) {
-												seen.Add (sm.sharedMaterial);
+								foreach (var sm in m.SubMeshes) {
+										if (seen.Contains (sm.SharedMaterial) == false) {
+												seen.Add (sm.SharedMaterial);
 										}
 								}
 						}
 						return seen.ToArray ();
 				}
 
-				public bool IsSame (Material lhs, Material rhs)
+				public bool MaterialCompare (Material lhs, Material rhs)
 				{
 						// Just for now.
 						return lhs.Equals (rhs);
@@ -266,23 +266,23 @@ namespace Hydrogen.Threading.Jobs
 
 				public class VertexArrayDescription<T>
 				{
+						public readonly int Size;
 						readonly T[] values;
-						public readonly int size;
 
-						public bool hasValues { get; private set; }
+						public bool HasValues { get; private set; }
 
 						public VertexArrayDescription (int nbVertices)
 						{
-								size = nbVertices;
-								values = new T[size];
-								hasValues = false;
+								Size = nbVertices;
+								values = new T[Size];
+								HasValues = false;
 						}
 
 						public T this [int i] {
 								get { return values [i]; }
 								set {
 										values [i] = value;
-										hasValues = true;
+										HasValues = true;
 								}
 						}
 
@@ -290,28 +290,28 @@ namespace Hydrogen.Threading.Jobs
 						{
 								if (other != null && other.Length > 0) {
 										// TODO Exception/Assert here when size != values.length
-										for (var i = 0; i < size; i++) {
+										for (var i = 0; i < Size; i++) {
 												values [i] = other [i];
 										}
-										hasValues = true;
+										HasValues = true;
 								}
 						}
 				}
 
 				public class IndexArrayDescription
 				{
-						readonly int[] values;
+						public int Size { get; private set; }
 
-						public int size { get; private set; }
+						readonly int[] values;
 
 						public IndexArrayDescription (int nbIndexes)
 						{
-								size = nbIndexes;
-								if (size % 3 != 0) {
+								Size = nbIndexes;
+								if (Size % 3 != 0) {
 										Debug.Log ("Bad index array, count is not a multiple of 3!");
 										return;
 								}
-								values = new int[size];
+								values = new int[Size];
 						}
 
 						public int this [int i] {
@@ -321,7 +321,7 @@ namespace Hydrogen.Threading.Jobs
 
 						internal void CopyFrom (int[] other)
 						{
-								for (var i = 0; i < size; i++) {
+								for (var i = 0; i < Size; i++) {
 										values [i] = other [i];
 								}
 						}
@@ -329,56 +329,56 @@ namespace Hydrogen.Threading.Jobs
 
 				public class MeshDescription
 				{
-						public readonly VertexObjectDescription vertexObject;
-						public readonly List<SubMeshDescription> subMeshes;
+						public readonly List<SubMeshDescription> SubMeshes;
+						public readonly VertexObjectDescription VertexObject;
 
-						public MeshDescription (int nbVertices)
+						public MeshDescription (int verticesCount)
 						{
-								vertexObject = new VertexObjectDescription (nbVertices);
-								subMeshes = new List<SubMeshDescription> ();
+								VertexObject = new VertexObjectDescription (verticesCount);
+								SubMeshes = new List<SubMeshDescription> ();
 						}
 
 						public SubMeshDescription AddSubMesh (Material sharedMaterial, int nbIndexes)
 						{
-								var smd = new SubMeshDescription (nbIndexes, vertexObject, sharedMaterial);
-								subMeshes.Add (smd);
+								var smd = new SubMeshDescription (nbIndexes, VertexObject, sharedMaterial);
+								SubMeshes.Add (smd);
 								return smd;
 						}
 
 						internal void DebugPrint (StringBuilder sb)
 						{
 								sb.AppendFormat ("Mesh#{0:X8}\n", GetHashCode ());
-								sb.AppendFormat ("Vertices.Size={0}\n", vertexObject.size);
-								sb.AppendFormat ("Vertices.Vertices =[{0},{1},{2}], [{3},{4},{5}], [{6},{7},{8}]...\n", vertexObject.vertices [0].x, vertexObject.vertices [1].y, vertexObject.vertices [2].z, vertexObject.vertices [3].x, vertexObject.vertices [4].y, vertexObject.vertices [5].z, vertexObject.vertices [6].x, vertexObject.vertices [7].y, vertexObject.vertices [8].z);
-								sb.AppendFormat ("Vertices.Normals={0}\n", vertexObject.normals.hasValues);
-								sb.AppendFormat ("Vertices.Tangents={0}\n", vertexObject.tangents.hasValues);
-								sb.AppendFormat ("Vertices.Colours={0}\n", vertexObject.colours.hasValues);
-								sb.AppendFormat ("Vertices.UV={0}\n", vertexObject.uv.hasValues);
-								sb.AppendFormat ("Vertices.UV1={0}\n", vertexObject.uv1.hasValues);
-								sb.AppendFormat ("Vertices.UV2={0}\n", vertexObject.uv2.hasValues);
-								sb.AppendFormat ("Vertices.WorldTransform={0}\n", vertexObject.worldTransform.ToString ().Replace ('\n', ' '));
-								sb.AppendFormat ("SubMesh.Count={0}\n", subMeshes.Count);
-								for (var i = 0; i < subMeshes.Count; i++) {
-										var sm = subMeshes [i];
-										sb.AppendFormat ("SubMesh[{0}].Indexes={1}\n", i, sm.indices.size);
+								sb.AppendFormat ("Vertices.Size={0}\n", VertexObject.Size);
+								sb.AppendFormat ("Vertices.Vertices =[{0},{1},{2}], [{3},{4},{5}], [{6},{7},{8}]...\n", VertexObject.Vertices [0].x, VertexObject.Vertices [1].y, VertexObject.Vertices [2].z, VertexObject.Vertices [3].x, VertexObject.Vertices [4].y, VertexObject.Vertices [5].z, VertexObject.Vertices [6].x, VertexObject.Vertices [7].y, VertexObject.Vertices [8].z);
+								sb.AppendFormat ("Vertices.Normals={0}\n", VertexObject.Normals.HasValues);
+								sb.AppendFormat ("Vertices.Tangents={0}\n", VertexObject.Tangents.HasValues);
+								sb.AppendFormat ("Vertices.Colours={0}\n", VertexObject.Colors.HasValues);
+								sb.AppendFormat ("Vertices.UV={0}\n", VertexObject.UV.HasValues);
+								sb.AppendFormat ("Vertices.UV1={0}\n", VertexObject.UV1.HasValues);
+								sb.AppendFormat ("Vertices.UV2={0}\n", VertexObject.UV2.HasValues);
+								sb.AppendFormat ("Vertices.WorldTransform={0}\n", VertexObject.WorldTransform.ToString ().Replace ('\n', ' '));
+								sb.AppendFormat ("SubMesh.Count={0}\n", SubMeshes.Count);
+								for (var i = 0; i < SubMeshes.Count; i++) {
+										var sm = SubMeshes [i];
+										sb.AppendFormat ("SubMesh[{0}].Indexes={1}\n", i, sm.Indices.Size);
 								}
 						}
 				}
 
 				public class MultiMeshDescription
 				{
-						public readonly Material sharedMaterial;
-						public readonly List<SubMeshDescription> subMeshes;
+						public readonly Material SharedMaterial;
+						public readonly List<SubMeshDescription> SubMeshes;
 
 						public MultiMeshDescription (Material material)
 						{
-								this.sharedMaterial = material;
-								this.subMeshes = new List<SubMeshDescription> (4);
+								SharedMaterial = material;
+								SubMeshes = new List<SubMeshDescription> (4);
 						}
 
 						public void AddSubMesh (SubMeshDescription sm)
 						{
-								subMeshes.Add (sm);
+								SubMeshes.Add (sm);
 						}
 
 						public MeshDescription[] Combine ()
@@ -386,7 +386,7 @@ namespace Hydrogen.Threading.Jobs
 								var mds = new List<MeshDescription> ();
 
 								int totalNbVertices = 0;
-								foreach (var sm in subMeshes) {
+								foreach (var sm in SubMeshes) {
 										totalNbVertices += sm.CountUsedVertices ();
 								}
 
@@ -409,32 +409,34 @@ namespace Hydrogen.Threading.Jobs
 
 				public class SubMeshDescription
 				{
-						public readonly Material sharedMaterial;
-						public readonly IndexArrayDescription indices;
-						public readonly VertexObjectDescription vertexObject;
-						public readonly int[] used;
+						public readonly IndexArrayDescription Indices;
+						public readonly Material SharedMaterial;
+						public readonly int[] Used;
+						public readonly VertexObjectDescription VertexObject;
 
-						public SubMeshDescription (int nbIndexes, VertexObjectDescription vertices, Material material)
+						public SubMeshDescription (int indexCount, VertexObjectDescription vertices, Material material)
 						{
-								this.sharedMaterial = material;
-								this.vertexObject = vertices;
-								this.indices = new IndexArrayDescription (nbIndexes);
-								this.used = new int[vertices.size];
+								SharedMaterial = material;
+								VertexObject = vertices;
+								Indices = new IndexArrayDescription (indexCount);
+								Used = new int[vertices.Size];
 						}
 
 						public int CountUsedVertices ()
 						{
 								int count = 0;
 
-								// Count used vertices.  This uses an 'if-less' solution so should be faster but uses 4x (int > bool) memory do to so.
-								for (int i = 0; i < used.Length; i++)
-										used [i] = 0;
+								// Count used vertices.  
+								// This uses an 'if-less' solution so should be faster but 
+								// uses 4x (int > bool) memory do to so.
+								for (int i = 0; i < Used.Length; i++)
+										Used [i] = 0;
 
-								for (int i = 0; i < indices.size; i++)
-										used [indices [i]] = 1;
+								for (int i = 0; i < Indices.Size; i++)
+										Used [Indices [i]] = 1;
 
-								for (int i = 0; i < indices.size; i++)
-										count += used [i];
+								for (int i = 0; i < Indices.Size; i++)
+										count += Used [i];
 
 								return count;
 						}
@@ -442,29 +444,29 @@ namespace Hydrogen.Threading.Jobs
 
 				public class VertexObjectDescription
 				{
-						public readonly int size;
-						public readonly VertexArrayDescription<Vector3> vertices;
-						public readonly VertexArrayDescription<Vector3> normals;
-						public readonly VertexArrayDescription<Vector4> tangents;
-						public readonly VertexArrayDescription<Color> colours;
-						public readonly VertexArrayDescription<Vector2> uv;
-						public readonly VertexArrayDescription<Vector2> uv1;
-						public readonly VertexArrayDescription<Vector2> uv2;
-						public readonly VertexArrayDescription<bool> used;
-						public Matrix4x4 worldTransform;
+						public readonly VertexArrayDescription<Color> Colors;
+						public readonly VertexArrayDescription<Vector3> Normals;
+						public readonly int Size;
+						public readonly VertexArrayDescription<Vector4> Tangents;
+						public readonly VertexArrayDescription<Vector2> UV;
+						public readonly VertexArrayDescription<Vector2> UV1;
+						public readonly VertexArrayDescription<Vector2> UV2;
+						public readonly VertexArrayDescription<bool> Used;
+						public readonly VertexArrayDescription<Vector3> Vertices;
+						public Matrix4x4 WorldTransform;
 
-						public VertexObjectDescription (int nbVertices)
+						public VertexObjectDescription (int verticesCount)
 						{
-								size = nbVertices;
-								vertices = new VertexArrayDescription<Vector3> (size);
-								normals = new VertexArrayDescription<Vector3> (size);
-								tangents = new VertexArrayDescription<Vector4> (size);
-								colours = new VertexArrayDescription<Color> (size);
-								uv = new VertexArrayDescription<Vector2> (size);
-								uv1 = new VertexArrayDescription<Vector2> (size);
-								uv2 = new VertexArrayDescription<Vector2> (size);
-								used = new VertexArrayDescription<bool> (size);
-								worldTransform = Matrix4x4.identity;
+								Size = verticesCount;
+								Vertices = new VertexArrayDescription<Vector3> (Size);
+								Normals = new VertexArrayDescription<Vector3> (Size);
+								Tangents = new VertexArrayDescription<Vector4> (Size);
+								Colors = new VertexArrayDescription<Color> (Size);
+								UV = new VertexArrayDescription<Vector2> (Size);
+								UV1 = new VertexArrayDescription<Vector2> (Size);
+								UV2 = new VertexArrayDescription<Vector2> (Size);
+								Used = new VertexArrayDescription<bool> (Size);
+								WorldTransform = Matrix4x4.identity;
 						}
 				}
 		}
