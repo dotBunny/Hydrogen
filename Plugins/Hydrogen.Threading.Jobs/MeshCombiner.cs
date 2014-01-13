@@ -175,7 +175,7 @@ namespace Hydrogen.Threading.Jobs
 				{
 						return Array.Remove (ref _meshDescriptions, meshDescription);
 				}
-
+				//TODO: Add optimization to mesh data?
 				protected sealed override void ThreadedFunction ()
 				{
 						// Combine meshes
@@ -227,7 +227,7 @@ namespace Hydrogen.Threading.Jobs
 						var finalMeshDescriptions = new List<MeshDescription> (_combinedMaterials.Length);
 
 						// Itterate over our MultiMeshDescriptions again and have them execute their 
-						// Combine method forcing them down into MeshDescriptions
+						// Combine method forcing them down into MeshDescriptions.
 						foreach (var multiMesh in multiMeshDescriptions) {
 								finalMeshDescriptions.AddRange (multiMesh.Combine ());
 						}
@@ -249,7 +249,25 @@ namespace Hydrogen.Threading.Jobs
 
 				void CreateMeshes ()
 				{
-						//_combinedMeshes = data
+						_combinedMeshes = new UnityEngine.Mesh[_combinedDescriptions.Length];
+
+						for (int x = 0; x <= _combinedDescriptions.Length; x++) {
+
+								_combinedMeshes [x] = new UnityEngine.Mesh ();
+								_combinedMeshes [x].name = "MeshCombiner_" + _hash + "_" + x;
+
+								_combinedMeshes [x].vertices = _combinedDescriptions [x].VertexObject.Vertices.ToArray ();
+								_combinedMeshes [x].normals = _combinedDescriptions [x].VertexObject.Normals.ToArray ();
+								_combinedMeshes [x].tangents = _combinedDescriptions [x].VertexObject.Tangents.ToArray ();
+								_combinedMeshes [x].colors = _combinedDescriptions [x].VertexObject.Colors.ToArray ();
+								_combinedMeshes [x].uv = _combinedDescriptions [x].VertexObject.UV.ToArray ();
+								_combinedMeshes [x].uv1 = _combinedDescriptions [x].VertexObject.UV1.ToArray ();
+								_combinedMeshes [x].uv2 = _combinedDescriptions [x].VertexObject.UV2.ToArray ();
+
+
+								// TODO: Um the indices?
+								//	_combinedMeshes [x].SetIndices (_combinedDescriptions [x].VertexObject.Indices, MeshTopology.Triangles, 0);
+						}
 				}
 
 				public class VertexArrayDescription<T>
@@ -272,6 +290,11 @@ namespace Hydrogen.Threading.Jobs
 										values [i] = value;
 										HasValues = true;
 								}
+						}
+
+						public T[] ToArray ()
+						{
+								return values;
 						}
 
 						public void CopyFrom (T[] other)
@@ -371,7 +394,9 @@ namespace Hydrogen.Threading.Jobs
 
 						public MeshDescription[] Combine ()
 						{
-								var mds = new List<MeshDescription> ();
+
+								// Create our holder 
+								var finalMeshDescriptions = new List<MeshDescription> ();
 
 								// Determine the total number of vertices accross submeshes
 								int TotalVerticesCount = 0;
@@ -383,16 +408,26 @@ namespace Hydrogen.Threading.Jobs
 								var nbVerticesPerMesh = new List<int> ();
 								int vertexCount = 0;
 								while (vertexCount != TotalVerticesCount) {
+
 										int used = vertexCount;
-										if (used > (Hydrogen.Mesh.VerticesLimit - 6))
+
+										if (used > (Hydrogen.Mesh.VerticesLimit - 6)) {
 												used = Hydrogen.Mesh.VerticesLimit - 6;
+										}
+
 										nbVerticesPerMesh.Add (used);
 										vertexCount += used;
 								}
 
-								// ROBIN - UPTO HERE.
+								//MeshDescription newMesh = new MeshDescription ()
 
-								return null;
+
+								// TODO: Create meshDescription(s)
+								// TODO: Add to finalMeshDescription
+
+
+								// Return our MeshDescriptions
+								return finalMeshDescriptions.ToArray ();
 						}
 				}
 
