@@ -139,14 +139,16 @@ namespace Hydrogen.Threading.Jobs
 
 				public static UnityEngine.Mesh CreateMesh (MeshDescription meshDescription)
 				{
+
+
 						var mesh = new UnityEngine.Mesh ();
+
+
 						mesh.name = "MeshCombiner_" + UnityEngine.Random.Range (0, 1000);
 
 						// A whole whack of data assignment.
 						mesh.vertices = meshDescription.VertexObject.Vertices.ToArray ();
 
-
-						
 						mesh.normals = meshDescription.VertexObject.Normals.ToArray ();
 						mesh.tangents = meshDescription.VertexObject.Tangents.ToArray ();
 						mesh.colors = meshDescription.VertexObject.Colors.ToArray ();
@@ -158,7 +160,7 @@ namespace Hydrogen.Threading.Jobs
 						mesh.subMeshCount = meshDescription.SubMeshes.Count;
 
 						// Itterate over the SubMeshes and assign their indices to the newly created Mesh.
-						for (int y = 0; y <= meshDescription.SubMeshes.Count; y++) {
+						for (int y = 0; y < meshDescription.SubMeshes.Count; y++) {
 						
 								if (meshDescription.Topology == MeshTopology.Triangles) {
 										mesh.SetIndices (
@@ -170,9 +172,8 @@ namespace Hydrogen.Threading.Jobs
 								}
 
 						}
-
+								
 						return mesh;
-
 				}
 
 				public bool AddMaterial (Material material)
@@ -252,7 +253,6 @@ namespace Hydrogen.Threading.Jobs
 								materialCounter++;
 						}
 								
-
 						// Itterate through all of the MeshDescriptions present to be combined.
 						foreach (var meshDescription in _meshDescriptions) {
 
@@ -275,19 +275,15 @@ namespace Hydrogen.Threading.Jobs
 						// Create our finalized MeshDescription holder, at the size of the materials
 						var finalMeshDescriptions = new List<MeshDescription> (_combinedMaterials.Length);
 
-						Console.WriteLine ("THREAD 3");
+
 						// Itterate over our MultiMeshDescriptions again and have them execute their 
 						// Combine method forcing them down into MeshDescriptions.
 						foreach (var multiMesh in multiMeshDescriptions) {
 								finalMeshDescriptions.AddRange (multiMesh.Combine ());
 						}
-						Console.WriteLine ("THREAD 4");
-
 
 						// Assign the finalized MeshDescriptions to our internal storage.
 						_combinedDescriptions = finalMeshDescriptions.ToArray ();
-
-						Console.WriteLine ("THREAD END");
 				}
 
 				protected sealed override void OnFinished ()
@@ -321,7 +317,7 @@ namespace Hydrogen.Threading.Jobs
 
 						public T[] ToArray ()
 						{
-								return Size < 3 ? null : values;
+								return Size == 0 ? null : values;
 						}
 
 						public void CopyFrom (T[] other)
@@ -354,7 +350,7 @@ namespace Hydrogen.Threading.Jobs
 
 						public int[] ToArray ()
 						{
-								return Size < 3 ? null : values;
+								return Size == 0 ? null : values;
 						}
 
 						public int this [int i] {
@@ -427,6 +423,7 @@ namespace Hydrogen.Threading.Jobs
 
 						public MeshDescription[] Combine ()
 						{	
+
 								// Determine the total number of vertices accross submeshes
 								int TotalVerticesCount = 0;
 								foreach (var subMesh in SubMeshes) {
@@ -473,8 +470,7 @@ namespace Hydrogen.Threading.Jobs
 												subMeshDescription.Indices [j] = j;
 										}
 								}
-
-								Console.WriteLine ("COMBINE 4");
+										
 								Console.WriteLine ("Number Of Meshes: " + meshNumberOfVertices.Count.ToString ());
 
 								int meshDescriptionIndex = 0;
@@ -494,14 +490,12 @@ namespace Hydrogen.Threading.Jobs
 
 												// Copy the index
 												int index = subMeshDescription.Indices [i];
-												Console.WriteLine ("COMBINE 6.3");
-												Console.WriteLine ("target:" + targetVertexObject.Vertices.Size);
-												Console.WriteLine ("source:" + sourceVertexObject.Vertices.Size);
-												Console.WriteLine ("submesh:" + subMeshDescription.Indices.Size);
-												Console.WriteLine ("i:" + index);
-												Console.WriteLine ("j:" + j);
 
-												targetVertexObject.Vertices [j] = sourceVertexObject.Vertices [index];
+
+
+												targetVertexObject.Vertices [j] = 
+														sourceVertexObject.WorldTransform.MultiplyPoint (
+														sourceVertexObject.Vertices [index]);
 												j++;
 										}
 										Console.WriteLine ("COMBINE 7");
@@ -509,11 +503,14 @@ namespace Hydrogen.Threading.Jobs
 										// Normal Copy
 										if (sourceVertexObject.Normals.Size != 0) {
 												j = vertexIndex;
+												var inversedTransposedMatrix = sourceVertexObject.WorldTransform.inverse.transpose; 
 												for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
 														// Copy the index
 														int index = subMeshDescription.Indices [i];
 
-														targetVertexObject.Normals [j] = sourceVertexObject.Normals [index];
+														targetVertexObject.Normals [j] = 
+																inversedTransposedMatrix.MultiplyVector (
+																sourceVertexObject.Normals [index]).normalized;
 														j++;
 												}
 										}
@@ -522,11 +519,14 @@ namespace Hydrogen.Threading.Jobs
 										// Tangents Copy
 										if (sourceVertexObject.Tangents.Size != 0) {
 												j = vertexIndex;
+												var inversedTransposedMatrix = sourceVertexObject.WorldTransform.inverse.transpose; 
 												for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
 														// Copy the index
 														int index = subMeshDescription.Indices [i];
-
-														targetVertexObject.Tangents [j] = sourceVertexObject.Tangents [index];
+														var p = sourceVertexObject.Tangents [index];
+														var w = p.w;
+														p = inversedTransposedMatrix.MultiplyVector (p);
+														targetVertexObject.Tangents [j] = new Vector4 (p.x, p.y, p.z, w);
 														j++;
 												}
 										}
