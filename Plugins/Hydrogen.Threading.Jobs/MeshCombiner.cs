@@ -348,7 +348,8 @@ namespace Hydrogen.Threading.Jobs
 						{
 								Size = nbIndexes;
 								if (Size % 3 != 0) {
-										Debug.Log ("Bad index array, count is not a multiple of 3!");
+
+										Debug.Log ("Bad index array, count is not a multiple of 3! It is " + Size);
 										return;
 								}
 								values = new int[Size];
@@ -448,7 +449,7 @@ namespace Hydrogen.Threading.Jobs
 
 										int used = TotalVerticesCount;
 
-										// The
+										// I have a feeling this is a problem maker
 										if (used > (Mesh.VerticesLimit)) {
 												used = Mesh.VerticesLimit;
 										}
