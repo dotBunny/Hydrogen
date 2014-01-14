@@ -1,6 +1,6 @@
 ﻿#region Copyright Notice & License Information
 //
-// Mesh.cs
+// Material.cs
 //
 // Author:
 //       Matthew Davey <matthew.davey@dotbunny.com>
