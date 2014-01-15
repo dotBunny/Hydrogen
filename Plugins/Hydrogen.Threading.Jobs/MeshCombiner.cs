@@ -109,6 +109,8 @@ namespace Hydrogen.Threading.Jobs
 
 								// If the meshes dont have materials defined, use the last one
 								int materialID = j >= material.Length ? material.Length - 1 : j;
+
+								// Assign SubMesh
 								var subMesh = meshDescripion.AddSubMesh (material [materialID].GetDataHashCode (), indices.Length);
 
 								// TODO: This might be whats causing the issue when we add off indices
@@ -249,7 +251,6 @@ namespace Hydrogen.Threading.Jobs
 				//TODO: Add optimization to mesh data?
 				protected sealed override void ThreadedFunction ()
 				{
-				
 						// Create a temporary set of meshes based on the number of materials that are being used.
 						var multiMeshDescriptions = new MultiMeshDescription[_materialLookup.Count];
 
@@ -435,7 +436,12 @@ namespace Hydrogen.Threading.Jobs
 								int TotalVerticesCount = 0;
 								foreach (var subMesh in SubMeshes) {
 
-										TotalVerticesCount += subMesh.CountUsedVertices ();
+										//TODO: Should used CountUsedVertices
+										//Debug.Log ("SubMesh.Indices.Size: " + subMesh.Indices.Size);
+										//Debug.Log ("SubMesh.CountUsed: " + subMesh.CountUsedVertices ());
+										//TotalVerticesCount += subMesh.CountUsedVertices ();
+										TotalVerticesCount += subMesh.Indices.Size;
+
 								}
 
 
@@ -443,21 +449,26 @@ namespace Hydrogen.Threading.Jobs
 								var meshNumberOfVertices = new List<int> ();
 								int verticesCounter = 0;
 
-								// TODO : Revisit
+								// TODO : Revisiting
+
+
 								while (verticesCounter < TotalVerticesCount) {
 
-
-										int used = TotalVerticesCount;
+										// Subtracked used from total left
+										int used = TotalVerticesCount - verticesCounter;
 
 										// I have a feeling this is a problem maker
-										if (used > (Mesh.VerticesLimit)) {
-												used = Mesh.VerticesLimit;
+										// We subtract from the numerical limit as the used counts 0 as 1
+										if (used > (Mesh.VerticesLimit - 1)) {
+												used = Mesh.VerticesLimit - 1;
 										}
+
 
 										meshNumberOfVertices.Add (used);
 
 										verticesCounter += used;
 								}
+
 
 								var newDescriptions = new MeshDescription[meshNumberOfVertices.Count];
 
@@ -485,24 +496,61 @@ namespace Hydrogen.Threading.Jobs
 
 								int vertexIndex = 0;
 
+
 								foreach (var subMeshDescription in SubMeshes) {
 
+									
 										VertexObjectDescription sourceVertexObject = subMeshDescription.VertexObject;
+
+
+
+										// Check if we need to switch to the next mesh
+										if ((vertexIndex + subMeshDescription.Indices.Size) > (Mesh.VerticesLimit)) {
+												meshDescriptionIndex++;
+												newMeshDescription = newDescriptions [meshDescriptionIndex];
+												targetVertexObject = newMeshDescription.VertexObject;
+												vertexIndex = 0;
+												Debug.Log ("-------- NEW MESH ---------");
+										}
 
 										// Vertex Copy
 										int j = vertexIndex;
-										for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
 
-												// Copy the index
-												int index = subMeshDescription.Indices [i];
+									
+
+										// TODO : THIS IS CAUSING EXCEPTIONS ON MESHES THAT REQUIRE SPLITTING
+										// Something is definately a foul with the targetVertext
+										try {
+												for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
+												
+
+														// Copy the index
+														int index = subMeshDescription.Indices [i];
+
+														// the issue is j in Vertices (tho the numbers are the same)
+														if (j < targetVertexObject.Vertices.Size) {
+																targetVertexObject.Vertices [j] = sourceVertexObject.WorldTransform.MultiplyPoint (
+																		sourceVertexObject.Vertices [index]);
+														} else {
+																Debug.Log ("TOO BIG: " + j);
+														}
+														j++;
+												}
+										} catch (Exception e) {
+
+												Console.WriteLine ("-------------- EXCEPTION --------------");
+												Console.WriteLine (DateTime.Now.ToString ());
+												Console.WriteLine ("targetVertexObject.Vertices.Size: " + targetVertexObject.Vertices.Size);
+												Console.WriteLine ("j:" + j);
 
 
-
-												targetVertexObject.Vertices [j] = 
-														sourceVertexObject.WorldTransform.MultiplyPoint (
-														sourceVertexObject.Vertices [index]);
-												j++;
+												//Array index is out of range.
+												Console.WriteLine (e.GetBaseException ().Message);
+												Console.WriteLine (e.GetBaseException ().InnerException);
+												Console.WriteLine (e.GetBaseException ().StackTrace);
 										}
+
+
 
 										// Normal Copy
 										if (sourceVertexObject.Normals.Size != 0) {
@@ -511,10 +559,11 @@ namespace Hydrogen.Threading.Jobs
 												for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
 														// Copy the index
 														int index = subMeshDescription.Indices [i];
-
-														targetVertexObject.Normals [j] = 
+														if (j < targetVertexObject.Normals.Size) {
+																targetVertexObject.Normals [j] = 
 																inversedTransposedMatrix.MultiplyVector (
-																sourceVertexObject.Normals [index]).normalized;
+																		sourceVertexObject.Normals [index]).normalized;
+														}
 														j++;
 												}
 										}
@@ -524,12 +573,15 @@ namespace Hydrogen.Threading.Jobs
 												j = vertexIndex;
 												var inversedTransposedMatrix = sourceVertexObject.WorldTransform.inverse.transpose; 
 												for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
-														// Copy the index
-														int index = subMeshDescription.Indices [i];
-														var p = sourceVertexObject.Tangents [index];
-														var w = p.w;
-														p = inversedTransposedMatrix.MultiplyVector (p);
-														targetVertexObject.Tangents [j] = new Vector4 (p.x, p.y, p.z, w);
+														if (j < targetVertexObject.Tangents.Size) {
+																// Copy the index
+																int index = subMeshDescription.Indices [i];
+																var p = sourceVertexObject.Tangents [index];
+																var w = p.w;
+																p = inversedTransposedMatrix.MultiplyVector (p);
+																targetVertexObject.Tangents [j] = new Vector4 (p.x, p.y, p.z, w);
+
+														}
 														j++;
 												}
 										}
@@ -540,8 +592,9 @@ namespace Hydrogen.Threading.Jobs
 												for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
 														// Copy the index
 														int index = subMeshDescription.Indices [i];
-
-														targetVertexObject.Colors [j] = sourceVertexObject.Colors [index];
+														if (j < targetVertexObject.Colors.Size) {
+																targetVertexObject.Colors [j] = sourceVertexObject.Colors [index];
+														}
 														j++;
 												}
 										}
@@ -552,8 +605,9 @@ namespace Hydrogen.Threading.Jobs
 												for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
 														// Copy the index
 														int index = subMeshDescription.Indices [i];
-
-														targetVertexObject.UV [j] = sourceVertexObject.UV [index];
+														if (j < targetVertexObject.UV.Size) {
+																targetVertexObject.UV [j] = sourceVertexObject.UV [index];
+														}
 														j++;
 												}
 										}
@@ -564,8 +618,9 @@ namespace Hydrogen.Threading.Jobs
 												for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
 														// Copy the index
 														int index = subMeshDescription.Indices [i];
-
-														targetVertexObject.UV1 [j] = sourceVertexObject.UV1 [index];
+														if (j < targetVertexObject.UV1.Size) {
+																targetVertexObject.UV1 [j] = sourceVertexObject.UV1 [index];
+														}
 														j++;
 												}
 										}
@@ -577,24 +632,16 @@ namespace Hydrogen.Threading.Jobs
 														// Copy the index
 														int index = subMeshDescription.Indices [i];
 
-														targetVertexObject.UV2 [j] = sourceVertexObject.UV2 [index];
+														if (j < targetVertexObject.UV2.Size) {
+																targetVertexObject.UV2 [j] = sourceVertexObject.UV2 [index];
+														}
 														j++;
 												}
 										}
 
 										// Increase Index
-										// TODO FIX
+
 										vertexIndex = j;
-
-
-
-										/*Console.WriteLine ("Increase Index Debug");
-										if (vertexIndex == newMeshDescription.VertexObject.Vertices.Size) {
-												meshDescriptionIndex++;
-												newMeshDescription = newDescriptions [meshDescriptionIndex];
-												targetVertexObject = newMeshDescription.VertexObject;
-												vertexIndex = 0;
-										}*/
 
 								}
 								// Return our MeshDescriptions
@@ -619,10 +666,10 @@ namespace Hydrogen.Threading.Jobs
 						//TODO BROKEN
 						public int CountUsedVertices ()
 						{
-								return Indices.Size;
+								// This isnt accurate as its not used
+								//return Indices.Size;
 
 								int count = 0;
-
 
 								// Count used vertices.  
 								// This uses an 'if-less' solution so should be faster but 
@@ -635,10 +682,9 @@ namespace Hydrogen.Threading.Jobs
 										Used [Indices [i]] = 1;
 
 								for (int i = 0; i < Used.Length; i++) {
-										count = count + Used [i];
+										count += Used [i];
 								}
-
-
+										
 								return count;
 						}
 				}
