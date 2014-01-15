@@ -519,7 +519,7 @@ namespace Hydrogen.Threading.Jobs
 									
 
 										// TODO : THIS IS CAUSING EXCEPTIONS ON MESHES THAT REQUIRE SPLITTING
-										// Something is definately a foul with the targetVertext
+										// Something is definately a foul with the targetVertex or maybe the subMeshDescription.Indicies.Size
 										try {
 												for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
 												
