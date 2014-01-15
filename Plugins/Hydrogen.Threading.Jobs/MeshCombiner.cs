@@ -437,8 +437,8 @@ namespace Hydrogen.Threading.Jobs
 								foreach (var subMesh in SubMeshes) {
 
 										//TODO: Should used CountUsedVertices
-										//Debug.Log ("SubMesh.Indices.Size: " + subMesh.Indices.Size);
-										//Debug.Log ("SubMesh.CountUsed: " + subMesh.CountUsedVertices ());
+										Debug.Log ("SubMesh.Indices.Size: " + subMesh.Indices.Size);
+										Debug.Log ("SubMesh.CountUsed: " + subMesh.CountUsedVertices ());
 										//TotalVerticesCount += subMesh.CountUsedVertices ();
 										TotalVerticesCount += subMesh.Indices.Size;
 
