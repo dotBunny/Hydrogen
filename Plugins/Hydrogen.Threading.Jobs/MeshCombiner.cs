@@ -49,7 +49,7 @@ namespace Hydrogen.Threading.Jobs
 				/// <summary>
 				/// A dictionary of Materials referenced by the added meshes.
 				/// </summary>
-				Dictionary <int, UnityEngine.Material> _materialLookup = new Dictionary<int, UnityEngine.Material> ();
+				Dictionary<int, UnityEngine.Material> _materialLookup = new Dictionary<int, UnityEngine.Material> ();
 				/// <summary>
 				/// An internal hash used to identify the Combine method instance.
 				/// </summary>
@@ -84,8 +84,8 @@ namespace Hydrogen.Threading.Jobs
 				public static MeshDescription CreateDescription (UnityEngine.Mesh mesh, UnityEngine.Material[] material, Transform transform)
 				{
 						// Vertex Count - Don't want to hit Unity's properties over and over.
-						var vertexCount = mesh.vertexCount;
 
+						var vertexCount = mesh.vertexCount;
 						// Create our new MeshDescription based on the provided vertex count.
 						var meshDescripion = new MeshDescription (vertexCount);
 
@@ -98,15 +98,14 @@ namespace Hydrogen.Threading.Jobs
 						meshDescripion.VertexObject.UV1.CopyFrom (mesh.uv1);
 						meshDescripion.VertexObject.UV2.CopyFrom (mesh.uv2);
 						meshDescripion.VertexObject.WorldTransform = transform.localToWorldMatrix;
-					
+
 						// SubMesh Count - Don't want to hit Unity's properties over and over.
 						var subMeshCount = mesh.subMeshCount;
 
 						// Iterate over the SubMeshes to be added to the description
 						for (var j = 0; j < subMeshCount; j++) {
-						
-								var indices = mesh.GetIndices (j);
 
+								var indices = mesh.GetIndices (j);
 								// If the meshes dont have materials defined, use the last one
 								int materialID = j >= material.Length ? material.Length - 1 : j;
 
@@ -118,8 +117,7 @@ namespace Hydrogen.Threading.Jobs
 
 
 								subMesh.Indices.CopyFrom (indices);
-						} 
-
+						}
 						return meshDescripion;
 				}
 
@@ -164,10 +162,10 @@ namespace Hydrogen.Threading.Jobs
 
 						// Itterate over the SubMeshes and assign their indices to the newly created Mesh.
 						for (int y = 0; y < meshDescription.SubMeshes.Count; y++) {
-						
+
 								if (meshDescription.Topology == MeshTopology.Triangles) {
 										mesh.SetIndices (
-												meshDescription.SubMeshes [y].Indices.ToArray (), 
+												meshDescription.SubMeshes [y].Indices.ToArray (),
 												MeshTopology.Triangles,
 												y);
 								} else {
@@ -188,7 +186,7 @@ namespace Hydrogen.Threading.Jobs
 								return true;
 						}
 
-						return  false;
+						return false;
 				}
 
 				/// <summary>
@@ -218,7 +216,7 @@ namespace Hydrogen.Threading.Jobs
 				}
 
 				public int Combine (
-						System.Threading.ThreadPriority priority, 
+						System.Threading.ThreadPriority priority,
 						Action<int, MeshDescription[], Dictionary<int, UnityEngine.Material>> onFinished)
 				{
 						// Generate Hash Code
@@ -259,13 +257,13 @@ namespace Hydrogen.Threading.Jobs
 								multiMeshDescriptions [materialCounter] = new MultiMeshDescription (i);
 								materialCounter++;
 						}
-								
+
 						// Itterate through all of the MeshDescriptions present to be combined.
 						foreach (var meshDescription in _meshDescriptions) {
 
 								// Itterate through all SubMeshes in the MeshDescription
 								foreach (var subMesh in meshDescription.SubMeshes) {
-								
+
 										// Itterate through all of our MultiMeshDescriptions adding meshes that
 										// have the same material as its own.
 										foreach (var multiMesh in multiMeshDescriptions) {
@@ -315,7 +313,9 @@ namespace Hydrogen.Threading.Jobs
 						}
 
 						public T this [int i] {
-								get { return values [i]; }
+								get {
+										return values [i];
+								}
 								set {
 										values [i] = value;
 										HasValues = true;
@@ -415,6 +415,13 @@ namespace Hydrogen.Threading.Jobs
 
 				public class MultiMeshDescription
 				{
+						class CombineTask
+						{
+								public SubMeshDescription subMeshDescription;
+								public int meshDescriptionIndex;
+								public int vertexStart;
+						}
+
 						public readonly int SharedMaterial;
 						public readonly List<SubMeshDescription> SubMeshes;
 
@@ -429,286 +436,199 @@ namespace Hydrogen.Threading.Jobs
 								SubMeshes.Add (sm);
 						}
 
-						class VertexElementQueue
+						private int Comparison (SubMeshDescription sad, SubMeshDescription panda)
 						{
-								public SubMeshDescription subMeshReference;
-								public int targetMeshDescriptionIndex;
-								public int targetIndexBegin;
-								public int sourceIndexBegin;
-								public int sourceIndexEnd;
+								return sad.VertexObject.Size.CompareTo (panda.VertexObject.Vertices.Size);
 						}
 
-						public MeshDescription[] CombineNew ()
+						public MeshDescription[] Combine ()
 						{
-								// Create our job queue
-								var queue = new List<VertexElementQueue> ();
+
+								const int maxVertices = Mesh.VerticesLimit;
+								const int maxIndexes = maxVertices * 3;
 
 								// Create our target list to write too
 								var newMeshes = new List<MeshDescription> ();
 
-								var vertexCounts = new List<int> ();
-								int vertexCount = 0x0000000;
+								try {
+										var combineTasks = new List<CombineTask> ();
+										var vertexCounts = new List<int> ();
+										var indexCounts = new List<int> ();
 
-								VertexElementQueue queued = null;
-								int currentMeshDescriptionIndex = 0x0000000;
-								int targetIndex = 0x00000000;
+										SubMeshes.Sort (Comparison);
 
+										var meshIndex = 0;
+										var vertexCount = 0;
+										var indexCount = 0;
 
-								// Cache used vertices count.
-								foreach (var subMesh in SubMeshes) {
-										if (queued == null) {
-												queued = new VertexElementQueue ();
-												queued.subMeshReference = subMesh;
-												queued.targetMeshDescriptionIndex = currentMeshDescriptionIndex;
+										// Cache used vertices count.
 
+										for (var i = 0; i < SubMeshes.Count; i++) {
+												var subMesh = SubMeshes [i];
+
+												var vcount = subMesh.VertexObject.Size;
+												var icount = subMesh.Indices.Size;
+
+												if (vertexCount + vcount > maxVertices || indexCount + icount > maxIndexes) {
+														if (vertexCount != 0 && indexCount != 0) {
+
+																vertexCounts.Add (vertexCount);
+																vertexCount = 0;
+
+																indexCounts.Add (indexCount);
+																indexCount = 0;
+
+																meshIndex++;
+														}
+												}
+
+												var ct = new CombineTask {
+														subMeshDescription = subMesh,
+														meshDescriptionIndex = meshIndex,
+														vertexStart = vertexCount
+												};
+
+												vertexCount += vcount;
+												indexCount += icount;
+
+												combineTasks.Add (ct);
 										}
-										vertexCount += subMesh.CountUsedVertices ();
 
-										// TODO: Make sure -1 is appropriate
-										if (vertexCount > (Mesh.VerticesLimit - 1)) {
-												vertexCounts.Add (Mesh.VerticesLimit - 1);
-												vertexCount -= (Mesh.VerticesLimit - 1);
+										Debug.Log ("We will make " + (meshIndex + 1) + " meshes for this MultiMeshDescription.");
+
+
+										if (vertexCount != 0 && indexCount != 0) {
+												vertexCounts.Add (vertexCount);
+												indexCounts.Add (indexCount);
 										}
+
+										for (int i = 0; i < vertexCounts.Count; i++) {
+												var vc = vertexCounts [i];
+												var ic = indexCounts [i];
+												var md = new MeshDescription (vc);
+												md.AddSubMesh (SharedMaterial, ic);
+												newMeshes.Add (md);
+										}
+
+
+										int targetVertexIndex = 0;
+										int targetIndexIndex = 0;
+
+										VertexObjectDescription lastTargetVertexObject = null;
+
+										foreach (var ct in combineTasks) {
+
+												VertexObjectDescription sourceVertexObject = ct.subMeshDescription.VertexObject;
+												VertexObjectDescription targetVertexObject = newMeshes [ct.meshDescriptionIndex].VertexObject;
+
+												if (lastTargetVertexObject != null && lastTargetVertexObject != targetVertexObject) {
+														targetVertexIndex = 0;
+														targetIndexIndex = 0;
+												}
+
+												int jVertex = targetVertexIndex;
+												int jIndex = targetIndexIndex;
+
+												var targetMesh = newMeshes [ct.meshDescriptionIndex];
+
+												for (int i = 0; i < sourceVertexObject.Vertices.Size; i++) {
+														targetVertexObject.Vertices [jVertex] =
+																sourceVertexObject.WorldTransform.MultiplyPoint (sourceVertexObject.Vertices [i]);
+														jVertex++;
+												}
+
+												SubMeshDescription targetSubMesh = targetMesh.SubMeshes [0];
+
+												for (int i = 0; i < ct.subMeshDescription.Indices.Size; i++) {
+														targetSubMesh.Indices [jIndex] = ct.subMeshDescription.Indices [i] + targetVertexIndex;
+														jIndex++;
+												}
+
+												var inversedTransposedMatrix = sourceVertexObject.WorldTransform.inverse.transpose;
+
+												// Normals Copy
+												if (sourceVertexObject.Normals.Size != 0) {
+														jVertex = targetVertexIndex;
+
+														for (int i = 0; i < sourceVertexObject.Vertices.Size; i++) {
+																targetVertexObject.Normals [jVertex] =
+																		inversedTransposedMatrix.MultiplyVector (
+																		sourceVertexObject.Normals [i]).normalized;
+																jVertex++;
+														}
+												}
+
+												// Tangents Copy
+												if (sourceVertexObject.Tangents.Size != 0) {
+														jVertex = targetVertexIndex;
+
+														for (int i = 0; i < sourceVertexObject.Tangents.Size; i++) {
+																var p = sourceVertexObject.Tangents [i];
+																var w = p.w;
+																p = inversedTransposedMatrix.MultiplyVector (p);
+																targetVertexObject.Tangents [jVertex] = new Vector4 (p.x, p.y, p.z, w);
+																jVertex++;
+														}
+
+												}
+
+												// Colors Copy
+												if (sourceVertexObject.Colors.Size != 0) {
+														jVertex = targetVertexIndex;
+														for (int i = 0; i < sourceVertexObject.Colors.Size; i++) {
+																targetVertexObject.Colors [jVertex] = sourceVertexObject.Colors [i];
+																jVertex++;
+														}
+												}
+
+												// UV Copy
+												if (sourceVertexObject.UV.Size != 0) {
+														jVertex = targetVertexIndex;
+														for (int i = 0; i < sourceVertexObject.UV.Size; i++) {
+																targetVertexObject.UV [jVertex] = sourceVertexObject.UV [i];
+																jVertex++;
+														}
+												}
+
+												// UV1 Copy
+												if (sourceVertexObject.UV1.Size != 0) {
+														jVertex = targetVertexIndex;
+														for (int i = 0; i < sourceVertexObject.UV1.Size; i++) {
+																targetVertexObject.UV1 [jVertex] = sourceVertexObject.UV1 [i];
+																jVertex++;
+														}
+												}
+
+												// UV2 Copy
+												if (sourceVertexObject.UV2.Size != 0) {
+														jVertex = targetVertexIndex;
+														for (int i = 0; i < sourceVertexObject.UV2.Size; i++) {
+																targetVertexObject.UV2 [jVertex] = sourceVertexObject.UV2 [i];
+																jVertex++;
+														}
+												}
+
+
+												targetVertexIndex = jVertex;
+												targetIndexIndex = jIndex;
+
+												lastTargetVertexObject = targetVertexObject;
+										}
+
+
+
+								} catch (Exception e) {
+
+
+										Console.WriteLine (e.Message);
+										Console.WriteLine (e.InnerException);
+										Console.WriteLine (e.StackTrace);
+
+
 								}
-
-								// Add last one / or only one if
-								if (vertexCount > 0)
-										vertexCounts.Add (vertexCount);
-
-
-
-
-
-								MeshDescription workingMesh;
-								int baseTargetIndex = 0x00000000;
-
-								foreach (var subMesh in SubMeshes) {
-
-								}
-
 
 
 								return newMeshes.ToArray ();
-						}
-
-						public MeshDescription[] Combine ()
-						{	
-
-								// Determine the total number of vertices accross submeshes
-								int TotalVerticesCount = 0;
-								foreach (var subMesh in SubMeshes) {
-
-										//TODO: Should used CountUsedVertices
-										Debug.Log ("SubMesh.Indices.Size: " + subMesh.Indices.Size);
-										Debug.Log ("SubMesh.CountUsed: " + subMesh.CountUsedVertices ());
-
-										//TotalVerticesCount += subMesh.CountUsedVertices ();
-										TotalVerticesCount += subMesh.Indices.Size;
-
-								}
-
-
-								// Divide up meshes equally with a maxium vertex limit
-								var meshNumberOfVertices = new List<int> ();
-								int verticesCounter = 0;
-
-								// TODO : Revisiting
-
-
-								while (verticesCounter < TotalVerticesCount) {
-
-										// Subtracked used from total left
-										int used = TotalVerticesCount - verticesCounter;
-
-										// I have a feeling this is a problem maker
-										// We subtract from the numerical limit as the used counts 0 as 1
-										if (used > (Mesh.VerticesLimit - 1)) {
-												used = Mesh.VerticesLimit - 1;
-										}
-
-
-										meshNumberOfVertices.Add (used);
-
-										verticesCounter += used;
-								}
-
-
-								var newDescriptions = new MeshDescription[meshNumberOfVertices.Count];
-
-								for (int i = 0; i < meshNumberOfVertices.Count; i++) {
-
-										int vertexCount = meshNumberOfVertices [i]; 
-
-										// Initialize MeshDescription with number of vertices
-										newDescriptions [i] = new MeshDescription (vertexCount);
-
-										// TODO: Not sure on the SharedMaterial ... to do with teh array we create on start.
-										var subMeshDescription = newDescriptions [i].AddSubMesh (SharedMaterial, vertexCount);
-
-										// Instant re-ordering of vertices
-										for (int j = 0; j < vertexCount; j++) {
-												subMeshDescription.Indices [j] = j;
-										}
-								}
-										
-
-								int meshDescriptionIndex = 0;
-
-								MeshDescription newMeshDescription = newDescriptions [meshDescriptionIndex];
-								VertexObjectDescription targetVertexObject = newMeshDescription.VertexObject;
-
-								int vertexIndex = 0;
-
-
-								foreach (var subMeshDescription in SubMeshes) {
-
-									
-										VertexObjectDescription sourceVertexObject = subMeshDescription.VertexObject;
-
-
-
-										// Check if we need to switch to the next mesh
-										if ((vertexIndex + subMeshDescription.Indices.Size) > (Mesh.VerticesLimit)) {
-												meshDescriptionIndex++;
-												newMeshDescription = newDescriptions [meshDescriptionIndex];
-												targetVertexObject = newMeshDescription.VertexObject;
-												vertexIndex = 0;
-												Debug.Log ("-------- NEW MESH ---------");
-										}
-
-										// Vertex Copy
-										int j = vertexIndex;
-
-									
-
-										// TODO : THIS IS CAUSING EXCEPTIONS ON MESHES THAT REQUIRE SPLITTING
-										// Something is definately a foul with the targetVertex or maybe the subMeshDescription.Indicies.Size
-										try {
-												for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
-												
-
-														// Copy the index
-														int index = subMeshDescription.Indices [i];
-
-														// the issue is j in Vertices (tho the numbers are the same)
-														if (j < targetVertexObject.Vertices.Size) {
-																targetVertexObject.Vertices [j] = sourceVertexObject.WorldTransform.MultiplyPoint (
-																		sourceVertexObject.Vertices [index]);
-														} else {
-																Debug.Log ("TOO BIG: " + j);
-														}
-														j++;
-												}
-										} catch (Exception e) {
-
-												Console.WriteLine ("-------------- EXCEPTION --------------");
-												Console.WriteLine (DateTime.Now.ToString ());
-												Console.WriteLine ("targetVertexObject.Vertices.Size: " + targetVertexObject.Vertices.Size);
-												Console.WriteLine ("j:" + j);
-
-
-												//Array index is out of range.
-												Console.WriteLine (e.GetBaseException ().Message);
-												Console.WriteLine (e.GetBaseException ().InnerException);
-												Console.WriteLine (e.GetBaseException ().StackTrace);
-										}
-
-
-
-										// Normal Copy
-										if (sourceVertexObject.Normals.Size != 0) {
-												j = vertexIndex;
-												var inversedTransposedMatrix = sourceVertexObject.WorldTransform.inverse.transpose; 
-												for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
-														// Copy the index
-														int index = subMeshDescription.Indices [i];
-														if (j < targetVertexObject.Normals.Size) {
-																targetVertexObject.Normals [j] = 
-																inversedTransposedMatrix.MultiplyVector (
-																		sourceVertexObject.Normals [index]).normalized;
-														}
-														j++;
-												}
-										}
-
-										// Tangents Copy
-										if (sourceVertexObject.Tangents.Size != 0) {
-												j = vertexIndex;
-												var inversedTransposedMatrix = sourceVertexObject.WorldTransform.inverse.transpose; 
-												for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
-														if (j < targetVertexObject.Tangents.Size) {
-																// Copy the index
-																int index = subMeshDescription.Indices [i];
-																var p = sourceVertexObject.Tangents [index];
-																var w = p.w;
-																p = inversedTransposedMatrix.MultiplyVector (p);
-																targetVertexObject.Tangents [j] = new Vector4 (p.x, p.y, p.z, w);
-
-														}
-														j++;
-												}
-										}
-
-										// Colors Copy
-										if (sourceVertexObject.Tangents.Size != 0) {
-												j = vertexIndex;
-												for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
-														// Copy the index
-														int index = subMeshDescription.Indices [i];
-														if (j < targetVertexObject.Colors.Size) {
-																targetVertexObject.Colors [j] = sourceVertexObject.Colors [index];
-														}
-														j++;
-												}
-										}
-
-										// UV Copy
-										if (sourceVertexObject.UV.Size != 0) {
-												j = vertexIndex;
-												for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
-														// Copy the index
-														int index = subMeshDescription.Indices [i];
-														if (j < targetVertexObject.UV.Size) {
-																targetVertexObject.UV [j] = sourceVertexObject.UV [index];
-														}
-														j++;
-												}
-										}
-												
-										// UV1 Copy
-										if (sourceVertexObject.UV1.Size != 0) {
-												j = vertexIndex;
-												for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
-														// Copy the index
-														int index = subMeshDescription.Indices [i];
-														if (j < targetVertexObject.UV1.Size) {
-																targetVertexObject.UV1 [j] = sourceVertexObject.UV1 [index];
-														}
-														j++;
-												}
-										}
-												
-										// UV2 Copy
-										if (sourceVertexObject.UV.Size != 0) {
-												j = vertexIndex;
-												for (int i = 0; i < subMeshDescription.Indices.Size; i++) {
-														// Copy the index
-														int index = subMeshDescription.Indices [i];
-
-														if (j < targetVertexObject.UV2.Size) {
-																targetVertexObject.UV2 [j] = sourceVertexObject.UV2 [index];
-														}
-														j++;
-												}
-										}
-
-										// Increase Index
-
-										vertexIndex = j;
-
-								}
-								// Return our MeshDescriptions
-								return newDescriptions;
 						}
 				}
 
@@ -748,7 +668,7 @@ namespace Hydrogen.Threading.Jobs
 								for (int i = 0; i < Used.Length; i++) {
 										NumberOfVerticesUsed += Used [i];
 								}
-							
+
 
 								return NumberOfVerticesUsed;
 						}
