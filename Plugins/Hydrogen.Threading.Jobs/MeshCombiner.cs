@@ -429,6 +429,68 @@ namespace Hydrogen.Threading.Jobs
 								SubMeshes.Add (sm);
 						}
 
+						class VertexElementQueue
+						{
+								public SubMeshDescription subMeshReference;
+								public int targetMeshDescriptionIndex;
+								public int targetIndexBegin;
+								public int sourceIndexBegin;
+								public int sourceIndexEnd;
+						}
+
+						public MeshDescription[] CombineNew ()
+						{
+								// Create our job queue
+								var queue = new List<VertexElementQueue> ();
+
+								// Create our target list to write too
+								var newMeshes = new List<MeshDescription> ();
+
+								var vertexCounts = new List<int> ();
+								int vertexCount = 0x0000000;
+
+								VertexElementQueue queued = null;
+								int currentMeshDescriptionIndex = 0x0000000;
+								int targetIndex = 0x00000000;
+
+
+								// Cache used vertices count.
+								foreach (var subMesh in SubMeshes) {
+										if (queued == null) {
+												queued = new VertexElementQueue ();
+												queued.subMeshReference = subMesh;
+												queued.targetMeshDescriptionIndex = currentMeshDescriptionIndex;
+
+										}
+										vertexCount += subMesh.CountUsedVertices ();
+
+										// TODO: Make sure -1 is appropriate
+										if (vertexCount > (Mesh.VerticesLimit - 1)) {
+												vertexCounts.Add (Mesh.VerticesLimit - 1);
+												vertexCount -= (Mesh.VerticesLimit - 1);
+										}
+								}
+
+								// Add last one / or only one if
+								if (vertexCount > 0)
+										vertexCounts.Add (vertexCount);
+
+
+
+
+
+								MeshDescription workingMesh;
+								int baseTargetIndex = 0x00000000;
+
+								foreach (var subMesh in SubMeshes) {
+
+								}
+
+
+
+								return newMeshes.ToArray ();
+						}
+
 						public MeshDescription[] Combine ()
 						{	
 
@@ -439,6 +501,7 @@ namespace Hydrogen.Threading.Jobs
 										//TODO: Should used CountUsedVertices
 										Debug.Log ("SubMesh.Indices.Size: " + subMesh.Indices.Size);
 										Debug.Log ("SubMesh.CountUsed: " + subMesh.CountUsedVertices ());
+
 										//TotalVerticesCount += subMesh.CountUsedVertices ();
 										TotalVerticesCount += subMesh.Indices.Size;
 
@@ -655,6 +718,7 @@ namespace Hydrogen.Threading.Jobs
 						public readonly int SharedMaterial;
 						public readonly int[] Used;
 						public readonly VertexObjectDescription VertexObject;
+						public int NumberOfVerticesUsed;
 
 						public SubMeshDescription (int indexCount, VertexObjectDescription vertices, int material)
 						{
@@ -669,7 +733,7 @@ namespace Hydrogen.Threading.Jobs
 								// This isnt accurate as its not used
 								//return Indices.Size;
 
-								int count = 0;
+								NumberOfVerticesUsed = 0;
 
 								// Count used vertices.  
 								// This uses an 'if-less' solution so should be faster but 
@@ -682,10 +746,11 @@ namespace Hydrogen.Threading.Jobs
 										Used [Indices [i]] = 1;
 
 								for (int i = 0; i < Used.Length; i++) {
-										count += Used [i];
+										NumberOfVerticesUsed += Used [i];
 								}
-										
-								return count;
+							
+
+								return NumberOfVerticesUsed;
 						}
 				}
 
