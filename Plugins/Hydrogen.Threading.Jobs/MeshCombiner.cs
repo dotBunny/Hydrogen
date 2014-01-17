@@ -327,7 +327,7 @@ namespace Hydrogen.Threading.Jobs
 										var uv1 = mesh.UV1;
 										var uv2 = mesh.UV2;
 
-										int lastValidMaterial = 0;
+
 										var inversedTransposedMatrix = meshRend.LocalToWorldMatrix.inverse.transpose;
 
 										for (var i = 0; i < subMeshCount; i++) {
@@ -335,10 +335,12 @@ namespace Hydrogen.Threading.Jobs
 												var indexes = mesh.GetIndices (i);
 
 												if (i > (meshRend.Materials.Length - 1)) {
-														tm.Material = meshRend.Materials [lastValidMaterial];
+														// If there is no material, dont add the mesh later to be rendered
+														// as it wasn't showing anyways!.
+														continue;
+
 												} else {
 														tm.Material = meshRend.Materials [i];
-														lastValidMaterial = i;
 												}
 
 												tm.VertexCount = CountUsedVertices (mesh, ref indexes);
