@@ -186,7 +186,7 @@ namespace Hydrogen.Core
 						_poolID = _poolReference.Add (newWebObject);
 
 						// We need to keep this GameObject around as it is referenced for spawning.
-						newWebObject.transform.parent = hObjectPool.Instance.gameObject.transform;
+						newWebObject.transform.parent = _poolReference.gameObject.transform;
 						newWebObject.gameObject.SetActive (false);
 						_initialized = true;
 				}

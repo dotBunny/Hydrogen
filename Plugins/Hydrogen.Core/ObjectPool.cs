@@ -313,7 +313,9 @@ namespace Hydrogen.Core
 								throw new MissingReferenceException (
 										"You are passing a null or empty prefabName to hObjectPool.Instance.GetPoolID()");
 						}	
-			
+						if (_poolStringLookupTable == null)
+								return -1;
+
 						return _poolStringLookupTable.ContainsKey (prefabName) ? _poolStringLookupTable [prefabName] : -1;
 				}
 
