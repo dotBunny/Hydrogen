@@ -37,8 +37,13 @@ namespace Hydrogen
 				/// <summary>
 				/// The maximum vertices allowed in a Mesh.
 				/// </summary>
-				/// <remarks>This is a Unity imposed limitation, presumably this may grow over time.</remarks>
+				/// <remarks>This is a limitation of the short integer.</remarks>
 				public const int VerticesLimit = 65536;
+				/// <summary>
+				/// The maximum vertices allowed in a Mesh when counting index 0 of an array as one.
+				/// </summary>
+				/// <remarks>This is useful for looping so you dont have to do -1 all the time.</remarks>
+				public const int VerticesArrayLimit = 65535;
 
 				/// <summary>
 				/// Return the index of the closest vertex to the targetPosition on the Mesh.
