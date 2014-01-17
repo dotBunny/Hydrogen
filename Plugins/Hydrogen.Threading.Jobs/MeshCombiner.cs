@@ -62,99 +62,6 @@ namespace Hydrogen.Threading.Jobs
 						get { return _materialLookup; }
 				}
 
-				public MeshInput CreateMeshInput (MeshFilter meshFilter, Renderer renderer, Transform transform)
-				{
-						var newMeshInput = new MeshInput ();
-
-						newMeshInput.Mesh = new BufferedMesh ();
-						newMeshInput.Mesh.Name = meshFilter.name;
-						newMeshInput.Mesh.Vertices = meshFilter.sharedMesh.vertices;
-						newMeshInput.Mesh.Normals = meshFilter.sharedMesh.normals;
-						newMeshInput.Mesh.Colors = meshFilter.sharedMesh.colors;
-						newMeshInput.Mesh.Tangets = meshFilter.sharedMesh.tangents;
-						newMeshInput.Mesh.UV = meshFilter.sharedMesh.uv;
-						newMeshInput.Mesh.UV1 = meshFilter.sharedMesh.uv1;
-						newMeshInput.Mesh.UV2 = meshFilter.sharedMesh.uv2;
-
-						for (var i = 0; i < meshFilter.sharedMesh.subMeshCount; i++) {
-								var indexes = meshFilter.sharedMesh.GetIndices (i);
-								newMeshInput.Mesh.Indexes.Add (indexes);
-						}
-								
-						// Create Materials
-						newMeshInput.Materials = MaterialsToMaterialDataHashCodes (renderer.sharedMaterials);
-						newMeshInput.LocalToWorldMatrix = transform.localToWorldMatrix;
-
-						return newMeshInput;
-				}
-
-				public MeshInput[] CreateMeshInputs (MeshFilter[] meshFilters, Renderer[] renderer, Transform[] transforms)
-				{
-						// Create our holder
-						var meshInputs = new MeshInput[meshFilters.Length];
-
-						// Lazy way of making a whole bunch.
-						for (int i = 0; i < meshFilters.Length; i++) {
-								meshInputs [i] = CreateMeshInput (meshFilters [i], renderer [i], transforms [i]);
-						}
-
-						// Send it back!
-						return meshInputs;
-				}
-
-				public MeshObject CreateMeshObject (MeshOutput transitionMesh)
-				{
-						var meshObject = new MeshObject ();
-
-
-						meshObject.Materials = MaterialDataHashCodesToMaterials (transitionMesh.Materials.ToArray ());
-
-						meshObject.Mesh = new UnityEngine.Mesh ();
-						meshObject.Mesh.vertices = transitionMesh.Positions.ToArray ();
-
-						// If there are normals we need to assign them to the mesh.
-						if (transitionMesh.Normals != null) {
-								meshObject.Mesh.normals = transitionMesh.Normals.ToArray ();
-						}
-
-						// Much like normals, if we've got tangents lets throw them on there too.
-						if (transitionMesh.Tangents != null) {
-								meshObject.Mesh.tangents = transitionMesh.Tangents.ToArray ();
-						}
-
-						// How about some vertex color data? Sounds like a good idea to add that too.
-						if (transitionMesh.Colors != null) {
-								meshObject.Mesh.colors = transitionMesh.Colors.ToArray ();
-						}
-								
-						// Better make those textures work too while were at it.
-						if (transitionMesh.UV != null) {
-								meshObject.Mesh.uv = transitionMesh.UV.ToArray ();
-						}
-
-						// How about some more UV's?
-						if (transitionMesh.UV1 != null) {
-								meshObject.Mesh.uv1 = transitionMesh.UV1.ToArray ();
-						}
-
-						// Lightmapping UV's anyone?
-						if (transitionMesh.UV2 != null) {
-								meshObject.Mesh.uv2 = transitionMesh.UV2.ToArray ();
-						}
-
-
-						meshObject.Mesh.subMeshCount = transitionMesh.Indexes.Count;
-						for (int i = 0; i < transitionMesh.Indexes.Count; i++) {
-								meshObject.Mesh.SetIndices (transitionMesh.Indexes [i].ToArray (), MeshTopology.Triangles, i);
-						}
-
-						// Recalculate mesh's bounds for fun.
-						meshObject.Mesh.RecalculateBounds ();
-
-						// Return our processed object.
-						return meshObject;
-				}
-
 				public bool AddMaterial (UnityEngine.Material material)
 				{
 						// Cache our generating of the lookup code.
@@ -234,6 +141,108 @@ namespace Hydrogen.Threading.Jobs
 						return _hash;
 				}
 
+				public MeshInput CreateMeshInput (MeshFilter meshFilter, Renderer renderer, Transform transform)
+				{
+						var newMeshInput = new MeshInput ();
+
+						newMeshInput.Mesh = new BufferedMesh ();
+						newMeshInput.Mesh.Name = meshFilter.name;
+						newMeshInput.Mesh.Vertices = meshFilter.sharedMesh.vertices;
+						newMeshInput.Mesh.Normals = meshFilter.sharedMesh.normals;
+						newMeshInput.Mesh.Colors = meshFilter.sharedMesh.colors;
+						newMeshInput.Mesh.Tangets = meshFilter.sharedMesh.tangents;
+						newMeshInput.Mesh.UV = meshFilter.sharedMesh.uv;
+						newMeshInput.Mesh.UV1 = meshFilter.sharedMesh.uv1;
+						newMeshInput.Mesh.UV2 = meshFilter.sharedMesh.uv2;
+
+						for (var i = 0; i < meshFilter.sharedMesh.subMeshCount; i++) {
+								var indexes = meshFilter.sharedMesh.GetIndices (i);
+								newMeshInput.Mesh.Indexes.Add (indexes);
+						}
+
+						// Create Materials
+						newMeshInput.Materials = MaterialsToMaterialDataHashCodes (renderer.sharedMaterials);
+						newMeshInput.LocalToWorldMatrix = transform.localToWorldMatrix;
+
+						return newMeshInput;
+				}
+
+				public MeshInput[] CreateMeshInputs (MeshFilter[] meshFilters, Renderer[] renderer, Transform[] transforms)
+				{
+						// Create our holder
+						var meshInputs = new MeshInput[meshFilters.Length];
+
+						// Lazy way of making a whole bunch.
+						for (int i = 0; i < meshFilters.Length; i++) {
+								meshInputs [i] = CreateMeshInput (meshFilters [i], renderer [i], transforms [i]);
+						}
+
+						// Send it back!
+						return meshInputs;
+				}
+
+				public MeshObject CreateMeshObject (MeshOutput transitionMesh)
+				{
+						var meshObject = new MeshObject ();
+
+
+						meshObject.Materials = MaterialDataHashCodesToMaterials (transitionMesh.Materials.ToArray ());
+
+						meshObject.Mesh = new UnityEngine.Mesh ();
+						meshObject.Mesh.vertices = transitionMesh.Positions.ToArray ();
+
+						// If there are normals we need to assign them to the mesh.
+						if (transitionMesh.Normals != null) {
+								meshObject.Mesh.normals = transitionMesh.Normals.ToArray ();
+						}
+
+						// Much like normals, if we've got tangents lets throw them on there too.
+						if (transitionMesh.Tangents != null) {
+								meshObject.Mesh.tangents = transitionMesh.Tangents.ToArray ();
+						}
+
+						// How about some vertex color data? Sounds like a good idea to add that too.
+						if (transitionMesh.Colors != null) {
+								meshObject.Mesh.colors = transitionMesh.Colors.ToArray ();
+						}
+
+						// Better make those textures work too while were at it.
+						if (transitionMesh.UV != null) {
+								meshObject.Mesh.uv = transitionMesh.UV.ToArray ();
+						}
+
+						// How about some more UV's?
+						if (transitionMesh.UV1 != null) {
+								meshObject.Mesh.uv1 = transitionMesh.UV1.ToArray ();
+						}
+
+						// Lightmapping UV's anyone?
+						if (transitionMesh.UV2 != null) {
+								meshObject.Mesh.uv2 = transitionMesh.UV2.ToArray ();
+						}
+
+
+						meshObject.Mesh.subMeshCount = transitionMesh.Indexes.Count;
+						for (int i = 0; i < transitionMesh.Indexes.Count; i++) {
+								meshObject.Mesh.SetIndices (transitionMesh.Indexes [i].ToArray (), MeshTopology.Triangles, i);
+						}
+
+						// Recalculate mesh's bounds for fun.
+						meshObject.Mesh.RecalculateBounds ();
+
+						// Return our processed object.
+						return meshObject;
+				}
+
+				public UnityEngine.Material[] MaterialDataHashCodesToMaterials (int[] codes)
+				{
+						UnityEngine.Material[] materials = new UnityEngine.Material[codes.Length];
+						for (int x = 0; x < codes.Length; x++) {
+								materials [x] = _materialLookup [codes [x]];
+						}
+						return materials;
+				}
+
 				public int[] MaterialsToMaterialDataHashCodes (UnityEngine.Material[] materials)
 				{
 
@@ -251,15 +260,6 @@ namespace Hydrogen.Threading.Jobs
 						return hashcodes;
 				}
 
-				public UnityEngine.Material[] MaterialDataHashCodesToMaterials (int[] codes)
-				{
-						UnityEngine.Material[] materials = new UnityEngine.Material[codes.Length];
-						for (int x = 0; x < codes.Length; x++) {
-								materials [x] = _materialLookup [codes [x]];
-						}
-						return materials;
-				}
-
 				public bool RemoveMaterial (UnityEngine.Material material)
 				{
 						int check = material.GetDataHashCode ();
@@ -270,16 +270,16 @@ namespace Hydrogen.Threading.Jobs
 						return false;
 				}
 
-				public bool RemoveMesh (UnityEngine.MeshFilter meshFilter, UnityEngine.Renderer renderer, Transform transform)
+				public bool RemoveMesh (MeshFilter meshFilter, Renderer renderer, Transform transform)
 				{
-						MeshInput newMeshDescription = CreateMeshInput (meshFilter, renderer, transform);
-						return RemoveMesh (newMeshDescription);
+						MeshInput meshInput = CreateMeshInput (meshFilter, renderer, transform);
+						return RemoveMesh (meshInput);
 				}
 
-				public bool RemoveMesh (MeshInput meshDescription)
+				public bool RemoveMesh (MeshInput meshInput)
 				{
-						if (_meshInputs.Contains (meshDescription)) {
-								_meshInputs.Remove (meshDescription);
+						if (_meshInputs.Contains (meshInput)) {
+								_meshInputs.Remove (meshInput);
 								return true;
 						}
 						return false;
