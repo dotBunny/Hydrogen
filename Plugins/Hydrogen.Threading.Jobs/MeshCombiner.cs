@@ -62,6 +62,14 @@ namespace Hydrogen.Threading.Jobs
 						get { return _materialLookup; }
 				}
 
+				public int MeshInputCount {
+						get { return _meshInputs.Count; }
+				}
+
+				public int MeshOutputCount {
+						get { return _meshOutputs.Count; }
+				}
+
 				public bool AddMaterial (UnityEngine.Material material)
 				{
 						// Cache our generating of the lookup code.
@@ -147,7 +155,20 @@ namespace Hydrogen.Threading.Jobs
 
 						newMeshInput.Mesh = new BufferedMesh ();
 						newMeshInput.Mesh.Name = meshFilter.name;
+
+
+
 						newMeshInput.Mesh.Vertices = meshFilter.sharedMesh.vertices;
+
+
+
+						// HACK: TEsting
+						/*for (int i = 0; i < newMeshInput.Mesh.Vertices.Length; i++) {
+								newMeshInput.Mesh.Vertices [i] = transform.localToWorldMatrix.MultiplyPoint (newMeshInput.Mesh.Vertices [i]);
+								//var v = newMeshInput.Mesh.Vertices [i];
+						}*/
+
+
 						newMeshInput.Mesh.Normals = meshFilter.sharedMesh.normals;
 						newMeshInput.Mesh.Colors = meshFilter.sharedMesh.colors;
 						newMeshInput.Mesh.Tangets = meshFilter.sharedMesh.tangents;
@@ -339,7 +360,10 @@ namespace Hydrogen.Threading.Jobs
 														var vertex = vertices [index];
 
 														// TODO: Issue with putting object where it was
+														// I bet when you start splitting things between meshes maybe it doesnt register the 
+														// relative WorldMatrix to that particular point?
 														tm.Positions [kindex] = meshRend.LocalToWorldMatrix.MultiplyPoint (vertex);
+														//tm.Positions [kindex] = vertex;
 												}
 
 												if (mesh.Normals != null && mesh.Normals.Length > 0) {
