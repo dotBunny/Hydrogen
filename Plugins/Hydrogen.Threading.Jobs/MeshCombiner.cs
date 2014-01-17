@@ -93,12 +93,12 @@ namespace Hydrogen.Threading.Jobs
 						return false;
 				}
 
-				public bool AddMesh (MeshFilter meshFilter, Renderer renderer, Transform transform)
+				public bool AddMesh (MeshFilter meshFilter, Renderer renderer, Matrix4x4 localToWorldMatrix)
 				{
 
 
 						// If we add te
-						if (AddMesh (CreateMeshInput (meshFilter, renderer, transform))) {
+						if (AddMesh (CreateMeshInput (meshFilter, renderer, localToWorldMatrix))) {
 
 								return true;
 						}
@@ -107,7 +107,6 @@ namespace Hydrogen.Threading.Jobs
 
 				public bool AddMesh (MeshInput newMeshDescription)
 				{
-				
 						if (!_meshInputs.Contains (newMeshDescription)) {
 								_meshInputs.Add (newMeshDescription);
 								return true;
@@ -149,7 +148,7 @@ namespace Hydrogen.Threading.Jobs
 						return _hash;
 				}
 
-				public MeshInput CreateMeshInput (MeshFilter meshFilter, Renderer renderer, Transform transform)
+				public MeshInput CreateMeshInput (MeshFilter meshFilter, Renderer renderer, Matrix4x4 localToWorldMatrix)
 				{
 						var newMeshInput = new MeshInput ();
 
@@ -160,18 +159,9 @@ namespace Hydrogen.Threading.Jobs
 
 						newMeshInput.Mesh.Vertices = meshFilter.sharedMesh.vertices;
 
-
-
-						// HACK: TEsting
-						/*for (int i = 0; i < newMeshInput.Mesh.Vertices.Length; i++) {
-								newMeshInput.Mesh.Vertices [i] = transform.localToWorldMatrix.MultiplyPoint (newMeshInput.Mesh.Vertices [i]);
-								//var v = newMeshInput.Mesh.Vertices [i];
-						}*/
-
-
 						newMeshInput.Mesh.Normals = meshFilter.sharedMesh.normals;
 						newMeshInput.Mesh.Colors = meshFilter.sharedMesh.colors;
-						newMeshInput.Mesh.Tangets = meshFilter.sharedMesh.tangents;
+						newMeshInput.Mesh.Tangents = meshFilter.sharedMesh.tangents;
 						newMeshInput.Mesh.UV = meshFilter.sharedMesh.uv;
 						newMeshInput.Mesh.UV1 = meshFilter.sharedMesh.uv1;
 						newMeshInput.Mesh.UV2 = meshFilter.sharedMesh.uv2;
@@ -183,19 +173,20 @@ namespace Hydrogen.Threading.Jobs
 
 						// Create Materials
 						newMeshInput.Materials = MaterialsToMaterialDataHashCodes (renderer.sharedMaterials);
-						newMeshInput.LocalToWorldMatrix = transform.localToWorldMatrix;
+
+						newMeshInput.LocalToWorldMatrix = localToWorldMatrix;
 
 						return newMeshInput;
 				}
 
-				public MeshInput[] CreateMeshInputs (MeshFilter[] meshFilters, Renderer[] renderer, Transform[] transforms)
+				public MeshInput[] CreateMeshInputs (MeshFilter[] meshFilters, Renderer[] renderers, Matrix4x4[] localToWorldMatrices)
 				{
 						// Create our holder
 						var meshInputs = new MeshInput[meshFilters.Length];
 
 						// Lazy way of making a whole bunch.
 						for (int i = 0; i < meshFilters.Length; i++) {
-								meshInputs [i] = CreateMeshInput (meshFilters [i], renderer [i], transforms [i]);
+								meshInputs [i] = CreateMeshInput (meshFilters [i], renderers [i], localToWorldMatrices [i]);
 						}
 
 						// Send it back!
@@ -291,9 +282,9 @@ namespace Hydrogen.Threading.Jobs
 						return false;
 				}
 
-				public bool RemoveMesh (MeshFilter meshFilter, Renderer renderer, Transform transform)
+				public bool RemoveMesh (MeshFilter meshFilter, Renderer renderer, Matrix4x4 localToWorldMatrix)
 				{
-						MeshInput meshInput = CreateMeshInput (meshFilter, renderer, transform);
+						MeshInput meshInput = CreateMeshInput (meshFilter, renderer, localToWorldMatrix);
 						return RemoveMesh (meshInput);
 				}
 
@@ -322,7 +313,7 @@ namespace Hydrogen.Threading.Jobs
 										var vertices = mesh.Vertices;
 										var normals = mesh.Normals;
 										var Colors = mesh.Colors;
-										var tangents = mesh.Tangets;
+										var tangents = mesh.Tangents;
 										var uv = mesh.UV;
 										var uv1 = mesh.UV1;
 										var uv2 = mesh.UV2;
@@ -349,8 +340,6 @@ namespace Hydrogen.Threading.Jobs
 												tm.Positions = new Vector3[tm.VertexCount];
 
 												tm.Indexes = new int[tm.IndexCount];
-
-
 
 												for (var j = 0; j < tm.IndexCount; j++) {
 														var index = indexes [j];
@@ -390,7 +379,7 @@ namespace Hydrogen.Threading.Jobs
 														}
 												}
 
-												if (mesh.Tangets != null && mesh.Tangets.Length > 0) {
+												if (mesh.Tangents != null && mesh.Tangents.Length > 0) {
 														tm.Tangents = new Vector4[tm.VertexCount];
 														for (var j = 0; j < tm.IndexCount; j++) {
 																var index = indexes [j];
@@ -534,7 +523,7 @@ namespace Hydrogen.Threading.Jobs
 						public List<int[]> Indexes = new List<int[]> ();
 						public String Name;
 						public Vector3[] Normals;
-						public Vector4[] Tangets;
+						public Vector4[] Tangents;
 						public Vector2[] UV;
 						public Vector2[] UV1;
 						public Vector2[] UV2;
@@ -599,7 +588,6 @@ namespace Hydrogen.Threading.Jobs
 
 				public class TransitionMesh
 				{
-						//public Matrix4x4 localToWorldMatrix;
 						public int[] Indexes;
 						public int IndexCount;
 						public Color[] Colors;
