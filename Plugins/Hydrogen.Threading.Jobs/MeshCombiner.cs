@@ -328,6 +328,8 @@ namespace Hydrogen.Threading.Jobs
 										var uv2 = mesh.UV2;
 
 										int lastValidMaterial = 0;
+										var inversedTransposedMatrix = meshRend.LocalToWorldMatrix.inverse.transpose;
+
 										for (var i = 0; i < subMeshCount; i++) {
 												var tm = new TransitionMesh ();
 												var indexes = mesh.GetIndices (i);
@@ -346,7 +348,7 @@ namespace Hydrogen.Threading.Jobs
 
 												tm.Indexes = new int[tm.IndexCount];
 
-												var inversedTransposedMatrix = meshRend.LocalToWorldMatrix.inverse.transpose;
+
 
 												for (var j = 0; j < tm.IndexCount; j++) {
 														var index = indexes [j];
