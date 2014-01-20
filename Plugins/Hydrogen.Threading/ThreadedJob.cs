@@ -28,6 +28,9 @@
 
 namespace Hydrogen.Threading
 {
+		/// <summary>
+		/// A base class for threaded jobs.
+		/// </summary>
 		public class ThreadedJob : JobBase
 		{
 				/// <summary>

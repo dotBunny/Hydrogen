@@ -33,6 +33,9 @@ using UnityEngine;
 
 namespace Hydrogen.Threading.Jobs
 {
+		/// <summary>
+		/// A MeshCombiner that runs in another thread.
+		/// </summary>
 		public class MeshCombiner : ThreadPoolJob
 		{
 				readonly List<MeshInput> _meshInputs = new List<MeshInput> ();
@@ -95,8 +98,6 @@ namespace Hydrogen.Threading.Jobs
 
 				public bool AddMesh (MeshFilter meshFilter, Renderer renderer, Matrix4x4 localToWorldMatrix)
 				{
-
-
 						// If we add te
 						if (AddMesh (CreateMeshInput (meshFilter, renderer, localToWorldMatrix))) {
 
@@ -193,51 +194,51 @@ namespace Hydrogen.Threading.Jobs
 						return meshInputs;
 				}
 
-				public MeshObject CreateMeshObject (MeshOutput transitionMesh)
+				public MeshObject CreateMeshObject (MeshOutput meshOutput)
 				{
 						var meshObject = new MeshObject ();
 
 
-						meshObject.Materials = MaterialDataHashCodesToMaterials (transitionMesh.Materials.ToArray ());
+						meshObject.Materials = MaterialDataHashCodesToMaterials (meshOutput.Materials.ToArray ());
 
 						meshObject.Mesh = new UnityEngine.Mesh ();
-						meshObject.Mesh.vertices = transitionMesh.Positions.ToArray ();
+						meshObject.Mesh.vertices = meshOutput.Positions.ToArray ();
 						meshObject.Mesh.name = "Combined Mesh (" + meshObject.Mesh.vertices.GetHashCode () + ")";
 
 						// If there are normals we need to assign them to the mesh.
-						if (transitionMesh.Normals != null) {
-								meshObject.Mesh.normals = transitionMesh.Normals.ToArray ();
+						if (meshOutput.Normals != null) {
+								meshObject.Mesh.normals = meshOutput.Normals.ToArray ();
 						}
 
 						// Much like normals, if we've got tangents lets throw them on there too.
-						if (transitionMesh.Tangents != null) {
-								meshObject.Mesh.tangents = transitionMesh.Tangents.ToArray ();
+						if (meshOutput.Tangents != null) {
+								meshObject.Mesh.tangents = meshOutput.Tangents.ToArray ();
 						}
 
 						// How about some vertex color data? Sounds like a good idea to add that too.
-						if (transitionMesh.Colors != null) {
-								meshObject.Mesh.colors = transitionMesh.Colors.ToArray ();
+						if (meshOutput.Colors != null) {
+								meshObject.Mesh.colors = meshOutput.Colors.ToArray ();
 						}
 
 						// Better make those textures work too while were at it.
-						if (transitionMesh.UV != null) {
-								meshObject.Mesh.uv = transitionMesh.UV.ToArray ();
+						if (meshOutput.UV != null) {
+								meshObject.Mesh.uv = meshOutput.UV.ToArray ();
 						}
 
 						// How about some more UV's?
-						if (transitionMesh.UV1 != null) {
-								meshObject.Mesh.uv1 = transitionMesh.UV1.ToArray ();
+						if (meshOutput.UV1 != null) {
+								meshObject.Mesh.uv1 = meshOutput.UV1.ToArray ();
 						}
 
 						// Lightmapping UV's anyone?
-						if (transitionMesh.UV2 != null) {
-								meshObject.Mesh.uv2 = transitionMesh.UV2.ToArray ();
+						if (meshOutput.UV2 != null) {
+								meshObject.Mesh.uv2 = meshOutput.UV2.ToArray ();
 						}
 
 
-						meshObject.Mesh.subMeshCount = transitionMesh.Indexes.Count;
-						for (int i = 0; i < transitionMesh.Indexes.Count; i++) {
-								meshObject.Mesh.SetIndices (transitionMesh.Indexes [i].ToArray (), MeshTopology.Triangles, i);
+						meshObject.Mesh.subMeshCount = meshOutput.Indexes.Count;
+						for (int i = 0; i < meshOutput.Indexes.Count; i++) {
+								meshObject.Mesh.SetIndices (meshOutput.Indexes [i].ToArray (), MeshTopology.Triangles, i);
 						}
 
 						// Recalculate mesh's bounds for fun.
@@ -309,9 +310,9 @@ namespace Hydrogen.Threading.Jobs
 						_meshOutputs.Clear ();
 
 
-						foreach (var meshRend in _meshInputs) {
+						foreach (var meshInput in _meshInputs) {
 
-								var mesh = meshRend.Mesh;
+								var mesh = meshInput.Mesh;
 								var subMeshCount = mesh.SubMeshCount;
 								var vertices = mesh.Vertices;
 								var normals = mesh.Normals;
@@ -322,100 +323,100 @@ namespace Hydrogen.Threading.Jobs
 								var uv2 = mesh.UV2;
 
 
-								var inversedTransposedMatrix = meshRend.LocalToWorldMatrix.inverse.transpose;
+								var inversedTransposedMatrix = meshInput.LocalToWorldMatrix.inverse.transpose;
 
 								for (var i = 0; i < subMeshCount; i++) {
-										var tm = new TransitionMesh ();
+										var newTransitionMesh = new TransitionMesh ();
 										var indexes = mesh.GetIndices (i);
 
-										if (i > (meshRend.Materials.Length - 1)) {
+										if (i > (meshInput.Materials.Length - 1)) {
 												// If there is no material, dont add the mesh later to be rendered
 												// as it wasn't showing anyways!.
 												continue;
 										}
-										tm.Material = meshRend.Materials [i];
+										newTransitionMesh.Material = meshInput.Materials [i];
 
-										tm.VertexCount = CountUsedVertices (mesh, ref indexes);
-										tm.IndexCount = indexes.Length;
+										newTransitionMesh.VertexCount = CountUsedVertices (mesh, ref indexes);
+										newTransitionMesh.IndexCount = indexes.Length;
 
-										tm.Positions = new Vector3[tm.VertexCount];
+										newTransitionMesh.Positions = new Vector3[newTransitionMesh.VertexCount];
 
-										tm.Indexes = new int[tm.IndexCount];
+										newTransitionMesh.Indexes = new int[newTransitionMesh.IndexCount];
 
-										for (var j = 0; j < tm.IndexCount; j++) {
+										for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 												var index = indexes [j];
 												var kindex = _transitionMeshCounter [index];
-												tm.Indexes [j] = kindex;
+												newTransitionMesh.Indexes [j] = kindex;
 										}
 
 										// Handle Vertices
-										for (var j = 0; j < tm.IndexCount; j++) {
+										for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 												var index = indexes [j];
 												var kindex = _transitionMeshCounter [index];
 												var vertex = vertices [index];
-												tm.Positions [kindex] = meshRend.LocalToWorldMatrix.MultiplyPoint (vertex);
+												newTransitionMesh.Positions [kindex] = meshInput.LocalToWorldMatrix.MultiplyPoint (vertex);
 										}
 
 										if (mesh.Normals != null && mesh.Normals.Length > 0) {
-												tm.Normals = new Vector3[tm.VertexCount];
-												for (var j = 0; j < tm.IndexCount; j++) {
+												newTransitionMesh.Normals = new Vector3[newTransitionMesh.VertexCount];
+												for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 														var index = indexes [j];
 														var kindex = _transitionMeshCounter [index];
 														var normal = normals [index];
-														tm.Normals [kindex] = inversedTransposedMatrix.MultiplyVector (normal).normalized;
+														newTransitionMesh.Normals [kindex] = inversedTransposedMatrix.MultiplyVector (normal).normalized;
 												}
 										}
 
 										if (mesh.Colors != null && mesh.Colors.Length > 0) {
-												tm.Colors = new Color[tm.VertexCount];
-												for (var j = 0; j < tm.IndexCount; j++) {
+												newTransitionMesh.Colors = new Color[newTransitionMesh.VertexCount];
+												for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 														var index = indexes [j];
 														var kindex = _transitionMeshCounter [index];
 														var Color = Colors [index];
-														tm.Colors [kindex] = Color;
+														newTransitionMesh.Colors [kindex] = Color;
 												}
 										}
 
 										if (mesh.Tangents != null && mesh.Tangents.Length > 0) {
-												tm.Tangents = new Vector4[tm.VertexCount];
-												for (var j = 0; j < tm.IndexCount; j++) {
+												newTransitionMesh.Tangents = new Vector4[newTransitionMesh.VertexCount];
+												for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 														var index = indexes [j];
 														var kindex = _transitionMeshCounter [index];
 														var p = tangents [index];
 														var w = p.w;
 														p = inversedTransposedMatrix.MultiplyVector (p);
-														tm.Tangents [kindex] = new Vector4 (p.x, p.y, p.z, w);
+														newTransitionMesh.Tangents [kindex] = new Vector4 (p.x, p.y, p.z, w);
 												}
 										}
 
 										if (mesh.UV != null && mesh.UV.Length > 0) {
-												tm.UV = new Vector2[tm.VertexCount];
-												for (var j = 0; j < tm.IndexCount; j++) {
+												newTransitionMesh.UV = new Vector2[newTransitionMesh.VertexCount];
+												for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 														var index = indexes [j];
 														var kindex = _transitionMeshCounter [index];
-														tm.UV [kindex] = uv [index];
+														newTransitionMesh.UV [kindex] = uv [index];
 												}
 										}
 
 										if (mesh.UV1 != null && mesh.UV1.Length > 0) {
-												tm.UV1 = new Vector2[tm.VertexCount];
-												for (var j = 0; j < tm.IndexCount; j++) {
+												newTransitionMesh.UV1 = new Vector2[newTransitionMesh.VertexCount];
+												for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 														var index = indexes [j];
 														var kindex = _transitionMeshCounter [index];
-														tm.UV1 [kindex] = uv1 [index];
+														newTransitionMesh.UV1 [kindex] = uv1 [index];
 												}
 										}
 
 										if (mesh.UV2 != null && mesh.UV2.Length > 0) {
-												tm.UV2 = new Vector2[tm.VertexCount];
-												for (var j = 0; j < tm.IndexCount; j++) {
+												newTransitionMesh.UV2 = new Vector2[newTransitionMesh.VertexCount];
+												for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 														var index = indexes [j];
 														var kindex = _transitionMeshCounter [index];
-														tm.UV2 [kindex] = uv2 [index];
+														newTransitionMesh.UV2 [kindex] = uv2 [index];
 												}
 										}
 
-										_transitionMeshes.Add (tm);
+										_transitionMeshes.Add (newTransitionMesh);
 								}
 						}
 
@@ -430,55 +431,55 @@ namespace Hydrogen.Threading.Jobs
 						// We should use as many submeshes as possible, keeping individual index
 						// counts for all of them (a list).
 
-						var tmt = new MeshOutput ();
+						var meshOutput = new MeshOutput ();
 						int bitmask = _transitionMeshes [0].GetBitMask ();
 					
 
-						foreach (var tmesh in _transitionMeshes) {
-								if (tmesh.GetBitMask () != bitmask || tmesh.VertexCount + tmt.VertexCount > Mesh.VerticesArrayLimit) {
-										_meshOutputs.Add (tmt);
-										tmt = new MeshOutput ();
+						foreach (var transitionMesh in _transitionMeshes) {
+								if (transitionMesh.GetBitMask () != bitmask || transitionMesh.VertexCount + meshOutput.VertexCount > Mesh.VerticesArrayLimit) {
+										_meshOutputs.Add (meshOutput);
+										meshOutput = new MeshOutput ();
 								}
 
-								var baseIndex = tmt.VertexCount;
-								tmt.VertexCount += tmesh.VertexCount;
-								tmt.SortedSources.Add (tmesh);
-								tmt.Positions.AddRange (tmesh.Positions);
+								var baseIndex = meshOutput.VertexCount;
+								meshOutput.VertexCount += transitionMesh.VertexCount;
+								meshOutput.SortedSources.Add (transitionMesh);
+								meshOutput.Positions.AddRange (transitionMesh.Positions);
 
-								if (tmesh.Normals != null) {
-										tmt.Normals.AddRange (tmesh.Normals);
+								if (transitionMesh.Normals != null) {
+										meshOutput.Normals.AddRange (transitionMesh.Normals);
 								}
 
-								if (tmesh.Colors != null) {
-										tmt.Colors.AddRange (tmesh.Colors);
+								if (transitionMesh.Colors != null) {
+										meshOutput.Colors.AddRange (transitionMesh.Colors);
 								}
 
-								if (tmesh.Tangents != null) {
-										tmt.Tangents.AddRange (tmesh.Tangents);
+								if (transitionMesh.Tangents != null) {
+										meshOutput.Tangents.AddRange (transitionMesh.Tangents);
 								}
 
-								if (tmesh.UV != null) {
-										tmt.UV.AddRange (tmesh.UV);
+								if (transitionMesh.UV != null) {
+										meshOutput.UV.AddRange (transitionMesh.UV);
 								}
 
-								if (tmesh.UV1 != null) {
-										tmt.UV1.AddRange (tmesh.UV1);
+								if (transitionMesh.UV1 != null) {
+										meshOutput.UV1.AddRange (transitionMesh.UV1);
 								}
 
-								if (tmesh.UV2 != null) {
-										tmt.UV2.AddRange (tmesh.UV2);
+								if (transitionMesh.UV2 != null) {
+										meshOutput.UV2.AddRange (transitionMesh.UV2);
 								}
 
-								var indexes = tmt.GetSubMesh (tmesh.Material);
-								indexes.Capacity = indexes.Count + tmesh.IndexCount;
-								for (var i = 0; i < tmesh.IndexCount; i++) {
-										indexes.Add (baseIndex + tmesh.Indexes [i]);
+								var indexes = meshOutput.GetSubMesh (transitionMesh.Material);
+								indexes.Capacity = indexes.Count + transitionMesh.IndexCount;
+								for (var i = 0; i < transitionMesh.IndexCount; i++) {
+										indexes.Add (baseIndex + transitionMesh.Indexes [i]);
 								}
 
-								bitmask = tmesh.GetBitMask ();
+								bitmask = transitionMesh.GetBitMask ();
 						}
 
-						_meshOutputs.Add (tmt);
+						_meshOutputs.Add (meshOutput);
 
 
 				}

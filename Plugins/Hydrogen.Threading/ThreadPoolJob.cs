@@ -28,8 +28,14 @@
 
 namespace Hydrogen.Threading
 {
+		/// <summary>
+		/// A base class for ThreadPool jobs.
+		/// </summary>
 		public class ThreadPoolJob : JobBase
 		{
+				/// <summary>
+				/// ThreadPool Delegate
+				/// </summary>
 				System.Threading.WaitCallback _callback;
 
 				/// <summary>
