@@ -47,7 +47,6 @@ namespace Hydrogen.Threading
 				public override void Start (bool backgroundThread, System.Threading.ThreadPriority priority)
 				{
 						_callback = new System.Threading.WaitCallback (Run);
-
 						System.Threading.ThreadPool.QueueUserWorkItem (_callback);
 				}
 		}

@@ -35,17 +35,14 @@ using UnityEngine;
 namespace Hydrogen.Threading.Jobs
 {
 		/// <summary>
-		/// A MeshCombiner that runs in another thread.
+		/// A Multi-Threaded Mesh Combiner that runs in another thread. (Yes! It is just that cool!)
 		/// </summary>
 		public class MeshCombiner : ThreadPoolJob
 		{
-				readonly List<MeshInput> _meshInputs = new List<MeshInput> ();
-				readonly List<MeshOutput> _meshOutputs = new List<MeshOutput> ();
-				readonly List<TransitionMesh> _transitionMeshes = new List<TransitionMesh> ();
 				/// <summary>
 				/// Reference to Action to be used when ThreadedFunction is completed, however it requires that
 				/// the Check method be called by Unity's main thread periodically. This will simply passback the 
-				/// MeshDescriptions which then can be processed vai a coroutine/etc.
+				/// MeshOutputs which then can be processed via a coroutine/etc.
 				/// </summary>
 				Action<int, MeshOutput[]> _callback;
 				/// <summary>
@@ -56,23 +53,66 @@ namespace Hydrogen.Threading.Jobs
 				/// A dictionary of Materials referenced by the added meshes.
 				/// </summary>
 				readonly Dictionary<int, UnityEngine.Material> _materialLookup = new Dictionary<int, UnityEngine.Material> ();
+				/// <summary>
+				/// Internal MeshInput storage that will be used to create TransitionMeshes during processing.
+				/// </summary>
+				readonly List<MeshInput> _meshInputs = new List<MeshInput> ();
+				/// <summary>
+				/// Internal MeshOutput storage that will be passed back out to the PostProcess coroutine.
+				/// </summary>
+				readonly List<MeshOutput> _meshOutputs = new List<MeshOutput> ();
+				/// <summary>
+				/// Internal TransitionMesh storage used as a go between the MeshInput -> MeshOutput.
+				/// </summary>
+				/// <remarks>>Handy for allowing us to work in parallel on some of the heavy processing.</remarks>
+				readonly List<TransitionMesh> _transitionMeshes = new List<TransitionMesh> ();
 
 				/// <summary>
-				/// Material reference .
+				/// Gets the current Material reference Dictionary.
 				/// </summary>
-				/// <value>The combined Materials.</value>
+				/// <value>The Material Reference Dictionary.</value>
 				public Dictionary<int, UnityEngine.Material> MaterialsLookup {
 						get { return _materialLookup; }
 				}
 
+				/// <summary>
+				/// Gets the MeshInput(s) list to be used to create TransitionMeshes during the processing.
+				/// </summary>
+				/// <value>The MeshInput(s)</value>
+				public List<MeshInput> MeshInputs {
+						get { return _meshInputs; }
+				}
+
+				/// <summary>
+				/// The total number of MeshInput(s) currently in the system.
+				/// </summary>
+				/// <value>The MeshInput(s) Count.</value>
 				public int MeshInputCount {
 						get { return _meshInputs.Count; }
 				}
 
+				/// <summary>
+				/// Gets the MeshOutput(s) list, often used during post processing to create meshes.
+				/// </summary>
+				/// <value>The MeshOutput(s)</value>
+				public List<MeshOutput> MeshOutputs {
+						get { return _meshOutputs; }
+				}
+
+				/// <summary>
+				/// The total number of MeshOutput(s) currently generated in the system.
+				/// </summary>
+				/// <value>The MeshOutput(s) Count.</value>
 				public int MeshOutputCount {
 						get { return _meshOutputs.Count; }
 				}
 
+				/// <summary>
+				/// Add a Material to the Material reference Dictionary.
+				/// </summary>
+				/// <remarks>This can only be used from within Unity's main thread.</remarks>
+				/// <returns><c>true</c>, if Material was added, <c>false</c> otherwise.</returns>
+				/// <param name="material">The UnityEngine.Material to be added.</param>
 				public bool AddMaterial (UnityEngine.Material material)
 				{
 						// Cache our generating of the lookup code.
@@ -83,10 +123,16 @@ namespace Hydrogen.Threading.Jobs
 								_materialLookup.Add (check, material);
 								return true;
 						}
-
 						return false;
 				}
 
+				/// <summary>
+				/// Add a Material to the Material reference Dictionary with a specific code.
+				/// </summary>
+				/// <remarks>This can only be used from within Unity's main thread.</remarks>
+				/// <returns><c>true</c>, if Material was added, <c>false</c> otherwise.</returns>
+				/// <param name="code">The code to store as the reference for the Material.</param>
+				/// <param name="material">The UnityEngine.Material to be added.</param>
 				public bool AddMaterial (int code, UnityEngine.Material material)
 				{
 						if (!_materialLookup.ContainsKey (code)) {
@@ -96,30 +142,48 @@ namespace Hydrogen.Threading.Jobs
 						return false;
 				}
 
-				public bool AddMesh (MeshFilter meshFilter, Renderer renderer, Matrix4x4 localToWorldMatrix)
-				{
-						// If we add te
-						if (AddMesh (CreateMeshInput (meshFilter, renderer, localToWorldMatrix))) {
+				/// <summary>
+				/// Add a Unity based Mesh into the MeshCombiner.
+				/// </summary>
+				/// <remarks>This can only be used from within Unity's main thread.</remarks>
+				/// <returns><c>true</c>, if mesh was added, <c>false</c> otherwise.</returns>
+				/// <param name="meshFilter">The Mesh's MeshFilter.</param>
+				/// <param name="renderer">The Mesh's Renderer.</param>
+				/// <param name="worldMatrix">The Mesh's World Matrix</param>
+				public bool AddMesh (MeshFilter meshFilter, Renderer renderer, Matrix4x4 worldMatrix)
+				{					
+						return AddMesh (CreateMeshInput (meshFilter, renderer, worldMatrix));
+				}
 
+				/// <summary>
+				/// Adds an existing MeshInput into the MeshCombiner.
+				/// </summary>
+				/// <remarks>
+				/// This can be done without Unity's main thread, if you have access to the data already. 
+				/// Just need to make sure that the material codes are set correctly.
+				/// </remarks>
+				/// <returns><c>true</c>, if MeshInput was added, <c>false</c> otherwise.</returns>
+				/// <param name="meshInput">The MeshInput to add.</param>
+				public bool AddMesh (MeshInput meshInput)
+				{
+						if (!_meshInputs.Contains (meshInput)) {
+								_meshInputs.Add (meshInput);
 								return true;
 						}
 						return false;
 				}
 
-				public bool AddMesh (MeshInput newMeshDescription)
-				{
-						if (!_meshInputs.Contains (newMeshDescription)) {
-								_meshInputs.Add (newMeshDescription);
-								return true;
-						}
-						return false;
-				}
-
+				/// <summary>
+				/// Clear the Material reference Dictionary.
+				/// </summary>
 				public void ClearMaterials ()
 				{
 						_materialLookup.Clear ();
 				}
 
+				/// <summary>
+				/// Clear the all Mesh data inside of the MeshCombiner.
+				/// </summary>
 				public void ClearMeshes ()
 				{
 						_meshInputs.Clear ();
@@ -127,13 +191,11 @@ namespace Hydrogen.Threading.Jobs
 						_transitionMeshes.Clear ();
 				}
 
+				/// <summary>
+				/// Start the actual threaded process to combine MeshInput data currently added to the MeshCombiner.
+				/// </summary>
+				/// <param name="onFinished">The method to call when completed inside of Unity's main thread.</param>
 				public int Combine (Action<int, MeshOutput[]> onFinished)
-				{
-						return Combine (System.Threading.ThreadPriority.Normal, onFinished);
-				}
-
-				public int Combine (System.Threading.ThreadPriority priority, 
-				                    Action<int, MeshOutput[]> onFinished)
 				{
 						// Generate Hash Code
 						_hash = (Time.time + UnityEngine.Random.Range (0, 100)).GetHashCode ();
@@ -143,20 +205,27 @@ namespace Hydrogen.Threading.Jobs
 								_callback = onFinished;
 						}
 
-						Start (true, priority);
+						// These values mean nothing in this case as we don't assign any of it to the ThreadPool tasks.
+						Start (true, System.Threading.ThreadPriority.Normal);
 
 						return _hash;
 				}
 
-				public MeshInput CreateMeshInput (MeshFilter meshFilter, Renderer renderer, Matrix4x4 localToWorldMatrix)
+				/// <summary>
+				/// Creates a MeshInput from the passed arguements.
+				/// </summary>
+				/// <remarks>This can only be used from within Unity's main thread.</remarks>
+				/// <returns>The created MeshInput</returns>
+				/// <param name="meshFilter">The source Mesh's MeshFilter.</param>
+				/// <param name="renderer">The source Mesh's Renderer.</param>
+				/// <param name="worldMatrix">The source Mesh's World Matrix</param>
+				public MeshInput CreateMeshInput (MeshFilter meshFilter, Renderer renderer, Matrix4x4 worldMatrix)
 				{
 						var newMeshInput = new MeshInput ();
 
 						newMeshInput.Mesh = new BufferedMesh ();
 						newMeshInput.Mesh.Name = meshFilter.name;
-
 						newMeshInput.Mesh.Vertices = meshFilter.sharedMesh.vertices;
-
 						newMeshInput.Mesh.Normals = meshFilter.sharedMesh.normals;
 						newMeshInput.Mesh.Colors = meshFilter.sharedMesh.colors;
 						newMeshInput.Mesh.Tangents = meshFilter.sharedMesh.tangents;
@@ -164,27 +233,47 @@ namespace Hydrogen.Threading.Jobs
 						newMeshInput.Mesh.UV1 = meshFilter.sharedMesh.uv1;
 						newMeshInput.Mesh.UV2 = meshFilter.sharedMesh.uv2;
 
+						newMeshInput.Mesh.Topology = new MeshTopology[meshFilter.sharedMesh.subMeshCount];
+
 						for (var i = 0; i < meshFilter.sharedMesh.subMeshCount; i++) {
-								var indexes = meshFilter.sharedMesh.GetIndices (i);
-								newMeshInput.Mesh.Indexes.Add (indexes);
+								newMeshInput.Mesh.Topology [i] = meshFilter.sharedMesh.GetTopology (i);
+
+								// Check for Unsupported Mesh Topology
+								switch (newMeshInput.Mesh.Topology [i]) {
+								case MeshTopology.Lines:
+								case MeshTopology.LineStrip:
+								case MeshTopology.Points:
+										Debug.LogWarning ("The MeshCombiner does not support this meshes (" +
+										newMeshInput.Mesh.Name + "topology (" + newMeshInput.Mesh.Topology [i] + ")");
+										break;
+								}
+								newMeshInput.Mesh.Indexes.Add (meshFilter.sharedMesh.GetIndices (i));
 						}
 
 						// Create Materials
 						newMeshInput.Materials = MaterialsToMaterialDataHashCodes (renderer.sharedMaterials);
 
-						newMeshInput.LocalToWorldMatrix = localToWorldMatrix;
+						newMeshInput.WorldMatrix = worldMatrix;
 
 						return newMeshInput;
 				}
 
-				public MeshInput[] CreateMeshInputs (MeshFilter[] meshFilters, Renderer[] renderers, Matrix4x4[] localToWorldMatrices)
+				/// <summary>
+				/// Creates MeshInput(s) from the passed arguement arrays.
+				/// </summary>
+				/// <remarks>This can only be used from within Unity's main thread.</remarks>
+				/// <returns>The created MeshInput(s)</returns>
+				/// <param name="meshFilters">The source Meshes MeshFilters.</param>
+				/// <param name="renderers">The source Meshes Renderers.</param>
+				/// <param name="worldMatrices">The source Meshes World Matrices</param>
+				public MeshInput[] CreateMeshInputs (MeshFilter[] meshFilters, Renderer[] renderers, Matrix4x4[] worldMatrices)
 				{
 						// Create our holder
 						var meshInputs = new MeshInput[meshFilters.Length];
 
 						// Lazy way of making a whole bunch.
 						for (int i = 0; i < meshFilters.Length; i++) {
-								meshInputs [i] = CreateMeshInput (meshFilters [i], renderers [i], localToWorldMatrices [i]);
+								meshInputs [i] = CreateMeshInput (meshFilters [i], renderers [i], worldMatrices [i]);
 						}
 
 						// Send it back!
@@ -193,10 +282,16 @@ namespace Hydrogen.Threading.Jobs
 
 				public MeshObject CreateMeshObject (MeshOutput meshOutput)
 				{
+						return CreateMeshObject (meshOutput, true);
+				}
+
+				public MeshObject CreateMeshObject (MeshOutput meshOutput, bool instanceMaterials)
+				{
 						var meshObject = new MeshObject ();
 
-
-						meshObject.Materials = MaterialDataHashCodesToMaterials (meshOutput.Materials.ToArray ());
+						meshObject.Materials = instanceMaterials ? 
+								MaterialDataHashCodesToMaterialInstances (meshOutput.Materials.ToArray ()) : 
+								MaterialDataHashCodesToMaterials (meshOutput.Materials.ToArray ());
 
 						meshObject.Mesh = new UnityEngine.Mesh ();
 						meshObject.Mesh.vertices = meshOutput.Positions.ToArray ();
@@ -246,12 +341,35 @@ namespace Hydrogen.Threading.Jobs
 						return meshObject;
 				}
 
+				public MeshObject[] CreateMeshObjects (MeshOutput[] meshOutputs)
+				{
+						return CreateMeshObjects (meshOutputs, true);
+				}
+
+				public MeshObject[] CreateMeshObjects (MeshOutput[] meshOutputs, bool instanceMaterials)
+				{
+						MeshObject[] meshObjects = new MeshObject[meshOutputs.Length];
+						for (int i = 0; i < meshOutputs.Length; i++) {
+								meshObjects [i] = CreateMeshObject (meshOutputs [i], instanceMaterials);
+						}
+						return meshObjects;
+				}
+
 				public UnityEngine.Material[] MaterialDataHashCodesToMaterials (int[] codes)
 				{
-						// TODO: Evaluate if it would be better to instance these, instead of referencing the root again
 						var materials = new UnityEngine.Material[codes.Length];
 						for (int x = 0; x < codes.Length; x++) {
 								materials [x] = _materialLookup [codes [x]];
+						}
+						return materials;
+				}
+
+				public UnityEngine.Material[] MaterialDataHashCodesToMaterialInstances (int[] codes)
+				{
+						var materials = new UnityEngine.Material[codes.Length];
+						for (int x = 0; x < codes.Length; x++) {
+								materials [x] = new UnityEngine.Material (_materialLookup [codes [x]]);
+								materials [x].name += " Instance";
 						}
 						return materials;
 				}
@@ -301,7 +419,6 @@ namespace Hydrogen.Threading.Jobs
 
 				protected sealed override void ThreadedFunction ()
 				{
-
 						// Empty out preexisting parsed data
 						_transitionMeshes.Clear ();
 						_meshOutputs.Clear ();
@@ -400,7 +517,7 @@ namespace Hydrogen.Threading.Jobs
 						var uv1 = mesh.UV1;
 						var uv2 = mesh.UV2;
 						var transitionMeshCounter = new int [mesh.VertexCount];
-						var inversedTransposedMatrix = meshInput.LocalToWorldMatrix.inverse.transpose;
+						var inversedTransposedMatrix = meshInput.WorldMatrix.inverse.transpose;
 
 						for (var i = 0; i < subMeshCount; i++) {
 								var newTransitionMesh = new TransitionMesh ();
@@ -444,7 +561,7 @@ namespace Hydrogen.Threading.Jobs
 										var index = indexes [j];
 										var kindex = transitionMeshCounter [index];
 										var vertex = vertices [index];
-										newTransitionMesh.Positions [kindex] = meshInput.LocalToWorldMatrix.MultiplyPoint (vertex);
+										newTransitionMesh.Positions [kindex] = meshInput.WorldMatrix.MultiplyPoint (vertex);
 								}
 
 								// Handle Normals
@@ -523,12 +640,12 @@ namespace Hydrogen.Threading.Jobs
 
 				public class BufferedMesh
 				{
-						// TODO: Add TopologyType eventually to handle this.
 						public Color[] Colors;
 						public List<int[]> Indexes = new List<int[]> ();
 						public String Name;
 						public Vector3[] Normals;
 						public Vector4[] Tangents;
+						public MeshTopology[] Topology;
 						public Vector2[] UV;
 						public Vector2[] UV1;
 						public Vector2[] UV2;
@@ -551,7 +668,7 @@ namespace Hydrogen.Threading.Jobs
 				public class MeshInput
 				{
 						public BufferedMesh Mesh;
-						public Matrix4x4 LocalToWorldMatrix;
+						public Matrix4x4 WorldMatrix;
 						public int[] Materials;
 				}
 
