@@ -299,7 +299,96 @@ namespace Hydrogen.Threading.Jobs
 
 				}
 
-				protected void CreateTransitionMesh (MeshInput meshInput)
+				protected sealed override void ThreadedFunction ()
+				{
+
+						// Empty out preexisting parsed data
+						_transitionMeshes.Clear ();
+						_meshOutputs.Clear ();
+
+						// Clever forker solution since we don't have Parallel.ForEach support available.
+						var parallelTasks = new Forker ();
+						foreach (var meshInput in _meshInputs) {
+								var tempInput = meshInput;
+								parallelTasks.Fork (delegate {
+										CreateTransitionMesh (tempInput);
+								});
+						}
+						parallelTasks.Join ();
+
+						// Sort the meshes in order
+						_transitionMeshes.Sort (new TransitionMeshSorter ());
+
+						// when making TMTs.
+						// It should onlt move to the next TMT either;
+						//  the vertex count is to high!
+						//  the bitmask has changed.
+						// We should use as many submeshes as possible, keeping individual index
+						// counts for all of them (a list).
+
+						var meshOutput = new MeshOutput ();
+						int bitmask = _transitionMeshes [0].GetBitMask ();
+					
+
+						foreach (var transitionMesh in _transitionMeshes) {
+								if (transitionMesh.GetBitMask () != bitmask ||
+								    (transitionMesh.VertexCount + meshOutput.VertexCount) > Mesh.VerticesArrayLimit) {
+										_meshOutputs.Add (meshOutput);
+										meshOutput = new MeshOutput ();
+								}
+												
+								var baseIndex = meshOutput.VertexCount;
+								meshOutput.VertexCount += transitionMesh.VertexCount;
+								meshOutput.SortedSources.Add (transitionMesh);
+								meshOutput.Positions.AddRange (transitionMesh.Positions);
+
+								if (transitionMesh.Normals != null) {
+										meshOutput.Normals.AddRange (transitionMesh.Normals);
+								}
+
+								if (transitionMesh.Colors != null) {
+										meshOutput.Colors.AddRange (transitionMesh.Colors);
+								}
+
+								if (transitionMesh.Tangents != null) {
+										meshOutput.Tangents.AddRange (transitionMesh.Tangents);
+								}
+
+								if (transitionMesh.UV != null) {
+										meshOutput.UV.AddRange (transitionMesh.UV);
+								}
+
+								if (transitionMesh.UV1 != null) {
+										meshOutput.UV1.AddRange (transitionMesh.UV1);
+								}
+
+								if (transitionMesh.UV2 != null) {
+										meshOutput.UV2.AddRange (transitionMesh.UV2);
+								}
+
+								var indexes = meshOutput.GetSubMesh (transitionMesh.Material);
+								indexes.Capacity = indexes.Count + transitionMesh.IndexCount;
+								for (var i = 0; i < transitionMesh.IndexCount; i++) {
+										indexes.Add (baseIndex + transitionMesh.Indexes [i]);
+								}
+
+								bitmask = transitionMesh.GetBitMask ();
+						}
+						_meshOutputs.Add (meshOutput);
+				}
+
+				protected sealed override void OnFinished ()
+				{
+						// Callback
+						if (_callback != null)
+								_callback (_hash, _meshOutputs.ToArray ());
+				}
+
+				/// <summary>
+				/// Threaded creation of a TransitionMesh from a MeshInput.
+				/// </summary>
+				/// <param name="meshInput">Mesh input.</param>
+				void CreateTransitionMesh (MeshInput meshInput)
 				{
 						var mesh = meshInput.Mesh;
 						var subMeshCount = mesh.SubMeshCount;
@@ -423,97 +512,13 @@ namespace Hydrogen.Threading.Jobs
 												newTransitionMesh.UV2 [kindex] = uv2 [index];
 										}
 								}
-										
+
 								// Lock the reference array, and add in as it can.
 								lock (_transitionMeshes) {
 										_transitionMeshes.Add (newTransitionMesh);
 								}
 
 						}
-				}
-
-				protected sealed override void ThreadedFunction ()
-				{
-
-						// Empty out preexisting parsed data
-						_transitionMeshes.Clear ();
-						_meshOutputs.Clear ();
-
-						var parallelTasks = new Forker ();
-						foreach (var meshInput in _meshInputs) {
-								var tempInput = meshInput;
-								parallelTasks.Fork (delegate {
-										CreateTransitionMesh (tempInput);
-								});
-						}
-						parallelTasks.Join ();
-
-						// MAKE TASKS
-						_transitionMeshes.Sort (new TransitionMeshSorter ());
-
-						// when making TMTs.
-						// It should onlt move to the next TMT either;
-						//  the vertex count is to high!
-						//  the bitmask has changed.
-						// We should use as many submeshes as possible, keeping individual index
-						// counts for all of them (a list).
-
-						var meshOutput = new MeshOutput ();
-						int bitmask = _transitionMeshes [0].GetBitMask ();
-					
-
-						foreach (var transitionMesh in _transitionMeshes) {
-								if (transitionMesh.GetBitMask () != bitmask ||
-								    (transitionMesh.VertexCount + meshOutput.VertexCount) > Mesh.VerticesArrayLimit) {
-										_meshOutputs.Add (meshOutput);
-										meshOutput = new MeshOutput ();
-								}
-												
-								var baseIndex = meshOutput.VertexCount;
-								meshOutput.VertexCount += transitionMesh.VertexCount;
-								meshOutput.SortedSources.Add (transitionMesh);
-								meshOutput.Positions.AddRange (transitionMesh.Positions);
-
-								if (transitionMesh.Normals != null) {
-										meshOutput.Normals.AddRange (transitionMesh.Normals);
-								}
-
-								if (transitionMesh.Colors != null) {
-										meshOutput.Colors.AddRange (transitionMesh.Colors);
-								}
-
-								if (transitionMesh.Tangents != null) {
-										meshOutput.Tangents.AddRange (transitionMesh.Tangents);
-								}
-
-								if (transitionMesh.UV != null) {
-										meshOutput.UV.AddRange (transitionMesh.UV);
-								}
-
-								if (transitionMesh.UV1 != null) {
-										meshOutput.UV1.AddRange (transitionMesh.UV1);
-								}
-
-								if (transitionMesh.UV2 != null) {
-										meshOutput.UV2.AddRange (transitionMesh.UV2);
-								}
-
-								var indexes = meshOutput.GetSubMesh (transitionMesh.Material);
-								indexes.Capacity = indexes.Count + transitionMesh.IndexCount;
-								for (var i = 0; i < transitionMesh.IndexCount; i++) {
-										indexes.Add (baseIndex + transitionMesh.Indexes [i]);
-								}
-
-								bitmask = transitionMesh.GetBitMask ();
-						}
-						_meshOutputs.Add (meshOutput);
-				}
-
-				protected sealed override void OnFinished ()
-				{
-						// Callback
-						if (_callback != null)
-								_callback (_hash, _meshOutputs.ToArray ());
 				}
 
 				public class BufferedMesh

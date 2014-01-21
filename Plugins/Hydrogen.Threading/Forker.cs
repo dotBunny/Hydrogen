@@ -1,75 +1,139 @@
-﻿using System;
+﻿#region Copyright Notice & License Information
+//
+// Forker.cs
+//
+// Author:
+//       Matthew Davey <matthew.davey@dotbunny.com>
+//       Marc Gravell <marc.gravell@gmail.com>
+//
+// Copyright (c) 2014 dotBunny Inc. (http://www.dotbunny.com)
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+#endregion
+
+using System;
 using System.Threading;
 
 /// <summary>Provides a caller-friendly wrapper around parallel actions.</summary>
 public sealed class Forker
 {
-		/// <summary>Event arguments representing the completion of a parallel action.</summary>
-		public class ParallelEventArgs : EventArgs
-		{
-				private readonly object state;
-				private readonly Exception exception;
-
-				internal ParallelEventArgs (object state, Exception exception)
-				{
-						this.state = state;
-						this.exception = exception;
-				}
-
-				/// <summary>The opaque state object that identifies the action (null otherwise).</summary>
-				public object State { get { return state; } }
-
-				/// <summary>The exception thrown by the parallel action, or null if it completed without exception.</summary>
-				public Exception Exception { get { return exception; } }
-		}
-
-		int running;
-		private readonly object joinLock = new object (), eventLock = new object ();
+		/// <summary>
+		/// The number of items running across the Forker.
+		/// </summary>
+		int _running;
+		/// <summary>
+		/// The join lock object used for safe threading.
+		/// </summary>
+		readonly object _joinLock = new object ();
+		/// <summary>
+		/// The event lock object used for safe threading.
+		/// </summary>
+		readonly object _eventLock = new object ();
+		/// <summary>
+		/// All Complete Event.
+		/// </summary>
+		EventHandler _allComplete;
+		/// <summary>
+		/// Event fired when an item is complete.
+		/// </summary>
+		EventHandler<ParallelEventArgs> _itemComplete;
 
 		/// <summary>Raised when all operations have completed.</summary>
 		public event EventHandler AllComplete {
 				add {
-						lock (eventLock) {
-								allComplete += value;
+						lock (_eventLock) {
+								_allComplete += value;
 						}
 				}
 				remove {
-						lock (eventLock) {
-								allComplete -= value;
+						lock (_eventLock) {
+								_allComplete -= value;
 						}
 				}
 		}
-
-		private EventHandler allComplete;
 
 		/// <summary>Raised when each operation completes.</summary>
 		public event EventHandler<ParallelEventArgs> ItemComplete {
 				add {
-						lock (eventLock) {
-								itemComplete += value;
+						lock (_eventLock) {
+								_itemComplete += value;
 						}
 				}
 				remove {
-						lock (eventLock) {
-								itemComplete -= value;
+						lock (_eventLock) {
+								_itemComplete -= value;
 						}
 				}
 		}
 
-		private EventHandler<ParallelEventArgs> itemComplete;
-
-		private void OnItemComplete (object state, Exception exception)
+		/// <summary>Indicates the number of incomplete operations.</summary>
+		/// <returns>The number of incomplete operations.</returns>
+		public int CountRunning ()
 		{
-				EventHandler<ParallelEventArgs> itemHandler = itemComplete; // don't need to lock
-				if (itemHandler != null)
-						itemHandler (this, new ParallelEventArgs (state, exception));
-				if (Interlocked.Decrement (ref running) == 0) {
-						EventHandler allHandler = allComplete; // don't need to lock
-						if (allHandler != null)
-								allHandler (this, EventArgs.Empty);
-						lock (joinLock) {
-								Monitor.PulseAll (joinLock);
+				return Interlocked.CompareExchange (ref _running, 0, 0);
+		}
+
+		/// <summary>Enqueues an operation.</summary>
+		/// <param name="action">The operation to perform.</param>
+		/// <returns>The current instance (for fluent API).</returns>
+		public Forker Fork (ThreadStart action)
+		{
+				return Fork (action, null);
+		}
+
+		/// <summary>Enqueues an operation.</summary>
+		/// <param name="action">The operation to perform.</param>
+		/// <param name="state">An opaque object, allowing the caller to identify operations.</param>
+		/// <returns>The current instance (for fluent API).</returns>
+		public Forker Fork (ThreadStart action, object state)
+		{
+				if (action == null)
+						throw new ArgumentNullException ("action");
+				Interlocked.Increment (ref _running);
+				ThreadPool.QueueUserWorkItem (delegate {
+						Exception exception = null;
+						try {
+								action ();
+						} catch (Exception ex) {
+								exception = ex;
 						}
+						OnItemComplete (state, exception);
+				});
+				return this;
+		}
+
+		/// <summary>Waits for all operations to complete.</summary>
+		public void Join ()
+		{
+				Join (-1);
+		}
+
+		/// <summary>Waits (with timeout) for all operations to complete.</summary>
+		/// <returns>Whether all operations had completed before the timeout.</returns>
+		public bool Join (int millisecondsTimeout)
+		{
+				lock (_joinLock) {
+						if (CountRunning () == 0)
+								return true;
+						Thread.SpinWait (1); // try our luck...
+						return (CountRunning () == 0) ||
+						Monitor.Wait (_joinLock, millisecondsTimeout);
 				}
 		}
 
@@ -93,58 +157,37 @@ public sealed class Forker
 				return this;
 		}
 
-		/// <summary>Waits for all operations to complete.</summary>
-		public void Join ()
+		void OnItemComplete (object state, Exception exception)
 		{
-				Join (-1);
-		}
-
-		/// <summary>Waits (with timeout) for all operations to complete.</summary>
-		/// <returns>Whether all operations had completed before the timeout.</returns>
-		public bool Join (int millisecondsTimeout)
-		{
-				lock (joinLock) {
-						if (CountRunning () == 0)
-								return true;
-						Thread.SpinWait (1); // try our luck...
-						return (CountRunning () == 0) ||
-						Monitor.Wait (joinLock, millisecondsTimeout);
+				EventHandler<ParallelEventArgs> itemHandler = _itemComplete; // don't need to lock
+				if (itemHandler != null)
+						itemHandler (this, new ParallelEventArgs (state, exception));
+				if (Interlocked.Decrement (ref _running) == 0) {
+						EventHandler allHandler = _allComplete; // don't need to lock
+						if (allHandler != null)
+								allHandler (this, EventArgs.Empty);
+						lock (_joinLock) {
+								Monitor.PulseAll (_joinLock);
+						}
 				}
 		}
 
-		/// <summary>Indicates the number of incomplete operations.</summary>
-		/// <returns>The number of incomplete operations.</returns>
-		public int CountRunning ()
+		/// <summary>Event arguments representing the completion of a parallel action.</summary>
+		public class ParallelEventArgs : EventArgs
 		{
-				return Interlocked.CompareExchange (ref running, 0, 0);
-		}
+				readonly object _state;
+				readonly Exception _exception;
 
-		/// <summary>Enqueues an operation.</summary>
-		/// <param name="action">The operation to perform.</param>
-		/// <returns>The current instance (for fluent API).</returns>
-		public Forker Fork (ThreadStart action)
-		{
-				return Fork (action, null);
-		}
+				internal ParallelEventArgs (object state, Exception exception)
+				{
+						_state = state;
+						_exception = exception;
+				}
 
-		/// <summary>Enqueues an operation.</summary>
-		/// <param name="action">The operation to perform.</param>
-		/// <param name="state">An opaque object, allowing the caller to identify operations.</param>
-		/// <returns>The current instance (for fluent API).</returns>
-		public Forker Fork (ThreadStart action, object state)
-		{
-				if (action == null)
-						throw new ArgumentNullException ("action");
-				Interlocked.Increment (ref running);
-				ThreadPool.QueueUserWorkItem (delegate {
-						Exception exception = null;
-						try {
-								action ();
-						} catch (Exception ex) {
-								exception = ex;
-						}
-						OnItemComplete (state, exception);
-				});
-				return this;
+				/// <summary>The opaque state object that identifies the action (null otherwise).</summary>
+				public object State { get { return _state; } }
+
+				/// <summary>The exception thrown by the parallel action, or null if it completed without exception.</summary>
+				public Exception Exception { get { return _exception; } }
 		}
 }
