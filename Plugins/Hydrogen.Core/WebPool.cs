@@ -59,6 +59,7 @@ namespace Hydrogen.Core
 				/// </summary>
 				/// <param name="URI">The Target URI</param>
 				/// <param name="formStringData">A Dictionary<string,string> of Form Data</param>
+				/// <returns>Call Hashcode</returns>
 				public void Form (string URI, Dictionary<string, string> formStringData)
 				{
 						Form (URI, formStringData, null, null, null);
@@ -72,6 +73,7 @@ namespace Hydrogen.Core
 				/// <param name="formBinaryData">A custom binary dataset. Useful for uploading pictures.</param>
 				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
+				/// <returns>Call Hashcode</returns>
 				public void Form (string URI, Dictionary<string, string> formStringData, FormBinaryData[] formBinaryData, string cookie, System.Action<int, Hashtable, string> callback)
 				{
 						if (!_initialized) {
@@ -87,10 +89,11 @@ namespace Hydrogen.Core
 				/// <summary>
 				/// HTTP GET Request to URI
 				/// </summary>
-				/// <param name="URI">The Target URI</param>
-				public void GET (string URI)
+				/// <param name="URI">The Target URI</param>*/
+				/// <returns>Call Hashcode</returns>
+				public int GET (string URI)
 				{
-						GET (URI, null, null);
+						return GET (URI, null, null);
 				}
 
 				/// <summary>
@@ -98,9 +101,10 @@ namespace Hydrogen.Core
 				/// </summary>
 				/// <param name="URI">The Target URI</param>
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
-				public void GET (string URI, System.Action<int, Hashtable, string> callback)
+				/// <returns>Call Hashcode</returns>
+				public int GET (string URI, System.Action<int, Hashtable, string> callback)
 				{
-						GET (URI, null, callback);
+						return GET (URI, null, callback);
 				}
 
 				/// <summary>
@@ -109,16 +113,17 @@ namespace Hydrogen.Core
 				/// <param name="URI">The Target URI</param>
 				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
-				public void GET (string URI, string cookie, System.Action<int, Hashtable, string> callback)
+				/// <returns>Call Hashcode</returns>
+				public int GET (string URI, string cookie, System.Action<int, Hashtable, string> callback)
 				{
 						if (!_initialized) {
 								Debug.LogError ("WebPool has not finished initializing ... " +
 								"Did you call this function without having either a WebPool or ObjectPool component " +
 								"already on a MonoBehaviour?");
-								return;
+								return 0;
 						}
 						GameObject go = _poolReference.Spawn (_poolID);
-						go.GetComponent<WebPoolWorker> ().GET (URI, cookie, callback);
+						return go.GetComponent<WebPoolWorker> ().GET (URI, cookie, callback);
 				}
 
 				/// <summary>
@@ -127,6 +132,7 @@ namespace Hydrogen.Core
 				/// <param name="URI">The Target URI</param>
 				/// <param name="contentType">The Content-Type Header</param>
 				/// <param name="payload">The data to be posted.</param>
+				/// <returns>Call Hashcode</returns>
 				public void POST (string URI, string contentType, string payload)
 				{
 						POST (URI, contentType, payload, null, null);
@@ -140,6 +146,7 @@ namespace Hydrogen.Core
 				/// <param name="payload">The data to be posted.</param>
 				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
+				/// <returns>Call Hashcode</returns> 
 				public void POST (string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
 				{
 						if (!_initialized) {
