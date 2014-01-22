@@ -253,6 +253,8 @@ namespace Hydrogen.Threading.Jobs
 						// Create Materials
 						newMeshInput.Materials = MaterialsToMaterialDataHashCodes (renderer.sharedMaterials);
 
+						// Determine if we've got a special case scenario that requires some extra work.
+						newMeshInput.ScaleInverted |= meshFilter.gameObject.transform.localScale.x < 0 && meshFilter.gameObject.transform.localScale.y < 0 && meshFilter.gameObject.transform.localScale.z < 0;
 						newMeshInput.WorldMatrix = worldMatrix;
 
 						return newMeshInput;
@@ -336,7 +338,7 @@ namespace Hydrogen.Threading.Jobs
 						// Recalculate mesh's bounds for fun.
 						meshObject.Mesh.RecalculateBounds ();
 
-
+					
 						// Return our processed object.
 						return meshObject;
 				}
@@ -457,6 +459,7 @@ namespace Hydrogen.Threading.Jobs
 								var baseIndex = meshOutput.VertexCount;
 								meshOutput.VertexCount += transitionMesh.VertexCount;
 								meshOutput.SortedSources.Add (transitionMesh);
+
 								meshOutput.Positions.AddRange (transitionMesh.Positions);
 
 								if (transitionMesh.Normals != null) {
@@ -550,28 +553,43 @@ namespace Hydrogen.Threading.Jobs
 								newTransitionMesh.Positions = new Vector3[newTransitionMesh.VertexCount];
 								newTransitionMesh.Indexes = new int[newTransitionMesh.IndexCount];
 
-								for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
-										var index = indexes [j];
-										var kindex = transitionMeshCounter [index];
-										newTransitionMesh.Indexes [j] = kindex;
+								if (meshInput.ScaleInverted) {
+										// Reverse Winding Order (0,2,1)
+										for (var j = 0; j < newTransitionMesh.IndexCount; j += 3) {
+												newTransitionMesh.Indexes [j] = transitionMeshCounter [indexes [j]];
+												newTransitionMesh.Indexes [j + 1] = transitionMeshCounter [indexes [j + 2]];
+												newTransitionMesh.Indexes [j + 2] = transitionMeshCounter [indexes [j + 1]];
+										}
+								} else {
+										// Normal Winding Order (0,1,2)
+										for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
+												newTransitionMesh.Indexes [j] = transitionMeshCounter [indexes [j]];
+										}
 								}
 
 								// Handle Vertices
 								for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 										var index = indexes [j];
-										var kindex = transitionMeshCounter [index];
-										var vertex = vertices [index];
-										newTransitionMesh.Positions [kindex] = meshInput.WorldMatrix.MultiplyPoint (vertex);
+										newTransitionMesh.Positions [transitionMeshCounter [index]] = 
+												meshInput.WorldMatrix.MultiplyPoint (vertices [index]);
 								}
 
 								// Handle Normals
 								if (mesh.Normals != null && mesh.Normals.Length > 0) {
 										newTransitionMesh.Normals = new Vector3[newTransitionMesh.VertexCount];
-										for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
-												var index = indexes [j];
-												var kindex = transitionMeshCounter [index];
-												var normal = normals [index];
-												newTransitionMesh.Normals [kindex] = inversedTransposedMatrix.MultiplyVector (normal).normalized;
+
+										if (meshInput.ScaleInverted) {
+												for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
+														var index = indexes [j];
+														newTransitionMesh.Normals [transitionMeshCounter [index]] = 
+																inversedTransposedMatrix.MultiplyVector (normals [index]).normalized;
+												}
+										} else {
+												for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
+														var index = indexes [j];
+														newTransitionMesh.Normals [transitionMeshCounter [index]] = 
+																inversedTransposedMatrix.MultiplyVector (normals [index]).normalized;
+												}
 										}
 								}
 
@@ -580,9 +598,8 @@ namespace Hydrogen.Threading.Jobs
 										newTransitionMesh.Colors = new Color[newTransitionMesh.VertexCount];
 										for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 												var index = indexes [j];
-												var kindex = transitionMeshCounter [index];
-												var Color = Colors [index];
-												newTransitionMesh.Colors [kindex] = Color;
+												newTransitionMesh.Colors [transitionMeshCounter [index]] = 
+														Colors [index];
 										}
 								}
 
@@ -591,22 +608,20 @@ namespace Hydrogen.Threading.Jobs
 										newTransitionMesh.Tangents = new Vector4[newTransitionMesh.VertexCount];
 										for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 												var index = indexes [j];
-												var kindex = transitionMeshCounter [index];
 												var p = tangents [index];
 												var w = p.w;
 												p = inversedTransposedMatrix.MultiplyVector (p);
-												newTransitionMesh.Tangents [kindex] = new Vector4 (p.x, p.y, p.z, w);
+												newTransitionMesh.Tangents [transitionMeshCounter [index]] = 
+														new Vector4 (p.x, p.y, p.z, w);
 										}
 								}
-
 
 								// Handle UVs
 								if (mesh.UV != null && mesh.UV.Length > 0) {
 										newTransitionMesh.UV = new Vector2[newTransitionMesh.VertexCount];
 										for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 												var index = indexes [j];
-												var kindex = transitionMeshCounter [index];
-												newTransitionMesh.UV [kindex] = uv [index];
+												newTransitionMesh.UV [transitionMeshCounter [index]] = uv [index];
 										}
 								}
 
@@ -615,8 +630,7 @@ namespace Hydrogen.Threading.Jobs
 										newTransitionMesh.UV1 = new Vector2[newTransitionMesh.VertexCount];
 										for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 												var index = indexes [j];
-												var kindex = transitionMeshCounter [index];
-												newTransitionMesh.UV1 [kindex] = uv1 [index];
+												newTransitionMesh.UV1 [transitionMeshCounter [index]] = uv1 [index];
 										}
 								}
 
@@ -625,8 +639,7 @@ namespace Hydrogen.Threading.Jobs
 										newTransitionMesh.UV2 = new Vector2[newTransitionMesh.VertexCount];
 										for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 												var index = indexes [j];
-												var kindex = transitionMeshCounter [index];
-												newTransitionMesh.UV2 [kindex] = uv2 [index];
+												newTransitionMesh.UV2 [transitionMeshCounter [index]] = uv2 [index];
 										}
 								}
 
@@ -634,7 +647,6 @@ namespace Hydrogen.Threading.Jobs
 								lock (_transitionMeshes) {
 										_transitionMeshes.Add (newTransitionMesh);
 								}
-
 						}
 				}
 
@@ -667,6 +679,7 @@ namespace Hydrogen.Threading.Jobs
 
 				public class MeshInput
 				{
+						public bool ScaleInverted;
 						public BufferedMesh Mesh;
 						public Matrix4x4 WorldMatrix;
 						public int[] Materials;
