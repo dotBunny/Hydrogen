@@ -253,8 +253,22 @@ namespace Hydrogen.Threading.Jobs
 						// Create Materials
 						newMeshInput.Materials = MaterialsToMaterialDataHashCodes (renderer.sharedMaterials);
 
-						// Determine if we've got a special case scenario that requires some extra work.
-						newMeshInput.ScaleInverted |= meshFilter.gameObject.transform.localScale.x < 0 && meshFilter.gameObject.transform.localScale.y < 0 && meshFilter.gameObject.transform.localScale.z < 0;
+
+						// Determine Inversion of Scale
+						// Don't Scale (NNP, PPP, PNN, NPN)
+						Vector3 scaleTest = meshFilter.gameObject.transform.localScale;
+
+						 
+						bool invertedX = (scaleTest.x < 0f); 
+						bool invertedY = (scaleTest.y < 0f);
+						bool invertedZ = (scaleTest.z < 0f);
+
+						if ((invertedX && invertedY && invertedZ) ||
+						    (invertedX && !invertedY && !invertedZ) ||
+						    (!invertedX && invertedY && !invertedZ) ||
+						    (!invertedX && !invertedY && invertedZ)) {
+								newMeshInput.ScaleInverted = true;
+						} 
 						newMeshInput.WorldMatrix = worldMatrix;
 
 						return newMeshInput;
@@ -578,18 +592,10 @@ namespace Hydrogen.Threading.Jobs
 								if (mesh.Normals != null && mesh.Normals.Length > 0) {
 										newTransitionMesh.Normals = new Vector3[newTransitionMesh.VertexCount];
 
-										if (meshInput.ScaleInverted) {
-												for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
-														var index = indexes [j];
-														newTransitionMesh.Normals [transitionMeshCounter [index]] = 
+										for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
+												var index = indexes [j];
+												newTransitionMesh.Normals [transitionMeshCounter [index]] = 
 																inversedTransposedMatrix.MultiplyVector (normals [index]).normalized;
-												}
-										} else {
-												for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
-														var index = indexes [j];
-														newTransitionMesh.Normals [transitionMeshCounter [index]] = 
-																inversedTransposedMatrix.MultiplyVector (normals [index]).normalized;
-												}
 										}
 								}
 
