@@ -153,8 +153,6 @@ namespace Hydrogen.Threading.Jobs
 				/// </summary>
 				/// <remarks>This can only be used from within Unity's main thread.</remarks>
 				/// <returns><c>true</c>, if mesh was added, <c>false</c> otherwise.</returns>
-
-
 				public bool AddMesh (MeshFilter meshFilter, Renderer renderer, Matrix4x4 worldMatrix)
 				{					
 						return AddMesh (CreateMeshInput (meshFilter, renderer, worldMatrix));
@@ -459,6 +457,15 @@ namespace Hydrogen.Threading.Jobs
 						return RemoveMesh (CreateMeshInput (meshFilter, renderer, worldMatrix));
 				}
 
+				/// <summary>
+				/// Removes a MeshInput from the MeshInput list to be processed.
+				/// </summary>
+				/// <remarks>
+				/// This is useful if you are caching MeshInputs for future use, and just want to remove a mesh as its 
+				/// no longer being combined. Open worlds may find this very useful.
+				/// </remarks>
+				/// <returns><c>true</c>, if the MeshInput was removed, <c>false</c> otherwise.</returns>
+				/// <param name="meshInput">The MeshInput to be removed.</param>
 				public bool RemoveMesh (MeshInput meshInput)
 				{
 						if (_meshInputs.Contains (meshInput)) {
@@ -469,6 +476,13 @@ namespace Hydrogen.Threading.Jobs
 
 				}
 
+				/// <summary>
+				/// This is the main workhorse method which runs in another thread.
+				/// </summary>
+				/// <remarks>
+				/// Takes the MeshInput(s) and converts them to TransitionMeshes in parallel. It then creates optimized 
+				/// MeshOutput(s) for use later or through the callback.
+				/// </remarks>
 				protected sealed override void ThreadedFunction ()
 				{
 						// Empty out preexisting parsed data
@@ -487,13 +501,6 @@ namespace Hydrogen.Threading.Jobs
 
 						// Sort the meshes in order
 						_transitionMeshes.Sort (new TransitionMeshSorter ());
-
-						// when making TMTs.
-						// It should onlt move to the next TMT either;
-						//  the vertex count is to high!
-						//  the bitmask has changed.
-						// We should use as many submeshes as possible, keeping individual index
-						// counts for all of them (a list).
 
 						var meshOutput = new MeshOutput ();
 						int bitmask = _transitionMeshes [0].GetBitMask ();
@@ -547,6 +554,11 @@ namespace Hydrogen.Threading.Jobs
 						_meshOutputs.Add (meshOutput);
 				}
 
+				/// <summary>
+				/// Executed when the ThreadedFunction is finished (sort of), sending our MeshOutput(s) back to Unity 
+				/// for our coroutine to use.
+				/// </summary>
+				/// <remarks>Can use Unity API.</remarks>
 				protected sealed override void OnFinished ()
 				{
 						// Callback
@@ -555,7 +567,7 @@ namespace Hydrogen.Threading.Jobs
 				}
 
 				/// <summary>
-				/// Threaded creation of a TransitionMesh from a MeshInput.
+				/// Thread safe creation of a TransitionMesh from a MeshInput.
 				/// </summary>
 				/// <param name="meshInput">Mesh input.</param>
 				void CreateTransitionMesh (MeshInput meshInput)
@@ -693,47 +705,123 @@ namespace Hydrogen.Threading.Jobs
 						}
 				}
 
+				/// <summary>
+				/// A thread safe representation of a Mesh.
+				/// </summary>
 				public class BufferedMesh
 				{
+						/// <summary>
+						/// Mesh's Colors Arary
+						/// </summary>
 						public Color[] Colors;
+						/// <summary>
+						/// Mesh's Indexes List
+						/// </summary>
 						public List<int[]> Indexes = new List<int[]> ();
+						/// <summary>
+						/// Mesh's Name
+						/// </summary>
 						public String Name;
+						/// <summary>
+						/// Mesh's Normal Array
+						/// </summary>
 						public Vector3[] Normals;
+						/// <summary>
+						/// Mesh's Tangents Array
+						/// </summary>
 						public Vector4[] Tangents;
+						/// <summary>
+						/// Mesh's Topology Per SubMesh
+						/// </summary>
 						public MeshTopology[] Topology;
+						/// <summary>
+						/// Mesh's UV Array
+						/// </summary>
 						public Vector2[] UV;
+						/// <summary>
+						/// Mesh's UV1 Array
+						/// </summary>
 						public Vector2[] UV1;
+						/// <summary>
+						/// Mesh's UV2 Array
+						/// </summary>
 						public Vector2[] UV2;
+						/// <summary>
+						/// Mesh's Vertex Array
+						/// </summary>
 						public Vector3[] Vertices;
 
+						/// <summary>
+						/// Gets the number of Vertices present in the BufferedMesh.
+						/// </summary>
+						/// <value>The Vertex Count.</value>
 						public int VertexCount {
 								get { return Vertices.Length; }
 						}
 
+						/// <summary>
+						/// Gets the number of SubMeshes present in the BufferedMesh.
+						/// </summary>
+						/// <value>The SubMesh Count.</value>
 						public int SubMeshCount {
 								get { return Indexes.Count; }
 						}
 
+						/// <summary>
+						/// Gets the Indices in the BufferedMesh.
+						/// </summary>
+						/// <returns>The indices array at index of the Indexes list of the BufferedMesh.</returns>
+						/// <param name="targetIndex">Target Index.</param>
 						public int[] GetIndices (int targetIndex)
 						{
 								return Indexes [targetIndex];
 						}
 				}
 
+				/// <summary>
+				/// Mesh Input Format
+				/// </summary>
 				public class MeshInput
 				{
+						/// <summary>
+						/// Was the scale of the Mesh inverted? Therefore needs rewinding!
+						/// </summary>
 						public bool ScaleInverted;
+						/// <summary>
+						/// Thread safe representation of a UnityEngine.Mesh.
+						/// </summary>
 						public BufferedMesh Mesh;
+						/// <summary>
+						/// The provided WorldMatrix.
+						/// </summary>
 						public Matrix4x4 WorldMatrix;
+						/// <summary>
+						/// An array of DataHashCodes ordered for the BufferedMesh.
+						/// </summary>
 						public int[] Materials;
 				}
 
+				/// <summary>
+				/// Mesh Object Format
+				/// </summary>
+				/// <remarks>
+				/// Easy to reference object for Unity to use.
+				/// </remarks>
 				public class MeshObject
 				{
+						/// <summary>
+						/// The created UnityEngine.Mesh
+						/// </summary>
 						public UnityEngine.Mesh Mesh;
+						/// <summary>
+						/// The UnityEngine.Material(s) ordered for the renderer.
+						/// </summary>
 						public UnityEngine.Material[] Materials;
 				}
 
+				/// <summary>
+				/// Mesh Output Format
+				/// </summary>
 				public class MeshOutput
 				{
 						public List<TransitionMesh> SortedSources = new List<TransitionMesh> ();
