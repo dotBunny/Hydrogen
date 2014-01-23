@@ -43,8 +43,8 @@ namespace Hydrogen
 
 						if (material.mainTexture != null) {
 								longName += material.mainTexture.name +
-								material.mainTextureOffset.ToString () +
-								material.mainTextureScale.ToString ();
+								material.mainTextureOffset +
+								material.mainTextureScale;
 						}
 
 						if (material.shader != null) {

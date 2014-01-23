@@ -25,7 +25,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System.Threading;
 
 #endregion
 using System;
@@ -111,35 +110,42 @@ namespace Hydrogen.Threading.Jobs
 				/// Add a Material to the Material reference Dictionary.
 				/// </summary>
 				/// <remarks>This can only be used from within Unity's main thread.</remarks>
-				/// <returns><c>true</c>, if Material was added, <c>false</c> otherwise.</returns>
+				/// <returns>The DataHashCode</returns>
 				/// <param name="material">The UnityEngine.Material to be added.</param>
-				public bool AddMaterial (UnityEngine.Material material)
+				public int AddMaterial (UnityEngine.Material material)
 				{
-						// Cache our generating of the lookup code.
-						int check = material.GetDataHashCode ();
+						return AddMaterial (material.GetDataHashCode (), material);
 
-						// Check if we have an entry already, and if we do not add it
-						if (!_materialLookup.ContainsKey (check)) {
-								_materialLookup.Add (check, material);
-								return true;
-						}
-						return false;
 				}
 
 				/// <summary>
 				/// Add a Material to the Material reference Dictionary with a specific code.
 				/// </summary>
 				/// <remarks>This can only be used from within Unity's main thread.</remarks>
-				/// <returns><c>true</c>, if Material was added, <c>false</c> otherwise.</returns>
+				/// <returns>The DataHashCode</returns>
 				/// <param name="code">The code to store as the reference for the Material.</param>
 				/// <param name="material">The UnityEngine.Material to be added.</param>
-				public bool AddMaterial (int code, UnityEngine.Material material)
+				public int AddMaterial (int code, UnityEngine.Material material)
 				{
 						if (!_materialLookup.ContainsKey (code)) {
 								_materialLookup.Add (code, material);
-								return true;
 						}
-						return false;
+						return code;
+				}
+
+				/// <summary>
+				/// Add an array of Material(s) to the reference Dictionary.
+				/// </summary>
+				/// <returns>The DataHashCode(s).</returns>
+				/// <param name="materials">The UnityEngine.Material(s) to be added..</param>
+				public int[] AddMaterials (UnityEngine.Material[] materials)
+				{
+						var hashcodes = new int[materials.Length];
+						for (var x = 0; x < materials.Length; x++) {
+								// Add if we need it
+								hashcodes [x] = AddMaterial (materials [x].GetDataHashCode (), materials [x]);
+						}
+						return hashcodes;
 				}
 
 				/// <summary>
@@ -147,9 +153,8 @@ namespace Hydrogen.Threading.Jobs
 				/// </summary>
 				/// <remarks>This can only be used from within Unity's main thread.</remarks>
 				/// <returns><c>true</c>, if mesh was added, <c>false</c> otherwise.</returns>
-				/// <param name="meshFilter">The Mesh's MeshFilter.</param>
-				/// <param name="renderer">The Mesh's Renderer.</param>
-				/// <param name="worldMatrix">The Mesh's World Matrix</param>
+
+
 				public bool AddMesh (MeshFilter meshFilter, Renderer renderer, Matrix4x4 worldMatrix)
 				{					
 						return AddMesh (CreateMeshInput (meshFilter, renderer, worldMatrix));
@@ -251,7 +256,7 @@ namespace Hydrogen.Threading.Jobs
 						}
 
 						// Create Materials
-						newMeshInput.Materials = MaterialsToMaterialDataHashCodes (renderer.sharedMaterials);
+						newMeshInput.Materials = AddMaterials (renderer.sharedMaterials);
 
 
 						// Determine Inversion of Scale
@@ -296,18 +301,29 @@ namespace Hydrogen.Threading.Jobs
 						return meshInputs;
 				}
 
+				/// <summary>
+				/// Creates a MeshObject from the MeshOutput (Instanced Materials).
+				/// </summary>
+				/// <returns>The created MeshObject.</returns>
+				/// <param name="meshOutput">The source MeshOutput to use in creating the MeshObject.</param>
 				public MeshObject CreateMeshObject (MeshOutput meshOutput)
 				{
 						return CreateMeshObject (meshOutput, true);
 				}
 
+				/// <summary>
+				/// Creates a MeshObject from the passed MeshOutput.
+				/// </summary>
+				/// <returns>The created MeshObject.</returns>
+				/// <param name="meshOutput">The source MeshOutput to use in creating the MeshObject.</param>
+				/// <param name="instanceMaterials">If set to <c>true</c> materials will be instanced.</param>
 				public MeshObject CreateMeshObject (MeshOutput meshOutput, bool instanceMaterials)
 				{
 						var meshObject = new MeshObject ();
 
 						meshObject.Materials = instanceMaterials ? 
-								MaterialDataHashCodesToMaterialInstances (meshOutput.Materials.ToArray ()) : 
-								MaterialDataHashCodesToMaterials (meshOutput.Materials.ToArray ());
+								GetMaterialInstances (meshOutput.Materials.ToArray ()) : 
+								GetMaterials (meshOutput.Materials.ToArray ());
 
 						meshObject.Mesh = new UnityEngine.Mesh ();
 						meshObject.Mesh.vertices = meshOutput.Positions.ToArray ();
@@ -357,11 +373,22 @@ namespace Hydrogen.Threading.Jobs
 						return meshObject;
 				}
 
+				/// <summary>
+				/// Creates MeshObject(s) from the passed MeshOutput(s) (Instanced Materials).
+				/// </summary>
+				/// <returns>The created MeshObject(s).</returns>
+				/// <param name="meshOutputs">The source MeshOutput(s) to use in creating the MeshObject(s).</param>
 				public MeshObject[] CreateMeshObjects (MeshOutput[] meshOutputs)
 				{
 						return CreateMeshObjects (meshOutputs, true);
 				}
 
+				/// <summary>
+				/// Creates MeshObject(s) from the passed MeshOutput(s).
+				/// </summary>
+				/// <returns>The created MeshObject(s).</returns>
+				/// <param name="meshOutputs">The source MeshOutput(s) to use in creating the MeshObject(s).</param>
+				/// <param name="instanceMaterials">If set to <c>true</c> materials will be instanced.</param>
 				public MeshObject[] CreateMeshObjects (MeshOutput[] meshOutputs, bool instanceMaterials)
 				{
 						MeshObject[] meshObjects = new MeshObject[meshOutputs.Length];
@@ -371,7 +398,12 @@ namespace Hydrogen.Threading.Jobs
 						return meshObjects;
 				}
 
-				public UnityEngine.Material[] MaterialDataHashCodesToMaterials (int[] codes)
+				/// <summary>
+				/// Gets an array of Materials.
+				/// </summary>
+				/// <returns>The referenced Materials.</returns>
+				/// <param name="codes">An array of Material DataHashCodes.</param>
+				public UnityEngine.Material[] GetMaterials (int[] codes)
 				{
 						var materials = new UnityEngine.Material[codes.Length];
 						for (int x = 0; x < codes.Length; x++) {
@@ -380,7 +412,12 @@ namespace Hydrogen.Threading.Jobs
 						return materials;
 				}
 
-				public UnityEngine.Material[] MaterialDataHashCodesToMaterialInstances (int[] codes)
+				/// <summary>
+				/// Gets an array of Materials (Instanced).
+				/// </summary>
+				/// <returns>The referenced Materials instanced.</returns>
+				/// <param name="codes">An array of Material DataHashCodes.</param>
+				public UnityEngine.Material[] GetMaterialInstances (int[] codes)
 				{
 						var materials = new UnityEngine.Material[codes.Length];
 						for (int x = 0; x < codes.Length; x++) {
@@ -390,23 +427,11 @@ namespace Hydrogen.Threading.Jobs
 						return materials;
 				}
 
-				public int[] MaterialsToMaterialDataHashCodes (UnityEngine.Material[] materials)
-				{
-
-						var hashcodes = new int[materials.Length];
-						for (var x = 0; x < materials.Length; x++) {
-								// Generate Code
-								int newCode = materials [x].GetDataHashCode ();
-
-								// Add if we need it
-								AddMaterial (newCode, materials [x]);
-
-								// Assign Code
-								hashcodes [x] = newCode;
-						}
-						return hashcodes;
-				}
-
+				/// <summary>
+				/// Remove a UnityEngine.Material from the Material reference Dictionary.
+				/// </summary>
+				/// <returns><c>true</c>, if UnityEngine.Material was removed, <c>false</c> otherwise.</returns>
+				/// <param name="material">The target UnityEngine.Material to be removed.</param>
 				public bool RemoveMaterial (UnityEngine.Material material)
 				{
 						int check = material.GetDataHashCode ();
@@ -417,10 +442,21 @@ namespace Hydrogen.Threading.Jobs
 						return false;
 				}
 
-				public bool RemoveMesh (MeshFilter meshFilter, Renderer renderer, Matrix4x4 localToWorldMatrix)
+				/// <summary>
+				/// Removes a Unity based Mesh from the MeshInput list to be processed.
+				/// </summary>
+				/// <remarks>
+				/// This is useful if you are caching MeshInputs for future use, and just want to remove a mesh as its 
+				/// no longer being combined. Open worlds may find this very useful. This can only be used from within 
+				/// Unity's main thread.
+				/// </remarks>
+				/// <returns><c>true</c>, if the Unity based Mesh was removed, <c>false</c> otherwise.</returns>
+				/// <param name="meshFilter">The Mesh's MeshFilter.</param>
+				/// <param name="renderer">The Mesh's Renderer.</param>
+				/// <param name="worldMatrix">The Mesh's World Matrix</param>
+				public bool RemoveMesh (MeshFilter meshFilter, Renderer renderer, Matrix4x4 worldMatrix)
 				{
-						MeshInput meshInput = CreateMeshInput (meshFilter, renderer, localToWorldMatrix);
-						return RemoveMesh (meshInput);
+						return RemoveMesh (CreateMeshInput (meshFilter, renderer, worldMatrix));
 				}
 
 				public bool RemoveMesh (MeshInput meshInput)
