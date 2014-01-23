@@ -11,18 +11,22 @@ using System.Collections.Generic;
 public class hMeshCombiner : MonoBehaviour
 {
 		/// <summary>
+		/// An instance of the MeshCombiner.
+		/// </summary>
+		Hydrogen.Threading.Jobs.MeshCombiner Combiner = new Hydrogen.Threading.Jobs.MeshCombiner ();
+		/// <summary>
 		/// This is used in our example to throttle things a bit when accessing Unity objects.
 		/// </summary>
-		/// <remakrs>It seems at 180, its a nice sweet spot for these meshes in this scene.</remarks>
+		/// <remarks>It seems at 180, its a nice sweet spot for the meshes in our example scene.</remarks>
 		public int ThrottleRate = 180;
-		Hydrogen.Threading.Jobs.MeshCombiner Combiner = new Hydrogen.Threading.Jobs.MeshCombiner ();
-		Transform _parentTransform;
-		GameObject _rootObject;
-		bool _threadRunning;
 		/// <summary>
 		/// Should this input manager survive scene switches?
 		/// </summary>
 		public bool Persistent = true;
+		/// <summary>
+		/// An internal reference to where created meshes should be parented.
+		/// </summary>
+		Transform _parentTransform;
 		/// <summary>
 		/// Internal fail safe to maintain instance across threads.
 		/// </summary>
@@ -37,6 +41,10 @@ public class hMeshCombiner : MonoBehaviour
 		/// Internal reference to the static instance of the Mesh Combiner component.
 		/// </summary>
 		static volatile hMeshCombiner _staticInstance;
+		/// <summary>
+		/// Is the MeshCombiner thread running?
+		/// </summary>
+		bool _threadRunning;
 
 		/// <summary>
 		/// Gets the input manager instance, creating one if none is found.
@@ -71,34 +79,57 @@ public class hMeshCombiner : MonoBehaviour
 		{
 				return _staticInstance != null;
 		}
-
-		/// <summary>
-		/// Unity's Awake Event
-		/// </summary>
-		protected void Awake ()
-		{
-				// Make sure to do the object pools normal initialization
-
-				// Should this gameObject be kept around :) I think so.
-				if (Persistent)
-						DontDestroyOnLoad (gameObject);
-		}
 		// This is an implementation that can be just thrown meshes and it does the rest.
 		// do i make meshcombines per instance ... probably... so you can keep throwing stuff into it.
 		// will mention the abilityto store stuff and use manually later
 		// TODO Make these incubated and run in their own coroutines (need to store the parent transform for later? dictionary hash/index0
-		public void Combine (GameObject rootObject, Transform outputParent, bool disableRootObject)
+		/// <summary>
+		/// Combine all active meshes under the root object.
+		/// </summary>
+		/// <param name="rootObject">The "root" GameObject.</param>
+		/// <param name="disableRootObject">
+		/// If set to <c>true</c> disable root object (and its children) after iterating
+		/// through its children..
+		/// </param>
+		public void Combine (GameObject rootObject, bool disableRootObject)
 		{
-				_rootObject = rootObject;
-				_parentTransform = outputParent;
-
 				// Do it!
-				StartCoroutine (AddMeshes ());
+				StartCoroutine (AddMeshes (rootObject));
 
 				// Disable our example dat
 				if (disableRootObject) {
-						_rootObject.SetActive (false);
+						rootObject.SetActive (false);
 				}
+		}
+
+		/// <summary>
+		/// Combine all active meshes under the root object.
+		/// </summary>
+		/// <param name="rootObject">The "root" GameObject.</param>
+		/// <param name="outputParent">Sets the output parent transform.</param>
+		/// <param name="disableRootObject">
+		/// If set to <c>true</c> disable root object (and its children) after iterating
+		/// through its children..
+		/// </param>
+		public void Combine (GameObject rootObject, Transform outputParent, bool disableRootObject)
+		{
+				_parentTransform = outputParent;
+				Combine (rootObject, disableRootObject);
+		}
+
+		/// <summary>
+		/// This function is called in the example after the MeshCombiner has processed the meshes, it starts a Coroutine 
+		/// to create the actual meshes based on the flat data. This is the most optimal way to do this sadly as we cannot
+		/// create or touch Unity based meshes outside of the main thread.
+		/// </summary>
+		/// <param name="hash">Instance Hash.</param>
+		/// <param name="meshOutputs">.</param>
+		public void ThreadCallback (int hash, Hydrogen.Threading.Jobs.MeshCombiner.MeshOutput[] meshOutputs)
+		{
+				// This is just a dirty way to see if we can squeeze jsut a bit more performance out of Unity when 
+				// making all of the meshes for us (instead of it being done in one call, we use a coroutine with a loop.
+				_threadRunning = false;
+				StartCoroutine (CreateMeshes (hash, meshOutputs));
 		}
 
 		/// <summary>
@@ -111,10 +142,10 @@ public class hMeshCombiner : MonoBehaviour
 		/// meshes that we need to look at, but in theory you could do this without having to load the
 		/// object by simply having raw mesh data, or any other means of accessing it.
 		/// </remarks>
-		IEnumerator AddMeshes ()
+		IEnumerator AddMeshes (GameObject rootObject)
 		{
 				// Yes We Hate This - There Are Better Implementations
-				MeshFilter[] meshFilters = _rootObject.GetComponentsInChildren<MeshFilter> ();
+				MeshFilter[] meshFilters = rootObject.GetComponentsInChildren<MeshFilter> ();
 
 				// Loop through all of our mesh filters and add them to the combiner to be combined.
 				for (int x = 0; x < meshFilters.Length; x++) {
@@ -124,20 +155,30 @@ public class hMeshCombiner : MonoBehaviour
 										meshFilters [x].renderer, 
 										meshFilters [x].transform.localToWorldMatrix);
 						}
-								
+
 						// We implemented this as a balance point to try and break some of the processing up.
 						// If we were to yield every pass it was taking to long to do nothing.
 						if (x > 0 && x % ThrottleRate == 0) {
 								yield return new WaitForEndOfFrame ();
 						}
 				}
-						
+
 				// Start the threaded love
 				if (Combiner.MeshInputCount > 0) {
 						_threadRunning = true;
 						Combiner.Combine (ThreadCallback);
 				}
 				yield return new WaitForEndOfFrame ();
+		}
+
+		/// <summary>
+		/// Unity's Awake Event
+		/// </summary>
+		protected void Awake ()
+		{
+				// Should this gameObject be kept around :) I think so.
+				if (Persistent)
+						DontDestroyOnLoad (gameObject);
 		}
 
 		/// <summary>
@@ -171,21 +212,6 @@ public class hMeshCombiner : MonoBehaviour
 				// It could be useful to keep some mesh data in already parsed, then you could use the RemoveMesh function
 				// to remove ones that you want changed, without having to reparse mesh data.
 				Combiner.ClearMeshes ();
-		}
-
-		/// <summary>
-		/// This function is called in the example after the MeshCombiner has processed the meshes, it starts a Coroutine 
-		/// to create the actual meshes based on the flat data. This is the most optimal way to do this sadly as we cannot
-		/// create or touch Unity based meshes outside of the main thread.
-		/// </summary>
-		/// <param name="hash">Instance Hash.</param>
-		/// <param name="meshOutputs">.</param>
-		public void ThreadCallback (int hash, Hydrogen.Threading.Jobs.MeshCombiner.MeshOutput[] meshOutputs)
-		{
-				// This is just a dirty way to see if we can squeeze jsut a bit more performance out of Unity when 
-				// making all of the meshes for us (instead of it being done in one call, we use a coroutine with a loop.
-				_threadRunning = false;
-				StartCoroutine (CreateMeshes (hash, meshOutputs));
 		}
 
 		/// <summary>

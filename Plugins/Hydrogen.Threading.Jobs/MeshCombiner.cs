@@ -890,6 +890,9 @@ namespace Hydrogen.Threading.Jobs
 						}
 				}
 
+				/// <summary>
+				/// Transition Stage Mesh
+				/// </summary>
 				public class TransitionMesh
 				{
 						public int[] Indexes;
