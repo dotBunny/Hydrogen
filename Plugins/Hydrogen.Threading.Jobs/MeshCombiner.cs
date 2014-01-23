@@ -595,7 +595,7 @@ namespace Hydrogen.Threading.Jobs
 										for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 												var index = indexes [j];
 												newTransitionMesh.Normals [transitionMeshCounter [index]] = 
-																inversedTransposedMatrix.MultiplyVector (normals [index]).normalized;
+														inversedTransposedMatrix.MultiplyVector (normals [index]).normalized;
 										}
 								}
 
@@ -616,7 +616,8 @@ namespace Hydrogen.Threading.Jobs
 												var index = indexes [j];
 												var p = tangents [index];
 												var w = p.w;
-												p = inversedTransposedMatrix.MultiplyVector (p);
+												p = inversedTransposedMatrix.MultiplyVector (p).normalized;
+
 												newTransitionMesh.Tangents [transitionMeshCounter [index]] = 
 														new Vector4 (p.x, p.y, p.z, w);
 										}
