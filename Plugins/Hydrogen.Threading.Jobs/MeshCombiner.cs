@@ -324,7 +324,7 @@ namespace Hydrogen.Threading.Jobs
 								GetMaterials (meshOutput.Materials.ToArray ());
 
 						meshObject.Mesh = new UnityEngine.Mesh ();
-						meshObject.Mesh.vertices = meshOutput.Positions.ToArray ();
+						meshObject.Mesh.vertices = meshOutput.Vertices.ToArray ();
 						meshObject.Mesh.name = "Combined Mesh (" + meshObject.Mesh.vertices.GetHashCode () + ")";
 
 						// If there are normals we need to assign them to the mesh.
@@ -517,7 +517,7 @@ namespace Hydrogen.Threading.Jobs
 								meshOutput.VertexCount += transitionMesh.VertexCount;
 								meshOutput.SortedSources.Add (transitionMesh);
 
-								meshOutput.Positions.AddRange (transitionMesh.Positions);
+								meshOutput.Vertices.AddRange (transitionMesh.Vertices);
 
 								if (transitionMesh.Normals != null) {
 										meshOutput.Normals.AddRange (transitionMesh.Normals);
@@ -612,7 +612,7 @@ namespace Hydrogen.Threading.Jobs
 
 								// Assign the rest of the things
 								newTransitionMesh.IndexCount = indexes.Length;
-								newTransitionMesh.Positions = new Vector3[newTransitionMesh.VertexCount];
+								newTransitionMesh.Vertices = new Vector3[newTransitionMesh.VertexCount];
 								newTransitionMesh.Indexes = new int[newTransitionMesh.IndexCount];
 
 								if (meshInput.ScaleInverted) {
@@ -632,7 +632,7 @@ namespace Hydrogen.Threading.Jobs
 								// Handle Vertices
 								for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 										var index = indexes [j];
-										newTransitionMesh.Positions [transitionMeshCounter [index]] = 
+										newTransitionMesh.Vertices [transitionMeshCounter [index]] = 
 												meshInput.WorldMatrix.MultiplyPoint (vertices [index]);
 								}
 
@@ -824,28 +824,66 @@ namespace Hydrogen.Threading.Jobs
 				/// </summary>
 				public class MeshOutput
 				{
+						/// <summary>
+						/// A sorted list of TransitionMeshes
+						/// </summary>
 						public List<TransitionMesh> SortedSources = new List<TransitionMesh> ();
+						/// <summary>
+						/// A sorted list of Material DataHashCodes.
+						/// </summary>
 						public List<int> Materials = new List<int> ();
+						/// <summary>
+						/// The number of vertices present in the Mesh
+						/// </summary>
 						public int VertexCount;
-						public List<Vector3> Positions = new List<Vector3> ();
+						/// <summary>
+						/// The vertex array.
+						/// </summary>
+						public List<Vector3> Vertices = new List<Vector3> ();
+						/// <summary>
+						/// The colors array.
+						/// </summary>
 						public List<Color> Colors = new List<Color> ();
+						/// <summary>
+						/// The normals array.
+						/// </summary>
 						public List<Vector3> Normals = new List<Vector3> ();
+						/// <summary>
+						/// The tangents array.
+						/// </summary>
 						public List<Vector4> Tangents = new List<Vector4> ();
+						/// <summary>
+						/// The UV array.
+						/// </summary>
 						public List<Vector2> UV = new List<Vector2> ();
+						/// <summary>
+						/// The UV1 array.
+						/// </summary>
 						public List<Vector2> UV1 = new List<Vector2> ();
+						/// <summary>
+						/// The UV2 array.
+						/// </summary>
 						public List<Vector2> UV2 = new List<Vector2> ();
+						/// <summary>
+						/// A list of indexes defining SubMeshes
+						/// </summary>
 						public List<List<int>> Indexes = new List<List<int>> ();
 
-						public List<int> GetSubMesh (int mat)
+						/// <summary>
+						/// Gets the Indices of a SubMesh with the specified Material DataHashCode.
+						/// </summary>
+						/// <returns>The SubMesh Indices list.</returns>
+						/// <param name="material">The Material's DataHashCode</param>
+						public List<int> GetSubMesh (int material)
 						{
 								for (int i = 0; i < Materials.Count; i++) {
 
 										var m = Materials [i];
-										if (m == mat) {
+										if (m == material) {
 												return Indexes [i];
 										}
 								}
-								Materials.Add (mat);
+								Materials.Add (material);
 								var indexes = new List<int> ();
 								Indexes.Add (indexes);
 								return indexes;
@@ -856,16 +894,47 @@ namespace Hydrogen.Threading.Jobs
 				{
 						public int[] Indexes;
 						public int IndexCount;
+						/// <summary>
+						/// The Mesh's Colors array.
+						/// </summary>
 						public Color[] Colors;
+						/// <summary>
+						/// The Mesh's Material DataHashCode array.
+						/// </summary>
 						public int Material;
+						/// <summary>
+						/// The Mesh's Normals array.
+						/// </summary>
 						public Vector3[] Normals;
-						public Vector3[] Positions;
+						/// <summary>
+						/// The Mesh's Vertex array.
+						/// </summary>
+						public Vector3[] Vertices;
+						/// <summary>
+						/// The Mesh's Tangent array.
+						/// </summary>
 						public Vector4[] Tangents;
+						/// <summary>
+						/// The Mesh's UV array.
+						/// </summary>
 						public Vector2[] UV;
+						/// <summary>
+						/// The Mesh's UV1 array.
+						/// </summary>
 						public Vector2[] UV1;
+						/// <summary>
+						/// The Mesh's UV2 array.
+						/// </summary>
 						public Vector2[] UV2;
+						/// <summary>
+						/// The number of vertices the Mesh has.
+						/// </summary>
 						public int VertexCount;
 
+						/// <summary>
+						/// Get the BitMask of the Mesh.
+						/// </summary>
+						/// <returns>The BitMask</returns>
 						public int GetBitMask ()
 						{
 								int mask = 0x0;
@@ -885,24 +954,29 @@ namespace Hydrogen.Threading.Jobs
 						}
 				}
 
+				/// <summary>
+				/// A class defining how to sort TransitionMeshes.
+				/// </summary>
 				public class TransitionMeshSorter : IComparer<TransitionMesh>
 				{
-						public int Compare (TransitionMesh x, TransitionMesh y)
+						/// <summary>
+						/// Compare the specified TransitionMeshes.
+						/// </summary>
+						/// <param name="leftSide">Left Side TransitionMesh.</param>
+						/// <param name="rightSide">Right Side TransitionMesh.</param>
+						public int Compare (TransitionMesh leftSide, TransitionMesh rightSide)
 						{
 								// Sort by features first? uv1, uv2, colours, tangents?  Like wise features should be grouped together
 								// It is an 'AND' logic, and not 'OR'.  You can't have optional colours!
-								int compare = x.GetBitMask ().CompareTo (y.GetBitMask ());
+								int compare = leftSide.GetBitMask ().CompareTo (rightSide.GetBitMask ());
 								if (compare != 0)
 										return compare;
 
 								// Then Sort by meshes -> meshes with similar meshes grouped together
-
-								compare = x.Material.CompareTo (y.Material);
-								if (compare != 0)
-										return compare;
+								compare = leftSide.Material.CompareTo (rightSide.Material);
 
 								// Then sort by size (largest to smallest) -> larger tmeshes more likely to share fewer tmeshes per mesh.
-								return x.VertexCount.CompareTo (y.VertexCount);
+								return compare != 0 ? compare : leftSide.VertexCount.CompareTo (rightSide.VertexCount);
 						}
 				}
 		}
