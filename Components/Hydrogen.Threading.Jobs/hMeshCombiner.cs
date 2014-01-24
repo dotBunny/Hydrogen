@@ -13,7 +13,7 @@ public class hMeshCombiner : MonoBehaviour
 		/// <summary>
 		/// An instance of the MeshCombiner.
 		/// </summary>
-		Hydrogen.Threading.Jobs.MeshCombiner Combiner = new Hydrogen.Threading.Jobs.MeshCombiner ();
+		public Hydrogen.Threading.Jobs.MeshCombiner Combiner = new Hydrogen.Threading.Jobs.MeshCombiner ();
 		/// <summary>
 		/// This is used in our example to throttle things a bit when accessing Unity objects.
 		/// </summary>
@@ -23,10 +23,6 @@ public class hMeshCombiner : MonoBehaviour
 		/// Should this input manager survive scene switches?
 		/// </summary>
 		public bool Persistent = true;
-		/// <summary>
-		/// An internal reference to where created meshes should be parented.
-		/// </summary>
-		Transform _parentTransform;
 		/// <summary>
 		/// Internal fail safe to maintain instance across threads.
 		/// </summary>
@@ -45,6 +41,10 @@ public class hMeshCombiner : MonoBehaviour
 		/// Is the MeshCombiner thread running?
 		/// </summary>
 		bool _threadRunning;
+		/// <summary>
+		/// Internal reference of what transform a combine operation should parent its meshes too.
+		/// </summary>
+		Dictionary<int, Transform> _parentLookup = new Dictionary<int, Transform> ();
 
 		/// <summary>
 		/// Gets the input manager instance, creating one if none is found.
@@ -79,28 +79,6 @@ public class hMeshCombiner : MonoBehaviour
 		{
 				return _staticInstance != null;
 		}
-		// This is an implementation that can be just thrown meshes and it does the rest.
-		// do i make meshcombines per instance ... probably... so you can keep throwing stuff into it.
-		// will mention the abilityto store stuff and use manually later
-		// TODO Make these incubated and run in their own coroutines (need to store the parent transform for later? dictionary hash/index0
-		/// <summary>
-		/// Combine all active meshes under the root object.
-		/// </summary>
-		/// <param name="rootObject">The "root" GameObject.</param>
-		/// <param name="disableRootObject">
-		/// If set to <c>true</c> disable root object (and its children) after iterating
-		/// through its children..
-		/// </param>
-		public void Combine (GameObject rootObject, bool disableRootObject)
-		{
-				// Do it!
-				StartCoroutine (AddMeshes (rootObject));
-
-				// Disable our example dat
-				if (disableRootObject) {
-						rootObject.SetActive (false);
-				}
-		}
 
 		/// <summary>
 		/// Combine all active meshes under the root object.
@@ -113,8 +91,13 @@ public class hMeshCombiner : MonoBehaviour
 		/// </param>
 		public void Combine (GameObject rootObject, Transform outputParent, bool disableRootObject)
 		{
-				_parentTransform = outputParent;
-				Combine (rootObject, disableRootObject);
+				// Do it!
+				StartCoroutine (AddMeshes (rootObject, outputParent));
+
+				// Disable our example dat
+				if (disableRootObject) {
+						rootObject.SetActive (false);
+				}
 		}
 
 		/// <summary>
@@ -142,7 +125,7 @@ public class hMeshCombiner : MonoBehaviour
 		/// meshes that we need to look at, but in theory you could do this without having to load the
 		/// object by simply having raw mesh data, or any other means of accessing it.
 		/// </remarks>
-		IEnumerator AddMeshes (GameObject rootObject)
+		IEnumerator AddMeshes (GameObject rootObject, Transform outputParent)
 		{
 				// Yes We Hate This - There Are Better Implementations
 				MeshFilter[] meshFilters = rootObject.GetComponentsInChildren<MeshFilter> ();
@@ -166,7 +149,7 @@ public class hMeshCombiner : MonoBehaviour
 				// Start the threaded love
 				if (Combiner.MeshInputCount > 0) {
 						_threadRunning = true;
-						Combiner.Combine (ThreadCallback);
+						_parentLookup.Add (Combiner.Combine (ThreadCallback), outputParent);
 				}
 				yield return new WaitForEndOfFrame ();
 		}
@@ -198,7 +181,11 @@ public class hMeshCombiner : MonoBehaviour
 						meshObject.name = newMesh.Mesh.name;
 						meshObject.AddComponent<MeshFilter> ().sharedMesh = newMesh.Mesh;
 						meshObject.AddComponent<MeshRenderer> ().sharedMaterials = newMesh.Materials;
-						meshObject.transform.parent = _parentTransform.transform;
+
+						if (_parentLookup.ContainsKey (hash)) {
+								meshObject.transform.parent = _parentLookup [hash];
+						}
+
 						meshObject.transform.position = Vector3.zero;
 						meshObject.transform.rotation = Quaternion.identity;
 
@@ -208,6 +195,11 @@ public class hMeshCombiner : MonoBehaviour
 								yield return new WaitForEndOfFrame ();
 						}
 				}
+						
+				if (_parentLookup.ContainsKey (hash)) {
+						_parentLookup.Remove (hash);
+				}
+
 				// Clear previous data (for demonstration purposes)
 				// It could be useful to keep some mesh data in already parsed, then you could use the RemoveMesh function
 				// to remove ones that you want changed, without having to reparse mesh data.
