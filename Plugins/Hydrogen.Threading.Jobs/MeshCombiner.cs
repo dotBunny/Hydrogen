@@ -260,7 +260,6 @@ namespace Hydrogen.Threading.Jobs
 						// Determine Inversion of Scale
 						// Don't Scale (NNP, PPP, PNN, NPN)
 						Vector3 scaleTest = meshFilter.gameObject.transform.localScale;
-
 						 
 						bool invertedX = (scaleTest.x < 0f); 
 						bool invertedY = (scaleTest.y < 0f);

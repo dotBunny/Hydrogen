@@ -83,6 +83,10 @@ public class hMeshCombiner : MonoBehaviour
 		/// <summary>
 		/// Combine all active meshes under the root object.
 		/// </summary>
+		/// <remarks>
+		/// You do not need to wait till completion to call this again with more meshes to combine, however the thread 
+		/// will not call back to Unity till all meshes have been processed in the queue.
+		/// </remarks>
 		/// <param name="rootObject">The "root" GameObject.</param>
 		/// <param name="outputParent">Sets the output parent transform.</param>
 		/// <param name="disableRootObject">

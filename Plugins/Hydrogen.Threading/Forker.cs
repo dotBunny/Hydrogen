@@ -30,31 +30,35 @@
 using System;
 using System.Threading;
 
-/// <summary>Provides a caller-friendly wrapper around parallel actions.</summary>
+/// <summary>
+/// Provides a caller-friendly wrapper around parallel actions.
+/// </summary>
 public sealed class Forker
 {
-		/// <summary>
-		/// The number of items running across the Forker.
-		/// </summary>
-		int _running;
-		/// <summary>
-		/// The join lock object used for safe threading.
-		/// </summary>
-		readonly object _joinLock = new object ();
-		/// <summary>
-		/// The event lock object used for safe threading.
-		/// </summary>
-		readonly object _eventLock = new object ();
 		/// <summary>
 		/// All Complete Event.
 		/// </summary>
 		EventHandler _allComplete;
 		/// <summary>
+		/// The event lock object used for safe threading.
+		/// </summary>
+		readonly object _eventLock = new object ();
+		/// <summary>
 		/// Event fired when an item is complete.
 		/// </summary>
 		EventHandler<ParallelEventArgs> _itemComplete;
+		/// <summary>
+		/// The join lock object used for safe threading.
+		/// </summary>
+		readonly object _joinLock = new object ();
+		/// <summary>
+		/// The number of items running across the Forker.
+		/// </summary>
+		int _runningCount;
 
-		/// <summary>Raised when all operations have completed.</summary>
+		/// <summary>
+		/// Raised when all operations have completed.
+		/// </summary>
 		public event EventHandler AllComplete {
 				add {
 						lock (_eventLock) {
@@ -68,7 +72,9 @@ public sealed class Forker
 				}
 		}
 
-		/// <summary>Raised when each operation completes.</summary>
+		/// <summary>
+		/// Raised when each operation completes.
+		/// </summary>
 		public event EventHandler<ParallelEventArgs> ItemComplete {
 				add {
 						lock (_eventLock) {
@@ -82,14 +88,18 @@ public sealed class Forker
 				}
 		}
 
-		/// <summary>Indicates the number of incomplete operations.</summary>
+		/// <summary>
+		/// Indicates the number of incomplete operations.
+		/// </summary>
 		/// <returns>The number of incomplete operations.</returns>
 		public int CountRunning ()
 		{
-				return Interlocked.CompareExchange (ref _running, 0, 0);
+				return Interlocked.CompareExchange (ref _runningCount, 0, 0);
 		}
 
-		/// <summary>Enqueues an operation.</summary>
+		/// <summary>
+		/// Enqueues an operation.
+		/// </summary>
 		/// <param name="action">The operation to perform.</param>
 		/// <returns>The current instance (for fluent API).</returns>
 		public Forker Fork (ThreadStart action)
@@ -97,7 +107,9 @@ public sealed class Forker
 				return Fork (action, null);
 		}
 
-		/// <summary>Enqueues an operation.</summary>
+		/// <summary>
+		/// Enqueues an operation.
+		/// </summary>
 		/// <param name="action">The operation to perform.</param>
 		/// <param name="state">An opaque object, allowing the caller to identify operations.</param>
 		/// <returns>The current instance (for fluent API).</returns>
@@ -105,7 +117,7 @@ public sealed class Forker
 		{
 				if (action == null)
 						throw new ArgumentNullException ("action");
-				Interlocked.Increment (ref _running);
+				Interlocked.Increment (ref _runningCount);
 				ThreadPool.QueueUserWorkItem (delegate {
 						Exception exception = null;
 						try {
@@ -118,13 +130,17 @@ public sealed class Forker
 				return this;
 		}
 
-		/// <summary>Waits for all operations to complete.</summary>
+		/// <summary>
+		/// Waits for all operations to complete.
+		/// </summary>
 		public void Join ()
 		{
 				Join (-1);
 		}
 
-		/// <summary>Waits (with timeout) for all operations to complete.</summary>
+		/// <summary>
+		/// Waits (with timeout) for all operations to complete.
+		/// </summary>
 		/// <returns>Whether all operations had completed before the timeout.</returns>
 		public bool Join (int millisecondsTimeout)
 		{
@@ -137,7 +153,9 @@ public sealed class Forker
 				}
 		}
 
-		/// <summary>Adds a callback to invoke when each operation completes.</summary>
+		/// <summary>
+		/// Adds a callback to invoke when each operation completes.
+		/// </summary>
 		/// <returns>Current instance (for fluent API).</returns>
 		public Forker OnItemComplete (EventHandler<ParallelEventArgs> handler)
 		{
@@ -147,7 +165,9 @@ public sealed class Forker
 				return this;
 		}
 
-		/// <summary>Adds a callback to invoke when all operations are complete.</summary>
+		/// <summary>
+		/// Adds a callback to invoke when all operations are complete.
+		/// </summary>
 		/// <returns>Current instance (for fluent API).</returns>
 		public Forker OnAllComplete (EventHandler handler)
 		{
@@ -157,12 +177,17 @@ public sealed class Forker
 				return this;
 		}
 
+		/// <summary>
+		/// Raised when an item is completed.
+		/// </summary>
+		/// <param name="state">Item State.</param>
+		/// <param name="exception">Exception.</param>
 		void OnItemComplete (object state, Exception exception)
 		{
 				EventHandler<ParallelEventArgs> itemHandler = _itemComplete; // don't need to lock
 				if (itemHandler != null)
 						itemHandler (this, new ParallelEventArgs (state, exception));
-				if (Interlocked.Decrement (ref _running) == 0) {
+				if (Interlocked.Decrement (ref _runningCount) == 0) {
 						EventHandler allHandler = _allComplete; // don't need to lock
 						if (allHandler != null)
 								allHandler (this, EventArgs.Empty);
@@ -172,22 +197,39 @@ public sealed class Forker
 				}
 		}
 
-		/// <summary>Event arguments representing the completion of a parallel action.</summary>
+		/// <summary>
+		/// Event arguments representing the completion of a parallel action.
+		/// </summary>
 		public class ParallelEventArgs : EventArgs
 		{
-				readonly object _state;
+				/// <summary>
+				/// The System.Exception
+				/// </summary>
 				readonly Exception _exception;
+				/// <summary>
+				/// The State
+				/// </summary>
+				readonly object _state;
 
+				/// <summary>
+				/// Initializes a new instance of the <see cref="Forker+ParallelEventArgs"/> class.
+				/// </summary>
+				/// <param name="state">Object State.</param>
+				/// <param name="exception">The System.Exeception.</param>
 				internal ParallelEventArgs (object state, Exception exception)
 				{
 						_state = state;
 						_exception = exception;
 				}
 
-				/// <summary>The opaque state object that identifies the action (null otherwise).</summary>
+				/// <summary>
+				/// The opaque state object that identifies the action (null otherwise).
+				/// </summary>
 				public object State { get { return _state; } }
 
-				/// <summary>The exception thrown by the parallel action, or null if it completed without exception.</summary>
+				/// <summary>T
+				/// he exception thrown by the parallel action, or null if it completed without exception.
+				/// </summary>
 				public Exception Exception { get { return _exception; } }
 		}
 }
