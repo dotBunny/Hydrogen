@@ -33,7 +33,7 @@ using UnityEngine;
 /// A drop in implementation of the Hydrogen.Peripherals.Input manager.  This simply makes the class an accessible 
 /// singleton with some very simple additional functionality.
 /// </summary>
-[AddComponentMenu ("Hydrogen/Input Manager")]
+[AddComponentMenu ("Hydrogen/Singletons/Input")]
 public sealed class hInput : Hydrogen.Peripherals.Input
 {
 		/// <summary>

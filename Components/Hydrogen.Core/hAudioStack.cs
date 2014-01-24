@@ -32,7 +32,7 @@ using UnityEngine;
 /// A drop in implementation of the Hydrogen.Core.AudioStack. This simply makes the class an accessible singleton 
 /// with some very simple additional functionality.
 /// </summary>
-[AddComponentMenu ("Hydrogen/Audio Stack")]
+[AddComponentMenu ("Hydrogen/Singletons/Audio Stack")]
 public sealed class hAudioStack : Hydrogen.Core.AudioStack
 {
 		/// <summary>

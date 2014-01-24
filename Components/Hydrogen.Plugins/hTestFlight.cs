@@ -33,7 +33,7 @@ using UnityEngine;
 /// A drop in implementation of the Hydrogen.Plugins.TestFlight manager. It implements advanced features included with
 /// TestFlight allowing for proper session tracking and reporting.
 /// </summary>
-[AddComponentMenu ("Hydrogen/TestFlight Manager")]
+[AddComponentMenu ("Hydrogen/Singletons/TestFlight")]
 public sealed class hTestFlight : MonoBehaviour
 {
 		/// <summary>

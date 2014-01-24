@@ -8,6 +8,7 @@ using System.Collections.Generic;
 /// an example of one way of using it, but you will probably want to create your own method to further optimize the 
 /// workflow.
 /// </summary>
+[AddComponentMenu ("Hydrogen/Singletons/Mesh Combiner")]
 public class hMeshCombiner : MonoBehaviour
 {
 		/// <summary>

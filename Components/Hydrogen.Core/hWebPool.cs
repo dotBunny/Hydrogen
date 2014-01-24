@@ -32,7 +32,7 @@ using UnityEngine;
 /// A drop in implementation of the Hydrogen.Core.WebPool. This simply makes the class an accessible singleton 
 /// with some very simple additional functionality.
 /// </summary>
-[AddComponentMenu ("Hydrogen/Web Pool Manager")]
+[AddComponentMenu ("Hydrogen/Singletons/Web Pool")]
 public sealed class hWebPool : Hydrogen.Core.WebPool
 {
 		/// <summary>

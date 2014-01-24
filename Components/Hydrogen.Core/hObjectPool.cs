@@ -32,7 +32,7 @@ using UnityEngine;
 /// A drop in implementation of the Hydrogen.Core.ObjectPool. This simply makes the class an accessible singleton 
 /// with some very simple additional functionality.
 /// </summary>
-[AddComponentMenu ("Hydrogen/Object Pool Manager")]
+[AddComponentMenu ("Hydrogen/Singletons/Object Pool")]
 public sealed class hObjectPool : Hydrogen.Core.ObjectPool
 {
 		/// <summary>

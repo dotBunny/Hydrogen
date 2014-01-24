@@ -36,6 +36,7 @@ namespace Hydrogen.Core
 		/// A stack system for 2D audio sources.
 		/// </summary>
 		/// <remarks>This should NEVER be used for 3D audio sources.</remarks>
+		[AddComponentMenu ("")]
 		public class AudioStack : MonoBehaviour
 		{
 				/// <summary>

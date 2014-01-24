@@ -43,6 +43,7 @@ namespace Hydrogen.Peripherals
 				ValueSet
 		}
 
+		[AddComponentMenu ("")]
 		public class Input : MonoBehaviour
 		{
 				Dictionary<String, InputAction> _actions;
