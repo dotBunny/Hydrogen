@@ -193,10 +193,10 @@ namespace Hydrogen.Core
 												Remove (replaceItem);
 												Add (item);
 										} else {
-												Debug.Log ("[H] No available Audio Sources from the AudioStack to use, even when prioritized.");
+												Debug.Log ("No available Audio Sources from the AudioStack to use, even when prioritized.");
 										}
 								} else {
-										Debug.Log ("[H] No available Audio Sources from the AudioStack to use.");
+										Debug.Log ("No available Audio Sources from the AudioStack to use.");
 								}
 						}
 

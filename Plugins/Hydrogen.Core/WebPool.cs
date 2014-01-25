@@ -77,7 +77,7 @@ namespace Hydrogen.Core
 				public void Form (string URI, Dictionary<string, string> formStringData, FormBinaryData[] formBinaryData, string cookie, System.Action<int, Hashtable, string> callback)
 				{
 						if (!_initialized) {
-								Debug.LogError ("WebPool has not finished initializing ... " +
+								UnityEngine.Debug.LogError ("WebPool has not finished initializing ... " +
 								"Did you call this function without having either a WebPool or ObjectPool component " +
 								"already on a MonoBehaviour?");
 								return;
@@ -117,7 +117,7 @@ namespace Hydrogen.Core
 				public int GET (string URI, string cookie, System.Action<int, Hashtable, string> callback)
 				{
 						if (!_initialized) {
-								Debug.LogError ("WebPool has not finished initializing ... " +
+								UnityEngine.Debug.LogError ("WebPool has not finished initializing ... " +
 								"Did you call this function without having either a WebPool or ObjectPool component " +
 								"already on a MonoBehaviour?");
 								return 0;
@@ -150,7 +150,7 @@ namespace Hydrogen.Core
 				public void POST (string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
 				{
 						if (!_initialized) {
-								Debug.LogError ("WebPool has not finished initializing ... " +
+								UnityEngine.Debug.LogError ("WebPool has not finished initializing ... " +
 								"Did you call this function without having either a WebPool or ObjectPool component " +
 								"already on a MonoBehaviour?");
 								return;

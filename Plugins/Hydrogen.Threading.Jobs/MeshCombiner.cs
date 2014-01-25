@@ -25,7 +25,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 #endregion
 using System;
 using System.Collections.Generic;
@@ -707,6 +706,7 @@ namespace Hydrogen.Threading.Jobs
 				/// <summary>
 				/// A thread safe representation of a Mesh.
 				/// </summary>
+				[System.Serializable]
 				public class BufferedMesh
 				{
 						/// <summary>
@@ -780,6 +780,7 @@ namespace Hydrogen.Threading.Jobs
 				/// <summary>
 				/// Mesh Input Format
 				/// </summary>
+				[System.Serializable]
 				public class MeshInput
 				{
 						/// <summary>
@@ -821,6 +822,7 @@ namespace Hydrogen.Threading.Jobs
 				/// <summary>
 				/// Mesh Output Format
 				/// </summary>
+				[System.Serializable]
 				public class MeshOutput
 				{
 						/// <summary>

@@ -319,7 +319,7 @@ namespace Hydrogen.Core
 								GameObject spawnedObject = _pooledObjects [0];
 
 								if (spawnedObject == null) {
-										Debug.LogError (
+										UnityEngine.Debug.LogError (
 												"[h] A GameObject (" + Prefab.name + ") has been destroyed," +
 												"but is still referenced by the Object Pool. If you must destroy a GameObject manually," +
 												"please make sure to remove it from the pool as well:" +
