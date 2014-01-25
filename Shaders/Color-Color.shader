@@ -1,10 +1,10 @@
 //
-// UnlitTexture.shader
+// Color-Color.shader
 //
 // Author:
 //       Matthew Davey <matthew.davey@dotbunny.com>
 //
-// Copyright (c) 2013 dotBunny Inc. (http://www.dotbunny.com)
+// Copyright (c) 2014 dotBunny Inc. (http://www.dotbunny.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,13 +24,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-Shader "Hydrogen/Unlit/Texture" {
+Shader "Hydrogen/Color/Color" {
 	Properties {
-		_MainTex ("Base (RGB)", 2D) = "white"
+		_Color ("Main Color", Color) = (1,1,1,1)
 	}
+
 	SubShader {
+		Tags { "RenderType"="Opaque" }
+		LOD 80
+
 		Pass {
-			SetTexture [_MainTex]
+			Tags { "LightMode" = "Vertex" }
+		 
+			Material {
+				Diffuse [_Color]
+				Ambient [_Color]
+			} 
+
+			Lighting On
+
+			SetTexture [_Color] {
+				constantColor (1,1,1,1)
+				Combine constant * primary DOUBLE, constant * primary
+			} 
 		}
 	}
 }

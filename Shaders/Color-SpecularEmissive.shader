@@ -1,10 +1,10 @@
 //
-// UnlitColor.shader
+// Color-SpecularEmissive.shader
 //
 // Author:
 //       Matthew Davey <matthew.davey@dotbunny.com>
 //
-// Copyright (c) 2013 dotBunny Inc. (http://www.dotbunny.com)
+// Copyright (c) 2014 dotBunny Inc. (http://www.dotbunny.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,13 +24,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-Shader "Hydrogen/Unlit/Color" {
-   Properties { 
-      _Color ("Color", Color) = (1, 1, 1, 1)
-   } 
-   SubShader { 
-      Pass { 
-         Color [_Color]
-      } 
-   }
+Shader "Hydrogen/Color/Specular Emissive" {
+	Properties {
+		_Color ("Main Color", Color) = (1,1,1,1)
+		_SpecColor ("Spec Color", Color) = (1,1,1,1)
+		_Emission ("Emissive Color", Color) = (0,0,0,0)
+		_Shininess ("Shininess", Range (0.01, 1)) = 0.7
+	}
+
+	SubShader {
+		Tags { "RenderType"="Opaque" }
+		LOD 80
+
+		Pass {
+			Tags { "LightMode" = "Vertex" }
+		 
+			Material {
+				Diffuse [_Color]
+				Ambient [_Color]
+				Shininess [_Shininess]
+				Specular [_SpecColor]
+				Emission [_Emission]
+			} 
+
+			Lighting On
+			SeparateSpecular On
+
+			SetTexture [_Color] {
+				constantColor (1,1,1,1)
+				Combine constant * primary DOUBLE, constant * primary
+			} 
+		}
+	}
 }

@@ -1,5 +1,5 @@
 //
-// UnlitTransparentTextureBlended.shader
+// Texture-UnlitAlphaTinted.shader
 //
 // Author:
 //       Matthew Davey <matthew.davey@dotbunny.com>
@@ -24,7 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-Shader "Hydrogen/Unlit/Transparent Texture (Blended)" {
+Shader "Hydrogen/Texture/Unlit Transparent Tinted" {
 	Properties {
 		_Color ("Main Color", Color) = (1,1,1,1)
 		_MainTex ("Base (RGB) Trans (A)", 2D) = "white" {}
