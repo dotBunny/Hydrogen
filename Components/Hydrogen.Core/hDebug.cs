@@ -41,6 +41,7 @@ public class hDebug : MonoBehaviour
 		const int _debugLogLines = 25;
 		const int _debugLogLinesMax = 10000;
 		const int _statsPadding = 10;
+		const int _statsLineSpacing = 6;
 		const int FontBegin = 33;
 		const int FontEnd = 127;
 		const int GlyphHeight = 15;
@@ -107,10 +108,7 @@ public class hDebug : MonoBehaviour
 		static readonly List<hDebug.PrintedText> _printedText = new List<hDebug.PrintedText> ();
 		static readonly Color _statsBackgroundColor = new Color (0.1337f, 0.1337f, 0.1337f, 0.95f);
 		static readonly Color _statsForegroundColor = new Color (1f, 1f, 1f, 0.95f);
-		static readonly Dictionary<string, bool> _watchedBools = new Dictionary<string, bool> ();
-		static readonly Dictionary<string, int> _watchedIntegers = new Dictionary<string, int> ();
-		static readonly Dictionary<string, float> _watchedFloats = new Dictionary<string, float> ();
-		static readonly Dictionary<string, string> _watchedStrings = new Dictionary<string, string> ();
+		static readonly Dictionary<string, WatchedItem> _watchedItems = new Dictionary<string, WatchedItem> ();
 		static int _debugLogCount;
 		Camera _fontCamera;
 		Texture2D _fontImage;
@@ -125,6 +123,7 @@ public class hDebug : MonoBehaviour
 		int _logOffsetH;
 		int _logOffsetV;
 		bool _showLog;
+		int _watchWidth;
 		hDebug.UVRectangle _whiteUV;
 
 		public enum ScreenLocation
@@ -238,48 +237,40 @@ public class hDebug : MonoBehaviour
 				hDebug.PushLog (string.Format (text, args), 1);
 		}
 
-		public static void WatchBool (string key, bool value)
+		public static void Watch (string key, bool value)
 		{
-				_watchedBools [key] = value;
+				if (_watchedItems.ContainsKey (key) && _watchedItems [key].Type == WatchedItem.ItemType.Boolean) {
+						_watchedItems [key].Data = value.ToString ();
+				} else {
+						_watchedItems [key] = new WatchedItem (WatchedItem.ItemType.Boolean, key, value.ToString ());
+				}
 		}
 
-		public static void WatchFloat (string key, float value)
+		public static void Watch (string key, string value)
 		{
-				_watchedFloats [key] = value;
+				if (_watchedItems.ContainsKey (key) && _watchedItems [key].Type == WatchedItem.ItemType.String) {
+						_watchedItems [key].Data = value;
+				} else {
+						_watchedItems [key] = new WatchedItem (WatchedItem.ItemType.String, key, value);
+				}
 		}
 
-		public static void WatchInt (string key, int value)
+		public static void Watch (string key, int value)
 		{
-				_watchedIntegers [key] = value;
+				if (_watchedItems.ContainsKey (key) && _watchedItems [key].Type == WatchedItem.ItemType.Integer) {
+						_watchedItems [key].Data = value.ToString ();
+				} else {
+						_watchedItems [key] = new WatchedItem (WatchedItem.ItemType.Integer, key, value.ToString ());
+				}
 		}
 
-		public static void WatchString (string key, string value)
+		public static void Watch (string key, float value)
 		{
-				_watchedStrings [key] = string.IsNullOrEmpty (value) ? "NoE" : value;
-		}
-
-		public static void UnWatchBool (string key)
-		{
-				if (_watchedBools.ContainsKey (key))
-						_watchedBools.Remove (key);
-		}
-
-		public static void UnWatchFloat (string key)
-		{
-				if (_watchedFloats.ContainsKey (key))
-						_watchedFloats.Remove (key);
-		}
-
-		public static void UnWatchInt (string key)
-		{
-				if (_watchedIntegers.ContainsKey (key))
-						_watchedIntegers.Remove (key);
-		}
-
-		public static void UnWatchString (string key)
-		{
-				if (_watchedStrings.ContainsKey (key))
-						_watchedStrings.Remove (key);
+				if (_watchedItems.ContainsKey (key) && _watchedItems [key].Type == WatchedItem.ItemType.Float) {
+						_watchedItems [key].Data = value.ToString ();
+				} else {
+						_watchedItems [key] = new WatchedItem (WatchedItem.ItemType.Float, key, value.ToString ());
+				}
 		}
 
 		public static void UnityError (string text, params object[] args)
@@ -297,6 +288,12 @@ public class hDebug : MonoBehaviour
 				hDebug.PushLog (string.Format (text, args), 1);
 		}
 
+		public static void UnWatch (string key)
+		{
+				if (_watchedItems.ContainsKey (key))
+						_watchedItems.Remove (key);
+		}
+
 		static void PushLog (string text, int type)
 		{
 				if (hDebug._logMessages.Count >= _debugLogLinesMax) {
@@ -308,7 +305,9 @@ public class hDebug : MonoBehaviour
 				string[] array2 = array;
 				for (int i = 0; i < array2.Length; i++) {
 						string m = array2 [i];
-						hDebug._logMessages.Add (new hDebug.LogMessage ("[" + Time.time + "]", m, type));
+						hDebug._logMessages.Add (
+								new hDebug.LogMessage (
+										string.Format ("[{0}] {1}", Time.time.ToString ().PadRight (9, '0'), m), type));
 						hDebug._debugLogCount++;
 				}
 		}
@@ -360,7 +359,7 @@ public class hDebug : MonoBehaviour
 										break;
 								case ScreenLocation.TopRight:
 										// Generate Watch List
-										SolidQuad (Screen.width, 0, Screen.width - 92, 50, _statsBackgroundColor);
+										SolidQuad (Screen.width - 92, 0, Screen.width, 50, _statsBackgroundColor);
 										PrintString ((1 / Time.smoothDeltaTime).ToString ("#,##0.00") + " FPS", Screen.width - 82, 10, _statsForegroundColor);
 										PrintString ((System.GC.GetTotalMemory (true) / 1048576f).ToString ("#,##0.00") + " MB", Screen.width - 82, 25, _statsForegroundColor);
 										break;
@@ -376,6 +375,20 @@ public class hDebug : MonoBehaviour
 										PrintString ((System.GC.GetTotalMemory (true) / 1048576f).ToString ("#,##0.00") + " MB", Screen.width - 82, Screen.height - 25, _statsForegroundColor);
 										break;
 
+								}
+
+
+								switch (WatchList) {
+								case ScreenLocation.TopRight:
+										int itemCount = _watchedItems.Count;
+										int height = (itemCount * 9) + (itemCount * _statsLineSpacing) + (_statsPadding * 2);
+										int lineOffset = _statsPadding;
+										SolidQuad (Screen.width - 100, 0, Screen.width, height, _statsBackgroundColor);
+										foreach (KeyValuePair<string, WatchedItem> entry in _watchedItems) {
+												PrintString (entry.Value.Output, Screen.width - 100 + _statsPadding, lineOffset, _statsForegroundColor);
+												lineOffset += _statsLineSpacing + 9;
+										}
+										break;
 								}
 
 						} else {
@@ -396,7 +409,7 @@ public class hDebug : MonoBehaviour
 								for (int i = num3; i < num2; i++) {
 										if (i >= 0 && i < hDebug._logMessages.Count) {
 												hDebug.LogMessage logMessage = hDebug._logMessages [i];
-												PrintString (logMessage.Timestamp + " " + logMessage.Message, 1 + _logOffsetH * 8, num, _logTypeColors [logMessage.Type]);
+												PrintString (logMessage.Message, 1 + _logOffsetH * 8, num, _logTypeColors [logMessage.Type]);
 												num += 15;
 										}
 								}
@@ -644,9 +657,39 @@ public class hDebug : MonoBehaviour
 				}
 		}
 
+		public class WatchedItem
+		{
+				public enum ItemType
+				{
+						String = 0,
+						Integer = 1,
+						Float = 2,
+						Boolean = 3
+				}
+
+				public ItemType Type;
+				public string Data;
+				public string Key;
+
+				public int Length { get; private set; }
+
+				public string Output { 
+						get {
+								return Key + ": " + Data;
+						}
+				}
+
+				public WatchedItem (ItemType type, string key, string data)
+				{
+						Type = type;
+						Key = key;
+						Data = data;
+						Length = Key.Length + 2 + Data.Length;
+				}
+		}
+
 		class LogMessage
 		{
-				public readonly string Timestamp;
 				/// <summary>
 				/// The Message
 				/// </summary>
@@ -656,9 +699,8 @@ public class hDebug : MonoBehaviour
 				/// </summary>
 				public readonly int Type;
 
-				public LogMessage (string timestamp, string message, int type)
+				public LogMessage (string message, int type)
 				{
-						Timestamp = timestamp;
 						Message = message;
 						Type = type;
 				}
