@@ -50,13 +50,13 @@ public class hDebug : MonoBehaviour
 		const string ShaderText = "Shader \"hDebug/Text\"\r\n{\r\nProperties\r\n{\r\n_MainTex (\"Main\", 2D) = \"white\" {}\r\n}\r\n\r\nCategory\r\n{\r\n                        Tags\r\n                        {\r\n                            \"Queue\" = \"Transparent\"\r\n                        }\r\n                        \r\n                        Blend SrcAlpha OneMinusSrcAlpha\r\n                        AlphaTest Greater .01\r\n                        ColorMask RGB\r\n                        Cull Off\r\n                        Lighting Off\r\n                        ZWrite On\r\n                        \r\n                        Fog\r\n                        {\r\n                            Color(0, 0, 0, 0)\r\n                        }\r\n                        \r\n                        BindChannels\r\n                        {\r\n                            Bind \"Color\", color\r\n                            Bind \"Vertex\", vertex\r\n                            Bind \"TexCoord\", texcoord\r\n                        }\r\n                        \r\n                        SubShader\r\n                        {\r\n                            Pass\r\n                            {\r\n                                SetTexture [_MainTex]\r\n                                {\r\n                                    combine texture * primary\r\n                                }\r\n                            }\r\n                        }\r\n                    }\r\n                }";
 		public static Color Shadow = Color.cyan;
 		public bool CreateCamera = true;
-		public ScreenLocation Stats = ScreenLocation.Off;
+		public DisplayMode Mode = DisplayMode.Off;
+		public DisplayLocation Location = DisplayLocation.Top;
 		public KeyCode Toggle = KeyCode.BackQuote;
 		public KeyCode ScrollUp = KeyCode.UpArrow;
 		public KeyCode ScrollDown = KeyCode.DownArrow;
 		public KeyCode ScrollLeft = KeyCode.LeftArrow;
 		public KeyCode ScrollRight = KeyCode.RightArrow;
-		public ScreenLocation WatchList = ScreenLocation.Off;
 		/// <summary>
 		/// The font to be rendered to the screen, stored as a byte array.
 		/// </summary>
@@ -123,16 +123,20 @@ public class hDebug : MonoBehaviour
 		int _logOffsetH;
 		int _logOffsetV;
 		bool _showLog;
-		int _watchWidth;
+		int _watchWidth = 100;
 		hDebug.UVRectangle _whiteUV;
 
-		public enum ScreenLocation
+		public enum DisplayLocation
+		{
+				Top = 1,
+				Bottom = 2,
+		}
+
+		public enum DisplayMode
 		{
 				Off = 0,
-				TopLeft = 1,
-				TopRight = 2,
-				BottomLeft = 3,
-				BottomRight = 4,
+				Stats = 1,
+				Console = 2
 		}
 
 		public static void Error (object obj)
@@ -241,6 +245,7 @@ public class hDebug : MonoBehaviour
 		{
 				if (_watchedItems.ContainsKey (key) && _watchedItems [key].Type == WatchedItem.ItemType.Boolean) {
 						_watchedItems [key].Data = value.ToString ();
+					
 				} else {
 						_watchedItems [key] = new WatchedItem (WatchedItem.ItemType.Boolean, key, value.ToString ());
 				}
@@ -349,49 +354,46 @@ public class hDebug : MonoBehaviour
 						foreach (hDebug.PrintedText current in hDebug._printedText) {
 								PrintString (current.Text, current.X, current.Y, current.Color);
 						}
-				
-						if (!_showLog) {
-								switch (Stats) {
-								case ScreenLocation.TopLeft:
+						if (Mode == DisplayMode.Stats) {
+								int itemCount = _watchedItems.Count;
+								int watchHeight = (itemCount * 9) + (itemCount * _statsLineSpacing) + (_statsPadding * 2);
+								int lineOffset = _statsPadding;
+								int lastFrameWidth = _watchWidth;
+
+								if (Location == DisplayLocation.Top) {
+										// Stats
 										SolidQuad (0, 0, 92, 50, _statsBackgroundColor);
 										PrintString ((1 / Time.smoothDeltaTime).ToString ("#,##0.00") + " FPS", 10, 10, _statsForegroundColor);
 										PrintString ((System.GC.GetTotalMemory (true) / 1048576f).ToString ("#,##0.00") + " MB", 10, 25, _statsForegroundColor);
-										break;
-								case ScreenLocation.TopRight:
-										// Generate Watch List
-										SolidQuad (Screen.width - 92, 0, Screen.width, 50, _statsBackgroundColor);
-										PrintString ((1 / Time.smoothDeltaTime).ToString ("#,##0.00") + " FPS", Screen.width - 82, 10, _statsForegroundColor);
-										PrintString ((System.GC.GetTotalMemory (true) / 1048576f).ToString ("#,##0.00") + " MB", Screen.width - 82, 25, _statsForegroundColor);
-										break;
-								case ScreenLocation.BottomLeft:
+
+										// Watch
+										SolidQuad (Screen.width - lastFrameWidth, 0, Screen.width, watchHeight, _statsBackgroundColor);
+										foreach (KeyValuePair<string, WatchedItem> entry in _watchedItems) {
+												int testLength = (entry.Value.Output.Length * GlyphWidth) + (_statsPadding * 2);
+												if (testLength > _watchWidth) {
+														_watchWidth = testLength;
+												}
+												PrintString (entry.Value.Output, Screen.width - lastFrameWidth + _statsPadding, lineOffset, _statsForegroundColor);
+												lineOffset += _statsLineSpacing + 9;
+										}
+								} else {
 										SolidQuad (0, Screen.height - 50, 92, Screen.height, _statsBackgroundColor);
 										PrintString ((1 / Time.smoothDeltaTime).ToString ("#,##0.00") + " FPS", 10, Screen.height - 40, _statsForegroundColor);
 										PrintString ((System.GC.GetTotalMemory (true) / 1048576f).ToString ("#,##0.00") + " MB", 10, Screen.height - 25, _statsForegroundColor);
-										break;
-								case ScreenLocation.BottomRight:
-										// Generate Watch List
-										SolidQuad (Screen.width - 92, Screen.height - 50, Screen.width, Screen.height, _statsBackgroundColor);
-										PrintString ((1 / Time.smoothDeltaTime).ToString ("#,##0.00") + " FPS", Screen.width - 82, Screen.height - 40, _statsForegroundColor);
-										PrintString ((System.GC.GetTotalMemory (true) / 1048576f).ToString ("#,##0.00") + " MB", Screen.width - 82, Screen.height - 25, _statsForegroundColor);
-										break;
 
-								}
-
-
-								switch (WatchList) {
-								case ScreenLocation.TopRight:
-										int itemCount = _watchedItems.Count;
-										int height = (itemCount * 9) + (itemCount * _statsLineSpacing) + (_statsPadding * 2);
-										int lineOffset = _statsPadding;
-										SolidQuad (Screen.width - 100, 0, Screen.width, height, _statsBackgroundColor);
+										// Watch
+										lineOffset = Screen.height - _statsPadding - (_statsLineSpacing * (_watchedItems.Count - 1)) - (GlyphHeight * (_watchedItems.Count - 1));
+										SolidQuad (Screen.width - lastFrameWidth, Screen.height - watchHeight, Screen.width, Screen.height, _statsBackgroundColor);
 										foreach (KeyValuePair<string, WatchedItem> entry in _watchedItems) {
-												PrintString (entry.Value.Output, Screen.width - 100 + _statsPadding, lineOffset, _statsForegroundColor);
+												int testLength = (entry.Value.Output.Length * GlyphWidth) + (_statsPadding * 2);
+												if (testLength > _watchWidth) {
+														_watchWidth = testLength;
+												}
+												PrintString (entry.Value.Output, Screen.width - lastFrameWidth + _statsPadding, lineOffset, _statsForegroundColor);
 												lineOffset += _statsLineSpacing + 9;
 										}
-										break;
 								}
-
-						} else {
+						} else if (Mode == DisplayMode.Console) {
 								SolidQuad (0f, -4f, (float)Screen.width, 375f, _logBackgroundColor);
 								int num = 0;
 								int num2 = hDebug._logMessages.Count - _logOffsetV;
@@ -415,6 +417,7 @@ public class hDebug : MonoBehaviour
 								}
 								string text = string.Format ("{0}-{1}", num3, num2);
 								PrintString (text, Screen.width - 8 * text.Length, 0, Color.gray);
+
 						}
 						GL.End ();
 						GL.PopMatrix ();
@@ -671,8 +674,6 @@ public class hDebug : MonoBehaviour
 				public string Data;
 				public string Key;
 
-				public int Length { get; private set; }
-
 				public string Output { 
 						get {
 								return Key + ": " + Data;
@@ -684,7 +685,6 @@ public class hDebug : MonoBehaviour
 						Type = type;
 						Key = key;
 						Data = data;
-						Length = Key.Length + 2 + Data.Length;
 				}
 		}
 
