@@ -30,6 +30,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO CODE REVIEW AND CLEAN UP
 /// <summary>
 /// A developer console useful for in-game debugging.
 /// </summary>
