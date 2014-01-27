@@ -1,6 +1,6 @@
 ﻿#region Copyright Notice & License Information
 //
-// hDebug.cs
+// hConsole.cs
 //
 // Author:
 //       Matthew Davey <matthew.davey@dotbunny.com>
@@ -27,36 +27,31 @@
 // THE SOFTWARE.
 #endregion
 
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: Make as a drop in
-// TODO: Add "Watch" system to watch something (maybe you register actions for it to pull a string from?
 /// <summary>
 /// A developer console useful for in-game debugging.
 /// </summary>
-public class hDebug : MonoBehaviour
+/// <remarks>This component does not follow our normal component/base model.</remarks>
+public class hConsole : MonoBehaviour
 {
-		const int _debugLogLines = 25;
-		const int _debugLogLinesMax = 10000;
-		const int _statsPadding = 10;
-		const int _statsLineSpacing = 6;
-		const int FontBegin = 33;
-		const int FontEnd = 127;
-		const int GlyphHeight = 15;
-		const int GlyphWidth = 8;
-		const int NbGlyphs = 94;
-		const string ShaderText = "Shader \"hDebug/Text\"\r\n{\r\nProperties\r\n{\r\n_MainTex (\"Main\", 2D) = \"white\" {}\r\n}\r\n\r\nCategory\r\n{\r\n                        Tags\r\n                        {\r\n                            \"Queue\" = \"Transparent\"\r\n                        }\r\n                        \r\n                        Blend SrcAlpha OneMinusSrcAlpha\r\n                        AlphaTest Greater .01\r\n                        ColorMask RGB\r\n                        Cull Off\r\n                        Lighting Off\r\n                        ZWrite On\r\n                        \r\n                        Fog\r\n                        {\r\n                            Color(0, 0, 0, 0)\r\n                        }\r\n                        \r\n                        BindChannels\r\n                        {\r\n                            Bind \"Color\", color\r\n                            Bind \"Vertex\", vertex\r\n                            Bind \"TexCoord\", texcoord\r\n                        }\r\n                        \r\n                        SubShader\r\n                        {\r\n                            Pass\r\n                            {\r\n                                SetTexture [_MainTex]\r\n                                {\r\n                                    combine texture * primary\r\n                                }\r\n                            }\r\n                        }\r\n                    }\r\n                }";
-		public static Color Shadow = Color.cyan;
 		public bool CreateCamera = true;
 		public DisplayMode Mode = DisplayMode.Off;
 		public DisplayLocation Location = DisplayLocation.Top;
-		public KeyCode Toggle = KeyCode.BackQuote;
-		public KeyCode ScrollUp = KeyCode.UpArrow;
-		public KeyCode ScrollDown = KeyCode.DownArrow;
-		public KeyCode ScrollLeft = KeyCode.LeftArrow;
-		public KeyCode ScrollRight = KeyCode.RightArrow;
+		public KeyCode ToggleKey = KeyCode.BackQuote;
+		const int DebugLogLines = 25;
+		const int DebugLogLinesMax = 10000;
+		const int StatsPadding = 10;
+		const int StatsLineSpacing = 7;
+		const int FontBegin = 33;
+		const int FontEnd = 127;
+		const int GlyphHeight = 8;
+		const int GlyphWidth = 8;
+		const int GlyphCount = 94;
+		const string ShaderText = "Shader \"hDebug/Text\"\r\n{\r\nProperties\r\n{\r\n_MainTex (\"Main\", 2D) = \"white\" {}\r\n}\r\n\r\nCategory\r\n{\r\n                        Tags\r\n                        {\r\n                            \"Queue\" = \"Transparent\"\r\n                        }\r\n                        \r\n                        Blend SrcAlpha OneMinusSrcAlpha\r\n                        AlphaTest Greater .01\r\n                        ColorMask RGB\r\n                        Cull Off\r\n                        Lighting Off\r\n                        ZWrite On\r\n                        \r\n                        Fog\r\n                        {\r\n                            Color(0, 0, 0, 0)\r\n                        }\r\n                        \r\n                        BindChannels\r\n                        {\r\n                            Bind \"Color\", color\r\n                            Bind \"Vertex\", vertex\r\n                            Bind \"TexCoord\", texcoord\r\n                        }\r\n                        \r\n                        SubShader\r\n                        {\r\n                            Pass\r\n                            {\r\n                                SetTexture [_MainTex]\r\n                                {\r\n                                    combine texture * primary\r\n                                }\r\n                            }\r\n                        }\r\n                    }\r\n                }";
+		public static Color Shadow = Color.cyan;
+		static readonly char[] _newLineCharacters = new char[] { '\n' };
 		/// <summary>
 		/// The font to be rendered to the screen, stored as a byte array.
 		/// </summary>
@@ -103,28 +98,25 @@ public class hDebug : MonoBehaviour
 				0x8C, 0x00, 0x00, 0x00, 0x00, 0x49, 0x45, 0x4E, 0x44, 0xAE, 0x42, 0x60, 0x82
 		};
 		static readonly Color _logBackgroundColor = new Color (0.1337f, 0.1337f, 0.1337f, 0.95f);
-		static readonly List<hDebug.LogMessage> _logMessages = new List<hDebug.LogMessage> ();
+		static readonly List<hConsole.LogMessage> _logMessages = new List<hConsole.LogMessage> ();
 		static readonly Color[] _logTypeColors = { Color.white, Color.yellow, Color.red };
-		static readonly List<hDebug.PrintedText> _printedText = new List<hDebug.PrintedText> ();
+		static readonly List<hConsole.PrintedText> _printedText = new List<hConsole.PrintedText> ();
 		static readonly Color _statsBackgroundColor = new Color (0.1337f, 0.1337f, 0.1337f, 0.95f);
 		static readonly Color _statsForegroundColor = new Color (1f, 1f, 1f, 0.95f);
 		static readonly Dictionary<string, WatchedItem> _watchedItems = new Dictionary<string, WatchedItem> ();
 		static int _debugLogCount;
 		Camera _fontCamera;
 		Texture2D _fontImage;
-		UnityEngine.Material _fontMaterial;
+		Material _fontMaterial;
 		float[] _glyphLeft;
 		float[] _glyphRight;
 		float[] _glyphTop;
 		float[] _glyphBottom;
 		bool _init;
-		bool _keyIsUp;
-		bool _keyWasUp;
 		int _logOffsetH;
 		int _logOffsetV;
-		bool _showLog;
 		int _watchWidth = 100;
-		hDebug.UVRectangle _whiteUV;
+		hConsole.UVRectangle _whiteUV;
 
 		public enum DisplayLocation
 		{
@@ -141,111 +133,109 @@ public class hDebug : MonoBehaviour
 
 		public static void Error (object obj)
 		{
-				#if UNITY_EDITOR
-				UnityEngine.Debug.LogError (obj);
-				#endif
-				hDebug.PushLog (obj.ToString (), 2);
+				Debug.LogError (obj);
+				hConsole.PushLog (obj.ToString (), 2);
 		}
 
 		public static void Error (string text, params object[] args)
 		{
-				#if UNITY_EDITOR
-				UnityEngine.Debug.LogError (string.Format (text, args));
-				#endif
-				hDebug.PushLog (string.Format (text, args), 2);
+				Debug.LogError (string.Format (text, args));
+
+				hConsole.PushLog (string.Format (text, args), 2);
 		}
 
-		public static void Error (UnityEngine.Object context, string text, params object[] args)
+		public static void Error (Object context, string text, params object[] args)
 		{
-				#if UNITY_EDITOR
-				UnityEngine.Debug.LogError (string.Format (text, args), context);
-				#endif
-				hDebug.PushLog (string.Format (text, args), 2);
+
+				Debug.LogError (string.Format (text, args), context);
+
+				hConsole.PushLog (string.Format (text, args), 2);
+		}
+
+		public static void Initialize ()
+		{
+				var foundConsole = FindObjectOfType (typeof(hConsole)) as hConsole;
+				if (foundConsole == null) {
+						var go = GameObject.Find (Hydrogen.Components.DefaultSingletonName) ??
+						         new GameObject (Hydrogen.Components.DefaultSingletonName);
+						go.AddComponent<hConsole> ();
+				}
 		}
 
 		public static void Log (object obj)
 		{
-				#if UNITY_EDITOR
-				UnityEngine.Debug.Log (obj);
-				#endif
-				hDebug.PushLog (obj.ToString (), 0);
+
+				Debug.Log (obj);
+				hConsole.PushLog (obj.ToString (), 0);
 		}
 
 		public static void Log (string text, params object[] args)
 		{
-				#if UNITY_EDITOR
-				UnityEngine.Debug.Log (string.Format (text, args));
-				#endif
-				hDebug.PushLog (string.Format (text, args), 0);
+
+				Debug.Log (string.Format (text, args));
+				hConsole.PushLog (string.Format (text, args), 0);
 		}
 
-		public static void Log (UnityEngine.Object context, string text, params object[] args)
+		public static void Log (Object context, string text, params object[] args)
 		{
-				#if UNITY_EDITOR
-				UnityEngine.Debug.Log (string.Format (text, args), context);
-				#endif
-				hDebug.PushLog (string.Format (text, args), 0);
+
+				Debug.Log (string.Format (text, args), context);
+				hConsole.PushLog (string.Format (text, args), 0);
 		}
 
 		public static void Print (int x, int y, object obj)
 		{
-				hDebug._printedText.Add (new hDebug.PrintedText (obj.ToString (), x, y, Color.white));
+				hConsole._printedText.Add (new hConsole.PrintedText (obj.ToString (), x, y, Color.white));
 		}
 
 		public static void Print (int x, int y, string text)
 		{
-				hDebug._printedText.Add (new hDebug.PrintedText (text, x, y, Color.white));
+				hConsole._printedText.Add (new hConsole.PrintedText (text, x, y, Color.white));
 		}
 
 		public static void Print (int x, int y, string text, params object[] args)
 		{
-				hDebug._printedText.Add (new hDebug.PrintedText (string.Format (text, args), x, y, Color.white));
+				hConsole._printedText.Add (new hConsole.PrintedText (string.Format (text, args), x, y, Color.white));
 		}
 
 		public static void Print (int x, int y, Color colour, object obj)
 		{
-				hDebug._printedText.Add (new hDebug.PrintedText (obj.ToString (), x, y, colour));
+				hConsole._printedText.Add (new hConsole.PrintedText (obj.ToString (), x, y, colour));
 		}
 
 		public static void Print (int x, int y, Color colour, string text)
 		{
-				hDebug._printedText.Add (new hDebug.PrintedText (text, x, y, colour));
+				hConsole._printedText.Add (new hConsole.PrintedText (text, x, y, colour));
 		}
 
 		public static void Print (int x, int y, Color colour, string text, params object[] args)
 		{
-				hDebug._printedText.Add (new hDebug.PrintedText (string.Format (text, args), x, y, colour));
+				hConsole._printedText.Add (new hConsole.PrintedText (string.Format (text, args), x, y, colour));
 		}
 
 		public static void Warn (object obj)
 		{
-				#if UNITY_EDITOR
-				UnityEngine.Debug.LogWarning (obj);
-				#endif
-				hDebug.PushLog (obj.ToString (), 1);
+				Debug.LogWarning (obj);
+				hConsole.PushLog (obj.ToString (), 1);
 		}
 
 		public static void Warn (string text, params object[] args)
 		{
-				#if UNITY_EDITOR
-				UnityEngine.Debug.LogWarning (string.Format (text, args));
-				#endif
-				hDebug.PushLog (string.Format (text, args), 1);
+				Debug.LogWarning (string.Format (text, args));
+				hConsole.PushLog (string.Format (text, args), 1);
 		}
 
-		public static void Warn (UnityEngine.Object context, string text, params object[] args)
+		public static void Warn (Object context, string text, params object[] args)
 		{
-				#if UNITY_EDITOR
-				UnityEngine.Debug.LogWarning (string.Format (text, args), context);
-				#endif
-				hDebug.PushLog (string.Format (text, args), 1);
+				Debug.LogWarning (string.Format (text, args), context);
+				hConsole.PushLog (string.Format (text, args), 1);
 		}
 
 		public static void Watch (string key, bool value)
 		{
 				if (_watchedItems.ContainsKey (key) && _watchedItems [key].Type == WatchedItem.ItemType.Boolean) {
 						_watchedItems [key].Data = value.ToString ();
-					
+
 				} else {
 						_watchedItems [key] = new WatchedItem (WatchedItem.ItemType.Boolean, key, value.ToString ());
 				}
@@ -280,17 +270,17 @@ public class hDebug : MonoBehaviour
 
 		public static void UnityError (string text, params object[] args)
 		{
-				hDebug.PushLog (string.Format (text, args), 2);
+				hConsole.PushLog (string.Format (text, args), 2);
 		}
 
 		public static void UnityLog (string text, params object[] args)
 		{
-				hDebug.PushLog (string.Format (text, args), 0);
+				hConsole.PushLog (string.Format (text, args), 0);
 		}
 
 		public static void UnityWarn (string text, params object[] args)
 		{
-				hDebug.PushLog (string.Format (text, args), 1);
+				hConsole.PushLog (string.Format (text, args), 1);
 		}
 
 		public static void UnWatch (string key)
@@ -301,19 +291,15 @@ public class hDebug : MonoBehaviour
 
 		static void PushLog (string text, int type)
 		{
-				if (hDebug._logMessages.Count >= _debugLogLinesMax) {
-						hDebug._logMessages.RemoveAt (0);
+				if (hConsole._logMessages.Count >= DebugLogLinesMax) {
+						hConsole._logMessages.RemoveAt (0);
 				}
-				string[] array = text.Split (new char[] {
-						'\n'
-				});
-				string[] array2 = array;
-				for (int i = 0; i < array2.Length; i++) {
-						string m = array2 [i];
-						hDebug._logMessages.Add (
-								new hDebug.LogMessage (
-										string.Format ("[{0}] {1}", Time.time.ToString ().PadRight (9, '0'), m), type));
-						hDebug._debugLogCount++;
+						
+				foreach (var lineItem in text.Split (_newLineCharacters)) {
+						hConsole._logMessages.Add (
+								new hConsole.LogMessage (
+										string.Format ("[{0}] {1}", Time.time.ToString ().PadRight (9, '0'), lineItem), type));
+						hConsole._debugLogCount++;
 				}
 		}
 
@@ -332,14 +318,14 @@ public class hDebug : MonoBehaviour
 		{
 				switch (type) {
 				case LogType.Warning:
-						hDebug.UnityWarn (condition, new object[0]);
+						hConsole.UnityWarn (condition, new object[0]);
 						break;
 				case LogType.Log:
-						hDebug.UnityLog (condition, new object[0]);
+						hConsole.UnityLog (condition, new object[0]);
 						break;
 				default:
-						hDebug.UnityError (condition, new object[0]);
-						hDebug.UnityError (stackTrace, new object[0]);
+						hConsole.UnityError (condition, new object[0]);
+						hConsole.UnityError (stackTrace, new object[0]);
 						break;
 				}
 		}
@@ -351,54 +337,79 @@ public class hDebug : MonoBehaviour
 						_fontMaterial.SetPass (0);
 						GL.LoadPixelMatrix ();
 						GL.Begin (4);
-						foreach (hDebug.PrintedText current in hDebug._printedText) {
+						foreach (hConsole.PrintedText current in hConsole._printedText) {
 								PrintString (current.Text, current.X, current.Y, current.Color);
 						}
 						if (Mode == DisplayMode.Stats) {
 								int itemCount = _watchedItems.Count;
-								int watchHeight = (itemCount * 9) + (itemCount * _statsLineSpacing) + (_statsPadding * 2);
-								int lineOffset = _statsPadding;
+								int watchHeight = (itemCount * GlyphHeight) + (itemCount * StatsLineSpacing) + (StatsPadding * 2);
+								int lineOffset = StatsPadding;
 								int lastFrameWidth = _watchWidth;
 
 								if (Location == DisplayLocation.Top) {
-										// Stats
+										// Output the stats background quad
 										SolidQuad (0, 0, 92, 50, _statsBackgroundColor);
-										PrintString ((1 / Time.smoothDeltaTime).ToString ("#,##0.00") + " FPS", 10, 10, _statsForegroundColor);
-										PrintString ((System.GC.GetTotalMemory (true) / 1048576f).ToString ("#,##0.00") + " MB", 10, 25, _statsForegroundColor);
 
-										// Watch
+										// Framerate
+										PrintString ((1 / Time.smoothDeltaTime).ToString ("#,##0.00") + " FPS", 10, 10, _statsForegroundColor);
+
+										// Approximated Memory
+										PrintString (string.Format ("{0:#,##0.00} MB", (System.GC.GetTotalMemory (true) / 1048576f)), 10, 25, _statsForegroundColor);
+
+										// Output the watch list background quad using the calculated width based on content.
 										SolidQuad (Screen.width - lastFrameWidth, 0, Screen.width, watchHeight, _statsBackgroundColor);
+
+										// Output all WatchedItems
 										foreach (KeyValuePair<string, WatchedItem> entry in _watchedItems) {
-												int testLength = (entry.Value.Output.Length * GlyphWidth) + (_statsPadding * 2);
-												if (testLength > _watchWidth) {
-														_watchWidth = testLength;
+
+												// Determine the width of the background quad for the future.
+												if (entry.Value.OutputPaddedSize > _watchWidth) {
+														_watchWidth = entry.Value.OutputPaddedSize;
 												}
-												PrintString (entry.Value.Output, Screen.width - lastFrameWidth + _statsPadding, lineOffset, _statsForegroundColor);
-												lineOffset += _statsLineSpacing + 9;
+
+												// Output WatchedItem
+												PrintString (entry.Value.Output, Screen.width - lastFrameWidth + StatsPadding, lineOffset, _statsForegroundColor);
+
+												// Increment Line Offset
+												lineOffset += StatsLineSpacing + GlyphHeight;
 										}
 								} else {
+										// Output the stats background quad
 										SolidQuad (0, Screen.height - 50, 92, Screen.height, _statsBackgroundColor);
-										PrintString ((1 / Time.smoothDeltaTime).ToString ("#,##0.00") + " FPS", 10, Screen.height - 40, _statsForegroundColor);
-										PrintString ((System.GC.GetTotalMemory (true) / 1048576f).ToString ("#,##0.00") + " MB", 10, Screen.height - 25, _statsForegroundColor);
 
-										// Watch
-										lineOffset = Screen.height - _statsPadding - (_statsLineSpacing * (_watchedItems.Count - 1)) - (GlyphHeight * (_watchedItems.Count - 1));
+										// Framerate
+										PrintString ((1 / Time.smoothDeltaTime).ToString ("#,##0.00") + " FPS", 10, Screen.height - 40, _statsForegroundColor);
+
+										// Approximated Memory
+										PrintString (string.Format ("{0:#,##0.00} MB", (System.GC.GetTotalMemory (true) / 1048576f)), 10, Screen.height - 25, _statsForegroundColor);
+
+										// Determine a height offset to start outputing the watches
+										lineOffset = Screen.height - watchHeight + StatsPadding;
+
+										// Output the watch list background quad using the calculated width based on content.
 										SolidQuad (Screen.width - lastFrameWidth, Screen.height - watchHeight, Screen.width, Screen.height, _statsBackgroundColor);
+
+										// Output all WatchedItems
 										foreach (KeyValuePair<string, WatchedItem> entry in _watchedItems) {
-												int testLength = (entry.Value.Output.Length * GlyphWidth) + (_statsPadding * 2);
-												if (testLength > _watchWidth) {
-														_watchWidth = testLength;
+
+												// Determine the width of the background quad for the future.
+												if (entry.Value.OutputPaddedSize > _watchWidth) {
+														_watchWidth = entry.Value.OutputPaddedSize;
 												}
-												PrintString (entry.Value.Output, Screen.width - lastFrameWidth + _statsPadding, lineOffset, _statsForegroundColor);
-												lineOffset += _statsLineSpacing + 9;
+
+												// Output WatchedItem
+												PrintString (entry.Value.Output, Screen.width - lastFrameWidth + StatsPadding, lineOffset, _statsForegroundColor);
+
+												// Increment Line Offset
+												lineOffset += StatsLineSpacing + GlyphHeight;
 										}
 								}
 						} else if (Mode == DisplayMode.Console) {
 								SolidQuad (0f, -4f, (float)Screen.width, 375f, _logBackgroundColor);
 								int num = 0;
-								int num2 = hDebug._logMessages.Count - _logOffsetV;
-								if (num2 > hDebug._debugLogCount) {
-										num2 = hDebug._debugLogCount;
+								int num2 = hConsole._logMessages.Count - _logOffsetV;
+								if (num2 > hConsole._debugLogCount) {
+										num2 = hConsole._debugLogCount;
 								} else {
 										if (num2 < 25) {
 												num2 = 25;
@@ -409,8 +420,8 @@ public class hDebug : MonoBehaviour
 										num3 = 0;
 								}
 								for (int i = num3; i < num2; i++) {
-										if (i >= 0 && i < hDebug._logMessages.Count) {
-												hDebug.LogMessage logMessage = hDebug._logMessages [i];
+										if (i >= 0 && i < hConsole._logMessages.Count) {
+												hConsole.LogMessage logMessage = hConsole._logMessages [i];
 												PrintString (logMessage.Message, 1 + _logOffsetH * 8, num, _logTypeColors [logMessage.Type]);
 												num += 15;
 										}
@@ -421,7 +432,7 @@ public class hDebug : MonoBehaviour
 						}
 						GL.End ();
 						GL.PopMatrix ();
-						hDebug._printedText.Clear ();
+						hConsole._printedText.Clear ();
 				}
 		}
 
@@ -442,7 +453,7 @@ public class hDebug : MonoBehaviour
 								int num4 = num + 8;
 								int num5 = Screen.height - y;
 								int num6 = Screen.height - (y + 15);
-								if (colour == hDebug.Shadow) {
+								if (colour == hConsole.Shadow) {
 										GL.Color (Color.black);
 										GL.TexCoord2 (_glyphLeft [num2], _glyphBottom [num2]);
 										GL.Vertex3 (num3, (float)num6, 0f);
@@ -504,26 +515,26 @@ public class hDebug : MonoBehaviour
 				}
 		}
 
-		void SolidQuad (float left, float top, float right, float bottom, Color colour)
+		void SolidQuad (float left, float top, float right, float bottom, Color color)
 		{
 				top = (float)Screen.height - top;
 				bottom = (float)Screen.height - bottom;
-				GL.Color (colour);
+				GL.Color (color);
 				GL.TexCoord2 (_whiteUV.U0, _whiteUV.V0);
 				GL.Vertex3 (left, bottom, 0f);
-				GL.Color (colour);
+				GL.Color (color);
 				GL.TexCoord2 (_whiteUV.U0, _whiteUV.V0);
 				GL.Vertex3 (left, top, 0f);
-				GL.Color (colour);
+				GL.Color (color);
 				GL.TexCoord2 (_whiteUV.U0, _whiteUV.V0);
 				GL.Vertex3 (right, top, 0f);
-				GL.Color (colour);
+				GL.Color (color);
 				GL.TexCoord2 (_whiteUV.U0, _whiteUV.V0);
 				GL.Vertex3 (left, bottom, 0f);
-				GL.Color (colour);
+				GL.Color (color);
 				GL.TexCoord2 (_whiteUV.U0, _whiteUV.V0);
 				GL.Vertex3 (right, top, 0f);
-				GL.Color (colour);
+				GL.Color (color);
 				GL.TexCoord2 (_whiteUV.U0, _whiteUV.V0);
 				GL.Vertex3 (right, bottom, 0f);
 		}
@@ -536,7 +547,7 @@ public class hDebug : MonoBehaviour
 						_fontImage.filterMode = 0;
 						_fontImage.wrapMode = (TextureWrapMode)1;
 						_fontImage.hideFlags = (HideFlags)13;
-						UnityEngine.Material material = new UnityEngine.Material ("Shader \"hDebug/Text\"\r\n                {\r\n                      Properties\r\n                      {\r\n                          _MainTex (\"Main\", 2D) = \"white\" {}\r\n                      }\r\n                      \r\n                      Category\r\n                      {\r\n                        Tags\r\n                        {\r\n                            \"Queue\" = \"Transparent\"\r\n                        }\r\n                        \r\n                        Blend SrcAlpha OneMinusSrcAlpha\r\n                        AlphaTest Greater .01\r\n                        ColorMask RGB\r\n                        Cull Off\r\n                        Lighting Off\r\n                        ZWrite On\r\n                        \r\n                        Fog\r\n                        {\r\n                            Color(0, 0, 0, 0)\r\n                        }\r\n                        \r\n                        BindChannels\r\n                        {\r\n                            Bind \"Color\", color\r\n                            Bind \"Vertex\", vertex\r\n                            Bind \"TexCoord\", texcoord\r\n                        }\r\n                        \r\n                        SubShader\r\n                        {\r\n                            Pass\r\n                            {\r\n                                SetTexture [_MainTex]\r\n                                {\r\n                                    combine texture * primary\r\n                                }\r\n                            }\r\n                        }\r\n                    }\r\n                }");
+						Material material = new Material ("Shader \"hDebug/Text\"\r\n                {\r\n                      Properties\r\n                      {\r\n                          _MainTex (\"Main\", 2D) = \"white\" {}\r\n                      }\r\n                      \r\n                      Category\r\n                      {\r\n                        Tags\r\n                        {\r\n                            \"Queue\" = \"Transparent\"\r\n                        }\r\n                        \r\n                        Blend SrcAlpha OneMinusSrcAlpha\r\n                        AlphaTest Greater .01\r\n                        ColorMask RGB\r\n                        Cull Off\r\n                        Lighting Off\r\n                        ZWrite On\r\n                        \r\n                        Fog\r\n                        {\r\n                            Color(0, 0, 0, 0)\r\n                        }\r\n                        \r\n                        BindChannels\r\n                        {\r\n                            Bind \"Color\", color\r\n                            Bind \"Vertex\", vertex\r\n                            Bind \"TexCoord\", texcoord\r\n                        }\r\n                        \r\n                        SubShader\r\n                        {\r\n                            Pass\r\n                            {\r\n                                SetTexture [_MainTex]\r\n                                {\r\n                                    combine texture * primary\r\n                                }\r\n                            }\r\n                        }\r\n                    }\r\n                }");
 						material.mainTexture = _fontImage;
 						material.hideFlags = (HideFlags)13;
 						material.shader.hideFlags = (HideFlags)13;
@@ -575,8 +586,50 @@ public class hDebug : MonoBehaviour
 										num2 += 15;
 								}
 						}
-						_whiteUV = hDebug.UVRectangle.CreateFromTexture (3, 5, 1, 1, _fontImage.width, _fontImage.height);
+						_whiteUV = hConsole.UVRectangle.CreateFromTexture (3, 5, 1, 1, _fontImage.width, _fontImage.height);
 				}
+		}
+
+		public void ToggleMode ()
+		{
+				switch (Mode) {
+				case DisplayMode.Off:
+						Mode = DisplayMode.Stats;
+						break;
+				case DisplayMode.Stats:
+						Mode = DisplayMode.Console;
+						break;
+				case DisplayMode.Console:
+						Mode = DisplayMode.Off;
+						break;
+				}
+		}
+
+		public void PageUp ()
+		{
+				_logOffsetV += DebugLogLines;
+				int num = hConsole._logMessages.Count - DebugLogLines;
+				if (_logOffsetV > num) {
+						_logOffsetV = num;
+				}
+		}
+
+		public void PageDown ()
+		{
+				_logOffsetV -= DebugLogLines;
+				if (_logOffsetV < 0) {
+						_logOffsetV = 0;
+				}
+		}
+
+		public void ScrollLeft ()
+		{
+				_logOffsetH--;
+		}
+
+		public void ScrollRight ()
+		{
+				_logOffsetH++;
 		}
 
 		void Update ()
@@ -585,33 +638,24 @@ public class hDebug : MonoBehaviour
 						_init = true;
 						gameObject.camera.enabled = true;
 				}
-				_keyWasUp = _keyIsUp;
-				_keyIsUp = Input.GetKeyUp (Toggle);
-				if (_keyWasUp && !_keyIsUp) {
-						_showLog = !_showLog;
+						
+				if ((Input.GetKey (KeyCode.LeftShift) || Input.GetKey (KeyCode.RightShift)) && Input.GetKeyDown (ToggleKey)) {
+						Mode = DisplayMode.Console;
+				} else {
+						if (Input.GetKeyDown (ToggleKey)) {
+								ToggleMode ();
+						}
 				}
-				if (_showLog) {
-						if (Input.GetKeyUp (ScrollUp)) {
-								_logOffsetV += 25;
-								int num = hDebug._logMessages.Count - 25;
-								if (_logOffsetV > num) {
-										_logOffsetV = num;
-								}
-						} else {
-								if (Input.GetKeyUp (ScrollDown)) {
-										_logOffsetV -= 25;
-										if (_logOffsetV < 0) {
-												_logOffsetV = 0;
-										}
-								} else {
-										if (Input.GetKeyUp (ScrollLeft)) {
-												_logOffsetH--;
-										} else {
-												if (Input.GetKeyUp (ScrollRight)) {
-														_logOffsetH++;
-												}
-										}
-								}
+
+				if (Mode == DisplayMode.Console) {
+						if (Input.GetKeyDown (KeyCode.UpArrow)) {
+								PageUp ();
+						} else if (Input.GetKeyDown (KeyCode.DownArrow)) {
+								PageDown ();
+						} else if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+								ScrollLeft ();
+						} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
+								ScrollRight ();
 						}
 				}
 		}
@@ -647,11 +691,11 @@ public class hDebug : MonoBehaviour
 						V1 = v1;
 				}
 
-				public static hDebug.UVRectangle CreateFromTexture (int left, int top, int width, int height, int sourceWidth, int sourceHeight)
+				public static hConsole.UVRectangle CreateFromTexture (int left, int top, int width, int height, int sourceWidth, int sourceHeight)
 				{
 						float num = 1f / (float)sourceWidth;
 						float num2 = 1f / (float)sourceHeight;
-						return new hDebug.UVRectangle {
+						return new hConsole.UVRectangle {
 								U0 = (float)left * num,
 								V0 = 1f - (float)top * num2,
 								U1 = (float)(left + width) * num,
@@ -671,14 +715,27 @@ public class hDebug : MonoBehaviour
 				}
 
 				public ItemType Type;
-				public string Data;
+
+				public string Data {
+						get { return _data; }
+						set { 
+								if (_data != value) {
+										_data = value;
+										OutputPaddedSize = (Output.Length * GlyphWidth) + (StatsPadding * 2);
+								}
+						}
+				}
+
 				public string Key;
+				string _data;
 
 				public string Output { 
 						get {
 								return Key + ": " + Data;
 						}
 				}
+
+				public int OutputPaddedSize;
 
 				public WatchedItem (ItemType type, string key, string data)
 				{
