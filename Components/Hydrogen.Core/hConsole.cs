@@ -40,7 +40,7 @@ public class hConsole : MonoBehaviour
 		public DisplayMode Mode = DisplayMode.Off;
 		public DisplayLocation Location = DisplayLocation.Top;
 		public KeyCode ToggleKey = KeyCode.BackQuote;
-		const int DebugLogLines = 25;
+		const int DebugLogLines = 24;
 		const int DebugLogLinesMax = 10000;
 		const int StatsPadding = 10;
 		const int StatsLineSpacing = 7;
@@ -116,6 +116,13 @@ public class hConsole : MonoBehaviour
 		int _logOffsetH;
 		int _logOffsetV;
 		int _watchWidth = 100;
+
+		public int ConsoleHeight {
+				get { return _consoleHeight; }
+				set { _consoleHeight = value; }
+		}
+
+		int _consoleHeight = 382;
 		hConsole.UVRectangle _whiteUV;
 
 		public enum DisplayLocation
@@ -405,29 +412,49 @@ public class hConsole : MonoBehaviour
 										}
 								}
 						} else if (Mode == DisplayMode.Console) {
-								SolidQuad (0f, -4f, (float)Screen.width, 375f, _logBackgroundColor);
-								int num = 0;
+
+								int num = StatsPadding;
 								int num2 = hConsole._logMessages.Count - _logOffsetV;
 								if (num2 > hConsole._debugLogCount) {
 										num2 = hConsole._debugLogCount;
 								} else {
-										if (num2 < 25) {
-												num2 = 25;
+										if (num2 < DebugLogLines) {
+												num2 = DebugLogLines;
 										}
 								}
-								int num3 = num2 - 25;
+								int num3 = num2 - DebugLogLines;
 								if (num3 < 0) {
 										num3 = 0;
 								}
-								for (int i = num3; i < num2; i++) {
-										if (i >= 0 && i < hConsole._logMessages.Count) {
-												hConsole.LogMessage logMessage = hConsole._logMessages [i];
-												PrintString (logMessage.Message, 1 + _logOffsetH * 8, num, _logTypeColors [logMessage.Type]);
-												num += 15;
+
+								if (Location == DisplayLocation.Top) {
+										SolidQuad (0f, -4f, (float)Screen.width, ConsoleHeight, _logBackgroundColor);
+
+										for (int i = num3; i < num2; i++) {
+												if (i >= 0 && i < hConsole._logMessages.Count) {
+														hConsole.LogMessage logMessage = hConsole._logMessages [i];
+														PrintString (logMessage.Message, StatsPadding + (_logOffsetH * 8), num, _logTypeColors [logMessage.Type]);
+														num += 15;
+												}
 										}
+
+										string text = string.Format ("{0}-{1}", num3, num2);
+										PrintString (text, Screen.width - StatsPadding - (text.Length * 8), StatsPadding, Color.gray);
+								} else {
+										SolidQuad (0f, Screen.height - ConsoleHeight, (float)Screen.width, Screen.height + 4, _logBackgroundColor);
+
+										num = Screen.height - ConsoleHeight + StatsPadding;
+										for (int i = num3; i < num2; i++) {
+												if (i >= 0 && i < hConsole._logMessages.Count) {
+														hConsole.LogMessage logMessage = hConsole._logMessages [i];
+														PrintString (logMessage.Message, StatsPadding + _logOffsetH * 8, num, _logTypeColors [logMessage.Type]);
+														num += 15;
+												}
+										}
+										string text = string.Format ("{0}-{1}", num3, num2);
+
+										PrintString (text, Screen.width - StatsPadding - (text.Length * 8), (Screen.height - ConsoleHeight) + StatsPadding, Color.gray);
 								}
-								string text = string.Format ("{0}-{1}", num3, num2);
-								PrintString (text, Screen.width - 8 * text.Length, 0, Color.gray);
 
 						}
 						GL.End ();
