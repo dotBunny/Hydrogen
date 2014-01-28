@@ -101,8 +101,8 @@ public class hDebug : MonoBehaviour
 		const int StatsLineSpacing = 7;
 		const int FontBegin = 33;
 		const int FontEnd = 127;
-		const int GlyphHeight = 8;
-		const int GlyphWidth = 8;
+		public const int GlyphHeight = 8;
+		public const int GlyphWidth = 8;
 		const int GlyphCount = 94;
 		const string ShaderText = "Shader \"hDebug/Text\"\r\n{\r\nProperties\r\n{\r\n_MainTex (\"Main\", 2D) = \"white\" {}\r\n}\r\n\r\nCategory\r\n{\r\n                        Tags\r\n                        {\r\n                            \"Queue\" = \"Transparent\"\r\n                        }\r\n                        \r\n                        Blend SrcAlpha OneMinusSrcAlpha\r\n                        AlphaTest Greater .01\r\n                        ColorMask RGB\r\n                        Cull Off\r\n                        Lighting Off\r\n                        ZWrite On\r\n                        \r\n                        Fog\r\n                        {\r\n                            Color(0, 0, 0, 0)\r\n                        }\r\n                        \r\n                        BindChannels\r\n                        {\r\n                            Bind \"Color\", color\r\n                            Bind \"Vertex\", vertex\r\n                            Bind \"TexCoord\", texcoord\r\n                        }\r\n                        \r\n                        SubShader\r\n                        {\r\n                            Pass\r\n                            {\r\n                                SetTexture [_MainTex]\r\n                                {\r\n                                    combine texture * primary\r\n                                }\r\n                            }\r\n                        }\r\n                    }\r\n                }";
 		public static Color Shadow = Color.black;
@@ -332,15 +332,14 @@ public class hDebug : MonoBehaviour
 		static void PushLog (string text, LogType type)
 		{
 
-				if (text.Substring (0, ConsoleUnityPrefix.Length) == ConsoleUnityPrefix)
-						return;
-
 				if (EchoToUnityLog) {
+						if (text.Substring (0, ConsoleUnityPrefix.Length) == ConsoleUnityPrefix)
+								return;
+
 						switch (type) {
 						case LogType.Assert:
 						case LogType.Exception:
 						case LogType.Error:
-
 								Debug.LogError (ConsoleUnityPrefix + text);
 								break;
 						case LogType.Warning:
@@ -350,9 +349,8 @@ public class hDebug : MonoBehaviour
 								Debug.Log (ConsoleUnityPrefix + text);
 								break;
 						}
-
 				}
-
+						
 				if (hDebug._logMessages.Count >= DebugLogLinesMax) {
 						hDebug._logMessages.RemoveAt (0);
 				}
@@ -383,12 +381,12 @@ public class hDebug : MonoBehaviour
 		{
 				switch (type) {
 				case LogType.Error:
-						hDebug.PushLog (condition, LogType.Error);
 						hDebug.PushLog (stackTrace, LogType.Error);
+						hDebug.PushLog (condition, LogType.Error);
 						break;
 				case LogType.Exception:
-						hDebug.PushLog (condition, LogType.Exception);
 						hDebug.PushLog (stackTrace, LogType.Exception);
+						hDebug.PushLog (condition, LogType.Exception);
 						break;
 				default:
 						hDebug.PushLog (condition, type);
