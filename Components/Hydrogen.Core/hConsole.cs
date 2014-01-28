@@ -93,6 +93,7 @@ public class hConsole : MonoBehaviour
 		public DisplayMode Mode = DisplayMode.Off;
 		public DisplayLocation Location = DisplayLocation.Top;
 		public KeyCode ToggleKey = KeyCode.BackQuote;
+		const string ConsoleUnityPrefix = "[h] ";
 		const int DebugLogLines = 24;
 		const int DebugLogLinesMax = 10000;
 		const int StatsPadding = 10;
@@ -104,7 +105,8 @@ public class hConsole : MonoBehaviour
 		const int GlyphWidth = 8;
 		const int GlyphCount = 94;
 		const string ShaderText = "Shader \"hDebug/Text\"\r\n{\r\nProperties\r\n{\r\n_MainTex (\"Main\", 2D) = \"white\" {}\r\n}\r\n\r\nCategory\r\n{\r\n                        Tags\r\n                        {\r\n                            \"Queue\" = \"Transparent\"\r\n                        }\r\n                        \r\n                        Blend SrcAlpha OneMinusSrcAlpha\r\n                        AlphaTest Greater .01\r\n                        ColorMask RGB\r\n                        Cull Off\r\n                        Lighting Off\r\n                        ZWrite On\r\n                        \r\n                        Fog\r\n                        {\r\n                            Color(0, 0, 0, 0)\r\n                        }\r\n                        \r\n                        BindChannels\r\n                        {\r\n                            Bind \"Color\", color\r\n                            Bind \"Vertex\", vertex\r\n                            Bind \"TexCoord\", texcoord\r\n                        }\r\n                        \r\n                        SubShader\r\n                        {\r\n                            Pass\r\n                            {\r\n                                SetTexture [_MainTex]\r\n                                {\r\n                                    combine texture * primary\r\n                                }\r\n                            }\r\n                        }\r\n                    }\r\n                }";
-		public static Color Shadow = Color.cyan;
+		public static Color Shadow = Color.black;
+		public static bool EchoToUnityLog = true;
 		static readonly char[] _newLineCharacters = new char[] { '\n', '\r' };
 		/// <summary>
 		/// The font to be rendered to the screen, stored as a byte array.
@@ -329,6 +331,28 @@ public class hConsole : MonoBehaviour
 
 		static void PushLog (string text, LogType type)
 		{
+
+				if (text.Substring (0, ConsoleUnityPrefix.Length) == ConsoleUnityPrefix)
+						return;
+
+				if (EchoToUnityLog) {
+						switch (type) {
+						case LogType.Assert:
+						case LogType.Exception:
+						case LogType.Error:
+
+								Debug.LogError (ConsoleUnityPrefix + text);
+								break;
+						case LogType.Warning:
+								Debug.LogWarning (ConsoleUnityPrefix + text);
+								break;
+						default:
+								Debug.Log (ConsoleUnityPrefix + text);
+								break;
+						}
+
+				}
+
 				if (hConsole._logMessages.Count >= DebugLogLinesMax) {
 						hConsole._logMessages.RemoveAt (0);
 				}
