@@ -36,8 +36,14 @@ namespace Hydrogen
 		/// </summary>
 		public static class Texture
 		{
+				/// <summary>
+				/// Handy 1/255, useful for calculating color values. 
+				/// </summary>
 				public const float HexInverse = 0.00392156863f;
 
+				/// <summary>
+				/// Web Colors
+				/// </summary>
 				public enum WebColor
 				{
 						None = 0,
@@ -190,7 +196,12 @@ namespace Hydrogen
 						YellowGreen = 0x9acd32
 				}
 
-				public static Color ToColor (WebColor color)
+				/// <summary>
+				/// Convert a WebColor to a UnityEngine.Color
+				/// </summary>
+				/// <returns>UnityEngine.Color.</returns>
+				/// <param name="color">The web color you wish to have returned in Unity format.</param>
+				public static Color ToColor (this WebColor color)
 				{
 
 						return new Color (
@@ -201,6 +212,12 @@ namespace Hydrogen
 						);
 				}
 
+				/// <summary>
+				/// Convert a WebColor to a UnityEngine.Color
+				/// </summary>
+				/// <returns>UnityEngine.Color.</returns>
+				/// <param name="color">The web color you wish to have returned in Unity format.</param>
+				/// <param name="alpha">The alpha value of the color you want returned.</param>
 				public static Color ToColor (WebColor color, float alpha)
 				{
 						Color newColor = ToColor (color);

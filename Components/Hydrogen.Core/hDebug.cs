@@ -37,7 +37,7 @@ using UnityEngine;
 /// A developer console useful for in-game debugging.
 /// </summary>
 /// <remarks>This component does not follow our normal component/base model.</remarks>
-public class hConsole : MonoBehaviour
+public class hDebug : MonoBehaviour
 {
 		/// <summary>
 		/// Internal fail safe to maintain instance across threads.
@@ -52,7 +52,7 @@ public class hConsole : MonoBehaviour
 		/// <summary>
 		/// Internal reference to the static instance of the object pool.
 		/// </summary>
-		static volatile hConsole _staticInstance;
+		static volatile hDebug _staticInstance;
 
 		/// <summary>
 		/// Gets the console instance, creating one if none is found.
@@ -60,19 +60,19 @@ public class hConsole : MonoBehaviour
 		/// <value>
 		/// The Object Pool.
 		/// </value>
-		public static hConsole Instance {
+		public static hDebug Instance {
 				get {
 						if (_staticInstance == null) {
 								lock (_syncRoot) {
-										_staticInstance = FindObjectOfType (typeof(hConsole)) as hConsole;
+										_staticInstance = FindObjectOfType (typeof(hDebug)) as hDebug;
 
 										// If we don't have it, lets make it!
 										if (_staticInstance == null) {
 												var go = GameObject.Find (Hydrogen.Components.DefaultSingletonName) ??
 												         new GameObject (Hydrogen.Components.DefaultSingletonName);
 
-												go.AddComponent<hConsole> ();
-												_staticInstance = go.GetComponent<hConsole> ();	
+												go.AddComponent<hDebug> ();
+												_staticInstance = go.GetComponent<hDebug> ();	
 										}
 								}
 						}
@@ -154,7 +154,7 @@ public class hConsole : MonoBehaviour
 				0x8C, 0x00, 0x00, 0x00, 0x00, 0x49, 0x45, 0x4E, 0x44, 0xAE, 0x42, 0x60, 0x82
 		};
 		static readonly Color _logBackgroundColor = new Color (0.1337f, 0.1337f, 0.1337f, 0.95f);
-		static readonly List<hConsole.LogMessage> _logMessages = new List<hConsole.LogMessage> ();
+		static readonly List<hDebug.LogMessage> _logMessages = new List<hDebug.LogMessage> ();
 		static readonly Color[] _logTypeColors = { 
 				Hydrogen.Texture.ToColor (Hydrogen.Texture.WebColor.Red, 0.95f), // Error
 				Hydrogen.Texture.ToColor (Hydrogen.Texture.WebColor.Crimson, 0.95f), // Assert
@@ -162,7 +162,7 @@ public class hConsole : MonoBehaviour
 				Hydrogen.Texture.ToColor (Hydrogen.Texture.WebColor.White, 0.95f), // Log
 				Hydrogen.Texture.ToColor (Hydrogen.Texture.WebColor.FireBrick, 0.95f), // Exception
 		};
-		static readonly List<hConsole.PrintedText> _printedText = new List<hConsole.PrintedText> ();
+		static readonly List<hDebug.PrintedText> _printedText = new List<hDebug.PrintedText> ();
 		static readonly Color _statsBackgroundColor = new Color (0.1337f, 0.1337f, 0.1337f, 0.95f);
 		static readonly Color _statsForegroundColor = new Color (1f, 1f, 1f, 0.95f);
 		static readonly Dictionary<string, WatchedItem> _watchedItems = new Dictionary<string, WatchedItem> ();
@@ -185,7 +185,7 @@ public class hConsole : MonoBehaviour
 		}
 
 		int _consoleHeight = 382;
-		hConsole.UVRectangle _whiteUV;
+		hDebug.UVRectangle _whiteUV;
 
 		public enum DisplayLocation
 		{
@@ -202,88 +202,88 @@ public class hConsole : MonoBehaviour
 
 		public static void Error (object obj)
 		{
-				hConsole.PushLog (obj.ToString (), LogType.Error);
+				hDebug.PushLog (obj.ToString (), LogType.Error);
 		}
 
 		public static void Error (string text)
 		{
-				hConsole.PushLog (text, LogType.Error);
+				hDebug.PushLog (text, LogType.Error);
 		}
 
 		public static void Error (string text, params object[] args)
 		{
-				hConsole.PushLog (string.Format (text, args), LogType.Error);
+				hDebug.PushLog (string.Format (text, args), LogType.Error);
 		}
 
 		public static void Initialize ()
 		{
-				var foundConsole = FindObjectOfType (typeof(hConsole)) as hConsole;
+				var foundConsole = FindObjectOfType (typeof(hDebug)) as hDebug;
 				if (foundConsole == null) {
 						var go = GameObject.Find (Hydrogen.Components.DefaultSingletonName) ??
 						         new GameObject (Hydrogen.Components.DefaultSingletonName);
-						go.AddComponent<hConsole> ();
-						_staticInstance = go.GetComponent<hConsole> ();
+						go.AddComponent<hDebug> ();
+						_staticInstance = go.GetComponent<hDebug> ();
 				}
 		}
 
 		public static void Log (object obj)
 		{
-				hConsole.PushLog (obj.ToString (), LogType.Log);
+				hDebug.PushLog (obj.ToString (), LogType.Log);
 		}
 
 		public static void Log (string text)
 		{
-				hConsole.PushLog (text, LogType.Log);
+				hDebug.PushLog (text, LogType.Log);
 		}
 
 		public static void Log (string text, params object[] args)
 		{
-				hConsole.PushLog (string.Format (text, args), LogType.Log);
+				hDebug.PushLog (string.Format (text, args), LogType.Log);
 		}
 
 		public static void Print (int x, int y, object obj)
 		{
-				hConsole._printedText.Add (new hConsole.PrintedText (obj.ToString (), x, y, Color.white));
+				hDebug._printedText.Add (new hDebug.PrintedText (obj.ToString (), x, y, Color.white));
 		}
 
 		public static void Print (int x, int y, string text)
 		{
-				hConsole._printedText.Add (new hConsole.PrintedText (text, x, y, Color.white));
+				hDebug._printedText.Add (new hDebug.PrintedText (text, x, y, Color.white));
 		}
 
 		public static void Print (int x, int y, string text, params object[] args)
 		{
-				hConsole._printedText.Add (new hConsole.PrintedText (string.Format (text, args), x, y, Color.white));
+				hDebug._printedText.Add (new hDebug.PrintedText (string.Format (text, args), x, y, Color.white));
 		}
 
 		public static void Print (int x, int y, Color color, object obj)
 		{
-				hConsole._printedText.Add (new hConsole.PrintedText (obj.ToString (), x, y, color));
+				hDebug._printedText.Add (new hDebug.PrintedText (obj.ToString (), x, y, color));
 		}
 
 		public static void Print (int x, int y, Color color, string text)
 		{
-				hConsole._printedText.Add (new hConsole.PrintedText (text, x, y, color));
+				hDebug._printedText.Add (new hDebug.PrintedText (text, x, y, color));
 		}
 
 		public static void Print (int x, int y, Color color, string text, params object[] args)
 		{
-				hConsole._printedText.Add (new hConsole.PrintedText (string.Format (text, args), x, y, color));
+				hDebug._printedText.Add (new hDebug.PrintedText (string.Format (text, args), x, y, color));
 		}
 
 		public static void Warn (object obj)
 		{
-				hConsole.PushLog (obj.ToString (), LogType.Warning);
+				hDebug.PushLog (obj.ToString (), LogType.Warning);
 		}
 
 		public static void Warn (string text)
 		{
-				hConsole.PushLog (text, LogType.Warning);
+				hDebug.PushLog (text, LogType.Warning);
 		}
 
 		public static void Warn (string text, params object[] args)
 		{
-				hConsole.PushLog (string.Format (text, args), LogType.Warning);
+				hDebug.PushLog (string.Format (text, args), LogType.Warning);
 		}
 
 		public static void Watch (string key, bool value)
@@ -353,15 +353,15 @@ public class hConsole : MonoBehaviour
 
 				}
 
-				if (hConsole._logMessages.Count >= DebugLogLinesMax) {
-						hConsole._logMessages.RemoveAt (0);
+				if (hDebug._logMessages.Count >= DebugLogLinesMax) {
+						hDebug._logMessages.RemoveAt (0);
 				}
 
 				foreach (var lineItem in text.Split (_newLineCharacters)) {
-						hConsole._logMessages.Add (
-								new hConsole.LogMessage (
+						hDebug._logMessages.Add (
+								new hDebug.LogMessage (
 										"[" + Time.time.ToString ().PadRight (9, '0') + "] " + lineItem, type));
-						hConsole._debugLogCount++;
+						hDebug._debugLogCount++;
 				}
 		}
 
@@ -383,15 +383,15 @@ public class hConsole : MonoBehaviour
 		{
 				switch (type) {
 				case LogType.Error:
-						hConsole.PushLog (condition, LogType.Error);
-						hConsole.PushLog (stackTrace, LogType.Error);
+						hDebug.PushLog (condition, LogType.Error);
+						hDebug.PushLog (stackTrace, LogType.Error);
 						break;
 				case LogType.Exception:
-						hConsole.PushLog (condition, LogType.Exception);
-						hConsole.PushLog (stackTrace, LogType.Exception);
+						hDebug.PushLog (condition, LogType.Exception);
+						hDebug.PushLog (stackTrace, LogType.Exception);
 						break;
 				default:
-						hConsole.PushLog (condition, type);
+						hDebug.PushLog (condition, type);
 						break;
 				}
 		}
@@ -407,7 +407,7 @@ public class hConsole : MonoBehaviour
 				GL.LoadPixelMatrix ();
 				GL.Begin (4);
 
-				foreach (hConsole.PrintedText current in hConsole._printedText) {
+				foreach (hDebug.PrintedText current in hDebug._printedText) {
 						PrintString (current.Text, current.X, current.Y, current.Color);
 				}
 
@@ -481,9 +481,9 @@ public class hConsole : MonoBehaviour
 				} else if (Mode == DisplayMode.Console) {
 
 						int num = ConsolePadding;
-						int num2 = hConsole._logMessages.Count - _logOffsetV;
-						if (num2 > hConsole._debugLogCount) {
-								num2 = hConsole._debugLogCount;
+						int num2 = hDebug._logMessages.Count - _logOffsetV;
+						if (num2 > hDebug._debugLogCount) {
+								num2 = hDebug._debugLogCount;
 						} else {
 								if (num2 < DebugLogLines) {
 										num2 = DebugLogLines;
@@ -498,8 +498,8 @@ public class hConsole : MonoBehaviour
 								SolidQuad (0f, -4f, (float)Screen.width, ConsoleHeight, _logBackgroundColor);
 
 								for (int i = num3; i < num2; i++) {
-										if (i >= 0 && i < hConsole._logMessages.Count) {
-												hConsole.LogMessage logMessage = hConsole._logMessages [i];
+										if (i >= 0 && i < hDebug._logMessages.Count) {
+												hDebug.LogMessage logMessage = hDebug._logMessages [i];
 												PrintString (logMessage.Message, ConsolePadding + (_logOffsetH * 8), num, _logTypeColors [(int)logMessage.Type]);
 												num += 15;
 										}
@@ -512,8 +512,8 @@ public class hConsole : MonoBehaviour
 
 								num = Screen.height - ConsoleHeight + StatsPadding;
 								for (int i = num3; i < num2; i++) {
-										if (i >= 0 && i < hConsole._logMessages.Count) {
-												hConsole.LogMessage logMessage = hConsole._logMessages [i];
+										if (i >= 0 && i < hDebug._logMessages.Count) {
+												hDebug.LogMessage logMessage = hDebug._logMessages [i];
 												PrintString (logMessage.Message, ConsolePadding + _logOffsetH * 8, num, _logTypeColors [(int)logMessage.Type]);
 												num += 15;
 										}
@@ -526,7 +526,7 @@ public class hConsole : MonoBehaviour
 				}
 				GL.End ();
 				GL.PopMatrix ();
-				hConsole._printedText.Clear ();
+				hDebug._printedText.Clear ();
 
 		}
 
@@ -547,7 +547,7 @@ public class hConsole : MonoBehaviour
 								int num4 = num + 8;
 								int num5 = Screen.height - y;
 								int num6 = Screen.height - (y + 15);
-								if (colour == hConsole.Shadow) {
+								if (colour == hDebug.Shadow) {
 										GL.Color (Color.black);
 										GL.TexCoord2 (_glyphLeft [num2], _glyphBottom [num2]);
 										GL.Vertex3 (num3, (float)num6, 0f);
@@ -679,7 +679,7 @@ public class hConsole : MonoBehaviour
 								num2 += 15;
 						}
 				}
-				_whiteUV = hConsole.UVRectangle.CreateFromTexture (3, 5, 1, 1, _fontImage.width, _fontImage.height);
+				_whiteUV = hDebug.UVRectangle.CreateFromTexture (3, 5, 1, 1, _fontImage.width, _fontImage.height);
 
 		}
 
@@ -701,7 +701,7 @@ public class hConsole : MonoBehaviour
 		public void PageUp ()
 		{
 				_logOffsetV += DebugLogLines;
-				int num = hConsole._logMessages.Count - DebugLogLines;
+				int num = hDebug._logMessages.Count - DebugLogLines;
 				if (_logOffsetV > num) {
 						_logOffsetV = num;
 				}
@@ -792,11 +792,11 @@ public class hConsole : MonoBehaviour
 						V1 = v1;
 				}
 
-				public static hConsole.UVRectangle CreateFromTexture (int left, int top, int width, int height, int sourceWidth, int sourceHeight)
+				public static hDebug.UVRectangle CreateFromTexture (int left, int top, int width, int height, int sourceWidth, int sourceHeight)
 				{
 						float num = 1f / (float)sourceWidth;
 						float num2 = 1f / (float)sourceHeight;
-						return new hConsole.UVRectangle {
+						return new hDebug.UVRectangle {
 								U0 = (float)left * num,
 								V0 = 1f - (float)top * num2,
 								U1 = (float)(left + width) * num,
