@@ -106,7 +106,6 @@ public class hConsole : MonoBehaviour
 		const string ShaderText = "Shader \"hDebug/Text\"\r\n{\r\nProperties\r\n{\r\n_MainTex (\"Main\", 2D) = \"white\" {}\r\n}\r\n\r\nCategory\r\n{\r\n                        Tags\r\n                        {\r\n                            \"Queue\" = \"Transparent\"\r\n                        }\r\n                        \r\n                        Blend SrcAlpha OneMinusSrcAlpha\r\n                        AlphaTest Greater .01\r\n                        ColorMask RGB\r\n                        Cull Off\r\n                        Lighting Off\r\n                        ZWrite On\r\n                        \r\n                        Fog\r\n                        {\r\n                            Color(0, 0, 0, 0)\r\n                        }\r\n                        \r\n                        BindChannels\r\n                        {\r\n                            Bind \"Color\", color\r\n                            Bind \"Vertex\", vertex\r\n                            Bind \"TexCoord\", texcoord\r\n                        }\r\n                        \r\n                        SubShader\r\n                        {\r\n                            Pass\r\n                            {\r\n                                SetTexture [_MainTex]\r\n                                {\r\n                                    combine texture * primary\r\n                                }\r\n                            }\r\n                        }\r\n                    }\r\n                }";
 		public static Color Shadow = Color.cyan;
 		static readonly char[] _newLineCharacters = new char[] { '\n', '\r' };
-		public static bool MirrorToUnity = true;
 		/// <summary>
 		/// The font to be rendered to the screen, stored as a byte array.
 		/// </summary>
@@ -201,25 +200,16 @@ public class hConsole : MonoBehaviour
 
 		public static void Error (object obj)
 		{
-				if (MirrorToUnity) {
-						Debug.LogError (obj);
-				}
 				hConsole.PushLog (obj.ToString (), LogType.Error);
 		}
 
 		public static void Error (string text)
 		{
-				if (MirrorToUnity) {
-						Debug.LogError (text);
-				}
 				hConsole.PushLog (text, LogType.Error);
 		}
 
 		public static void Error (string text, params object[] args)
 		{
-				if (MirrorToUnity) {
-						Debug.LogError (string.Format (text, args));
-				}
 				hConsole.PushLog (string.Format (text, args), LogType.Error);
 		}
 
@@ -236,25 +226,16 @@ public class hConsole : MonoBehaviour
 
 		public static void Log (object obj)
 		{
-				if (MirrorToUnity) {
-						Debug.Log (obj);
-				}
 				hConsole.PushLog (obj.ToString (), LogType.Log);
 		}
 
 		public static void Log (string text)
 		{
-				if (MirrorToUnity) {
-						Debug.Log (text);
-				}
 				hConsole.PushLog (text, LogType.Log);
 		}
 
 		public static void Log (string text, params object[] args)
 		{
-				if (MirrorToUnity) { 
-						Debug.Log (string.Format (text, args));
-				}
 				hConsole.PushLog (string.Format (text, args), LogType.Log);
 		}
 
@@ -290,25 +271,16 @@ public class hConsole : MonoBehaviour
 
 		public static void Warn (object obj)
 		{
-				if (MirrorToUnity) {
-						Debug.LogWarning (obj);
-				}
 				hConsole.PushLog (obj.ToString (), LogType.Warning);
 		}
 
 		public static void Warn (string text)
 		{
-				if (MirrorToUnity) {
-						Debug.LogWarning (text);
-				}
 				hConsole.PushLog (text, LogType.Warning);
 		}
 
 		public static void Warn (string text, params object[] args)
 		{
-				if (MirrorToUnity) { 
-						Debug.LogWarning (string.Format (text, args));
-				}
 				hConsole.PushLog (string.Format (text, args), LogType.Warning);
 		}
 
@@ -357,7 +329,6 @@ public class hConsole : MonoBehaviour
 
 		static void PushLog (string text, LogType type)
 		{
-
 				if (hConsole._logMessages.Count >= DebugLogLinesMax) {
 						hConsole._logMessages.RemoveAt (0);
 				}
