@@ -30,11 +30,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//TODO CODE REVIEW AND CLEAN UP
-//TODO: Make console only render size if at max length / size based on lines  (if 0  show message)
-// TODO Make reference to instance.
 /// <summary>
-/// A developer console useful for in-game debugging.
+/// An in-game debugging system to make every developer happy.
 /// </summary>
 /// <remarks>This component does not follow our normal component/base model.</remarks>
 public class hDebug : MonoBehaviour
