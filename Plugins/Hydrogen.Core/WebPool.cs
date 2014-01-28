@@ -77,7 +77,7 @@ namespace Hydrogen.Core
 				public void Form (string URI, Dictionary<string, string> formStringData, FormBinaryData[] formBinaryData, string cookie, System.Action<int, Hashtable, string> callback)
 				{
 						if (!_initialized) {
-								UnityEngine.Debug.LogError ("WebPool has not finished initializing ... " +
+								Debug.LogError ("WebPool has not finished initializing ... " +
 								"Did you call this function without having either a WebPool or ObjectPool component " +
 								"already on a MonoBehaviour?");
 								return;
@@ -117,7 +117,7 @@ namespace Hydrogen.Core
 				public int GET (string URI, string cookie, System.Action<int, Hashtable, string> callback)
 				{
 						if (!_initialized) {
-								UnityEngine.Debug.LogError ("WebPool has not finished initializing ... " +
+								Debug.LogError ("WebPool has not finished initializing ... " +
 								"Did you call this function without having either a WebPool or ObjectPool component " +
 								"already on a MonoBehaviour?");
 								return 0;
@@ -172,30 +172,33 @@ namespace Hydrogen.Core
 				/// </summary>
 				IEnumerator Initialize ()
 				{
-						// Create our buddy object
-						var newWebObject = new GameObject ();
-						newWebObject.AddComponent (typeof(WebPoolWorker));
-						newWebObject.name = "Web Call";
+						if (!_initialized) {
 
-						// Search out any existing ObjectPool
-						_poolReference = (ObjectPool)FindObjectOfType (typeof(ObjectPool));
+								// Create our buddy object
+								var newWebObject = new GameObject ();
+								newWebObject.AddComponent (typeof(WebPoolWorker));
+								newWebObject.name = "Web Call";
 
-						// If we don't have an existing reference in the scene for an ObjectPool, we need to make one.
-						if (_poolReference == null) {
-								// Create a new ObjectPool using our default singleton.
-								_poolReference = hObjectPool.Instance;
+								// Search out any existing ObjectPool
+								_poolReference = (ObjectPool)FindObjectOfType (typeof(ObjectPool));
 
-								// Wait for end of frame so that the new Object Pool can initialize.
-								yield return new WaitForEndOfFrame ();
+								// If we don't have an existing reference in the scene for an ObjectPool, we need to make one.
+								if (_poolReference == null) {
+										// Create a new ObjectPool using our default singleton.
+										_poolReference = hObjectPool.Instance;
+
+										// Wait for end of frame so that the new Object Pool can initialize.
+										yield return new WaitForEndOfFrame ();
+								}
+
+								// Add the new object to the Object Pool
+								_poolID = _poolReference.Add (newWebObject);
+
+								// We need to keep this GameObject around as it is referenced for spawning.
+								newWebObject.transform.parent = _poolReference.gameObject.transform;
+								newWebObject.gameObject.SetActive (false);
+								_initialized = true;
 						}
-
-						// Add the new object to the Object Pool
-						_poolID = _poolReference.Add (newWebObject);
-
-						// We need to keep this GameObject around as it is referenced for spawning.
-						newWebObject.transform.parent = _poolReference.gameObject.transform;
-						newWebObject.gameObject.SetActive (false);
-						_initialized = true;
 				}
 
 				/// <summary>
