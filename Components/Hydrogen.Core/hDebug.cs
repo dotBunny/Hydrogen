@@ -1,6 +1,6 @@
 ﻿#region Copyright Notice & License Information
 //
-// hConsole.cs
+// hDebug.cs
 //
 // Author:
 //       Matthew Davey <matthew.davey@dotbunny.com>
