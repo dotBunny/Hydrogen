@@ -31,12 +31,63 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //TODO CODE REVIEW AND CLEAN UP
+//TODO: Make console only render size if at max length / size based on lines  (if 0  show message)
+// TODO Make reference to instance.
 /// <summary>
 /// A developer console useful for in-game debugging.
 /// </summary>
 /// <remarks>This component does not follow our normal component/base model.</remarks>
 public class hConsole : MonoBehaviour
 {
+		/// <summary>
+		/// Internal fail safe to maintain instance across threads.
+		/// </summary>
+		/// <remarks>
+		/// Multithreaded Safe Singleton Pattern.
+		/// </remarks>
+		/// <description>
+		/// http://msdn.microsoft.com/en-us/library/ms998558.aspx
+		/// </description>
+		static readonly System.Object _syncRoot = new System.Object ();
+		/// <summary>
+		/// Internal reference to the static instance of the object pool.
+		/// </summary>
+		static volatile hConsole _staticInstance;
+
+		/// <summary>
+		/// Gets the console instance, creating one if none is found.
+		/// </summary>
+		/// <value>
+		/// The Object Pool.
+		/// </value>
+		public static hConsole Instance {
+				get {
+						if (_staticInstance == null) {
+								lock (_syncRoot) {
+										_staticInstance = FindObjectOfType (typeof(hConsole)) as hConsole;
+
+										// If we don't have it, lets make it!
+										if (_staticInstance == null) {
+												var go = GameObject.Find (Hydrogen.Components.DefaultSingletonName) ??
+												         new GameObject (Hydrogen.Components.DefaultSingletonName);
+
+												go.AddComponent<hConsole> ();
+												_staticInstance = go.GetComponent<hConsole> ();	
+										}
+								}
+						}
+						return _staticInstance;
+				}
+		}
+
+		/// <summary>
+		/// Does the Console already exist?
+		/// </summary>
+		public static bool Exists ()
+		{
+				return _staticInstance != null;
+		}
+
 		public bool CreateCamera = true;
 		public DisplayMode Mode = DisplayMode.Off;
 		public DisplayLocation Location = DisplayLocation.Top;
@@ -167,6 +218,7 @@ public class hConsole : MonoBehaviour
 						var go = GameObject.Find (Hydrogen.Components.DefaultSingletonName) ??
 						         new GameObject (Hydrogen.Components.DefaultSingletonName);
 						go.AddComponent<hConsole> ();
+						_staticInstance = go.GetComponent<hConsole> ();
 				}
 		}
 
@@ -302,7 +354,7 @@ public class hConsole : MonoBehaviour
 				if (hConsole._logMessages.Count >= DebugLogLinesMax) {
 						hConsole._logMessages.RemoveAt (0);
 				}
-						
+
 				foreach (var lineItem in text.Split (_newLineCharacters)) {
 						hConsole._logMessages.Add (
 								new hConsole.LogMessage (
@@ -666,7 +718,7 @@ public class hConsole : MonoBehaviour
 						_init = true;
 						gameObject.camera.enabled = true;
 				}
-						
+
 				if ((Input.GetKey (KeyCode.LeftShift) || Input.GetKey (KeyCode.RightShift)) && Input.GetKeyDown (ToggleKey)) {
 						Mode = DisplayMode.Console;
 				} else {
