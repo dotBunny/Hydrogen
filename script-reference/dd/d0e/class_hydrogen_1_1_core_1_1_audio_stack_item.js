@@ -5,7 +5,6 @@ var class_hydrogen_1_1_core_1_1_audio_stack_item =
     [ "AudioStackItem", "dd/d0e/class_hydrogen_1_1_core_1_1_audio_stack_item.html#aeffb3a2d5fb51409c7c5c429953fc61c", null ],
     [ "AudioStackItem", "dd/d0e/class_hydrogen_1_1_core_1_1_audio_stack_item.html#a238affc9af19a6933dcec643e912637a", null ],
     [ "AudioStackItem", "dd/d0e/class_hydrogen_1_1_core_1_1_audio_stack_item.html#a0ab3cc3ebe7709e2d0375328516602a0", null ],
-    [ "Dispose", "dd/d0e/class_hydrogen_1_1_core_1_1_audio_stack_item.html#a9713925079bcaa81bd3234387ff9b6d0", null ],
     [ "Pause", "dd/d0e/class_hydrogen_1_1_core_1_1_audio_stack_item.html#a0c79e3572747e82dd776db03c7c39082", null ],
     [ "Play", "dd/d0e/class_hydrogen_1_1_core_1_1_audio_stack_item.html#a28befed273bb5094a4b253993defdeb6", null ],
     [ "Process", "dd/d0e/class_hydrogen_1_1_core_1_1_audio_stack_item.html#ae0259b8b1bbc8df4198910fb1ccb0daa", null ],

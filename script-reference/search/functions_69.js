@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['initialize',['Initialize',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a9de4a992ef63ea4deaf8f2aca9ced8c4',1,'Hydrogen.Core.ObjectPoolCollection.Initialize()'],['../d3/d8d/class_hydrogen_1_1_plugins_1_1_test_flight.html#a87398bb15e0c9655538d1ea6380111a9',1,'Hydrogen.Plugins.TestFlight.Initialize()']]],
+  ['initialize',['Initialize',['../de/dc9/classh_debug.html#abefe727517abc1890b11d015bf82da3d',1,'hDebug.Initialize()'],['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a9de4a992ef63ea4deaf8f2aca9ced8c4',1,'Hydrogen.Core.ObjectPoolCollection.Initialize()'],['../d3/d8d/class_hydrogen_1_1_plugins_1_1_test_flight.html#a87398bb15e0c9655538d1ea6380111a9',1,'Hydrogen.Plugins.TestFlight.Initialize()']]],
   ['inputaction',['InputAction',['../d2/daf/namespace_hydrogen_1_1_peripherals.html#af5064c1618bbc05b8c4a76b690a8e185',1,'Hydrogen::Peripherals']]],
   ['inputaxiscontrol',['InputAxisControl',['../d7/d18/class_hydrogen_1_1_peripherals_1_1_input_axis_control.html#a045d3a3c67ede13b85d608d5a24b1c27',1,'Hydrogen::Peripherals::InputAxisControl']]],
   ['inputcontrolbase',['InputControlBase',['../d3/d0a/class_hydrogen_1_1_peripherals_1_1_input_control_base.html#a0f01fae2c853d4d035aa20df101a7499',1,'Hydrogen::Peripherals::InputControlBase']]],

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.5"/>
-<title>Hydrogen Framework: /Users/reapazor/Unity/Hydrogen-Package/Assets/Hydrogen Framework/Hydrogen/Plugins/Hydrogen.Core/ThreadedJob.cs Source File</title>
+<title>Hydrogen Framework: /Users/reapazor/Unity/Hydrogen-Package/Assets/Hydrogen Framework/Hydrogen/Plugins/Hydrogen.Threading/ThreadedJob.cs Source File</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../hydrogen-logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Hydrogen Framework
-   &#160;<span id="projectnumber">1.2.4</span>
+   &#160;<span id="projectnumber">1.3.0</span>
    </div>
   </td>
  </tr>
@@ -86,7 +86,7 @@ $(document).ready(function(){initNavTree('d7/dd9/_threaded_job_8cs_source.html',
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Events</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -100,92 +100,96 @@ $(document).ready(function(){initNavTree('d7/dd9/_threaded_job_8cs_source.html',
 <div class="title">ThreadedJob.cs</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//http://answers.unity3d.com/questions/357033/unity3d-and-c-coroutines-vs-threading.html</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
-<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="../../dd/dea/class_threaded_job.html">    3</a></span>&#160;<span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="../../dd/dea/class_threaded_job.html">ThreadedJob</a></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;{</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;        <span class="keywordtype">bool</span> _isDone;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;        <span class="keywordtype">object</span> _syncRoot = <span class="keyword">new</span> object ();</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        System.Threading.Thread _thread = null;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="../../dd/dea/class_threaded_job.html#a72e1b53f9f6621133c3713cb94df8896">    9</a></span>&#160;        <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code" href="../../dd/dea/class_threaded_job.html#a72e1b53f9f6621133c3713cb94df8896">IsDone</a> {</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;                <span class="keyword">get</span> {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;                        <span class="keywordtype">bool</span> tmp;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;                        lock (_syncRoot) {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;                                tmp = _isDone;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;                        }</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;                        <span class="keywordflow">return</span> tmp;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;                }</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                set {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                        lock (_syncRoot) {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;                                _isDone = value;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;                        }</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                }</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        }</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="../../dd/dea/class_threaded_job.html#a003ae062db64942ce655c156b40ded2d">   24</a></span>&#160;        <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="../../dd/dea/class_threaded_job.html#a003ae062db64942ce655c156b40ded2d">Start</a> (<span class="keywordtype">bool</span> backgroundThread, System.Threading.ThreadPriority priority)</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                <span class="comment">// Create our new thread.</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                _thread = <span class="keyword">new</span> System.Threading.Thread (Run);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                <span class="comment">// Establish threads background.</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                _thread.IsBackground = backgroundThread;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                <span class="comment">// Establish the threads priority.</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                _thread.Priority = priority;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                <span class="comment">// Start working!</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                _thread.Start ();</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="../../dd/dea/class_threaded_job.html#a12831f72d0b6f18adcc9115740ed68e2">   39</a></span>&#160;        <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="../../dd/dea/class_threaded_job.html#a12831f72d0b6f18adcc9115740ed68e2">Abort</a> ()</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                _thread.Abort ();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="../../dd/dea/class_threaded_job.html#ae52494b64bece2c4c1425aacb5112eb6">   44</a></span>&#160;        <span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="../../dd/dea/class_threaded_job.html#ae52494b64bece2c4c1425aacb5112eb6">ThreadedFunction</a> ()</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        }</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="../../dd/dea/class_threaded_job.html#a18e5500cb1d51ac5b586b9f13eef25c5">   48</a></span>&#160;        <span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="../../dd/dea/class_threaded_job.html#a18e5500cb1d51ac5b586b9f13eef25c5">OnFinished</a> ()</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="../../dd/dea/class_threaded_job.html#a9ba4732736768cee61a473898d73d3ee">   52</a></span>&#160;        <span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="../../dd/dea/class_threaded_job.html#a9ba4732736768cee61a473898d73d3ee">Check</a> ()</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <span class="keywordflow">if</span> (<a class="code" href="../../dd/dea/class_threaded_job.html#a72e1b53f9f6621133c3713cb94df8896">IsDone</a>) {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                        <a class="code" href="../../dd/dea/class_threaded_job.html#a18e5500cb1d51ac5b586b9f13eef25c5">OnFinished</a> ();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">void</span> Run ()</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="comment">// I guess we can&#39;t be done now can we?</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <a class="code" href="../../dd/dea/class_threaded_job.html#a72e1b53f9f6621133c3713cb94df8896">IsDone</a> = <span class="keyword">false</span>;</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#region Copyright Notice &amp; License Information</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="comment">//</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// ThreadedJob.cs</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// Author:</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//       Matthew Davey &lt;matthew.davey@dotbunny.com&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// Copyright (c) 2013 dotBunny Inc. (http://www.dotbunny.com)</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// Permission is hereby granted, free of charge, to any person obtaining a copy</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// of this software and associated documentation files (the &quot;Software&quot;), to deal</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// in the Software without restriction, including without limitation the rights</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// copies of the Software, and to permit persons to whom the Software is</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// furnished to do so, subject to the following conditions:</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// The above copyright notice and this permission notice shall be included in</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// all copies or substantial portions of the Software.</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// THE SOFTWARE.</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endregion</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">namespace </span>Hydrogen.Threading</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{<span class="comment"></span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">        /// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">        /// A base class for threaded jobs.</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">        /// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="../../df/db4/class_hydrogen_1_1_threading_1_1_threaded_job.html">   34</a></span>&#160;<span class="comment"></span>        <span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="../../df/db4/class_hydrogen_1_1_threading_1_1_threaded_job.html">ThreadedJob</a> : <a class="code" href="../../db/d5f/class_hydrogen_1_1_threading_1_1_job_base.html">JobBase</a></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        {<span class="comment"></span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">                /// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">                /// The job&#39;s thread.</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">                /// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment"></span>                System.Threading.Thread _thread;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">                /// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">                /// System assigned thread.</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">                /// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">                /// &lt;value&gt;The job.&lt;/value&gt;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="../../df/db4/class_hydrogen_1_1_threading_1_1_threaded_job.html#a8ba090db03d48f5d53fff40a79289eb5">   45</a></span>&#160;<span class="comment"></span>                <span class="keyword">public</span> System.Threading.Thread Thread {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                        <span class="keyword">get</span> { <span class="keywordflow">return</span> _thread; }</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">                /// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">                /// Start the work process.</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">                /// This should initialize the Thread with the Run function.</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">                /// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">                /// &lt;param name=&quot;backgroundThread&quot;&gt;If set to &lt;c&gt;true&lt;/c&gt; background thread.&lt;/param&gt;</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">                /// &lt;param name=&quot;priority&quot;&gt;Priority.&lt;/param&gt;</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="../../df/db4/class_hydrogen_1_1_threading_1_1_threaded_job.html#a377823704625ff9665c9a7ae7e6f5481">   55</a></span>&#160;<span class="comment"></span>                <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> <a class="code" href="../../df/db4/class_hydrogen_1_1_threading_1_1_threaded_job.html#a377823704625ff9665c9a7ae7e6f5481">Start</a> (<span class="keywordtype">bool</span> backgroundThread, System.Threading.ThreadPriority priority)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                        <span class="comment">// Create our new thread.</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                        _thread = <span class="keyword">new</span> System.Threading.Thread (Run);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                        <span class="comment">// Establish threads background.</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                        _thread.IsBackground = backgroundThread;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                        <span class="comment">// Establish the threads priority.</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                        _thread.Priority = priority;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                <span class="comment">// Execute our threaded function</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                <a class="code" href="../../dd/dea/class_threaded_job.html#ae52494b64bece2c4c1425aacb5112eb6">ThreadedFunction</a> ();</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                <span class="comment">// Yup we are now done.</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                <a class="code" href="../../dd/dea/class_threaded_job.html#a72e1b53f9f6621133c3713cb94df8896">IsDone</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
-<div class="ttc" id="class_threaded_job_html"><div class="ttname"><a href="../../dd/dea/class_threaded_job.html">ThreadedJob</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d7/dd9/_threaded_job_8cs_source.html#l00003">ThreadedJob.cs:3</a></div></div>
-<div class="ttc" id="class_threaded_job_html_a18e5500cb1d51ac5b586b9f13eef25c5"><div class="ttname"><a href="../../dd/dea/class_threaded_job.html#a18e5500cb1d51ac5b586b9f13eef25c5">ThreadedJob.OnFinished</a></div><div class="ttdeci">virtual void OnFinished()</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/dd9/_threaded_job_8cs_source.html#l00048">ThreadedJob.cs:48</a></div></div>
-<div class="ttc" id="class_threaded_job_html_a12831f72d0b6f18adcc9115740ed68e2"><div class="ttname"><a href="../../dd/dea/class_threaded_job.html#a12831f72d0b6f18adcc9115740ed68e2">ThreadedJob.Abort</a></div><div class="ttdeci">virtual void Abort()</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/dd9/_threaded_job_8cs_source.html#l00039">ThreadedJob.cs:39</a></div></div>
-<div class="ttc" id="class_threaded_job_html_ae52494b64bece2c4c1425aacb5112eb6"><div class="ttname"><a href="../../dd/dea/class_threaded_job.html#ae52494b64bece2c4c1425aacb5112eb6">ThreadedJob.ThreadedFunction</a></div><div class="ttdeci">virtual void ThreadedFunction()</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/dd9/_threaded_job_8cs_source.html#l00044">ThreadedJob.cs:44</a></div></div>
-<div class="ttc" id="class_threaded_job_html_a003ae062db64942ce655c156b40ded2d"><div class="ttname"><a href="../../dd/dea/class_threaded_job.html#a003ae062db64942ce655c156b40ded2d">ThreadedJob.Start</a></div><div class="ttdeci">virtual void Start(bool backgroundThread, System.Threading.ThreadPriority priority)</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/dd9/_threaded_job_8cs_source.html#l00024">ThreadedJob.cs:24</a></div></div>
-<div class="ttc" id="class_threaded_job_html_a72e1b53f9f6621133c3713cb94df8896"><div class="ttname"><a href="../../dd/dea/class_threaded_job.html#a72e1b53f9f6621133c3713cb94df8896">ThreadedJob.IsDone</a></div><div class="ttdeci">bool IsDone</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/dd9/_threaded_job_8cs_source.html#l00009">ThreadedJob.cs:9</a></div></div>
-<div class="ttc" id="class_threaded_job_html_a9ba4732736768cee61a473898d73d3ee"><div class="ttname"><a href="../../dd/dea/class_threaded_job.html#a9ba4732736768cee61a473898d73d3ee">ThreadedJob.Check</a></div><div class="ttdeci">virtual bool Check()</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/dd9/_threaded_job_8cs_source.html#l00052">ThreadedJob.cs:52</a></div></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                        <span class="comment">// Start working!</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                        _thread.Start ();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">                /// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">                /// Abort the Job (as best we can).</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">                /// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="../../df/db4/class_hydrogen_1_1_threading_1_1_threaded_job.html#aca43a15f4903f63255b170782e025a8d">   73</a></span>&#160;<span class="comment"></span>                <span class="keyword">protected</span> <span class="keyword">override</span> <span class="keywordtype">void</span> <a class="code" href="../../df/db4/class_hydrogen_1_1_threading_1_1_threaded_job.html#aca43a15f4903f63255b170782e025a8d">Abort</a> ()</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                        _thread.Abort ();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                        base.Abort ();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
+<div class="ttc" id="class_hydrogen_1_1_threading_1_1_threaded_job_html_a377823704625ff9665c9a7ae7e6f5481"><div class="ttname"><a href="../../df/db4/class_hydrogen_1_1_threading_1_1_threaded_job.html#a377823704625ff9665c9a7ae7e6f5481">Hydrogen.Threading.ThreadedJob.Start</a></div><div class="ttdeci">override void Start(bool backgroundThread, System.Threading.ThreadPriority priority)</div><div class="ttdoc">Start the work process. This should initialize the Thread with the Run function. </div><div class="ttdef"><b>Definition:</b> <a href="../../d7/dd9/_threaded_job_8cs_source.html#l00055">ThreadedJob.cs:55</a></div></div>
+<div class="ttc" id="class_hydrogen_1_1_threading_1_1_threaded_job_html_aca43a15f4903f63255b170782e025a8d"><div class="ttname"><a href="../../df/db4/class_hydrogen_1_1_threading_1_1_threaded_job.html#aca43a15f4903f63255b170782e025a8d">Hydrogen.Threading.ThreadedJob.Abort</a></div><div class="ttdeci">override void Abort()</div><div class="ttdoc">Abort the Job (as best we can). </div><div class="ttdef"><b>Definition:</b> <a href="../../d7/dd9/_threaded_job_8cs_source.html#l00073">ThreadedJob.cs:73</a></div></div>
+<div class="ttc" id="class_hydrogen_1_1_threading_1_1_job_base_html"><div class="ttname"><a href="../../db/d5f/class_hydrogen_1_1_threading_1_1_job_base.html">Hydrogen.Threading.JobBase</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d0/ddf/_job_base_8cs_source.html#l00034">JobBase.cs:34</a></div></div>
+<div class="ttc" id="class_hydrogen_1_1_threading_1_1_threaded_job_html"><div class="ttname"><a href="../../df/db4/class_hydrogen_1_1_threading_1_1_threaded_job.html">Hydrogen.Threading.ThreadedJob</a></div><div class="ttdoc">A base class for threaded jobs. </div><div class="ttdef"><b>Definition:</b> <a href="../../d7/dd9/_threaded_job_8cs_source.html#l00034">ThreadedJob.cs:34</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="../../dir_84bbf7b3c7f28a5a18725745e1505219.html">Assets</a></li><li class="navelem"><a class="el" href="../../dir_b28097260afe8574b8406ba7dfbb81e6.html">Hydrogen Framework</a></li><li class="navelem"><a class="el" href="../../dir_27bfb49e10942b2337de158651d24362.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../dir_f456ffc0c0cbfbbdb67b3854d7def5c9.html">Plugins</a></li><li class="navelem"><a class="el" href="../../dir_2a2f99a2e7f5d3c02810bc62c56e75a7.html">Hydrogen.Core</a></li><li class="navelem"><b>ThreadedJob.cs</b></li>
-    <li class="footer">Generated on Wed Jan 8 2014 14:53:10 for Hydrogen Framework by
+    <li class="navelem"><a class="el" href="../../dir_84bbf7b3c7f28a5a18725745e1505219.html">Assets</a></li><li class="navelem"><a class="el" href="../../dir_b28097260afe8574b8406ba7dfbb81e6.html">Hydrogen Framework</a></li><li class="navelem"><a class="el" href="../../dir_27bfb49e10942b2337de158651d24362.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../dir_f456ffc0c0cbfbbdb67b3854d7def5c9.html">Plugins</a></li><li class="navelem"><a class="el" href="../../dir_d7af5f1f04d5731bfca99fbd049c7c64.html">Hydrogen.Threading</a></li><li class="navelem"><b>ThreadedJob.cs</b></li>
+    <li class="footer">Generated on Wed Jan 29 2014 12:25:47 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

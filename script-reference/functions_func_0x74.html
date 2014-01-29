@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="hydrogen-logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Hydrogen Framework
-   &#160;<span id="projectnumber">1.2.4</span>
+   &#160;<span id="projectnumber">1.3.0</span>
    </div>
   </td>
  </tr>
@@ -82,6 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_enum.html"><span>Enumerations</span></a></li>
       <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
       <li><a href="functions_prop.html"><span>Properties</span></a></li>
+      <li><a href="functions_evnt.html"><span>Events</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
@@ -104,6 +105,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_func_0x73.html#index_s"><span>s</span></a></li>
       <li class="current"><a href="functions_func_0x74.html#index_t"><span>t</span></a></li>
       <li><a href="functions_func_0x75.html#index_u"><span>u</span></a></li>
+      <li><a href="functions_func_0x77.html#index_w"><span>w</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -126,7 +128,7 @@ $(document).ready(function(){initNavTree('functions_func_0x74.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Events</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -142,9 +144,12 @@ $(document).ready(function(){initNavTree('functions_func_0x74.html','');});
 <li>TakeOff()
 : <a class="el" href="d3/d8d/class_hydrogen_1_1_plugins_1_1_test_flight.html#a4cdf044a81fc8406aaf202dbaa627d34">Hydrogen.Plugins.TestFlight</a>
 </li>
+<li>ThreadCallback()
+: <a class="el" href="d7/d04/classh_mesh_combiner.html#a4190904759a76d5bb28d789120b06fc1">hMeshCombiner</a>
+</li>
 <li>ThreadedFunction()
-: <a class="el" href="dd/dea/class_threaded_job.html#ae52494b64bece2c4c1425aacb5112eb6">ThreadedJob</a>
-, <a class="el" href="d9/dfc/class_thread_pool_job.html#a3c9b1a40b15c19b112791ae54f1a4012">ThreadPoolJob</a>
+: <a class="el" href="d3/dac/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner.html#a3c1d7286448cac442cdc6309367bf5ab">Hydrogen.Threading.Jobs.MeshCombiner</a>
+, <a class="el" href="db/d5f/class_hydrogen_1_1_threading_1_1_job_base.html#ae0995557d115892961c206ed8baa2839">Hydrogen.Threading.JobBase</a>
 </li>
 <li>Tile()
 : <a class="el" href="d0/d85/class_hydrogen_1_1_texture.html#a3a6559437a3854e2d7b43f0708cf883a">Hydrogen.Texture</a>
@@ -155,8 +160,14 @@ $(document).ready(function(){initNavTree('functions_func_0x74.html','');});
 <li>ToBoolean()
 : <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a114cb14afc7e16fbc2934691bb07357b">Hydrogen.Serialization.JSONObject</a>
 </li>
+<li>ToColor()
+: <a class="el" href="d0/d85/class_hydrogen_1_1_texture.html#ab11bbed521129462cfbe94a4a483e67a">Hydrogen.Texture</a>
+</li>
 <li>ToFloat()
 : <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#aad72aa4d27e0fe077c4104896b9d57e9">Hydrogen.Serialization.JSONObject</a>
+</li>
+<li>ToggleMode()
+: <a class="el" href="de/dc9/classh_debug.html#aecd830fc3c4ded740999a9673cc7e6b6">hDebug</a>
 </li>
 <li>ToInt()
 : <a class="el" href="d3/dcc/class_hydrogen_1_1_serialization_1_1_j_s_o_n_object.html#a2e88e6d1839429d38b3b3c2fa8b3290a">Hydrogen.Serialization.JSONObject</a>
@@ -182,7 +193,7 @@ $(document).ready(function(){initNavTree('functions_func_0x74.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jan 8 2014 14:53:10 for Hydrogen Framework by
+    <li class="footer">Generated on Wed Jan 29 2014 12:25:48 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

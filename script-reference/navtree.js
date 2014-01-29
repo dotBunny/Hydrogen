@@ -20,7 +20,8 @@ var NAVTREE =
         [ "Variables", "functions_vars.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
         [ "Enumerator", "functions_eval.html", null ],
-        [ "Properties", "functions_prop.html", null ]
+        [ "Properties", "functions_prop.html", null ],
+        [ "Events", "functions_evnt.html", null ]
       ] ]
     ] ]
   ] ]
@@ -29,7 +30,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#a820495c7c53b843d127e03633e0b73d6"
+"d3/d8d/class_hydrogen_1_1_plugins_1_1_test_flight.html#aef6b01a16da2af2f5f85885667da87f0",
+"db/d5f/class_hydrogen_1_1_threading_1_1_job_base.html#acfbcd624809f2b213a72dfe71b153d43"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../hydrogen-logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Hydrogen Framework
-   &#160;<span id="projectnumber">1.2.4</span>
+   &#160;<span id="projectnumber">1.3.0</span>
    </div>
   </td>
  </tr>
@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('d7/de6/class_hydrogen_1_1_mesh.html','
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Events</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -127,6 +127,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:adab081b2b1459cee70bd7f58cab2ef64"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/de6/class_hydrogen_1_1_mesh.html#adab081b2b1459cee70bd7f58cab2ef64">VerticesLimit</a> = 65536</td></tr>
 <tr class="memdesc:adab081b2b1459cee70bd7f58cab2ef64"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum vertices allowed in a <a class="el" href="../../d7/de6/class_hydrogen_1_1_mesh.html" title="Additional static functions and constants used to extend existing Mesh support inside of Unity...">Mesh</a>.  <a href="#adab081b2b1459cee70bd7f58cab2ef64">More...</a><br/></td></tr>
 <tr class="separator:adab081b2b1459cee70bd7f58cab2ef64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22aa5493765375507bf5dc0226194eef"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/de6/class_hydrogen_1_1_mesh.html#a22aa5493765375507bf5dc0226194eef">VerticesArrayLimit</a> = 65535</td></tr>
+<tr class="memdesc:a22aa5493765375507bf5dc0226194eef"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum vertices allowed in a <a class="el" href="../../d7/de6/class_hydrogen_1_1_mesh.html" title="Additional static functions and constants used to extend existing Mesh support inside of Unity...">Mesh</a> when counting index 0 of an array as one.  <a href="#a22aa5493765375507bf5dc0226194eef">More...</a><br/></td></tr>
+<tr class="separator:a22aa5493765375507bf5dc0226194eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Additional static functions and constants used to extend existing <a class="el" href="../../d7/de6/class_hydrogen_1_1_mesh.html" title="Additional static functions and constants used to extend existing Mesh support inside of Unity...">Mesh</a> support inside of Unity. </p>
@@ -175,36 +178,53 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../d6/d5c/_mesh_8cs_source.html#l00049">49</a> of file <a class="el" href="../../d6/d5c/_mesh_8cs_source.html">Mesh.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                        <span class="comment">// Create local reference</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                        UnityEngine.Vector3[] vertices = mesh.vertices;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                        <span class="comment">// Our best distance so far</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                        <span class="keywordtype">float</span> nearestDistance = UnityEngine.Mathf.Infinity;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                        <span class="comment">// The index (-1) if we don&#39;t find one</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                        <span class="keywordtype">int</span> best = vertices.Length - 1;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                        <span class="keywordflow">for</span> (var i = 0; i &lt; (best + 1); i++) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                                UnityEngine.Vector3 vertex = vertices [i];</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                                UnityEngine.Vector3 difference = targetPosition - vertex;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                                <span class="keywordtype">float</span> differenceDist = difference.sqrMagnitude;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                                <span class="keywordflow">if</span> (differenceDist &lt; nearestDistance) {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                                        nearestDistance = differenceDist;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                                        best = i;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                                }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                        }</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                        <span class="comment">// Send it back!</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                        <span class="keywordflow">return</span> best;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                }</div>
+<p>Definition at line <a class="el" href="../../d6/d5c/_mesh_8cs_source.html#l00054">54</a> of file <a class="el" href="../../d6/d5c/_mesh_8cs_source.html">Mesh.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                        <span class="comment">// Create local reference</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                        UnityEngine.Vector3[] vertices = mesh.vertices;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                        <span class="comment">// Our best distance so far</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                        <span class="keywordtype">float</span> nearestDistance = UnityEngine.Mathf.Infinity;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                        <span class="comment">// The index (-1) if we don&#39;t find one</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                        <span class="keywordtype">int</span> best = vertices.Length - 1;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                        <span class="keywordflow">for</span> (var i = 0; i &lt; (best + 1); i++) {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                                UnityEngine.Vector3 vertex = vertices [i];</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                                UnityEngine.Vector3 difference = targetPosition - vertex;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                                <span class="keywordtype">float</span> differenceDist = difference.sqrMagnitude;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                                <span class="keywordflow">if</span> (differenceDist &lt; nearestDistance) {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                                        nearestDistance = differenceDist;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                                        best = i;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                                }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                        }</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                        <span class="comment">// Send it back!</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                        <span class="keywordflow">return</span> best;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                }</div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a22aa5493765375507bf5dc0226194eef"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int Hydrogen.Mesh.VerticesArrayLimit = 65535</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The maximum vertices allowed in a <a class="el" href="../../d7/de6/class_hydrogen_1_1_mesh.html" title="Additional static functions and constants used to extend existing Mesh support inside of Unity...">Mesh</a> when counting index 0 of an array as one. </p>
+<p>This is useful for looping so you dont have to do -1 all the time.</p>
+
+<p>Definition at line <a class="el" href="../../d6/d5c/_mesh_8cs_source.html#l00046">46</a> of file <a class="el" href="../../d6/d5c/_mesh_8cs_source.html">Mesh.cs</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="adab081b2b1459cee70bd7f58cab2ef64"></a>
 <div class="memitem">
 <div class="memproto">
@@ -216,7 +236,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The maximum vertices allowed in a <a class="el" href="../../d7/de6/class_hydrogen_1_1_mesh.html" title="Additional static functions and constants used to extend existing Mesh support inside of Unity...">Mesh</a>. </p>
-<p>This is a Unity imposed limitation, presumably this may grow over time.</p>
+<p>This is a limitation of the short integer.</p>
 
 <p>Definition at line <a class="el" href="../../d6/d5c/_mesh_8cs_source.html#l00041">41</a> of file <a class="el" href="../../d6/d5c/_mesh_8cs_source.html">Mesh.cs</a>.</p>
 
@@ -228,7 +248,7 @@ Public Attributes</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d0/dff/namespace_hydrogen.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../d7/de6/class_hydrogen_1_1_mesh.html">Mesh</a></li>
-    <li class="footer">Generated on Wed Jan 8 2014 14:53:10 for Hydrogen Framework by
+    <li class="footer">Generated on Wed Jan 29 2014 12:25:47 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

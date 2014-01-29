@@ -7,9 +7,12 @@ var searchData=
   ['removeat_3c_20t_20_3e',['RemoveAt&lt; T &gt;',['../d9/d04/class_hydrogen_1_1_array.html#aae5f21d3c51507daf38a79363c8d6e57',1,'Hydrogen::Array']]],
   ['removecontrol',['RemoveControl',['../d9/d31/class_hydrogen_1_1_peripherals_1_1_input.html#ab19cf0e68a19e71e6a0c97202513cd09',1,'Hydrogen::Peripherals::Input']]],
   ['removefrompool',['RemoveFromPool',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a4a7d07affbee8e1b8087ac1f9ed5bd6d',1,'Hydrogen::Core::ObjectPoolCollection']]],
+  ['removematerial',['RemoveMaterial',['../d3/dac/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner.html#afb28e7305328abc6d9ed922715b68e66',1,'Hydrogen::Threading::Jobs::MeshCombiner']]],
+  ['removemesh',['RemoveMesh',['../d3/dac/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner.html#ae609e384d85b39b076ed691d211e7f81',1,'Hydrogen.Threading.Jobs.MeshCombiner.RemoveMesh(MeshFilter meshFilter, Renderer renderer, Matrix4x4 worldMatrix)'],['../d3/dac/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner.html#a1a9292e4536b6ee861f0257504e1d38b',1,'Hydrogen.Threading.Jobs.MeshCombiner.RemoveMesh(MeshInput meshInput)']]],
   ['replacemetachars',['ReplaceMetaChars',['../dd/d91/class_hydrogen_1_1_regex.html#aa9287becb42f37298da4256ec7b89cb4',1,'Hydrogen::Regex']]],
   ['resize',['Resize',['../d0/d85/class_hydrogen_1_1_texture.html#a47dd61e97ca33e82b114e0da868a0966',1,'Hydrogen::Texture']]],
   ['restart',['Restart',['../dd/d0e/class_hydrogen_1_1_core_1_1_audio_stack_item.html#a3a53702323835ad3ab4eae868d8516cb',1,'Hydrogen::Core::AudioStackItem']]],
   ['rotateclockwise90degrees',['RotateClockwise90Degrees',['../d0/d85/class_hydrogen_1_1_texture.html#aa319aa0d17d290b934b3f38e32d9fffd',1,'Hydrogen::Texture']]],
-  ['rotatecounterclockwise90degrees',['RotateCounterClockwise90Degrees',['../d0/d85/class_hydrogen_1_1_texture.html#ac727a59ad6da2c0b6157241d1226b726',1,'Hydrogen::Texture']]]
+  ['rotatecounterclockwise90degrees',['RotateCounterClockwise90Degrees',['../d0/d85/class_hydrogen_1_1_texture.html#ac727a59ad6da2c0b6157241d1226b726',1,'Hydrogen::Texture']]],
+  ['run',['Run',['../db/d5f/class_hydrogen_1_1_threading_1_1_job_base.html#a7619bf9c49d00f0f0a732bfe88dc5f54',1,'Hydrogen::Threading::JobBase']]]
 ];

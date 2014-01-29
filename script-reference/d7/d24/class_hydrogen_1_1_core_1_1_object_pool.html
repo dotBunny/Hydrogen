@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="../../hydrogen-logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Hydrogen Framework
-   &#160;<span id="projectnumber">1.2.4</span>
+   &#160;<span id="projectnumber">1.3.0</span>
    </div>
   </td>
  </tr>
@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('d7/d24/class_hydrogen_1_1_core_1_1_obj
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Events</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -628,25 +628,25 @@ Protected Member Functions</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="../../de/d7c/classh_object_pool.html#a8070f85ec6a66e5f52b14eb5205110f1">hObjectPool</a>.</p>
 
-<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00413">413</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;                {</div>
-<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;                        <span class="keywordflow">if</span> (<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> == null)</div>
-<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;                                <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> = <span class="keyword">new</span> ObjectPoolCollection[0];</div>
-<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;                        <span class="keywordflow">if</span> (_poolStringLookupTable == null)</div>
-<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;                                _poolStringLookupTable = <span class="keyword">new</span> Dictionary&lt;string, int&gt; ();</div>
-<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> x = 0; x &lt; ObjectPools.Length; x++) {</div>
+<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00415">415</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;                {</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;                        <span class="keywordflow">if</span> (<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> == null)</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;                                <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> = <span class="keyword">new</span> ObjectPoolCollection[0];</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;                        <span class="keywordflow">if</span> (_poolStringLookupTable == null)</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;                                _poolStringLookupTable = <span class="keyword">new</span> Dictionary&lt;string, int&gt; ();</div>
 <div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;</div>
-<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;                                <span class="keywordflow">if</span> (<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [x].Prefab == null) {</div>
-<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;                                        <span class="keywordflow">throw</span> <span class="keyword">new</span> MissingReferenceException (<span class="stringliteral">&quot;You have not set the prefab in the hObjectPool Inspector for Object Pools-&gt;Element &quot;</span> + x);</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;                                }</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;                                <span class="keywordflow">if</span> (!<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [x].Initialized) {</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;                                        <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [x].Initialize (<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [x].Prefab, transform, x);</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;                                        _poolStringLookupTable.Add (<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [x].Prefab.name, x);</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;                                }</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;                        }</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;                }</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> x = 0; x &lt; ObjectPools.Length; x++) {</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;                                <span class="keywordflow">if</span> (<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [x].Prefab == null) {</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;                                        <span class="keywordflow">throw</span> <span class="keyword">new</span> MissingReferenceException (<span class="stringliteral">&quot;You have not set the prefab in the hObjectPool Inspector for Object Pools-&gt;Element &quot;</span> + x);</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;                                }</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;                                <span class="keywordflow">if</span> (!<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [x].Initialized) {</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;                                        <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [x].Initialize (<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [x].Prefab, transform, x);</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;                                        _poolStringLookupTable.Add (<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [x].Prefab.name, x);</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;                                }</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;                        }</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;                }</div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_html_a68dcf31e3aac37f50d7087c19c4dfd52"><div class="ttname"><a href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">Hydrogen.Core.ObjectPool.ObjectPools</a></div><div class="ttdeci">ObjectPoolCollection[] ObjectPools</div><div class="ttdoc">Our pooled object collections. </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd4/_object_pool_8cs_source.html#l00070">ObjectPool.cs:70</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -857,9 +857,11 @@ Protected Member Functions</h2></td></tr>
 <div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;                                <span class="keywordflow">throw</span> <span class="keyword">new</span> MissingReferenceException (</div>
 <div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                                        <span class="stringliteral">&quot;You are passing a null or empty prefabName to hObjectPool.Instance.GetPoolID()&quot;</span>);</div>
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                        }   </div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;            </div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;                        <span class="keywordflow">return</span> _poolStringLookupTable.ContainsKey (prefabName) ? _poolStringLookupTable [prefabName] : -1;</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;                }</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;                        <span class="keywordflow">if</span> (_poolStringLookupTable == null)</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;                                <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                        <span class="keywordflow">return</span> _poolStringLookupTable.ContainsKey (prefabName) ? _poolStringLookupTable [prefabName] : -1;</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -896,18 +898,18 @@ Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00325">325</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                {</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;                        var tempLookup = <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a88b7aa038aab9abb050b76fc72b66510">GetPoolID</a> (gameObject.name);</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                        <span class="keywordflow">if</span> (tempLookup != -1) {</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                                <span class="comment">// Remove object from lookup table</span></div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                                _poolStringLookupTable.Remove (gameObject.name);</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                </div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                                <span class="comment">// Remove from pooling system</span></div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                                <span class="keywordflow">return</span> <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [tempLookup].RemoveFromPool (gameObject, destroyImmediate);</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                        }</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                }</div>
+<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00327">327</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;                {</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                        var tempLookup = <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a88b7aa038aab9abb050b76fc72b66510">GetPoolID</a> (gameObject.name);</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                        <span class="keywordflow">if</span> (tempLookup != -1) {</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                                <span class="comment">// Remove object from lookup table</span></div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                                _poolStringLookupTable.Remove (gameObject.name);</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                                <span class="comment">// Remove from pooling system</span></div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                                <span class="keywordflow">return</span> <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [tempLookup].RemoveFromPool (gameObject, destroyImmediate);</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                        }</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                }</div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_html_a88b7aa038aab9abb050b76fc72b66510"><div class="ttname"><a href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a88b7aa038aab9abb050b76fc72b66510">Hydrogen.Core.ObjectPool.GetPoolID</a></div><div class="ttdeci">int GetPoolID(GameObject gameObject)</div><div class="ttdoc">Gets the Pool ID for the GameObject. </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd4/_object_pool_8cs_source.html#l00300">ObjectPool.cs:300</a></div></div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_html_a68dcf31e3aac37f50d7087c19c4dfd52"><div class="ttname"><a href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">Hydrogen.Core.ObjectPool.ObjectPools</a></div><div class="ttdeci">ObjectPoolCollection[] ObjectPools</div><div class="ttdoc">Our pooled object collections. </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd4/_object_pool_8cs_source.html#l00070">ObjectPool.cs:70</a></div></div>
 </div><!-- fragment -->
@@ -936,10 +938,10 @@ Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00345">345</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                {</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                        <span class="keywordflow">return</span> <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a88b7aa038aab9abb050b76fc72b66510">GetPoolID</a> (transform.gameObject.name)].Spawn (Vector3.zero, Quaternion.identity);</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                }</div>
+<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00347">347</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                {</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;                        <span class="keywordflow">return</span> <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a88b7aa038aab9abb050b76fc72b66510">GetPoolID</a> (transform.gameObject.name)].Spawn (Vector3.zero, Quaternion.identity);</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                }</div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_html_a88b7aa038aab9abb050b76fc72b66510"><div class="ttname"><a href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a88b7aa038aab9abb050b76fc72b66510">Hydrogen.Core.ObjectPool.GetPoolID</a></div><div class="ttdeci">int GetPoolID(GameObject gameObject)</div><div class="ttdoc">Gets the Pool ID for the GameObject. </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd4/_object_pool_8cs_source.html#l00300">ObjectPool.cs:300</a></div></div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_html_a68dcf31e3aac37f50d7087c19c4dfd52"><div class="ttname"><a href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">Hydrogen.Core.ObjectPool.ObjectPools</a></div><div class="ttdeci">ObjectPoolCollection[] ObjectPools</div><div class="ttdoc">Our pooled object collections. </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd4/_object_pool_8cs_source.html#l00070">ObjectPool.cs:70</a></div></div>
 </div><!-- fragment -->
@@ -968,10 +970,10 @@ Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00357">357</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;                {</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;                        <span class="keywordflow">return</span> <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a88b7aa038aab9abb050b76fc72b66510">GetPoolID</a> (gameObject.name)].Spawn (Vector3.zero, Quaternion.identity);</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;                }</div>
+<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00359">359</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;                {</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;                        <span class="keywordflow">return</span> <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a88b7aa038aab9abb050b76fc72b66510">GetPoolID</a> (gameObject.name)].Spawn (Vector3.zero, Quaternion.identity);</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;                }</div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_html_a88b7aa038aab9abb050b76fc72b66510"><div class="ttname"><a href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a88b7aa038aab9abb050b76fc72b66510">Hydrogen.Core.ObjectPool.GetPoolID</a></div><div class="ttdeci">int GetPoolID(GameObject gameObject)</div><div class="ttdoc">Gets the Pool ID for the GameObject. </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd4/_object_pool_8cs_source.html#l00300">ObjectPool.cs:300</a></div></div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_html_a68dcf31e3aac37f50d7087c19c4dfd52"><div class="ttname"><a href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">Hydrogen.Core.ObjectPool.ObjectPools</a></div><div class="ttdeci">ObjectPoolCollection[] ObjectPools</div><div class="ttdoc">Our pooled object collections. </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd4/_object_pool_8cs_source.html#l00070">ObjectPool.cs:70</a></div></div>
 </div><!-- fragment -->
@@ -1018,10 +1020,10 @@ Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00371">371</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;                {</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;                        <span class="keywordflow">return</span> <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a88b7aa038aab9abb050b76fc72b66510">GetPoolID</a> (transform.gameObject.name)].Spawn (position, rotation);</div>
-<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;                }</div>
+<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00373">373</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;                {</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;                        <span class="keywordflow">return</span> <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a88b7aa038aab9abb050b76fc72b66510">GetPoolID</a> (transform.gameObject.name)].Spawn (position, rotation);</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;                }</div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_html_a88b7aa038aab9abb050b76fc72b66510"><div class="ttname"><a href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a88b7aa038aab9abb050b76fc72b66510">Hydrogen.Core.ObjectPool.GetPoolID</a></div><div class="ttdeci">int GetPoolID(GameObject gameObject)</div><div class="ttdoc">Gets the Pool ID for the GameObject. </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd4/_object_pool_8cs_source.html#l00300">ObjectPool.cs:300</a></div></div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_html_a68dcf31e3aac37f50d7087c19c4dfd52"><div class="ttname"><a href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">Hydrogen.Core.ObjectPool.ObjectPools</a></div><div class="ttdeci">ObjectPoolCollection[] ObjectPools</div><div class="ttdoc">Our pooled object collections. </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd4/_object_pool_8cs_source.html#l00070">ObjectPool.cs:70</a></div></div>
 </div><!-- fragment -->
@@ -1068,10 +1070,10 @@ Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00385">385</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;                {</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;                        <span class="keywordflow">return</span> <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a88b7aa038aab9abb050b76fc72b66510">GetPoolID</a> (gameObject.name)].Spawn (position, rotation);</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;                }</div>
+<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00387">387</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;                {</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;                        <span class="keywordflow">return</span> <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a88b7aa038aab9abb050b76fc72b66510">GetPoolID</a> (gameObject.name)].Spawn (position, rotation);</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;                }</div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_html_a88b7aa038aab9abb050b76fc72b66510"><div class="ttname"><a href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a88b7aa038aab9abb050b76fc72b66510">Hydrogen.Core.ObjectPool.GetPoolID</a></div><div class="ttdeci">int GetPoolID(GameObject gameObject)</div><div class="ttdoc">Gets the Pool ID for the GameObject. </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd4/_object_pool_8cs_source.html#l00300">ObjectPool.cs:300</a></div></div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_html_a68dcf31e3aac37f50d7087c19c4dfd52"><div class="ttname"><a href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">Hydrogen.Core.ObjectPool.ObjectPools</a></div><div class="ttdeci">ObjectPoolCollection[] ObjectPools</div><div class="ttdoc">Our pooled object collections. </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd4/_object_pool_8cs_source.html#l00070">ObjectPool.cs:70</a></div></div>
 </div><!-- fragment -->
@@ -1099,10 +1101,10 @@ Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00394">394</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;                {</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;                        <span class="keywordflow">return</span> <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [poolID].Spawn (Vector3.zero, Quaternion.identity);</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;                }</div>
+<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00396">396</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;                {</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;                        <span class="keywordflow">return</span> <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [poolID].Spawn (Vector3.zero, Quaternion.identity);</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;                }</div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_html_a68dcf31e3aac37f50d7087c19c4dfd52"><div class="ttname"><a href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">Hydrogen.Core.ObjectPool.ObjectPools</a></div><div class="ttdeci">ObjectPoolCollection[] ObjectPools</div><div class="ttdoc">Our pooled object collections. </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd4/_object_pool_8cs_source.html#l00070">ObjectPool.cs:70</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1147,10 +1149,10 @@ Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00405">405</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;                {</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;                        <span class="keywordflow">return</span> <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [poolID].Spawn (position, rotation);</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;                }</div>
+<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00407">407</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;                {</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;                        <span class="keywordflow">return</span> <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [poolID].Spawn (position, rotation);</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;                }</div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_html_a68dcf31e3aac37f50d7087c19c4dfd52"><div class="ttname"><a href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">Hydrogen.Core.ObjectPool.ObjectPools</a></div><div class="ttdeci">ObjectPoolCollection[] ObjectPools</div><div class="ttdoc">Our pooled object collections. </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd4/_object_pool_8cs_source.html#l00070">ObjectPool.cs:70</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -1178,15 +1180,15 @@ Protected Member Functions</h2></td></tr>
 
 <p>Unity's Update Event </p>
 
-<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00436">436</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
-<div class="fragment"><div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;                {</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> x = 0; x &lt; ObjectPools.Length; x++) {</div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;                                <span class="keywordflow">if</span> (<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [x].<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a170f5406501629beabdbbff9fcf8e091">TrackObjects</a> &amp;&amp; <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [x].<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a134250dce0b27a8ac59b9028c8ff6f61">CullExtras</a>) {</div>
-<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;                                        <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [x].CullUpdate ();</div>
-<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;                                }</div>
-<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;                        }</div>
-<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;                }</div>
+<p>Definition at line <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html#l00438">438</a> of file <a class="el" href="../../d2/dd4/_object_pool_8cs_source.html">ObjectPool.cs</a>.</p>
+<div class="fragment"><div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;                {</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;                        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> x = 0; x &lt; ObjectPools.Length; x++) {</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;                                <span class="keywordflow">if</span> (<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [x].<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a170f5406501629beabdbbff9fcf8e091">TrackObjects</a> &amp;&amp; <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [x].<a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a134250dce0b27a8ac59b9028c8ff6f61">CullExtras</a>) {</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;                                        <a class="code" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">ObjectPools</a> [x].CullUpdate ();</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;                                }</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;                        }</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;                }</div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_html_a170f5406501629beabdbbff9fcf8e091"><div class="ttname"><a href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a170f5406501629beabdbbff9fcf8e091">Hydrogen.Core.ObjectPool.TrackObjects</a></div><div class="ttdeci">bool TrackObjects</div><div class="ttdoc">Should objects be tracked when they are spawned? </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd4/_object_pool_8cs_source.html#l00099">ObjectPool.cs:99</a></div></div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_html_a68dcf31e3aac37f50d7087c19c4dfd52"><div class="ttname"><a href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a68dcf31e3aac37f50d7087c19c4dfd52">Hydrogen.Core.ObjectPool.ObjectPools</a></div><div class="ttdeci">ObjectPoolCollection[] ObjectPools</div><div class="ttdoc">Our pooled object collections. </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd4/_object_pool_8cs_source.html#l00070">ObjectPool.cs:70</a></div></div>
 <div class="ttc" id="class_hydrogen_1_1_core_1_1_object_pool_html_a134250dce0b27a8ac59b9028c8ff6f61"><div class="ttname"><a href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a134250dce0b27a8ac59b9028c8ff6f61">Hydrogen.Core.ObjectPool.CullExtras</a></div><div class="ttdeci">bool CullExtras</div><div class="ttdoc">Should extra objects be culled when not in use? </div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd4/_object_pool_8cs_source.html#l00049">ObjectPool.cs:49</a></div></div>
@@ -1336,7 +1338,7 @@ Protected Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="../../d0/dff/namespace_hydrogen.html">Hydrogen</a></li><li class="navelem"><a class="el" href="../../d1/d8f/namespace_hydrogen_1_1_core.html">Core</a></li><li class="navelem"><a class="el" href="../../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html">ObjectPool</a></li>
-    <li class="footer">Generated on Wed Jan 8 2014 14:53:10 for Hydrogen Framework by
+    <li class="footer">Generated on Wed Jan 29 2014 12:25:47 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

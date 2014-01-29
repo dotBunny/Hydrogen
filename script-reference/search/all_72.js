@@ -1,6 +1,7 @@
 var searchData=
 [
   ['randomposition',['RandomPosition',['../d8/dd1/class_hydrogen_1_1_nav_mesh.html#a5430a9b9c022585c9dbfe6f16377469c',1,'Hydrogen::NavMesh']]],
+  ['red',['Red',['../d0/d85/class_hydrogen_1_1_texture.html#a6031a2e9ddaa6dfa8ee16f4df4ef3c4baee38e4d5dd68c4e440825018d549cb47',1,'Hydrogen::Texture']]],
   ['regex',['Regex',['../dd/d91/class_hydrogen_1_1_regex.html',1,'Hydrogen']]],
   ['released',['Released',['../d2/daf/namespace_hydrogen_1_1_peripherals.html#a3876c8102da79cc57ded581352c8bd9eaea1e34304a5d8ffa7c9b0ed8ede4ef1a',1,'Hydrogen::Peripherals']]],
   ['remove',['Remove',['../da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#af0d79927a37f6799bf67ecbc44d6ef1e',1,'Hydrogen.Core.AudioStack.Remove(AudioClip clip)'],['../da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#a80c4e6ee537dfad8514c42ba482c4670',1,'Hydrogen.Core.AudioStack.Remove(AudioStackItem item)'],['../da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#a22f04e1e1296c42ed29bb040d1076786',1,'Hydrogen.Core.AudioStack.Remove(string key)'],['../d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a0e9a4712ffd200345aa65e3340dcbd04',1,'Hydrogen.Core.ObjectPool.Remove()']]],
@@ -10,10 +11,15 @@ var searchData=
   ['removeat_3c_20t_20_3e',['RemoveAt&lt; T &gt;',['../d9/d04/class_hydrogen_1_1_array.html#aae5f21d3c51507daf38a79363c8d6e57',1,'Hydrogen::Array']]],
   ['removecontrol',['RemoveControl',['../d9/d31/class_hydrogen_1_1_peripherals_1_1_input.html#ab19cf0e68a19e71e6a0c97202513cd09',1,'Hydrogen::Peripherals::Input']]],
   ['removefrompool',['RemoveFromPool',['../d9/d87/class_hydrogen_1_1_core_1_1_object_pool_collection.html#a4a7d07affbee8e1b8087ac1f9ed5bd6d',1,'Hydrogen::Core::ObjectPoolCollection']]],
+  ['removematerial',['RemoveMaterial',['../d3/dac/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner.html#afb28e7305328abc6d9ed922715b68e66',1,'Hydrogen::Threading::Jobs::MeshCombiner']]],
+  ['removemesh',['RemoveMesh',['../d3/dac/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner.html#ae609e384d85b39b076ed691d211e7f81',1,'Hydrogen.Threading.Jobs.MeshCombiner.RemoveMesh(MeshFilter meshFilter, Renderer renderer, Matrix4x4 worldMatrix)'],['../d3/dac/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner.html#a1a9292e4536b6ee861f0257504e1d38b',1,'Hydrogen.Threading.Jobs.MeshCombiner.RemoveMesh(MeshInput meshInput)']]],
   ['replacemetachars',['ReplaceMetaChars',['../dd/d91/class_hydrogen_1_1_regex.html#aa9287becb42f37298da4256ec7b89cb4',1,'Hydrogen::Regex']]],
   ['resize',['Resize',['../d0/d85/class_hydrogen_1_1_texture.html#a47dd61e97ca33e82b114e0da868a0966',1,'Hydrogen::Texture']]],
   ['resources',['Resources',['../dc/d7b/class_hydrogen_1_1_resources.html',1,'Hydrogen']]],
   ['restart',['Restart',['../dd/d0e/class_hydrogen_1_1_core_1_1_audio_stack_item.html#a3a53702323835ad3ab4eae868d8516cb',1,'Hydrogen::Core::AudioStackItem']]],
+  ['rosybrown',['RosyBrown',['../d0/d85/class_hydrogen_1_1_texture.html#a6031a2e9ddaa6dfa8ee16f4df4ef3c4ba36b966a66d6bd385bc65c4ea063c841c',1,'Hydrogen::Texture']]],
   ['rotateclockwise90degrees',['RotateClockwise90Degrees',['../d0/d85/class_hydrogen_1_1_texture.html#aa319aa0d17d290b934b3f38e32d9fffd',1,'Hydrogen::Texture']]],
-  ['rotatecounterclockwise90degrees',['RotateCounterClockwise90Degrees',['../d0/d85/class_hydrogen_1_1_texture.html#ac727a59ad6da2c0b6157241d1226b726',1,'Hydrogen::Texture']]]
+  ['rotatecounterclockwise90degrees',['RotateCounterClockwise90Degrees',['../d0/d85/class_hydrogen_1_1_texture.html#ac727a59ad6da2c0b6157241d1226b726',1,'Hydrogen::Texture']]],
+  ['royalblue',['RoyalBlue',['../d0/d85/class_hydrogen_1_1_texture.html#a6031a2e9ddaa6dfa8ee16f4df4ef3c4ba3c6a0f673ebc53ef5e2912c59330c802',1,'Hydrogen::Texture']]],
+  ['run',['Run',['../db/d5f/class_hydrogen_1_1_threading_1_1_job_base.html#a7619bf9c49d00f0f0a732bfe88dc5f54',1,'Hydrogen::Threading::JobBase']]]
 ];

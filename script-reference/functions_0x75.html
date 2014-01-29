@@ -31,7 +31,7 @@
   <td id="projectlogo"><img alt="Logo" src="hydrogen-logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">Hydrogen Framework
-   &#160;<span id="projectnumber">1.2.4</span>
+   &#160;<span id="projectnumber">1.3.0</span>
    </div>
   </td>
  </tr>
@@ -82,6 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_enum.html"><span>Enumerations</span></a></li>
       <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
       <li><a href="functions_prop.html"><span>Properties</span></a></li>
+      <li><a href="functions_evnt.html"><span>Events</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
@@ -107,6 +108,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_0x74.html#index_t"><span>t</span></a></li>
       <li class="current"><a href="functions_0x75.html#index_u"><span>u</span></a></li>
       <li><a href="functions_0x76.html#index_v"><span>v</span></a></li>
+      <li><a href="functions_0x77.html#index_w"><span>w</span></a></li>
+      <li><a href="functions_0x79.html#index_y"><span>y</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -129,7 +132,7 @@ $(document).ready(function(){initNavTree('functions_0x75.html','');});
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Properties</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Events</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -148,10 +151,13 @@ $(document).ready(function(){initNavTree('functions_0x75.html','');});
 <li>UnsignedAngle()
 : <a class="el" href="d3/d69/class_hydrogen_1_1_math.html#a6919a65b5cb27e9a5dd61bd4e9be7a36">Hydrogen.Math</a>
 </li>
+<li>UnWatch()
+: <a class="el" href="de/dc9/classh_debug.html#aba087907884dd6a9557ee0e7abb99219">hDebug</a>
+</li>
 <li>Update()
-: <a class="el" href="d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a31cd813bc36a8bc78fe17d68efe5266e">Hydrogen.Core.ObjectPool</a>
+: <a class="el" href="da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#addbbb50f3520c9ebc4bc2e499247969e">Hydrogen.Core.AudioStack</a>
+, <a class="el" href="d7/d24/class_hydrogen_1_1_core_1_1_object_pool.html#a31cd813bc36a8bc78fe17d68efe5266e">Hydrogen.Core.ObjectPool</a>
 , <a class="el" href="d9/d31/class_hydrogen_1_1_peripherals_1_1_input.html#afd452af8ef086b77d18313801eb9c3ef">Hydrogen.Peripherals.Input</a>
-, <a class="el" href="da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#addbbb50f3520c9ebc4bc2e499247969e">Hydrogen.Core.AudioStack</a>
 </li>
 <li>UsePriorities
 : <a class="el" href="da/d6d/class_hydrogen_1_1_core_1_1_audio_stack.html#a66cf5b6e25e9d357b7b50eea72c3b121">Hydrogen.Core.AudioStack</a>
@@ -159,13 +165,28 @@ $(document).ready(function(){initNavTree('functions_0x75.html','');});
 <li>UTF8ByteArrayToString()
 : <a class="el" href="d3/d67/class_hydrogen_1_1_x_m_l.html#a567c0ecfa624ded3316366141306d853">Hydrogen.XML</a>
 </li>
+<li>UV
+: <a class="el" href="d3/d18/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner_1_1_transition_mesh.html#a10997ce435b745cdfbffd8bb11067449">Hydrogen.Threading.Jobs.MeshCombiner.TransitionMesh</a>
+, <a class="el" href="de/dcc/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner_1_1_buffered_mesh.html#af7c7f059f99b4cfcf11a986d2cf6cd13">Hydrogen.Threading.Jobs.MeshCombiner.BufferedMesh</a>
+, <a class="el" href="d6/d6a/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner_1_1_mesh_output.html#a39b8d02a2e71fa498370c80e2232593c">Hydrogen.Threading.Jobs.MeshCombiner.MeshOutput</a>
+</li>
+<li>UV1
+: <a class="el" href="d6/d6a/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner_1_1_mesh_output.html#acd27b2edf3894c703a38bb48d1dd705f">Hydrogen.Threading.Jobs.MeshCombiner.MeshOutput</a>
+, <a class="el" href="d3/d18/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner_1_1_transition_mesh.html#a03af6004bafdcf07333034f6b58c4077">Hydrogen.Threading.Jobs.MeshCombiner.TransitionMesh</a>
+, <a class="el" href="de/dcc/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner_1_1_buffered_mesh.html#a0bbd0e779d9cfe6f25fb6dd061836bf9">Hydrogen.Threading.Jobs.MeshCombiner.BufferedMesh</a>
+</li>
+<li>UV2
+: <a class="el" href="d3/d18/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner_1_1_transition_mesh.html#a18028b9df24c609dc9a790a969f2761e">Hydrogen.Threading.Jobs.MeshCombiner.TransitionMesh</a>
+, <a class="el" href="de/dcc/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner_1_1_buffered_mesh.html#af1632642fd900dd9d67007b52def041f">Hydrogen.Threading.Jobs.MeshCombiner.BufferedMesh</a>
+, <a class="el" href="d6/d6a/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner_1_1_mesh_output.html#a90991907c128bb5df68dfcf12a6db983">Hydrogen.Threading.Jobs.MeshCombiner.MeshOutput</a>
+</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Jan 8 2014 14:53:10 for Hydrogen Framework by
+    <li class="footer">Generated on Wed Jan 29 2014 12:25:48 for Hydrogen Framework by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>
