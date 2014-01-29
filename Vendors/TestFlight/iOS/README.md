@@ -6,11 +6,10 @@ The SDK can track more information if you pass it to TestFlight. The Checkpoint 
 
 The SDK also offers a remote logging solution. Find out more about our logging system in the "Remote Logging" section.
 
+
 ## Requirements
 
 The TestFlight SDK requires iOS 4.3 or above, the Apple LLVM compiler, and the libz library to run.
-
-The AdSupport.framework is required for iOS 6.0+ in order to uniquely identify users so we can estimate the number of users your app has (using `ASIdentifierManager`). You may weak link the framework in you app. If your app does not link with the AdSupport.framework, the TestFlight SDK will automatically load it for apps running on iOS 6.0+.
 
                 
 ## Integration
@@ -40,9 +39,9 @@ The AdSupport.framework is required for iOS 6.0+ in order to uniquely identify u
     
 4. Get your App Token
 
-    1.  If this is a new application, and you have not uploaded it to TestFlight before, first register it here: [https://testflightapp.com/dashboard/applications/create/]().
+    1.  If this is a new application, and you have not uploaded it to TestFlight before, first register it here: [https://testflightapp.com/dashboard/applications/create/](https://testflightapp.com/dashboard/applications/create/).
 
-        Otherwise, if you have previously uploaded your app to TestFlight, go to your list of applications ([http://testflightapp.com/dashboard/applications/]()) and click on the application you are using from the list.
+        Otherwise, if you have previously uploaded your app to TestFlight, go to your list of applications ([http://testflightapp.com/dashboard/applications/](http://testflightapp.com/dashboard/applications/)) and click on the application you are using from the list.
         
     2. Click on the "App Token" tab on the left. The App Token for that application will be there.
     

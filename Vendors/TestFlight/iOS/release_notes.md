@@ -1,3 +1,7 @@
+## 2.2.1
+
+- Consolidate both SDK versions into one which removes all access to `ASIdentifierManager`
+
 ## 2.2
 
 - Restore In App Updates

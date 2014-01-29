@@ -78,3 +78,44 @@ As testers install your build and start to test it you will see their session da
 To perform remote logging you can use the `TestFlight.log()` method.
 
     TestFlight.log("Logging info here…");
+    
+
+##Session Timeout
+
+You can adjust the amount of time a user can leave the app for and still continue the same session when they come back by calling `TestFlight.setSessionTimeout(int timeoutMS)` prior to `takeOff()`. Change it to 0 to turn the feature off.
+
+    TestFlight.setSessionTimeout(20000);//20 seconds
+    TestFlight.takeOff(this, APP_TOKEN);
+
+##Manual Session Control
+
+If your app is home screen widget, a music player that continues to play music in the background, a navigation app that continues to function in the background, or any app where a user is considered to be "using" the app even while the app is not active you should use Manual Session Control. **Please only use manual session control if you know exactly what you are doing.** There are many pitfalls which can result in bad session duration and counts. 
+
+###Usage
+
+Enable manual sessions **before** calling `takeOff()`.
+
+    TestFlight.enableManualSessions();
+    TestFlight.takeOff(this, APP_TOKEN);
+
+Use the manually start/end session methods to control you sessions.
+
+    TestFlight.manuallyStartSession();
+    ...
+    TestFlight.manuallyEndSession();
+    
+Check session status using `isSessionStarted()`.
+
+    TestFlight.isSessionStarted();
+    
+###Pitfalls
+ 
+When using manual sessions in the background, you must always be aware of the fact that Android may suspend your app at any time without any warning. You must end your session before that happens. If you do not, the session will continue and include all the time the app was suspended in it's duration if the app is brought back from suspension. This will lead to very inaccurate session lengths and counts.
+ 
+ On app termination: For the most accurate sessions, try to end your session if you know the app is about to terminate. If you do not, the session will still be ended on the next launch, however, it's end time will not be correct.
+ 
+ Sessions do not continue across termination if you do not end a session before termination.
+
+ On crashes: Do not worry about ending sessions in the event of a crash. Even manual sessions are automatically ended in the event of a crash. Crashes that occur while not in session will still be sent.
+ 
+ Checkpoints will not be sent if they occur while not in session. 

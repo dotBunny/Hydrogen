@@ -1,3 +1,8 @@
+##1.4 - January 16, 2014
+* Added support for manual session control.
+* Crashes that occur before session start no longer send session end event.
+* Resolved issue with closing cursor for SQL Lite, which caused crash on Android 2.3 devices.
+
 ##1.3 - November 18, 2013
 
 * Fixed bug that prevented takeOff from outside Application class.
