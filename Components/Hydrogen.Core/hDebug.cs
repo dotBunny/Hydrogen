@@ -475,6 +475,13 @@ public class hDebug : MonoBehaviour
 						}
 				} else if (Mode == DisplayMode.Console) {
 
+						if (hDebug._logMessages.Count < DebugLogLines) {
+								ConsoleHeight = (ConsolePadding * 2) + (15 * (hDebug._logMessages.Count));
+						} else {
+								ConsoleHeight = (ConsolePadding * 2) + (15 * (DebugLogLines));
+						}
+
+
 						int num = ConsolePadding;
 						int num2 = hDebug._logMessages.Count - _logOffsetV;
 						if (num2 > hDebug._debugLogCount) {
