@@ -5,9 +5,9 @@ var hierarchy =
     [ "Hydrogen.Threading.Jobs.MeshCombiner.BufferedMesh", "de/dcc/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner_1_1_buffered_mesh.html", null ],
     [ "Hydrogen.Components", "d5/da1/class_hydrogen_1_1_components.html", null ],
     [ "EventArgs", null, [
-      [ "Forker.ParallelEventArgs", "d3/d58/class_forker_1_1_parallel_event_args.html", null ]
+      [ "Hydrogen.Threading.Forker.ParallelEventArgs", "d0/d75/class_hydrogen_1_1_threading_1_1_forker_1_1_parallel_event_args.html", null ]
     ] ],
-    [ "Forker", "dd/d0c/class_forker.html", null ],
+    [ "Hydrogen.Threading.Forker", "d0/dd6/class_hydrogen_1_1_threading_1_1_forker.html", null ],
     [ "Hydrogen.Core.WebPool.FormBinaryData", "df/d8b/struct_hydrogen_1_1_core_1_1_web_pool_1_1_form_binary_data.html", null ],
     [ "IComparer< TransitionMesh >", null, [
       [ "Hydrogen.Threading.Jobs.MeshCombiner.TransitionMeshSorter", "db/df4/class_hydrogen_1_1_threading_1_1_jobs_1_1_mesh_combiner_1_1_transition_mesh_sorter.html", null ]

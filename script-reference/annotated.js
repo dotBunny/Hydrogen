@@ -1,7 +1,6 @@
 var annotated =
 [
     [ "Hydrogen", "d0/dff/namespace_hydrogen.html", "d0/dff/namespace_hydrogen" ],
-    [ "Forker", "dd/d0c/class_forker.html", "dd/d0c/class_forker" ],
     [ "hAudioStack", "db/d29/classh_audio_stack.html", "db/d29/classh_audio_stack" ],
     [ "hDebug", "de/dc9/classh_debug.html", "de/dc9/classh_debug" ],
     [ "hInput", "d6/d4c/classh_input.html", "d6/d4c/classh_input" ],
