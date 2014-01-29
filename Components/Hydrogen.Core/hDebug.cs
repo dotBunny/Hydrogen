@@ -34,8 +34,71 @@ using UnityEngine;
 /// An in-game debugging system to make every developer happy.
 /// </summary>
 /// <remarks>This component does not follow our normal component/base model.</remarks>
+/// TODO: This is getting massively reworked.
 public class hDebug : MonoBehaviour
 {
+		/// <summary>
+		/// Height of a character from our fontImage.
+		/// </summary>
+		public const int GlyphHeight = 8;
+		/// <summary>
+		/// Width of a character from our fontImage.
+		/// </summary>
+		public const int GlyphWidth = 8;
+		/// <summary>
+		/// The consoles output spacing between lines.
+		/// </summary>
+		const int ConsoleLineSpacing = 7;
+		/// <summary>
+		/// The max number of lines to display at any one time in the console.
+		/// </summary>
+		const int ConsoleMaxDisplayedLines = 24;
+		/// <summary>
+		/// The maximum number of lines stored in the consoles list.
+		/// </summary>
+		const int ConsoleMaxLines = 10000;
+		/// <summary>
+		/// How much space should be around the consoles output.
+		/// </summary>
+		const int ConsolePadding = 5;
+		/// <summary>
+		/// When outputting to Unity's debug log, what should entries be prefixed with.
+		/// </summary>
+		/// <remarks>This is used to prevent double dipping.</remarks>
+		const string ConsoleUnityPrefix = "[h] ";
+		/// <summary>
+		/// Debug Shader
+		/// </summary>
+		const string ShaderText = "Shader \"hDebug/Text\"\r\n{\r\nProperties\r\n{\r\n_MainTex (\"Main\", 2D) = \"white\" {}\r\n}\r\n\r\nCategory\r\n{\r\n                        Tags\r\n                        {\r\n                            \"Queue\" = \"Transparent\"\r\n                        }\r\n                        \r\n                        Blend SrcAlpha OneMinusSrcAlpha\r\n                        AlphaTest Greater .01\r\n                        ColorMask RGB\r\n                        Cull Off\r\n                        Lighting Off\r\n                        ZWrite On\r\n                        \r\n                        Fog\r\n                        {\r\n                            Color(0, 0, 0, 0)\r\n                        }\r\n                        \r\n                        BindChannels\r\n                        {\r\n                            Bind \"Color\", color\r\n                            Bind \"Vertex\", vertex\r\n                            Bind \"TexCoord\", texcoord\r\n                        }\r\n                        \r\n                        SubShader\r\n                        {\r\n                            Pass\r\n                            {\r\n                                SetTexture [_MainTex]\r\n                                {\r\n                                    combine texture * primary\r\n                                }\r\n                            }\r\n                        }\r\n}\r\n}";
+		/// <summary>
+		/// The space around the boxed outputs in stats mode.
+		/// </summary>
+		const int StatsPadding = 10;
+		/// <summary>
+		/// The space between items when outputting in stats mode.
+		/// </summary>
+		const int StatsLineSpacing = 7;
+		/// <summary>
+		/// Should we monitor for input? 
+		/// </summary>
+		/// <remarks>
+		/// Turn this off if your binding your own keys to the input methods.
+		/// </remarks>
+		public bool CheckForInput = true;
+		/// <summary>
+		/// Where should the console be displayed on the screen.
+		/// </summary>
+		/// <remarks>Top or Bottom?</remarks>
+		public DisplayLocation Location = DisplayLocation.Top;
+		/// <summary>
+		/// What should be displayed? Stats or Console?
+		/// </summary>
+		public DisplayMode Mode = DisplayMode.Off;
+		/// <summary>
+		/// What key should be used to toggle between modes.
+		/// </summary>
+		/// <remarks>Available where Keyboard input is received.</remarks>
+		public KeyCode ToggleKey = KeyCode.BackQuote;
 		/// <summary>
 		/// Internal fail safe to maintain instance across threads.
 		/// </summary>
@@ -50,58 +113,6 @@ public class hDebug : MonoBehaviour
 		/// Internal reference to the static instance of the object pool.
 		/// </summary>
 		static volatile hDebug _staticInstance;
-
-		/// <summary>
-		/// Gets the console instance, creating one if none is found.
-		/// </summary>
-		/// <value>
-		/// The Object Pool.
-		/// </value>
-		public static hDebug Instance {
-				get {
-						if (_staticInstance == null) {
-								lock (_syncRoot) {
-										_staticInstance = FindObjectOfType (typeof(hDebug)) as hDebug;
-
-										// If we don't have it, lets make it!
-										if (_staticInstance == null) {
-												var go = GameObject.Find (Hydrogen.Components.DefaultSingletonName) ??
-												         new GameObject (Hydrogen.Components.DefaultSingletonName);
-
-												go.AddComponent<hDebug> ();
-												_staticInstance = go.GetComponent<hDebug> ();	
-										}
-								}
-						}
-						return _staticInstance;
-				}
-		}
-
-		/// <summary>
-		/// Does the Console already exist?
-		/// </summary>
-		public static bool Exists ()
-		{
-				return _staticInstance != null;
-		}
-
-		public bool CheckForInput = true;
-		public bool CreateCamera = true;
-		public DisplayMode Mode = DisplayMode.Off;
-		public DisplayLocation Location = DisplayLocation.Top;
-		public KeyCode ToggleKey = KeyCode.BackQuote;
-		const string ConsoleUnityPrefix = "[h] ";
-		const int DebugLogLines = 24;
-		const int DebugLogLinesMax = 10000;
-		const int StatsPadding = 10;
-		const int ConsolePadding = 5;
-		const int StatsLineSpacing = 7;
-		const int FontBegin = 33;
-		const int FontEnd = 127;
-		public const int GlyphHeight = 8;
-		public const int GlyphWidth = 8;
-		const int GlyphCount = 94;
-		const string ShaderText = "Shader \"hDebug/Text\"\r\n{\r\nProperties\r\n{\r\n_MainTex (\"Main\", 2D) = \"white\" {}\r\n}\r\n\r\nCategory\r\n{\r\n                        Tags\r\n                        {\r\n                            \"Queue\" = \"Transparent\"\r\n                        }\r\n                        \r\n                        Blend SrcAlpha OneMinusSrcAlpha\r\n                        AlphaTest Greater .01\r\n                        ColorMask RGB\r\n                        Cull Off\r\n                        Lighting Off\r\n                        ZWrite On\r\n                        \r\n                        Fog\r\n                        {\r\n                            Color(0, 0, 0, 0)\r\n                        }\r\n                        \r\n                        BindChannels\r\n                        {\r\n                            Bind \"Color\", color\r\n                            Bind \"Vertex\", vertex\r\n                            Bind \"TexCoord\", texcoord\r\n                        }\r\n                        \r\n                        SubShader\r\n                        {\r\n                            Pass\r\n                            {\r\n                                SetTexture [_MainTex]\r\n                                {\r\n                                    combine texture * primary\r\n                                }\r\n                            }\r\n                        }\r\n                    }\r\n                }";
 		public static Color Shadow = Color.black;
 		public static bool EchoToUnityLog = true;
 		static readonly char[] _newLineCharacters = new char[] { '\n', '\r' };
@@ -171,16 +182,9 @@ public class hDebug : MonoBehaviour
 		float[] _glyphRight;
 		float[] _glyphTop;
 		float[] _glyphBottom;
-		bool _init;
 		int _logOffsetH;
 		int _logOffsetV;
 		int _watchWidth = 100;
-
-		public int ConsoleHeight {
-				get { return _consoleHeight; }
-				set { _consoleHeight = value; }
-		}
-
 		int _consoleHeight = 382;
 		hDebug.UVRectangle _whiteUV;
 
@@ -195,6 +199,45 @@ public class hDebug : MonoBehaviour
 				Off = 0,
 				Stats = 1,
 				Console = 2
+		}
+
+		/// <summary>
+		/// Gets the console instance, creating one if none is found.
+		/// </summary>
+		/// <value>
+		/// The Object Pool.
+		/// </value>
+		public static hDebug Instance {
+				get {
+						if (_staticInstance == null) {
+								lock (_syncRoot) {
+										_staticInstance = FindObjectOfType (typeof(hDebug)) as hDebug;
+
+										// If we don't have it, lets make it!
+										if (_staticInstance == null) {
+												var go = GameObject.Find (Hydrogen.Components.DefaultSingletonName) ??
+												         new GameObject (Hydrogen.Components.DefaultSingletonName);
+
+												go.AddComponent<hDebug> ();
+												_staticInstance = go.GetComponent<hDebug> ();	
+										}
+								}
+						}
+						return _staticInstance;
+				}
+		}
+
+		public int ConsoleHeight {
+				get { return _consoleHeight; }
+				set { _consoleHeight = value; }
+		}
+
+		/// <summary>
+		/// Does the Console already exist?
+		/// </summary>
+		public static bool Exists ()
+		{
+				return _staticInstance != null;
 		}
 
 		public static void Error (object obj)
@@ -348,7 +391,7 @@ public class hDebug : MonoBehaviour
 						}
 				}
 						
-				if (hDebug._logMessages.Count >= DebugLogLinesMax) {
+				if (hDebug._logMessages.Count >= ConsoleMaxLines) {
 						hDebug._logMessages.RemoveAt (0);
 				}
 
@@ -476,11 +519,11 @@ public class hDebug : MonoBehaviour
 				} else if (Mode == DisplayMode.Console) {
 
 						// Sorta dynamic console ... will redo
-						if (hDebug._logMessages.Count < DebugLogLines) {
+						if (hDebug._logMessages.Count < ConsoleMaxDisplayedLines) {
 								ConsoleHeight = (ConsolePadding * 2) + (15 * hDebug._logMessages.Count) + 1;
 						} else {
 
-								ConsoleHeight = (ConsolePadding * 2) + (15 * DebugLogLines) - 1;
+								ConsoleHeight = (ConsolePadding * 2) + (15 * ConsoleMaxDisplayedLines) - 1;
 						}
 
 
@@ -489,11 +532,11 @@ public class hDebug : MonoBehaviour
 						if (num2 > hDebug._debugLogCount) {
 								num2 = hDebug._debugLogCount;
 						} else {
-								if (num2 < DebugLogLines) {
-										num2 = DebugLogLines;
+								if (num2 < ConsoleMaxDisplayedLines) {
+										num2 = ConsoleMaxDisplayedLines;
 								}
 						}
-						int num3 = num2 - DebugLogLines;
+						int num3 = num2 - ConsoleMaxDisplayedLines;
 						if (num3 < 0) {
 								num3 = 0;
 						}
@@ -704,8 +747,8 @@ public class hDebug : MonoBehaviour
 
 		public void PageUp ()
 		{
-				_logOffsetV += DebugLogLines;
-				int num = hDebug._logMessages.Count - DebugLogLines;
+				_logOffsetV += ConsoleMaxDisplayedLines;
+				int num = hDebug._logMessages.Count - ConsoleMaxDisplayedLines;
 				if (_logOffsetV > num) {
 						_logOffsetV = num;
 				}
@@ -713,7 +756,7 @@ public class hDebug : MonoBehaviour
 
 		public void PageDown ()
 		{
-				_logOffsetV -= DebugLogLines;
+				_logOffsetV -= ConsoleMaxDisplayedLines;
 				if (_logOffsetV < 0) {
 						_logOffsetV = 0;
 				}
