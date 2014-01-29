@@ -19,6 +19,17 @@ http://joncairns.com/2011/10/how-to-use-git-submodules/
 If you've downloaded the Asset Store version, its already installed for you :) 
 
 
+Examples
+--------
+
+The example package can be found on the Unity Asset Store here:
+
+https://www.assetstore.unity3d.com/#/content/14110
+
+It has also been made available via a GIT rep here:
+
+http://github.com/dotBunny/Hydrogen-Examples
+
 Support
 -------
 
