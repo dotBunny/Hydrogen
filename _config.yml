@@ -20,9 +20,10 @@ port:             			9001
 # ===============================
 
 # Versions
-version_hydrogen:  			1.2.4
-version_testflight_ios:	 	2.2.0
-version_testflight_android:	1.3
+version_hydrogen:  			1.3.0
+version_hydrogen_examples:	1.3.0
+version_testflight_ios:	 	2.2.1
+version_testflight_android:	1.4
 
 # Website Links
 dotbunny:	      			http://dotbunny.com
