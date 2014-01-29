@@ -475,10 +475,12 @@ public class hDebug : MonoBehaviour
 						}
 				} else if (Mode == DisplayMode.Console) {
 
+						// Sorta dynamic console ... will redo
 						if (hDebug._logMessages.Count < DebugLogLines) {
-								ConsoleHeight = (ConsolePadding * 2) + (15 * (hDebug._logMessages.Count));
+								ConsoleHeight = (ConsolePadding * 2) + (15 * hDebug._logMessages.Count) + 1;
 						} else {
-								ConsoleHeight = (ConsolePadding * 2) + (15 * (DebugLogLines));
+
+								ConsoleHeight = (ConsolePadding * 2) + (15 * DebugLogLines) - 1;
 						}
 
 
