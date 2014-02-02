@@ -1,5 +1,5 @@
 var data = {
-	labels : ["07/13","08/13", "09/13", "10/13", "11/13", "12/13"],
+	labels : ["07/13","08/13", "09/13", "10/13", "11/13", "12/13", "01/14"],
 	datasets : [
 		{
 			fillColor : "rgba(66,139,202,0.5)",
@@ -7,21 +7,8 @@ var data = {
 			pointColor : "rgba(66,139,202,1)",
 			pointStrokeColor : "#fff",
 			
-			data : [0,0,0,11,38,70]
+			data : [0,0,0,11,38,70,124]
 		},
-		/*{
-		fillColor : "rgba(220,220,220,0.5)",
-			strokeColor : "rgba(220,220,220,1)",
-			pointColor : "rgba(220,220,220,1)",
-			pointStrokeColor : "#fff",
-			
-			
-			fillColor : "rgba(151,187,205,0.5)",
-			strokeColor : "rgba(151,187,205,1)",
-			pointColor : "rgba(151,187,205,1)",
-			pointStrokeColor : "#fff",
-			data : [28,48,40,19,96,27,100]
-		}*/
 	]
 }
 
