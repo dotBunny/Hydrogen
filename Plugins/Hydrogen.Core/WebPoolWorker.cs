@@ -134,9 +134,9 @@ namespace Hydrogen.Core
 				public int POST (string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
 				{
 						_hash = (Time.time + URI + payload + Random.Range (0, 100)).GetHashCode ();
-			
+
 						StartCoroutine (PostReturnedText (URI, contentType, payload, cookie, callback));
-			
+
 						return _hash;
 				}
 
@@ -157,13 +157,17 @@ namespace Hydrogen.Core
 						var newForm = new WWWForm ();
 
 						// Add string data
-						foreach (string s in formStringData.Keys) {
-								newForm.AddField (s, formStringData [s]);
+						if (formStringData != null) {
+								foreach (string s in formStringData.Keys) {
+										newForm.AddField (s, formStringData [s]);
+								}
 						}
 
 						// Add binary data
-						foreach (WebPool.FormBinaryData b in formBinaryData) {
-								newForm.AddBinaryData (b.FieldName, b.Data, b.FileName, b.MimeType);
+						if (formBinaryData != null) {
+								foreach (WebPool.FormBinaryData b in formBinaryData) {
+										newForm.AddBinaryData (b.FieldName, b.Data, b.FileName, b.MimeType);
+								}
 						}
 
 						var headers = newForm.headers;
@@ -245,19 +249,19 @@ namespace Hydrogen.Core
 
 						// Message Data
 						byte[] postData = System.Text.Encoding.ASCII.GetBytes (payload.ToCharArray ());
-			
+
 						// Process Headers
 						var headers = new Hashtable ();
-			
-						headers.Add ("Content-Type", contentType);
-						headers.Add ("Content-Length", postData.Length);
-						if (cookie != null)
-								headers.Add ("Cookie", cookie);
-			
+
+						//headers.Add ("Content-Type", contentType);
+						//headers.Add ("Content-Length", postData.Length);
+						//if (cookie != null)
+						//		headers.Add ("Cookie", cookie);
+
 						var newCall = new WWW (URI, postData, headers);
 
 						yield return newCall;
-			
+
 						while (!newCall.isDone)
 								yield return new WaitForSeconds (0.01f);
 

@@ -60,9 +60,9 @@ namespace Hydrogen.Core
 				/// <param name="URI">The Target URI</param>
 				/// <param name="formStringData">A Dictionary<string,string> of Form Data</param>
 				/// <returns>Call Hashcode</returns>
-				public void Form (string URI, Dictionary<string, string> formStringData)
+				public int Form (string URI, Dictionary<string, string> formStringData)
 				{
-						Form (URI, formStringData, null, null, null);
+						return Form (URI, formStringData, null, null, null);
 				}
 
 				/// <summary>
@@ -74,16 +74,16 @@ namespace Hydrogen.Core
 				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
 				/// <returns>Call Hashcode</returns>
-				public void Form (string URI, Dictionary<string, string> formStringData, FormBinaryData[] formBinaryData, string cookie, System.Action<int, Hashtable, string> callback)
+				public int Form (string URI, Dictionary<string, string> formStringData, FormBinaryData[] formBinaryData, string cookie, System.Action<int, Hashtable, string> callback)
 				{
 						if (!_initialized) {
 								Debug.LogError ("WebPool has not finished initializing ... " +
 								"Did you call this function without having either a WebPool or ObjectPool component " +
 								"already on a MonoBehaviour?");
-								return;
+								return 0;
 						}
 						GameObject go = _poolReference.Spawn (_poolID);
-						go.GetComponent<WebPoolWorker> ().Form (URI, formStringData, formBinaryData, cookie, callback);
+						return go.GetComponent<WebPoolWorker> ().Form (URI, formStringData, formBinaryData, cookie, callback);
 				}
 
 				/// <summary>
@@ -133,9 +133,9 @@ namespace Hydrogen.Core
 				/// <param name="contentType">The Content-Type Header</param>
 				/// <param name="payload">The data to be posted.</param>
 				/// <returns>Call Hashcode</returns>
-				public void POST (string URI, string contentType, string payload)
+				public int POST (string URI, string contentType, string payload)
 				{
-						POST (URI, contentType, payload, null, null);
+						return POST (URI, contentType, payload, null, null);
 				}
 
 				/// <summary>
@@ -147,16 +147,16 @@ namespace Hydrogen.Core
 				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
 				/// <returns>Call Hashcode</returns> 
-				public void POST (string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
+				public int POST (string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
 				{
 						if (!_initialized) {
 								UnityEngine.Debug.LogError ("WebPool has not finished initializing ... " +
 								"Did you call this function without having either a WebPool or ObjectPool component " +
 								"already on a MonoBehaviour?");
-								return;
+								return 0;
 						}
 						GameObject go = _poolReference.Spawn (_poolID);
-						go.GetComponent<WebPoolWorker> ().POST (URI, contentType, payload, cookie, callback);
+						return go.GetComponent<WebPoolWorker> ().POST (URI, contentType, payload, cookie, callback);
 				}
 
 				/// <summary>
