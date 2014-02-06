@@ -46,6 +46,23 @@ namespace Hydrogen.Peripherals
                 public static readonly Dictionary<String, String[]> DoubleDeltaAxes = new Dictionary<String, String[]> {
 						{ "Mouse", new []{"Mouse X", "Mouse Y"} },
 				};
+		        public static readonly Dictionary<String, MouseGesture> MouseGestures = new Dictionary<string, MouseGesture>()
+		        {
+		                {"Click", MouseGesture.Click},
+		                {"DoubleClick", MouseGesture.DoubleClick},
+		                {"DoubleClickDrag", MouseGesture.DoubleClickDrag},
+		                {"LongClick", MouseGesture.LongClick},
+		                {"LongClickDrag", MouseGesture.LongClickDrag}
+		        };
+                public static readonly Dictionary<String, TouchGesture> TouchGestures = new Dictionary<String, TouchGesture>
+		        {
+                    {"Touch",                TouchGesture.Touch},
+                    {"DoubleTouch",          TouchGesture.DoubleTouch},
+                    {"DoubleTouchDrag",      TouchGesture.DoubleTouchDrag},
+                    {"LongPress",            TouchGesture.LongPress},
+                    {"LongPressDrag",        TouchGesture.LongPressDrag},
+                    {"Pinch",                TouchGesture.Pinch},
+		        };
 				public static readonly Dictionary<String, String> Axes = new Dictionary<String, String> {
 						{ "Horizontal", "Horizontal" },
 						{ "Vertical", "Vertical" }
@@ -441,16 +458,6 @@ namespace Hydrogen.Peripherals
                         
 				};
 
-                public static readonly Dictionary<String, Gesture> GestureControls = new Dictionary<String, Gesture>
-		        {
-                    {"Touch",                Gesture.Touch},
-                    //{"DoubleTouch",          Gesture.DoubleTouch},
-                    //{"DoubleTouchDrag",      Gesture.DoubleTouchDrag},
-                    {"LongPress",            Gesture.LongPress},
-                    {"LongPressDrag",        Gesture.LongPressDrag},
-                    //{"Pinch",                Gesture.Pinch},
-		        };
-
 				#endregion
 
 				public enum ControlType
@@ -478,6 +485,42 @@ namespace Hydrogen.Peripherals
 						if (KeyboardButtons.TryGetValue (name, out keyCode)) {
 								return new InputKeyboardButtonControl (name, keyCode, action);
 						}
+                        MouseGesture mouseGesture;
+                        if (MouseGestures.TryGetValue(name, out mouseGesture))
+                        {
+                            switch (mouseGesture)
+                            {
+                                case MouseGesture.Click:
+                                    return new ClickGestureControl("Click", action);
+                                case MouseGesture.DoubleClick:
+                                    return new DoubleClickGestureControl("DoubleClick", action);
+                                case MouseGesture.DoubleClickDrag:
+                                    return new DoubleClickDragGestureControl("DoubleClickDrag", action);
+                                case MouseGesture.LongClick:
+                                    return new LongClickGestureControl("LongClick", action);
+                                case MouseGesture.LongClickDrag:
+                                    return new LongClickDragGestureControl("LongClickDrag", action);
+                            }
+                        }
+                        TouchGesture touchGesture;
+                        if (TouchGestures.TryGetValue(name, out touchGesture))
+                        {
+                            switch (touchGesture)
+                            {
+                                case TouchGesture.Touch:
+                                    return new TouchGestureControl("Touch", action);
+                                case TouchGesture.DoubleTouch:
+                                    return new DoubleTouchGestureControl("DoubleTouch", action);
+                                case TouchGesture.DoubleTouchDrag:
+                                    return new DoubleTouchDragGestureControl("DoubleTouchDrag", action);
+                                case TouchGesture.LongPress:
+                                    return new LongPressGestureControl("LongPress", action);
+                                case TouchGesture.LongPressDrag:
+                                    return new LongPressDragGestureControl("LongPressDrag", action);
+                                case TouchGesture.Pinch:
+                                    return new PinchGestureControl("Pinch", action);
+                            }
+                        }
                         TouchAxis touchAxis;
                         if (TouchAxes.TryGetValue(name, out touchAxis))
                         {
@@ -547,26 +590,6 @@ namespace Hydrogen.Peripherals
                         }
 
                     
-                        Gesture gesture;
-
-                        if (GestureControls.TryGetValue(name, out gesture))
-                        {
-                            switch (gesture)
-                            {
-                                case Gesture.Touch:
-                                    return new TouchGestureControl("Touch", action);
-                                case Gesture.DoubleTouch:
-                                    return new DoubleTouchGestureControl("DoubleTouch", action);
-                                case Gesture.DoubleTouchDrag:
-                                    return new DoubleTouchDragGestureControl("DoubleTouchDrag", action);
-                                case Gesture.LongPress:
-                                    return new LongPressGestureControl("LongPress", action);
-                                case Gesture.LongPressDrag:
-                                    return new LongPressDragGestureControl("LongPressDrag", action);
-                                case Gesture.Pinch:
-                                    return new PinchGestureControl("Pinch", action);
-                            }
-                        }
 
 						return null;
 				}
