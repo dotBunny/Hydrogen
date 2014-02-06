@@ -347,6 +347,9 @@ namespace Hydrogen.Core
 				/// </remarks>
 				protected virtual void Update ()
 				{
+						if (_loadedItems == null)
+								return;
+
 						foreach (string s in _loadedItems.Keys.ToList()) {
 								_loadedItems [s].Process ();
 						}
