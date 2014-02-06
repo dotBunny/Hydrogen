@@ -1,6 +1,6 @@
-#region Copyright Notice & License Information
+﻿#region Copyright Notice & License Information
 //
-// InputKeyboardButtonControl.cs
+// InputDeltaAxisControl.cs
 //
 // Author:
 //       Matthew Davey <matthew.davey@dotbunny.com>
@@ -31,31 +31,26 @@ using UnityEngine;
 
 namespace Hydrogen.Peripherals
 {
-		sealed class InputKeyboardButtonControl : InputControlBase
-		{
-				readonly KeyCode _key;
-				bool _last, _now;
-				float _timeBegan;
+    sealed class InputDoubleDeltaAxisControl : InputControlBase
+    {
+        readonly string _axis1, _axis2;
 
-				public InputKeyboardButtonControl (string name, KeyCode key, InputAction action)
-			: base (name, action)
-				{
-						_key = key;
-				}
+        public InputDoubleDeltaAxisControl(string name, string axisName1, string axisName2, InputAction action)
+            : base(name, action)
+        {
+            _axis1 = axisName1;
+            _axis2 = axisName2;
+        }
 
-				public override void Capture ()
-				{
-						_last = _now;
-						_now = UnityEngine.Input.GetKey (_key);
+        public override void Capture()
+        {
+            float value1 = UnityEngine.Input.GetAxis(_axis1);
+            float value2 = UnityEngine.Input.GetAxis(_axis2);
 
-						if (_now && !_last) {
-								_timeBegan = Time.time;
-								Action (InputEvent.Pressed, new Vector2(1.0f, 1.0f), 0.0f);
-						} else if (!_now && _last) {
-                            Action(InputEvent.Released, new Vector2(0.0f, 0.0f), Time.time - _timeBegan);
-						} else if (_now && _last) {
-                            Action(InputEvent.Down, new Vector2(1.0f, 1.0f), Time.time - _timeBegan);
-						}
-				}
-		}
+            if (!UnityEngine.Mathf.Approximately(value1, 0.0f) || !UnityEngine.Mathf.Approximately(value2, 0.0f))
+            {
+                Action(InputEvent.ValueMoved, new Vector2(value1, value2), 0.0f);
+            }
+        }
+    }
 }

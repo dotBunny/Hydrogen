@@ -43,6 +43,9 @@ namespace Hydrogen.Peripherals
 						{ "Mouse Y", "Mouse Y" },
 						{ "Mouse ScrollWheel", "Mouse ScrollWheel" }
 				};
+                public static readonly Dictionary<String, String[]> DoubleDeltaAxes = new Dictionary<String, String[]> {
+						{ "Mouse", new []{"Mouse X", "Mouse Y"} },
+				};
 				public static readonly Dictionary<String, String> Axes = new Dictionary<String, String> {
 						{ "Horizontal", "Horizontal" },
 						{ "Vertical", "Vertical" }
@@ -295,6 +298,159 @@ namespace Hydrogen.Peripherals
 						{ "Joystick4Button19", KeyCode.Joystick4Button19 }
 				};
 
+
+                public static readonly Dictionary<String, TouchAxis> TouchAxes = new Dictionary<String, TouchAxis> {
+
+                        // Touch0
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(0).position
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch0",                     TouchAxis.Touch0},
+                        
+                        
+                        // Touch0Delta
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(0).deltaPosition
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch0Delta",                TouchAxis.Touch0Delta},
+
+                        
+                        // Touch1
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(1).position
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch1",                     TouchAxis.Touch1},
+                        
+                        
+                        // Touch0Delta
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(1).deltaPosition
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch1Delta",                TouchAxis.Touch1Delta},
+
+                        
+                        // Touch2
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(2).position
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch2",                     TouchAxis.Touch2},
+                        
+                        
+                        // Touch2Delta
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(2).deltaPosition
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch2Delta",                TouchAxis.Touch2Delta},
+
+                        
+                        // Touch3
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(2).position
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch3",                     TouchAxis.Touch3},
+                        
+                        
+                        // Touch3Delta
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(2).deltaPosition
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch3Delta",                TouchAxis.Touch3Delta},
+
+
+                        // Touch4
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(4).position
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch4",                     TouchAxis.Touch4},
+                        
+                        
+                        // Touch4Delta
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(4).deltaPosition
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch4Delta",                TouchAxis.Touch4Delta},
+
+                        
+                        // Touch5
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(5).position
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch5",                     TouchAxis.Touch5},
+                        
+                        
+                        // Touch5Delta
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(4).deltaPosition
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch5Delta",                TouchAxis.Touch5Delta},
+                        
+                        // Touch6
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(6).position
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch6",                     TouchAxis.Touch6},
+                        
+                        
+                        // Touch6Delta
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(6).deltaPosition
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch6Delta",                TouchAxis.Touch6Delta},
+
+                        
+                        // Touch7
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(7).position
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch7",                     TouchAxis.Touch7},
+                        
+                        
+                        // Touch7Delta
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(7).deltaPosition
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch7Delta",                TouchAxis.Touch7Delta},
+                        
+
+                        // Touch8
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(7).position
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch8",                     TouchAxis.Touch8},
+                        
+                        
+                        // Touch7Delta
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(7).deltaPosition
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch8Delta",                TouchAxis.Touch8Delta},
+
+                        
+                        // Touch9
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(9).position
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch9",                     TouchAxis.Touch9},
+                        
+                        
+                        // Touch9Delta
+                        // Raw Touch Input.
+                        // Equivalent to: UnityEngine.Input.GetTouch(9).deltaPosition
+                        // Only fires when the value has changed, or is set for the first time.
+                        {"Touch9Delta",                TouchAxis.Touch9Delta},
+                        
+				};
+
+                public static readonly Dictionary<String, Gesture> GestureControls = new Dictionary<String, Gesture>
+		        {
+                    {"Touch",                Gesture.Touch},
+                    //{"DoubleTouch",          Gesture.DoubleTouch},
+                    //{"DoubleTouchDrag",      Gesture.DoubleTouchDrag},
+                    {"LongPress",            Gesture.LongPress},
+                    {"LongPressDrag",        Gesture.LongPressDrag},
+                    //{"Pinch",                Gesture.Pinch},
+		        };
+
 				#endregion
 
 				public enum ControlType
@@ -322,6 +478,96 @@ namespace Hydrogen.Peripherals
 						if (KeyboardButtons.TryGetValue (name, out keyCode)) {
 								return new InputKeyboardButtonControl (name, keyCode, action);
 						}
+                        TouchAxis touchAxis;
+                        if (TouchAxes.TryGetValue(name, out touchAxis))
+                        {
+                            switch (touchAxis)
+                            {
+                                case TouchAxis.Touch0:
+                                    return new TouchAxisControl("Touch0", 0, TouchAxisControl.kOperation_Position,
+                                        action);
+                                case TouchAxis.Touch0Delta:
+                                    return new TouchAxisControl("Touch0", 0, TouchAxisControl.kOperation_DeltaPosition,
+                                        action);
+                                case TouchAxis.Touch1:
+                                    return new TouchAxisControl("Touch1", 1, TouchAxisControl.kOperation_Position,
+                                        action);
+                                case TouchAxis.Touch1Delta:
+                                    return new TouchAxisControl("Touch1", 1, TouchAxisControl.kOperation_DeltaPosition,
+                                        action);
+                                case TouchAxis.Touch2:
+                                    return new TouchAxisControl("Touch2", 2, TouchAxisControl.kOperation_Position,
+                                        action);
+                                case TouchAxis.Touch2Delta:
+                                    return new TouchAxisControl("Touch2", 2, TouchAxisControl.kOperation_DeltaPosition,
+                                        action);
+                                case TouchAxis.Touch3:
+                                    return new TouchAxisControl("Touch3", 3, TouchAxisControl.kOperation_Position,
+                                        action);
+                                case TouchAxis.Touch3Delta:
+                                    return new TouchAxisControl("Touch3", 3, TouchAxisControl.kOperation_DeltaPosition,
+                                        action);
+                                case TouchAxis.Touch4:
+                                    return new TouchAxisControl("Touch4", 4, TouchAxisControl.kOperation_Position,
+                                        action);
+                                case TouchAxis.Touch4Delta:
+                                    return new TouchAxisControl("Touch4", 4, TouchAxisControl.kOperation_DeltaPosition,
+                                        action);
+                                case TouchAxis.Touch5:
+                                    return new TouchAxisControl("Touch5", 5, TouchAxisControl.kOperation_Position,
+                                        action);
+                                case TouchAxis.Touch5Delta:
+                                    return new TouchAxisControl("Touch5", 5, TouchAxisControl.kOperation_DeltaPosition,
+                                        action);
+                                case TouchAxis.Touch6:
+                                    return new TouchAxisControl("Touch6", 6, TouchAxisControl.kOperation_Position,
+                                        action);
+                                case TouchAxis.Touch6Delta:
+                                    return new TouchAxisControl("Touch6", 6, TouchAxisControl.kOperation_DeltaPosition,
+                                        action);
+                                case TouchAxis.Touch7:
+                                    return new TouchAxisControl("Touch7", 7, TouchAxisControl.kOperation_Position,
+                                        action);
+                                case TouchAxis.Touch7Delta:
+                                    return new TouchAxisControl("Touch7", 7, TouchAxisControl.kOperation_DeltaPosition,
+                                        action);
+                                case TouchAxis.Touch8:
+                                    return new TouchAxisControl("Touch8", 8, TouchAxisControl.kOperation_Position,
+                                        action);
+                                case TouchAxis.Touch8Delta:
+                                    return new TouchAxisControl("Touch8", 8, TouchAxisControl.kOperation_DeltaPosition,
+                                        action);
+                                case TouchAxis.Touch9:
+                                    return new TouchAxisControl("Touch9", 9, TouchAxisControl.kOperation_Position,
+                                        action);
+                                case TouchAxis.Touch9Delta:
+                                    return new TouchAxisControl("Touch9", 9, TouchAxisControl.kOperation_DeltaPosition,
+                                        action);
+                            }
+                        }
+
+                    
+                        Gesture gesture;
+
+                        if (GestureControls.TryGetValue(name, out gesture))
+                        {
+                            switch (gesture)
+                            {
+                                case Gesture.Touch:
+                                    return new TouchGestureControl("Touch", action);
+                                case Gesture.DoubleTouch:
+                                    return new DoubleTouchGestureControl("DoubleTouch", action);
+                                case Gesture.DoubleTouchDrag:
+                                    return new DoubleTouchDragGestureControl("DoubleTouchDrag", action);
+                                case Gesture.LongPress:
+                                    return new LongPressGestureControl("LongPress", action);
+                                case Gesture.LongPressDrag:
+                                    return new LongPressDragGestureControl("LongPressDrag", action);
+                                case Gesture.Pinch:
+                                    return new PinchGestureControl("Pinch", action);
+                            }
+                        }
+
 						return null;
 				}
 

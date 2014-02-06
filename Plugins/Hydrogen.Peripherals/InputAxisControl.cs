@@ -27,6 +27,8 @@
 // THE SOFTWARE.
 #endregion
 
+using UnityEngine;
+
 namespace Hydrogen.Peripherals
 {
 		sealed class InputAxisControl : InputControlBase
@@ -43,7 +45,7 @@ namespace Hydrogen.Peripherals
 				{
 						float value = UnityEngine.Input.GetAxis (_axis);
 						if (!UnityEngine.Mathf.Approximately (value, 0.0f)) {
-								Action (InputEvent.ValueSet, value, 0.0f);
+								Action (InputEvent.ValueSet, new Vector2(value, value), 0.0f);
 						}
 				}
 		}

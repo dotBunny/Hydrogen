@@ -50,11 +50,11 @@ namespace Hydrogen.Peripherals
 			
 						if (_now && !_last) {
 								_timeBegan = Time.time;
-								Action (InputEvent.Pressed, 1.0f, 0.0f);
+								Action (InputEvent.Pressed, new Vector2(1.0f, 1.0f), 0.0f);
 						} else if (!_now && _last) {
-								Action (InputEvent.Released, 0.0f, Time.time - _timeBegan);
+                            Action(InputEvent.Released, new Vector2(0.0f, 0.0f), Time.time - _timeBegan);
 						} else if (_now && _last) {
-								Action (InputEvent.Down, 1.0f, Time.time - _timeBegan);
+								Action (InputEvent.Down, new Vector2(1.0f, 1.0f), Time.time - _timeBegan);
 						}
 				}
 		}

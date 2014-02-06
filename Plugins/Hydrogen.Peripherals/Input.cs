@@ -33,7 +33,7 @@ using UnityEngine;
 
 namespace Hydrogen.Peripherals
 {
-		public delegate void InputAction (InputEvent evt,float value,float time);
+		public delegate void InputAction (InputEvent evt, Vector2 value,float time);
 		public enum InputEvent
 		{
 				Pressed,
