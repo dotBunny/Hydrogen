@@ -313,7 +313,7 @@ namespace Hydrogen.Peripherals
         private const int kMode_Cancelling = 3;
 
 
-        private Vector2 _pressPoint, _releasePoint, _lastPoint, _currentPoint, _dragDelta;
+        private Vector2 _pressPoint, _releasePoint,  _currentPoint, _dragDelta;
         private float _pressTime, _releaseTime, _currentTime;
         protected int _touchCount;
         protected Vector2 _touchPosition;
@@ -370,7 +370,6 @@ namespace Hydrogen.Peripherals
                         if (currentMovementSquared > kMinDragDistancePixelsSquared)
                         {
                             _mode = kMode_Dragging;
-                            _lastPoint = _currentPoint = _touchPosition;
                             //Debug.Log("LP.Drag.C");
                             Action(InputEvent.Pressed, _currentPoint, _currentTime);
                             return true;
@@ -388,8 +387,6 @@ namespace Hydrogen.Peripherals
                             return true;
                         }
                         _currentTime = Time.time - _pressTime;
-
-                        _lastPoint = _currentPoint;
                         _currentPoint = _touchPosition;
 
                         Action(InputEvent.ValueMoved, (_currentPoint - _pressPoint), _currentTime);
