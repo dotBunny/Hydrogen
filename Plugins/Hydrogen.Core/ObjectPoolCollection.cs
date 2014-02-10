@@ -200,6 +200,7 @@ namespace Hydrogen.Core
 						_hasRigidbody |= prefab.GetComponent<Rigidbody> ();
 
 						if (ManageParticles) {
+
 								_hasLegacyParticleEmitter |= prefab.GetComponent<ParticleEmitter> ();
 								_hasLegacyParticleAnimator |= prefab.GetComponent<ParticleAnimator> ();
 								_hasParticleSystem |= prefab.GetComponent<ParticleSystem> ();
@@ -335,8 +336,12 @@ namespace Hydrogen.Core
 								spawnedObject.transform.rotation = rotation;
 
 								if (ManageParticles) {
-										spawnedObject.GetComponent<ParticleAnimator> ().autodestruct &= !_hasLegacyParticleAnimator;
-										spawnedObject.GetComponent<ParticleEmitter> ().emit |= _hasLegacyParticleEmitter;
+										if (_hasLegacyParticleAnimator) {
+												spawnedObject.GetComponent<ParticleAnimator> ().autodestruct = false;
+										}
+										if (_hasLegacyParticleEmitter) {
+												spawnedObject.GetComponent<ParticleEmitter> ().emit = true;
+										}
 								}
 
 								if (_hasObjectPoolItem) {
