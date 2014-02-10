@@ -96,7 +96,7 @@ namespace Hydrogen.Peripherals
 						return false;
 				}
 
-				public bool AddControl (String controlName, String actionName)
+				public bool AddControl (String controlName, String actionName, int priority = 0)
 				{
 						InputAction action;
 
@@ -106,16 +106,25 @@ namespace Hydrogen.Peripherals
 
 
 						InputControlBase control = InputControlBase.CreateControl (controlName, action);
-						control.ActionName = actionName;
 
 						if (control != null) {
+
+                                control.ActionName = actionName;
+                                control.Priority = priority;
+
 								_controls.Add (control);
+                                _controls.Sort(SortControlByPriority);
 								return true;
 						}
 						return false;
 				}
 
-				public void RemoveControl (String controlName)
+		    private int SortControlByPriority(InputControlBase x, InputControlBase y)
+		    {
+		        return x.Priority.CompareTo(y.Priority);
+		    }
+
+		    public void RemoveControl (String controlName)
 				{
 						bool hasMore = true;
 						while (hasMore) {
@@ -129,6 +138,7 @@ namespace Hydrogen.Peripherals
 								}
 						}
 				}
+
 
 				/// <summary>
 				/// Clears all controls.

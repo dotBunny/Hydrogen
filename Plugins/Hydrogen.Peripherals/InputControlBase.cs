@@ -606,6 +606,8 @@ namespace Hydrogen.Peripherals
 
 				public string ActionName { get; set; }
 
+                public int Priority { get; set; }
+
 				public InputAction Action { get; private set; }
 		}
 }
