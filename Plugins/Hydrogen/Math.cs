@@ -49,6 +49,15 @@ namespace Hydrogen
 				}
 
 				/// <summary>
+				/// Flip a coin.
+				/// </summary>
+				/// <returns><c>true</c>, if toss was heads, <c>false</c> if it was tails.</returns>
+				public static bool CoinToss ()
+				{
+						return UnityEngine.Random.Range (0, 100) <= 50;
+				}
+
+				/// <summary>
 				/// Neutralizes the an angle, providing an angle below 360 degrees.
 				/// </summary>
 				/// <returns>The neutralized angle.</returns>
