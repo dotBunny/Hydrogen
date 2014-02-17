@@ -37,6 +37,10 @@ namespace Hydrogen.Core
 		public class ObjectPoolCollection
 		{
 				/// <summary>
+				/// Inspector Name for Element
+				/// </summary>
+				public string Name;
+				/// <summary>
 				/// Should extra objects be culled when not in use?
 				/// </summary>
 				public bool CullExtras;
