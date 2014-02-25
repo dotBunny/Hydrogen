@@ -170,7 +170,8 @@ namespace Hydrogen.Core
 				/// </summary>
 				public void Play ()
 				{
-						Source.Play ();
+						if (Source.enabled)
+								Source.Play ();
 				}
 
 				/// <summary>
