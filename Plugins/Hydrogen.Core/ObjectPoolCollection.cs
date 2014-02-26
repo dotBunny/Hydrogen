@@ -238,6 +238,9 @@ namespace Hydrogen.Core
 
 				public void Despawn (GameObject gameObject)
 				{
+						if (gameObject == null)
+								return;
+
 						Despawn (gameObject, false);
 				}
 
