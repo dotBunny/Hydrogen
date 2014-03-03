@@ -45,7 +45,7 @@ namespace Hydrogen.Plugins
 				public static bool Flying { get; private set; }
 				#if HYDROGEN_TESTFLIGHT && (UNITY_IPHONE || UNITY_IOS) && (!UNITY_EDITOR)
 				[DllImport ("__Internal")]
-				static extern void TestFlight_Initialize (string deviceUniqueIdentifier);
+				static extern void TestFlight_Initialize ();
 
 				public static void Initialize ()
 				{
@@ -128,6 +128,7 @@ namespace Hydrogen.Plugins
 
 
 
+
 #elif HYDROGEN_TESTFLIGHT && UNITY_ANDROID && !UNITY_EDITOR
 				static AndroidJavaClass _testFlight;
 				static AndroidJavaClass _unityPlayer;
@@ -184,6 +185,7 @@ namespace Hydrogen.Plugins
 						_testFlight.CallStatic ("startSession");
 						Session = true;
 				}
+
 
 
 
