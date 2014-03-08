@@ -73,6 +73,10 @@ namespace Hydrogen.Core
 				/// </summary>
 				public bool SpawnMore;
 				/// <summary>
+				/// Where should pooled items reside
+				/// </summary>
+				public Transform FixedParent;
+				/// <summary>
 				/// Should objects be tracked when they are spawned?
 				/// </summary>
 				/// <remarks>
@@ -179,6 +183,9 @@ namespace Hydrogen.Core
 						var newObject = Object.Instantiate (Prefab) as GameObject;
 						newObject.name = Prefab.name;
 
+						if (FixedParent != null) {
+								newObject.transform.parent = FixedParent;
+						}
 
 						// Check if there is our helper item on the gameObject
 						if (newObject.GetComponent<ObjectPoolItemBase> ()) {
@@ -249,6 +256,9 @@ namespace Hydrogen.Core
 						if (!ManageParticles)
 								gameObject.transform.parent = _parentTransform;
 
+						if (FixedParent != null) {
+								gameObject.transform.parent = FixedParent;
+						}
 						// Has our handler
 						if (_hasObjectPoolItem) {
 								if (ManageParticles) {
