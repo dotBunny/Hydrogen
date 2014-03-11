@@ -279,7 +279,7 @@ namespace Hydrogen.Core
 						// Fail safe
 						else {
 								// This stops things from keeping their velocity from previous
-								if (_hasRigidbody) {
+								if (_hasRigidbody && !gameObject.rigidbody.isKinematic) {
 										gameObject.rigidbody.velocity = Vector3.zero;
 										gameObject.rigidbody.angularVelocity = Vector3.zero;
 								}
