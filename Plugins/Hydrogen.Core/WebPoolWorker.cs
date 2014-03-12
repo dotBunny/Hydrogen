@@ -184,7 +184,7 @@ namespace Hydrogen.Core
 
 						// Callback!
 						if (callback != null) {
-								if (newCall.responseHeaders ["STATUS"].Contains (" 200 "))
+								if (newCall.responseHeaders.ContainsKey ("STATUS") && newCall.responseHeaders ["STATUS"].Contains (" 200 "))
 										callback (_hash, new Hashtable (newCall.responseHeaders), newCall.text);
 								else
 										callback (_hash, new Hashtable (newCall.responseHeaders), "");
