@@ -84,6 +84,19 @@ namespace Hydrogen.Serialization
 						return Fields.ContainsKey (fieldName) ? Convert.ToString (Fields [fieldName]) : "";
 				}
 
+				public string[] ToStringArray (string fieldName)
+				{
+						if (Fields.ContainsKey (fieldName)) {
+								string[] newArray = Fields [fieldName].ToString ().Split (',');
+								for (int i = 0; i < newArray.Length; i++) {
+										newArray [i] = newArray [i].TrimStart ('"').TrimEnd ('"');
+								}
+								return newArray;
+						} else {
+								return null;
+						}
+				}
+
 				public int ToInt (string fieldName)
 				{
 						return Fields.ContainsKey (fieldName) ? Convert.ToInt32 (Fields [fieldName]) : 0;
