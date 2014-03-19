@@ -84,7 +84,7 @@ namespace Hydrogen.Serialization
 						return Fields.ContainsKey (fieldName) ? Convert.ToString (Fields [fieldName]) : "";
 				}
 
-				public string[] ToStringArray (string fieldName)
+				public string[] ToSimpleStringArray (string fieldName)
 				{
 						if (Fields.ContainsKey (fieldName)) {
 								string[] newArray = Fields [fieldName].ToString ().Split (',');
