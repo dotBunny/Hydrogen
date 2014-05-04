@@ -5,6 +5,7 @@
 // Author:
 //       Matthew Davey <matthew.davey@dotbunny.com>
 //       Robin Southern <betajaen@ihoed.com>
+//	 Lars Simkins <lars.simkins@gmail.com>
 //
 // Copyright (c) 2014 dotBunny Inc. (http://www.dotbunny.com)
 //
@@ -579,11 +580,14 @@ namespace Hydrogen.Threading.Jobs
 						var uv = mesh.UV;
 						var uv1 = mesh.UV1;
 						var uv2 = mesh.UV2;
-						var transitionMeshCounter = new int [mesh.VertexCount];
 						var inversedTransposedMatrix = meshInput.WorldMatrix.inverse.transpose;
 
 						for (var i = 0; i < subMeshCount; i++) {
 								var newTransitionMesh = new TransitionMesh ();
+								
+								// bug fix from Lars
+								var transitionMeshCounter = new int [mesh.VertexCount];
+								
 								var indexes = mesh.GetIndices (i);
 
 								if (i > (meshInput.Materials.Length - 1)) {
