@@ -74,7 +74,7 @@ namespace Hydrogen.Core
 				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
 				/// <returns>Call Hashcode</returns>
-				public int Form (string URI, Dictionary<string, string> formStringData, FormBinaryData[] formBinaryData, string cookie, System.Action<int, Hashtable, string> callback)
+				public int Form (string URI, Dictionary<string, string> formStringData, FormBinaryData[] formBinaryData, string cookie, System.Action<int, Dictionary<string,string>, string> callback)
 				{
 						if (!_initialized) {
 								Debug.LogError ("WebPool has not finished initializing ... " +
@@ -102,7 +102,7 @@ namespace Hydrogen.Core
 				/// <param name="URI">The Target URI</param>
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
 				/// <returns>Call Hashcode</returns>
-				public int GET (string URI, System.Action<int, Hashtable, string> callback)
+				public int GET (string URI, System.Action<int, Dictionary<string,string>, string> callback)
 				{
 						return GET (URI, null, callback);
 				}
@@ -114,7 +114,7 @@ namespace Hydrogen.Core
 				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
 				/// <returns>Call Hashcode</returns>
-				public int GET (string URI, string cookie, System.Action<int, Hashtable, string> callback)
+				public int GET (string URI, string cookie, System.Action<int, Dictionary<string,string>, string> callback)
 				{
 						if (!_initialized) {
 								Debug.LogError ("WebPool has not finished initializing ... " +
@@ -147,7 +147,7 @@ namespace Hydrogen.Core
 				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
 				/// <returns>Call Hashcode</returns> 
-				public int POST (string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
+				public int POST (string URI, string contentType, string payload, string cookie, System.Action<int, Dictionary<string,string>, string> callback)
 				{
 						if (!_initialized) {
 								UnityEngine.Debug.LogError ("WebPool has not finished initializing ... " +

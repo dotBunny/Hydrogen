@@ -70,7 +70,7 @@ namespace Hydrogen.Core
 				/// <param name="formBinaryData">A custom binary dataset. Useful for uploading pictures.</param>
 				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
-				public int Form (string URI, Dictionary<string,string> formStringData, WebPool.FormBinaryData[] formBinaryData, string cookie, System.Action<int, Hashtable, string> callback)
+				public int Form (string URI, Dictionary<string,string> formStringData, WebPool.FormBinaryData[] formBinaryData, string cookie, System.Action<int, Dictionary<string,string>, string> callback)
 				{
 						_hash = (Time.time + URI + formStringData.GetHashCode () + Random.Range (0, 100)).GetHashCode ();
 
@@ -86,7 +86,7 @@ namespace Hydrogen.Core
 				/// <param name="URI">The Target URI</param>
 				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
-				public int GET (string URI, string cookie, System.Action<int, Hashtable, string> callback)
+				public int GET (string URI, string cookie, System.Action<int, Dictionary<string,string>, string> callback)
 				{
 						_hash = (Time.time + URI + Random.Range (0, 100)).GetHashCode ();
 
@@ -131,7 +131,7 @@ namespace Hydrogen.Core
 				/// <param name="formBinaryData">A custom binary dataset. Useful for uploading pictures.</param>
 				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
-				public int POST (string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
+				public int POST (string URI, string contentType, string payload, string cookie, System.Action<int, Dictionary<string,string>, string> callback)
 				{
 						_hash = (Time.time + URI + payload + Random.Range (0, 100)).GetHashCode ();
 
@@ -149,12 +149,13 @@ namespace Hydrogen.Core
 				/// <param name="formBinaryData">A custom binary dataset. Useful for uploading pictures.</param>
 				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
-				IEnumerator FormReturnedText (string URI, Dictionary<string, string> formStringData, WebPool.FormBinaryData[] formBinaryData, string cookie, System.Action<int, Hashtable, string> callback)
+				IEnumerator FormReturnedText (string URI, Dictionary<string, string> formStringData, WebPool.FormBinaryData[] formBinaryData, string cookie, System.Action<int, Dictionary<string,string>, string> callback)
 				{
 						// Assign Busy Flag
 						_busy = true;
 
 						var newForm = new WWWForm ();
+
 
 						// Add string data
 						if (formStringData != null) {
@@ -170,7 +171,14 @@ namespace Hydrogen.Core
 								}
 						}
 
-						var headers = newForm.headers;
+
+
+
+						// HACK: This is a fix till Unity cleans up that bug I submitted about forgetting this one.
+						var headers = new Dictionary<string, string> ();
+						foreach (DictionaryEntry entry in newForm.headers) {
+								headers.Add ((string)entry.Key, (string)entry.Value);
+						}
 
 						if (cookie != null)
 								headers.Add ("Cookie", cookie);
@@ -185,9 +193,9 @@ namespace Hydrogen.Core
 						// Callback!
 						if (callback != null) {
 								if (newCall.responseHeaders.ContainsKey ("STATUS") && newCall.responseHeaders ["STATUS"].Contains (" 200 "))
-										callback (_hash, new Hashtable (newCall.responseHeaders), newCall.text);
+										callback (_hash, new Dictionary<string,string> (newCall.responseHeaders), newCall.text);
 								else
-										callback (_hash, new Hashtable (newCall.responseHeaders), "");
+										callback (_hash, new Dictionary<string,string> (newCall.responseHeaders), "");
 						}
 
 						_busy = false;
@@ -202,13 +210,13 @@ namespace Hydrogen.Core
 				/// <param name="URI">The Target URI.</param>
 				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
-				IEnumerator GetReturnedText (string URI, string cookie, System.Action<int, Hashtable, string> callback)
+				IEnumerator GetReturnedText (string URI, string cookie, System.Action<int, Dictionary<string,string>, string> callback)
 				{
 						// Assign Busy Flag
 						_busy = true;
 
 						// Process Headers
-						var headers = new Hashtable ();
+						var headers = new Dictionary<string,string> ();
 						if (cookie != null)
 								headers.Add ("Cookie", cookie);
 
@@ -223,9 +231,9 @@ namespace Hydrogen.Core
 						// Callback! (Avoid Unity Bitching)
 						if (callback != null) {
 								if (newCall.responseHeaders.ContainsKey ("STATUS") && newCall.responseHeaders ["STATUS"].Contains (" 200 "))
-										callback (_hash, new Hashtable (newCall.responseHeaders), newCall.text);
+										callback (_hash, new Dictionary<string,string> (newCall.responseHeaders), newCall.text);
 								else
-										callback (_hash, new Hashtable (newCall.responseHeaders), "");
+										callback (_hash, new Dictionary<string,string> (newCall.responseHeaders), "");
 						}
 
 						_busy = false;
@@ -242,7 +250,7 @@ namespace Hydrogen.Core
 				/// <param name="payload">The data to be posted.</param>
 				/// <param name="cookie">Any previous cookie data to be used for authentication.</param>
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
-				IEnumerator PostReturnedText (string URI, string contentType, string payload, string cookie, System.Action<int, Hashtable, string> callback)
+				IEnumerator PostReturnedText (string URI, string contentType, string payload, string cookie, System.Action<int, Dictionary<string,string>, string> callback)
 				{
 						// Assign Busy Flag
 						_busy = true;
@@ -251,7 +259,7 @@ namespace Hydrogen.Core
 						byte[] postData = System.Text.Encoding.ASCII.GetBytes (payload.ToCharArray ());
 
 						// Process Headers
-						var headers = new Hashtable ();
+						var headers = new Dictionary<string,string> ();
 
 						//headers.Add ("Content-Type", contentType);
 						//headers.Add ("Content-Length", postData.Length);
@@ -267,9 +275,9 @@ namespace Hydrogen.Core
 
 						if (callback != null) {
 								if (newCall.responseHeaders ["STATUS"].Contains (" 200 "))
-										callback (_hash, new Hashtable (newCall.responseHeaders), newCall.text);
+										callback (_hash, new Dictionary<string,string> (newCall.responseHeaders), newCall.text);
 								else
-										callback (_hash, new Hashtable (newCall.responseHeaders), "");
+										callback (_hash, new Dictionary<string,string> (newCall.responseHeaders), "");
 						}
 
 						_busy = false;
