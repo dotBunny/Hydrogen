@@ -233,8 +233,9 @@ namespace Hydrogen.Threading.Jobs
 						newMeshInput.Mesh.Colors = meshFilter.sharedMesh.colors;
 						newMeshInput.Mesh.Tangents = meshFilter.sharedMesh.tangents;
 						newMeshInput.Mesh.UV = meshFilter.sharedMesh.uv;
-						newMeshInput.Mesh.UV1 = meshFilter.sharedMesh.uv1;
 						newMeshInput.Mesh.UV2 = meshFilter.sharedMesh.uv2;
+						newMeshInput.Mesh.UV3 = meshFilter.sharedMesh.uv3;
+						newMeshInput.Mesh.UV4 = meshFilter.sharedMesh.uv4;
 
 						newMeshInput.Mesh.Topology = new MeshTopology[meshFilter.sharedMesh.subMeshCount];
 
@@ -345,17 +346,19 @@ namespace Hydrogen.Threading.Jobs
 						if (meshOutput.UV != null) {
 								meshObject.Mesh.uv = meshOutput.UV.ToArray ();
 						}
+							
 
-						// How about some more UV's?
-						if (meshOutput.UV1 != null) {
-								meshObject.Mesh.uv1 = meshOutput.UV1.ToArray ();
-						}
 
-						// Lightmapping UV's anyone?
 						if (meshOutput.UV2 != null) {
 								meshObject.Mesh.uv2 = meshOutput.UV2.ToArray ();
 						}
 
+						if (meshOutput.UV3 != null) {
+								meshObject.Mesh.uv3 = meshOutput.UV3.ToArray ();
+						}
+						if (meshOutput.UV4 != null) {
+								meshObject.Mesh.uv4 = meshOutput.UV4.ToArray ();
+						}
 
 						meshObject.Mesh.subMeshCount = meshOutput.Indexes.Count;
 						for (int i = 0; i < meshOutput.Indexes.Count; i++) {
@@ -534,12 +537,14 @@ namespace Hydrogen.Threading.Jobs
 										meshOutput.UV.AddRange (transitionMesh.UV);
 								}
 
-								if (transitionMesh.UV1 != null) {
-										meshOutput.UV1.AddRange (transitionMesh.UV1);
-								}
-
 								if (transitionMesh.UV2 != null) {
 										meshOutput.UV2.AddRange (transitionMesh.UV2);
+								}
+								if (transitionMesh.UV3 != null) {
+										meshOutput.UV3.AddRange (transitionMesh.UV3);
+								}
+								if (transitionMesh.UV4 != null) {
+										meshOutput.UV4.AddRange (transitionMesh.UV4);
 								}
 
 								var indexes = meshOutput.GetSubMesh (transitionMesh.Material);
@@ -578,8 +583,9 @@ namespace Hydrogen.Threading.Jobs
 						var Colors = mesh.Colors;
 						var tangents = mesh.Tangents;
 						var uv = mesh.UV;
-						var uv1 = mesh.UV1;
+						var uv3 = mesh.UV3;
 						var uv2 = mesh.UV2;
+						var uv4 = mesh.UV4;
 						var inversedTransposedMatrix = meshInput.WorldMatrix.inverse.transpose;
 
 						for (var i = 0; i < subMeshCount; i++) {
@@ -682,21 +688,30 @@ namespace Hydrogen.Threading.Jobs
 										}
 								}
 
-								// Handle UV1s
-								if (mesh.UV1 != null && mesh.UV1.Length > 0) {
-										newTransitionMesh.UV1 = new Vector2[newTransitionMesh.VertexCount];
-										for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
-												var index = indexes [j];
-												newTransitionMesh.UV1 [transitionMeshCounter [index]] = uv1 [index];
-										}
-								}
-
 								// Handle UV2s
 								if (mesh.UV2 != null && mesh.UV2.Length > 0) {
 										newTransitionMesh.UV2 = new Vector2[newTransitionMesh.VertexCount];
 										for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
 												var index = indexes [j];
 												newTransitionMesh.UV2 [transitionMeshCounter [index]] = uv2 [index];
+										}
+								}
+
+								// Handle UV3s
+								if (mesh.UV3 != null && mesh.UV3.Length > 0) {
+										newTransitionMesh.UV3 = new Vector2[newTransitionMesh.VertexCount];
+										for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
+												var index = indexes [j];
+												newTransitionMesh.UV3 [transitionMeshCounter [index]] = uv3 [index];
+										}
+								}
+
+								// Handle UV4s
+								if (mesh.UV4 != null && mesh.UV4.Length > 0) {
+										newTransitionMesh.UV4 = new Vector2[newTransitionMesh.VertexCount];
+										for (var j = 0; j < newTransitionMesh.IndexCount; j++) {
+												var index = indexes [j];
+												newTransitionMesh.UV4 [transitionMeshCounter [index]] = uv4 [index];
 										}
 								}
 
@@ -742,13 +757,17 @@ namespace Hydrogen.Threading.Jobs
 						/// </summary>
 						public Vector2[] UV;
 						/// <summary>
-						/// Mesh's UV1 Array
-						/// </summary>
-						public Vector2[] UV1;
-						/// <summary>
 						/// Mesh's UV2 Array
 						/// </summary>
 						public Vector2[] UV2;
+						/// <summary>
+						/// Mesh's UV3 Array
+						/// </summary>
+						public Vector2[] UV3;
+						/// <summary>
+						/// Mesh's UV4 Array
+						/// </summary>
+						public Vector2[] UV4;
 						/// <summary>
 						/// Mesh's Vertex Array
 						/// </summary>
@@ -862,13 +881,17 @@ namespace Hydrogen.Threading.Jobs
 						/// </summary>
 						public List<Vector2> UV = new List<Vector2> ();
 						/// <summary>
-						/// The UV1 array.
-						/// </summary>
-						public List<Vector2> UV1 = new List<Vector2> ();
-						/// <summary>
 						/// The UV2 array.
 						/// </summary>
 						public List<Vector2> UV2 = new List<Vector2> ();
+						/// <summary>
+						/// The UV3 array.
+						/// </summary>
+						public List<Vector2> UV3 = new List<Vector2> ();
+						/// <summary>
+						/// The UV4 array.
+						/// </summary>
+						public List<Vector2> UV4 = new List<Vector2> ();
 						/// <summary>
 						/// A list of indexes defining SubMeshes
 						/// </summary>
@@ -927,13 +950,17 @@ namespace Hydrogen.Threading.Jobs
 						/// </summary>
 						public Vector2[] UV;
 						/// <summary>
-						/// The Mesh's UV1 array.
-						/// </summary>
-						public Vector2[] UV1;
-						/// <summary>
 						/// The Mesh's UV2 array.
 						/// </summary>
 						public Vector2[] UV2;
+						/// <summary>
+						/// The Mesh's UV3 array.
+						/// </summary>
+						public Vector2[] UV3;
+						/// <summary>
+						/// The Mesh's UV4 array.
+						/// </summary>
+						public Vector2[] UV4;
 						/// <summary>
 						/// The number of vertices the Mesh has.
 						/// </summary>
@@ -954,10 +981,12 @@ namespace Hydrogen.Threading.Jobs
 										mask |= 4;
 								if (UV != null)
 										mask |= 8;
-								if (UV1 != null)
-										mask |= 16;
 								if (UV2 != null)
+										mask |= 16;
+								if (UV3 != null)
 										mask |= 32;
+								if (UV4 != null)
+										mask |= 64;
 								return mask;
 						}
 				}

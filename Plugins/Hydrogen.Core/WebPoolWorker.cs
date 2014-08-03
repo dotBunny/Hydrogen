@@ -170,14 +170,10 @@ namespace Hydrogen.Core
 										newForm.AddBinaryData (b.FieldName, b.Data, b.FileName, b.MimeType);
 								}
 						}
-
-
-
-
-						// HACK: This is a fix till Unity cleans up that bug I submitted about forgetting this one.
+								
 						var headers = new Dictionary<string, string> ();
-						foreach (DictionaryEntry entry in newForm.headers) {
-								headers.Add ((string)entry.Key, (string)entry.Value);
+						foreach (KeyValuePair<string, string> entry in newForm.headers) {
+								headers.Add (entry.Key, entry.Value);
 						}
 
 						if (cookie != null)
