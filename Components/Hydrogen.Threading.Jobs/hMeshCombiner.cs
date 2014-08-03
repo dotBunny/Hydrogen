@@ -168,7 +168,7 @@ public class hMeshCombiner : MonoBehaviour
 
 						if (meshFilters [x].gameObject.activeSelf) {
 								Combiner.AddMesh (meshFilters [x], 
-										meshFilters [x].renderer, 
+										meshFilters [x].GetComponent<Renderer> (), 
 										meshFilters [x].transform.localToWorldMatrix);
 						}
 

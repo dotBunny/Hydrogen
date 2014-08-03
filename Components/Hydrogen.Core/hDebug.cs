@@ -692,14 +692,14 @@ public class hDebug : MonoBehaviour
 				material.hideFlags = (HideFlags)13;
 				material.shader.hideFlags = (HideFlags)13;
 				_fontMaterial = material;
-				_fontCamera = (Camera)gameObject.AddComponent ("Camera");
+				_fontCamera = gameObject.AddComponent<Camera> () as Camera;
 				_fontCamera.nearClipPlane = 0.1f;
 				_fontCamera.farClipPlane = 1f;
 				_fontCamera.clearFlags = (CameraClearFlags)4;
 				_fontCamera.depth = 99f;
 				_fontCamera.cullingMask = 0;
 				_fontCamera.useOcclusionCulling = false;
-				_fontCamera.isOrthoGraphic = true;
+				_fontCamera.orthographic = true;
 				_glyphLeft = new float[94];
 				_glyphTop = new float[94];
 				_glyphRight = new float[94];

@@ -46,6 +46,18 @@ public sealed class hObjectPoolItem : Hydrogen.Core.ObjectPoolItemBase
 		/// <remarks>In seconds, use 0 to disable.</remarks>
 		public float LifeTime;
 
+		Rigidbody _rigidbody;
+		ParticleEmitter _emitter;
+		ParticleSystem _particles;
+
+
+		public void Awake ()
+		{
+				_rigidbody = GetComponent<Rigidbody> ();
+				_emitter = GetComponent<ParticleEmitter> ();
+				_particles = GetComponent<ParticleSystem> ();
+		}
+
 		/// <summary>
 		/// Despawn the gameObject safely after all particles have done their thing. 
 		/// </summary>
@@ -65,7 +77,7 @@ public sealed class hObjectPoolItem : Hydrogen.Core.ObjectPoolItemBase
 		public override bool IsInactive ()
 		{
 				// A simple rigidbody check, otherwise no bueno
-				return ParentPool.HasRigidbody && gameObject.rigidbody.IsSleeping ();
+				return ParentPool.HasRigidbody && _rigidbody.IsSleeping ();
 		}
 
 		/// <summary>
@@ -76,7 +88,7 @@ public sealed class hObjectPoolItem : Hydrogen.Core.ObjectPoolItemBase
 		{
 				// If our object has a rigidbody (cached check), make sure to zero its velocity.
 				if (ParentPool.HasRigidbody)
-						gameObject.rigidbody.velocity = Vector3.zero;
+						_rigidbody.velocity = Vector3.zero;
 		
 				// Disable the gameObject
 				gameObject.SetActive (false);
@@ -110,19 +122,19 @@ public sealed class hObjectPoolItem : Hydrogen.Core.ObjectPoolItemBase
 		/// </summary>
 		IEnumerator WaitForParticles ()
 		{
-				if (particleEmitter != null) {
+				if (_emitter != null) {
 						yield return null;
 						yield return new WaitForEndOfFrame ();
 
-						while (particleEmitter.particleCount > 0) {
+						while (_emitter.particleCount > 0) {
 								yield return null;
 						}
-						particleEmitter.emit = false;
-				} else if (particleSystem != null) {
-						yield return new WaitForSeconds (particleSystem.startDelay + 0.25f);
-						while (particleSystem.IsAlive (true)) {
-								if (!particleSystem.gameObject.activeSelf) {
-										particleSystem.Clear (true);
+						_emitter.emit = false;
+				} else if (_particles != null) {
+						yield return new WaitForSeconds (_particles.startDelay + 0.25f);
+						while (_particles.IsAlive (true)) {
+								if (!_particles.gameObject.activeSelf) {
+										_particles.Clear (true);
 										yield break;
 								}
 								yield return null;

@@ -253,6 +253,8 @@ namespace Hydrogen.Core
 
 				public void Despawn (GameObject gameObject, bool onSpawn)
 				{
+						Rigidbody rigidbody = gameObject.GetComponent<Rigidbody> ();
+
 						if (!ManageParticles)
 								gameObject.transform.parent = _parentTransform;
 
@@ -279,9 +281,9 @@ namespace Hydrogen.Core
 						// Fail safe
 						else {
 								// This stops things from keeping their velocity from previous
-								if (_hasRigidbody && !gameObject.rigidbody.isKinematic) {
-										gameObject.rigidbody.velocity = Vector3.zero;
-										gameObject.rigidbody.angularVelocity = Vector3.zero;
+								if (_hasRigidbody && !rigidbody.isKinematic) {
+										rigidbody.velocity = Vector3.zero;
+										rigidbody.angularVelocity = Vector3.zero;
 								}
 
 								gameObject.SetActive (false);
