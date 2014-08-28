@@ -232,10 +232,14 @@ namespace Hydrogen.Threading.Jobs
 						newMeshInput.Mesh.Normals = meshFilter.sharedMesh.normals;
 						newMeshInput.Mesh.Colors = meshFilter.sharedMesh.colors;
 						newMeshInput.Mesh.Tangents = meshFilter.sharedMesh.tangents;
+
 						newMeshInput.Mesh.UV = meshFilter.sharedMesh.uv;
 						newMeshInput.Mesh.UV2 = meshFilter.sharedMesh.uv2;
+			
+#if UNITY_5_0
 						newMeshInput.Mesh.UV3 = meshFilter.sharedMesh.uv3;
 						newMeshInput.Mesh.UV4 = meshFilter.sharedMesh.uv4;
+#endif
 
 						newMeshInput.Mesh.Topology = new MeshTopology[meshFilter.sharedMesh.subMeshCount];
 
@@ -353,12 +357,14 @@ namespace Hydrogen.Threading.Jobs
 								meshObject.Mesh.uv2 = meshOutput.UV2.ToArray ();
 						}
 
+#if UNITY_5_0			
 						if (meshOutput.UV3 != null) {
 								meshObject.Mesh.uv3 = meshOutput.UV3.ToArray ();
 						}
 						if (meshOutput.UV4 != null) {
 								meshObject.Mesh.uv4 = meshOutput.UV4.ToArray ();
 						}
+#endif
 
 						meshObject.Mesh.subMeshCount = meshOutput.Indexes.Count;
 						for (int i = 0; i < meshOutput.Indexes.Count; i++) {
