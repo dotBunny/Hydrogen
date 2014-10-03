@@ -1,3 +1,9 @@
+Version 1.4.9
+=============
+[ADD] Documentation for the Automatic Updator code
+[ADD] Included Mersenne Twister random implementation by Rory Plaire (Hydrogen.Random.MersenneTwister) 
+[FIX] Numerous namespace/class fixes for implementing our own Random namespace.
+
 Version 1.4.8
 =============
 [FIX] Mismatched Version Code

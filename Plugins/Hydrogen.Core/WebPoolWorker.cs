@@ -72,7 +72,7 @@ namespace Hydrogen.Core
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
 				public int Form (string URI, Dictionary<string,string> formStringData, WebPool.FormBinaryData[] formBinaryData, string cookie, System.Action<int, Dictionary<string,string>, string> callback)
 				{
-						_hash = (Time.time + URI + formStringData.GetHashCode () + Random.Range (0, 100)).GetHashCode ();
+						_hash = (Time.time + URI + formStringData.GetHashCode () + UnityEngine.Random.Range (0, 100)).GetHashCode ();
 
 						StartCoroutine (FormReturnedText (URI, formStringData, formBinaryData, cookie, callback));
 
@@ -88,7 +88,7 @@ namespace Hydrogen.Core
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
 				public int GET (string URI, string cookie, System.Action<int, Dictionary<string,string>, string> callback)
 				{
-						_hash = (Time.time + URI + Random.Range (0, 100)).GetHashCode ();
+						_hash = (Time.time + URI + UnityEngine.Random.Range (0, 100)).GetHashCode ();
 
 						StartCoroutine (GetReturnedText (URI, cookie, callback));
 
@@ -133,7 +133,7 @@ namespace Hydrogen.Core
 				/// <param name="callback">A callback function (int hash, Hashtable headers, string payload).</param>
 				public int POST (string URI, string contentType, string payload, string cookie, System.Action<int, Dictionary<string,string>, string> callback)
 				{
-						_hash = (Time.time + URI + payload + Random.Range (0, 100)).GetHashCode ();
+						_hash = (Time.time + URI + payload + UnityEngine.Random.Range (0, 100)).GetHashCode ();
 
 						StartCoroutine (PostReturnedText (URI, contentType, payload, cookie, callback));
 

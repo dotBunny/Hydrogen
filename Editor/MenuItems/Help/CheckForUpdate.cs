@@ -63,17 +63,22 @@ public static class CheckForUpdate
 
 							System.Diagnostics.ProcessStartInfo gitInfo = new System.Diagnostics.ProcessStartInfo("git");
 
+							// Establish base settings
 							gitInfo.WorkingDirectory = HydrogenUtility.GetHydrogenPath();
 							gitInfo.LoadUserProfile = true;
 							gitInfo.CreateNoWindow = true;
-							gitInfo.Arguments = "reset --hard HEAD";
 
+							// We'll change these as we need too
+							gitInfo.Arguments = "reset --hard HEAD";
+							
+							// Reset the repo ... HARD!
 							System.Diagnostics.Process.Start (gitInfo);
 
 							gitInfo.Arguments = "pull";
 							
 							EditorUtility.DisplayCancelableProgressBar("Updating Hydrogen", "Fetching latest (" + latestVersion.ToString() + ") ...", 0.6f);
 							
+							// Update the repo
 							System.Diagnostics.Process.Start (gitInfo);
 						}
 					}
@@ -124,6 +129,7 @@ public static class CheckForUpdate
 			}
 			finally
 			{
+				// This just makes sure that we dont have a progress bar laying around
 				EditorUtility.ClearProgressBar();
 			}
 		}

@@ -31,17 +31,20 @@ using UnityEngine;
 using UnityEditor;
 
 [InitializeOnLoad]
-public class HydrogenStartup {
+public class HydrogenStartup 
+{
 	static HydrogenStartup()
-	{
+	{	
 		string lastChecked = EditorPrefs.GetString("HydrogenFramework_LastChecked");
 
+		// Have we ever checked for an update?
 		if ( string.IsNullOrEmpty(lastChecked) ) 
 		{
 			CheckForUpdate.CheckUpdate();
 		} 
 		else 
 		{
+			// Parse out times to determine duration
 			DateTime lastTime = DateTime.Parse(lastChecked);
 			TimeSpan span = DateTime.Now - lastTime;
 

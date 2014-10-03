@@ -185,5 +185,5 @@ namespace Hydrogen
 						}
 						return angle;
 				}
-		}
+	}
 }

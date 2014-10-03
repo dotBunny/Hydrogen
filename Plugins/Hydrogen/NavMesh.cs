@@ -61,7 +61,7 @@ namespace Hydrogen
 				{
 						NavMeshHit _hit;
 
-						return UnityEngine.NavMesh.SamplePosition ((Random.insideUnitSphere * distance) + basePosition, 
+						return UnityEngine.NavMesh.SamplePosition ((UnityEngine.Random.insideUnitSphere * distance) + basePosition, 
 								out _hit, distance, allowedMask) ? _hit.position : basePosition;
 				}
 		}
