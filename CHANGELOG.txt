@@ -1,3 +1,9 @@
+Version 1.4.7
+=============
+[FIX] Unused varaible in Automatic Updator
+[FIX] Cleaned up this file a bit.
+[FIX] Testflight fully removed (Fixes #6)
+
 Version 1.4.6
 =============
 [FIX] Fix for updator to handle GIT repositories
