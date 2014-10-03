@@ -35,6 +35,9 @@ namespace Hydrogen
 		/// </summary>
 		public static class Math
 		{
+				public const float Half = 0.5f;
+				public const float Quarter = 0.25f;
+
 				/// <summary>
 				/// Clamp and neutralize an angle.
 				/// </summary>

@@ -408,7 +408,12 @@ public class hDebug : MonoBehaviour
 		/// </summary>
 		void Awake ()
 		{
-				Application.RegisterLogCallback (new Application.LogCallback (HandleException));
+#if UNITY_5_0
+			Application.logMessageReceived += HandleException;
+#else				
+			Application.RegisterLogCallback (new Application.LogCallback (HandleException));
+#endif
+		
 		}
 
 		/// <summary>
