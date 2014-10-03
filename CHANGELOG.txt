@@ -1,0 +1,9 @@
+Version 1.4.0
+=============
+
++ Addition of some statics to Math helper (Half/Quarter)
+
+* Adapted AudioStack to support 3D sound
+* Conditional compile fixes for Unity 5
+
+- Removal of TestFlight
