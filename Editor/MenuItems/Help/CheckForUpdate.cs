@@ -85,7 +85,6 @@ public static class CheckForUpdate
 						if ( decision == 1 ) {
 							
 							EditorUtility.DisplayCancelableProgressBar("Updating Hydrogen", "Downloading latest (" + latestVersion.ToString() + ") ...", 0.3f);
-							byte[] package = client.DownloadData(HydrogenUtility.PackageURI);
 					
 							string tempFile = Path.GetTempFileName();
 							string tempFolder = Path.GetTempPath() + "Hydrogen_" + latestVersion.ToString();
