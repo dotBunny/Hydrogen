@@ -51,37 +51,68 @@ public static class CheckForUpdate
 				if (latestVersion.CompareTo(HydrogenUtility.Version) > 0 ) 
 				{ 
 					EditorUtility.ClearProgressBar();
-					int decision = EditorUtility.DisplayDialogComplex("Hydrogen Update Available", "Do you wish to update your version of the Hydrogen Framework? \n\nThis will OVERWRITE any chances you've made to the framework.", "No", "Yes", string.Empty);
+
+					// Check if they are using a repository of Hydrogen?
+					if ( Directory.Exists(HydrogenUtility.GetHydrogenPath() + ".git") ) 
+					{
+						int gitChoice = EditorUtility.DisplayDialogComplex("Hydrogen Update Available", "An update is availble from the Hydrogen GIT repository. Would you like to pull the updates?\n\nThis will OVERWRITE any changes you've made to the framework. This also will only work if you have GIT available via the command line.", "No", "Yes", string.Empty);
+
+						if ( gitChoice == 1 ) {
+
+							EditorUtility.DisplayCancelableProgressBar("Updating Hydrogen", "Reseting local repository ...", 0.3f);
+
+							System.Diagnostics.ProcessStartInfo gitInfo = new System.Diagnostics.ProcessStartInfo("git");
+
+							gitInfo.WorkingDirectory = HydrogenUtility.GetHydrogenPath();
+							gitInfo.LoadUserProfile = true;
+							gitInfo.CreateNoWindow = true;
+							gitInfo.Arguments = "reset --hard HEAD";
+
+							System.Diagnostics.Process.Start (gitInfo);
+
+							gitInfo.Arguments = "pull";
+							
+							EditorUtility.DisplayCancelableProgressBar("Updating Hydrogen", "Fetching latest (" + latestVersion.ToString() + ") ...", 0.6f);
+							
+							System.Diagnostics.Process.Start (gitInfo);
+						}
+					}
+					else 
+					{
+						// If they are not 
+						int decision = EditorUtility.DisplayDialogComplex("Hydrogen Update Available", "Do you wish to update your version of the Hydrogen Framework? \n\nThis will OVERWRITE any changes you've made to the framework.", "No", "Yes", string.Empty);
+						
+						if ( decision == 1 ) {
+							
+							EditorUtility.DisplayCancelableProgressBar("Updating Hydrogen", "Downloading latest (" + latestVersion.ToString() + ") ...", 0.3f);
+							byte[] package = client.DownloadData(HydrogenUtility.PackageURI);
 					
-					if ( decision == 1 ) {
-					EditorUtility.DisplayCancelableProgressBar("Updating Hydrogen", "Downloading latest (" + latestVersion.ToString() + ") ...", 0.3f);
-						byte[] package = client.DownloadData(HydrogenUtility.PackageURI);
-				
-						string tempFile = Path.GetTempFileName();
-						string tempFolder = Path.GetTempPath() + "Hydrogen_" + latestVersion.ToString();
-						
-						client.DownloadFile(HydrogenUtility.PackageURI, tempFile);
+							string tempFile = Path.GetTempFileName();
+							string tempFolder = Path.GetTempPath() + "Hydrogen_" + latestVersion.ToString();
+							
+							client.DownloadFile(HydrogenUtility.PackageURI, tempFile);
 
 
-						EditorUtility.DisplayCancelableProgressBar("Updating Hydrogen", "Extracting ...", 0.6f);
-						
-						// Create Temp Extraction Folder
-						if ( Directory.Exists(tempFolder) ) 
-						{
-							Directory.Delete(tempFolder, true);
+							EditorUtility.DisplayCancelableProgressBar("Updating Hydrogen", "Extracting ...", 0.6f);
+							
+							// Create Temp Extraction Folder
+							if ( Directory.Exists(tempFolder) ) 
+							{
+								Directory.Delete(tempFolder, true);
+							}
+							Directory.CreateDirectory(tempFolder);
+
+							HydrogenUtility.ExtractZipFile(tempFile, "", tempFolder);
+
+							EditorUtility.DisplayCancelableProgressBar("Updating Hydrogen", "Moving Into Place ...", 0.8f);
+
+							if ( Directory.Exists(HydrogenUtility.GetHydrogenPath()) )
+							{
+								Directory.Delete (HydrogenUtility.GetHydrogenPath(), true);
+							}
+						    
+							Directory.Move(tempFolder + Path.DirectorySeparatorChar + "Hydrogen-master", HydrogenUtility.GetHydrogenPath());
 						}
-						Directory.CreateDirectory(tempFolder);
-
-						HydrogenUtility.ExtractZipFile(tempFile, "", tempFolder);
-
-						EditorUtility.DisplayCancelableProgressBar("Updating Hydrogen", "Moving Into Place ...", 0.8f);
-
-						if ( Directory.Exists(HydrogenUtility.GetHydrogenPath()) )
-						{
-							Directory.Delete (HydrogenUtility.GetHydrogenPath(), true);
-						}
-					    
-						Directory.Move(tempFolder + Path.DirectorySeparatorChar + "Hydrogen-master", HydrogenUtility.GetHydrogenPath());
 					}
 				}
 
