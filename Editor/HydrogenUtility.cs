@@ -50,7 +50,7 @@ public static class HydrogenUtility
 		/// </summary>
 		public static string ChangelogURI = "https://raw.githubusercontent.com/dotBunny/Hydrogen/master/CHANGELOG.txt";
 
-		public static Version Version = new Version(1,4,9);
+		public static Version Version = new Version(1,5,0);
 
 		/// <summary>
 		/// Gets the path of the Hydrogen Package

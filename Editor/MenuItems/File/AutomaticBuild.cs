@@ -82,8 +82,14 @@ public static class AutomaticBuild
 		[MenuItem ("File/Automatic Build/iOS")]
 		static void PerformiOSBuild ()
 		{
+				
+#if UNITY_5_0
+				EditorUserBuildSettings.SwitchActiveBuildTarget (BuildTarget.iOS);
+				BuildPipeline.BuildPlayer (GetScenePaths (), "Builds/iOS", BuildTarget.iOS, BuildOptions.None);
+#else
 				EditorUserBuildSettings.SwitchActiveBuildTarget (BuildTarget.iPhone);
 				BuildPipeline.BuildPlayer (GetScenePaths (), "Builds/iOS", BuildTarget.iPhone, BuildOptions.None);
+#endif
 		}
 
 		[MenuItem ("File/Automatic Build/Android")]

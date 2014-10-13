@@ -1,3 +1,8 @@
+Version 1.5.0
+=============
+[ADD] Logo included in root of project for SourceTree / BitBucket / GitHub
+[FIX] Fixed AutomaticBuild targets to reflect iOS API changes.
+
 Version 1.4.9
 =============
 [ADD] Documentation for the Automatic Updator code
