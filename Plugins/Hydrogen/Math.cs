@@ -91,6 +91,16 @@ namespace Hydrogen
 						return angle;
 				}
 
+				public static float InverseSquareRoot (float x)
+				{
+						float xhalf = 0.5f * x;
+						int i = System.BitConverter.ToInt32 (System.BitConverter.GetBytes (x), 0);
+						i = 0x5f3759df - (i >> 1);
+						x = System.BitConverter.ToSingle (System.BitConverter.GetBytes (i), 0);
+						x = x * (1.5f - xhalf * x * x);
+						return x;
+				}
+
 				/// <summary>
 				/// Converts the specified values boxed type to its corresponding unsigned type.
 				/// </summary>
@@ -185,5 +195,5 @@ namespace Hydrogen
 						}
 						return angle;
 				}
-	}
+		}
 }
