@@ -343,6 +343,7 @@ namespace Hydrogen
 								}
 
 								destinationTexture.SetPixels (dstps);
+								destinationTexture.Apply();
 						} catch (System.Exception e) {
 								Debug.Log ("[H] There was a problem Blitting the texture. " + e);
 						}
@@ -361,6 +362,7 @@ namespace Hydrogen
 						var result = new Texture2D (width, height);
 
 						result.SetPixels (sourceTexture.GetPixels (offsetX, offsetY, width, height));
+						result.Apply();
 
 						return result;
 				}
@@ -387,6 +389,7 @@ namespace Hydrogen
 						var result = new Texture2D (width, height);
 
 						result.SetPixels (newImage);
+						result.Apply();
 
 						return result;
 				}
@@ -413,6 +416,7 @@ namespace Hydrogen
 						var result = new Texture2D (width, height);
 
 						result.SetPixels (newImage);
+						result.Apply();
 
 						return result;
 				}
@@ -491,6 +495,7 @@ namespace Hydrogen
 						}
 
 						resizedTexture.SetPixels (result);
+						resizedTexture.Apply();
 
 						return resizedTexture;
 				}
@@ -517,6 +522,7 @@ namespace Hydrogen
 						var result = new Texture2D (width, height);
 
 						result.SetPixels (newImage);
+						result.Apply();
 
 						return result;
 				}
@@ -543,6 +549,7 @@ namespace Hydrogen
 						var result = new Texture2D (width, height);
 
 						result.SetPixels (newImage);
+						result.Apply();
 
 						return result;
 				}
@@ -568,7 +575,7 @@ namespace Hydrogen
 								for (var j = 0; j < verticalTiles; j++)
 										tiledTexture.SetPixels (i * texture.width, j * texture.height, texture.width, texture.height, texturePixels);
 						}
-
+						tiledTexture.Apply();
 						return tiledTexture;
 				}
 
@@ -594,6 +601,7 @@ namespace Hydrogen
 						var result = new Texture2D (width, height);
 
 						result.SetPixels (newImage);
+						result.Apply();
 
 						return result;
 				}
@@ -620,6 +628,7 @@ namespace Hydrogen
 						var result = new Texture2D (width, height);
 
 						result.SetPixels (newImage);
+						result.Apply();
 
 						return result;
 				}
